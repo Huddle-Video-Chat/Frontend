@@ -15,9 +15,11 @@ interface VideoTrackProps {
   track: IVideoTrack;
   isLocal?: boolean;
   priority?: Track.Priority | null;
+  x?: number;
+  y?: number;
 }
 
-export default function VideoTrack({ track, isLocal, priority }: VideoTrackProps) {
+export default function VideoTrack({ track, isLocal, priority, x, y }: VideoTrackProps) {
   const ref = useRef<HTMLVideoElement>(null!);
 
   useEffect(() => {
@@ -38,20 +40,18 @@ export default function VideoTrack({ track, isLocal, priority }: VideoTrackProps
 
   // The local video track is mirrored.
   const isFrontFacing = track.mediaStreamTrack.getSettings().facingMode !== 'environment';
-  // var style = isLocal && isFrontFacing ? { transform: 'rotateY(180deg)' } : {};
+  var style = isLocal && isFrontFacing ? { transform: 'rotateY(180deg)' } : {};
 
-  const style = {
-    border: '0px solid transparent',
-    'border-radius': '50%',
-    height: '100px',
-    width: '100px',
-    position: 'relative',
-    overflow: 'hidden',
-  };
+  if (x != null && y != null) {
+    x -= 250;
+    y -= 250;
+  }
 
   return (
-    <div className="image-cropper">
-      <Video ref={ref} className="img" />;
+    // <div className="video-wrapper">
+    <div className="video-cropper" style={{ left: x, top: y }}>
+      <Video ref={ref} style={style} className="video" />
     </div>
+    // </div>
   );
 }
