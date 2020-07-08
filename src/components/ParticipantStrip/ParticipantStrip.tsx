@@ -32,18 +32,22 @@ export default function ParticipantStrip() {
   return (
     <Container>
       <ScrollContainer>
-        <Participant
-          participant={localParticipant}
-          isSelected={selectedParticipant === localParticipant}
-          onClick={() => setSelectedParticipant(localParticipant)}
-        />
-        {participants.map(participant => (
+        <div className = "local-cropper" >
           <Participant
-            key={participant.sid}
-            participant={participant}
-            isSelected={selectedParticipant === participant}
-            onClick={() => setSelectedParticipant(participant)}
-          />
+            participant={localParticipant}
+            isSelected={selectedParticipant === localParticipant}
+            onClick={() => setSelectedParticipant(localParticipant)}
+        />
+        </div>
+        {participants.map(participant => (
+          <div className = "participant-cropper">
+            <Participant
+              key={participant.sid}
+              participant={participant}
+              isSelected={selectedParticipant === participant}
+              onClick={() => setSelectedParticipant(participant)}
+            />
+          </div>
         ))}
       </ScrollContainer>
     </Container>
