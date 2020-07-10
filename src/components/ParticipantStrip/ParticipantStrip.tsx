@@ -24,40 +24,42 @@ const ScrollContainer = styled('div')(({ theme }) => ({
   },
 }));
 
-// Original code
-// export default function ParticipantStrip() {
-//   const {
-//     room: { localParticipant },
-//   } = useVideoContext();
-//   const participants = useParticipants();
-//   const [selectedParticipant, setSelectedParticipant] = useSelectedParticipant();
+/* Original code with container and scroll container */
+/*
+export default function ParticipantStrip() {
+  const {
+    room: { localParticipant },
+  } = useVideoContext();
+  const participants = useParticipants();
+  const [selectedParticipant, setSelectedParticipant] = useSelectedParticipant();
 
-//   return (
-//     <Container>
-//       <ScrollContainer>
-//         <div className = "local-cropper" >
-//           <Participant
-//             participant={localParticipant}
-//             isSelected={selectedParticipant === localParticipant}
-//             onClick={() => setSelectedParticipant(localParticipant)}
-//         />
-//         </div>
-//         {participants.map(participant => (
-//           <div className = "participant-cropper">
-//             <Participant
-//               key={participant.sid}
-//               participant={participant}
-//               isSelected={selectedParticipant === participant}
-//               onClick={() => setSelectedParticipant(participant)}
-//             />
-//           </div>
-//         ))}
-//       </ScrollContainer>
-//     </Container>
-//   );
-// }
+  return (
+    <Container>
+      <ScrollContainer>
+        <div className = "local-cropper" >
+          <Participant
+            participant={localParticipant}
+            isSelected={selectedParticipant === localParticipant}
+            onClick={() => setSelectedParticipant(localParticipant)}
+        />
+        </div>
+        {participants.map(participant => (
+          <div className = "participant-cropper">
+            <Participant
+              key={participant.sid}
+              participant={participant}
+              isSelected={selectedParticipant === participant}
+              onClick={() => setSelectedParticipant(participant)}
+            />
+          </div>
+        ))}
+      </ScrollContainer>
+    </Container>
+  );
+}
+*/
 
-// Without styled containers or scroll container
+/* Without styled containers or scroll container */
 export default function ParticipantStrip() {
   const {
     room: { localParticipant },

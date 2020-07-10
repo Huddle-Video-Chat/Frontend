@@ -18,7 +18,7 @@ const Container = styled('div')(({ theme }) => ({
   },
 }));
 
-const Fake = styled('div')({
+const FakeParticipant = styled('div')({
   background: 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)',
   border: 0,
   borderRadius: 3,
@@ -28,15 +28,17 @@ const Fake = styled('div')({
   padding: '0 30px',
 })
 
-// Original code --
-// export default function Room() {
-//   return (
-//     <Container>
-//       <ParticipantStrip />
-//       <MainParticipant />
-//     </Container>
-//   );
-// }
+/* Original code */
+/*
+export default function Room() {
+  return (
+    <Container>
+      <ParticipantStrip />
+      <MainParticipant />
+    </Container>
+  );
+}
+*/
 
 
 // To test without main participant, without container

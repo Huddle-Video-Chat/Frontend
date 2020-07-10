@@ -42,10 +42,13 @@ export default function VideoTrack({ track, isLocal, priority, x, y }: VideoTrac
   const isFrontFacing = track.mediaStreamTrack.getSettings().facingMode !== 'environment';
   var style = isLocal && isFrontFacing ? { transform: 'rotateY(180deg)' } : {};
 
+  // Makes mouse the center of circle
+  /*
   if (x != null && y != null) {
     x -= 250;
     y -= 250;
   }
+  */
 
   /* original code
   return (
