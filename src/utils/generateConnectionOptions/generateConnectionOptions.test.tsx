@@ -34,7 +34,7 @@ describe('the generateConnectionOptions function', () => {
     const settings: Settings = {
       trackSwitchOffMode: 'detected',
       dominantSpeakerPriority: 'high',
-      bandwidthProfileMode: 'collaboration',
+      bandwidthProfileMode: 'grid',
       maxTracks: '100',
       maxAudioBitrate: '0',
       renderDimensionLow: 'low',
@@ -47,7 +47,7 @@ describe('the generateConnectionOptions function', () => {
         video: {
           dominantSpeakerPriority: 'high',
           maxTracks: 100,
-          mode: 'collaboration',
+          mode: 'grid',
           renderDimensions: {
             high: {
               height: 1080,

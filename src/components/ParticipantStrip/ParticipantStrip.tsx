@@ -5,6 +5,8 @@ import useParticipants from '../../hooks/useParticipants/useParticipants';
 import useVideoContext from '../../hooks/useVideoContext/useVideoContext';
 import useSelectedParticipant from '../VideoProvider/useSelectedParticipant/useSelectedParticipant';
 
+import './ParticipantStrip.css'
+
 const Container = styled('aside')(({ theme }) => ({
   padding: '0.5em',
   overflowY: 'auto',
