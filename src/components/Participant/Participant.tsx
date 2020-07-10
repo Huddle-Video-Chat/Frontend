@@ -22,10 +22,8 @@ export default function Participant({
 }: ParticipantProps) {
   return (
     // testing to see if I can change render position of participant
-    <div className="participant-video">
-      <ParticipantInfo participant={participant} onClick={onClick} isSelected={isSelected}>
-        <ParticipantTracks participant={participant} disableAudio={disableAudio} enableScreenShare={enableScreenShare} />
-      </ParticipantInfo>
-    </div>
+    <ParticipantInfo participant={participant} onClick={onClick} isSelected={isSelected}>
+      <ParticipantTracks participant={participant} disableAudio={disableAudio} enableScreenShare={enableScreenShare} />
+    </ParticipantInfo>
   );
 }

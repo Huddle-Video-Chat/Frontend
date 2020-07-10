@@ -9,9 +9,10 @@
     display: flex;
     justify-content: center;
   
-    position: absolute; */
+    position: absolute; 
 
     border: 5px dotted blue;
+    */
   }
 
   .participant-cropper {
@@ -24,7 +25,8 @@
     display: flex;
     justify-content: center;
   
-    position: absolute; */
+    position: absolute; 
 
     border: 5px dotted green;
+    */
   }

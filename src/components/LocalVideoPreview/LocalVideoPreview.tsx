@@ -15,8 +15,16 @@ export default function LocalVideoPreview() {
   var xPos: number = Number(x);
   var yPos: number = Number(y);
 
+  /* Original code
   return videoTrack ? (
-    <div className="preview-wrapper">
+    <div className="preview-wrapper" >
+      <VideoTrack track={videoTrack} isLocal x={xPos} y={yPos} />
+    </div>
+  ) : null;
+  */
+
+  return videoTrack ? (
+    <div className="preview-wrapper" style = {{left: xPos, top: yPos}}>
       <VideoTrack track={videoTrack} isLocal x={xPos} y={yPos} />
     </div>
   ) : null;

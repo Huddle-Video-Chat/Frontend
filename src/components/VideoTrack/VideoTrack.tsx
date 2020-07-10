@@ -47,11 +47,17 @@ export default function VideoTrack({ track, isLocal, priority, x, y }: VideoTrac
     y -= 250;
   }
 
+  /* original code
   return (
     // <div className="video-wrapper">
-    <div className="video-cropper" style={{ left: x, top: y }}>
+    <div className = "video-cropper" style={{ left: x, top: y }}>
       <Video ref={ref} style={style} className="video" />
     </div>
     // </div>
   );
+  */
+
+  return (
+    <Video ref={ref} style={style} className="video"/>
+  )
 }
