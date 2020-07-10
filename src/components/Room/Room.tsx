@@ -18,11 +18,21 @@ const Container = styled('div')(({ theme }) => ({
   },
 }));
 
+// Original code --
+// export default function Room() {
+//   return (
+//     <Container>
+//       <ParticipantStrip />
+//       <MainParticipant />
+//     </Container>
+//   );
+// }
+
+// To test without main participant
 export default function Room() {
   return (
     <Container>
       <ParticipantStrip />
-      <MainParticipant />
     </Container>
   );
 }
