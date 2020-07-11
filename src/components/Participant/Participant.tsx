@@ -3,6 +3,8 @@ import ParticipantInfo from '../ParticipantInfo/ParticipantInfo';
 import ParticipantTracks from '../ParticipantTracks/ParticipantTracks';
 import { Participant as IParticipant } from 'twilio-video';
 
+import { styled } from '@material-ui/core/styles';
+
 import './Participant.css';
 
 interface ParticipantProps {
@@ -13,6 +15,21 @@ interface ParticipantProps {
   isSelected: boolean;
 }
 
+const Container = styled('div')({
+  overflow: 'hidden',
+  // border: '5px dotted red',
+  borderRadius: '50%',
+
+  backgroundColor: 'blue',
+
+  width: '250px',
+  height: '250px',
+})
+
+const BorderTest = styled('div')({
+  border: '5px dahsed yellow',
+})
+
 export default function Participant({
   participant,
   disableAudio,
@@ -22,8 +39,12 @@ export default function Participant({
 }: ParticipantProps) {
   return (
     // testing to see if I can change render position of participant
-    <ParticipantInfo participant={participant} onClick={onClick} isSelected={isSelected}>
-      <ParticipantTracks participant={participant} disableAudio={disableAudio} enableScreenShare={enableScreenShare} />
-    </ParticipantInfo>
+    <Container>
+      <ParticipantInfo participant={participant} onClick={onClick} isSelected={isSelected}>
+        <BorderTest>
+          <ParticipantTracks participant={participant} disableAudio={disableAudio} enableScreenShare={enableScreenShare} />
+        </BorderTest>
+      </ParticipantInfo>
+    </Container>
   );
 }

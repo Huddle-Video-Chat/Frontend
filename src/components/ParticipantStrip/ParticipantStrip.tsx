@@ -24,7 +24,8 @@ const ScrollContainer = styled('div')(({ theme }) => ({
   },
 }));
 
-/* Original code with container and scroll container */
+/* Original code with container and scroll container
+Renders yourself as a normal participant as selected participant = local participant */
 /*
 export default function ParticipantStrip() {
   const {
@@ -59,6 +60,23 @@ export default function ParticipantStrip() {
 }
 */
 
+/* This is where the grid layout will need to live and maybe the circle cropper for participant. */
+const Grid = styled('div')({
+  margin: '20px auto',
+  display: 'grid',
+  gridTemplateColumns: '250px 250px',
+  gridRow: 'auto auto',
+  gridColumnGap: '20px',
+  gridRowGap: '20px',
+})
+
+const BoxTest = styled('div')({
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+})
+
+
 /* Without styled containers or scroll container */
 export default function ParticipantStrip() {
   const {
@@ -68,21 +86,22 @@ export default function ParticipantStrip() {
   const [selectedParticipant, setSelectedParticipant] = useSelectedParticipant();
 
   return (
-    <>
+    <Grid>
       <Participant
         participant={localParticipant}
         isSelected={selectedParticipant === localParticipant}
         onClick={() => setSelectedParticipant(localParticipant)}
       />
-      {participants.map(participant => (
-        <Participant
-          key={participant.sid}
-          participant={participant}
-          isSelected={selectedParticipant === participant}
-          onClick={() => setSelectedParticipant(participant)}
-        />
-      ))}
-    </>
-
+      {
+        participants.map(participant => (
+          <Participant
+            key={participant.sid}
+            participant={participant}
+            isSelected={selectedParticipant === participant}
+            onClick={() => setSelectedParticipant(participant)}
+          />
+        ))
+      }
+    </ Grid>
   );
 }

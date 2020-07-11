@@ -28,6 +28,21 @@ const FakeParticipant = styled('div')({
   padding: '0 30px',
 })
 
+const Outline = styled('div')({
+  position: 'relative',
+  height: '100%',
+  display: 'grid',
+
+  background: 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)',
+  // border: '5px dashed green',
+  boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',
+})
+
+/* Enters room after LocalVideoPreview, renders participantStrip and MainParticipant.
+Style the grid here? or inside participantStrip?
+What is the difference between participants and MainParticipant?
+*/
+
 /* Original code */
 /*
 export default function Room() {
@@ -44,9 +59,10 @@ export default function Room() {
 // To test without main participant, without container
 export default function Room() {
   return (
-    // <Container>
-
-    // </Container>
-    <ParticipantStrip />
+    <>
+    <Outline>
+      <ParticipantStrip />
+    </Outline>
+    </>
   );
 }
