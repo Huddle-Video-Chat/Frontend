@@ -3,10 +3,14 @@ import Participant from '../Participant/Participant';
 import { styled } from '@material-ui/core/styles';
 import useParticipants from '../../hooks/useParticipants/useParticipants';
 import useVideoContext from '../../hooks/useVideoContext/useVideoContext';
+// import useMousePosition from '../../hooks/useMousePosition/useMousePosition';
 import useSelectedParticipant from '../VideoProvider/useSelectedParticipant/useSelectedParticipant';
 
-import './ParticipantStrip.css'
 
+/* Original code with container and scroll container
+Renders yourself as a normal participant as selected participant = local participant */
+
+/*
 const Container = styled('aside')(({ theme }) => ({
   padding: '0.5em',
   overflowY: 'auto',
@@ -24,9 +28,6 @@ const ScrollContainer = styled('div')(({ theme }) => ({
   },
 }));
 
-/* Original code with container and scroll container
-Renders yourself as a normal participant as selected participant = local participant */
-/*
 export default function ParticipantStrip() {
   const {
     room: { localParticipant },
@@ -70,11 +71,8 @@ const Grid = styled('div')({
   gridRowGap: '20px',
 })
 
-const BoxTest = styled('div')({
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-})
+/* Position and arrangement algorith lives here. */
+
 
 
 /* Without styled containers or scroll container */
@@ -85,12 +83,17 @@ export default function ParticipantStrip() {
   const participants = useParticipants();
   const [selectedParticipant, setSelectedParticipant] = useSelectedParticipant();
 
+  // const { x, y } = useMousePosition();
+  // var xPos: number = Number(x);
+  // var yPos: number = Number(y);
+
   return (
-    <Grid>
+    <>
       <Participant
         participant={localParticipant}
         isSelected={selectedParticipant === localParticipant}
         onClick={() => setSelectedParticipant(localParticipant)}
+        position = {{left: 125, top: 125}}
       />
       {
         participants.map(participant => (
@@ -99,9 +102,10 @@ export default function ParticipantStrip() {
             participant={participant}
             isSelected={selectedParticipant === participant}
             onClick={() => setSelectedParticipant(participant)}
+            position = {{left: 700, top: 200}}
           />
         ))
       }
-    </ Grid>
+    </>
   );
 }

@@ -13,17 +13,20 @@ interface ParticipantProps {
   enableScreenShare?: boolean;
   onClick: () => void;
   isSelected: boolean;
+  position: object;
 }
 
 const Container = styled('div')({
   overflow: 'hidden',
-  // border: '5px dotted red',
+  border: '5px dotted red',
   borderRadius: '50%',
 
   backgroundColor: 'blue',
 
   width: '250px',
   height: '250px',
+
+  position: 'absolute',
 })
 
 const BorderTest = styled('div')({
@@ -36,14 +39,13 @@ export default function Participant({
   enableScreenShare,
   onClick,
   isSelected,
+  position,
 }: ParticipantProps) {
   return (
     // testing to see if I can change render position of participant
-    <Container>
+    <Container style={position}>
       <ParticipantInfo participant={participant} onClick={onClick} isSelected={isSelected}>
-        <BorderTest>
           <ParticipantTracks participant={participant} disableAudio={disableAudio} enableScreenShare={enableScreenShare} />
-        </BorderTest>
       </ParticipantInfo>
     </Container>
   );

@@ -4,8 +4,8 @@ import VideoTrack from '../VideoTrack/VideoTrack';
 import useVideoContext from '../../hooks/useVideoContext/useVideoContext';
 import { styled } from '@material-ui/core/styles';
 
-import './LocalVideoPreview.css';
-import useMousePosition from './UseMousePosition';
+// import useMousePosition from './UseMousePosition';
+import useMousePosition from '../../hooks/useMousePosition/useMousePosition';
 
 const Container = styled('div')({
   overflow: 'hidden',
@@ -46,7 +46,7 @@ export default function LocalVideoPreview() {
   ) : null;
   */
 
-  
+  // Hardcoded -250 for radius
   return videoTrack ? (
     <Container style = {{left: xPos-250, top:yPos-250}}>
       <VideoTrack track={videoTrack} isLocal x={xPos} y={yPos} />

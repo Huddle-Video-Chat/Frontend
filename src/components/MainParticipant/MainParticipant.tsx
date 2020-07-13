@@ -10,6 +10,7 @@ export default function MainParticipant() {
   const [selectedParticipant] = useSelectedParticipant();
   const screenShareParticipant = useScreenShareParticipant();
 
+  // WHAT MAKES MAIN VIDEO MUCH CRISPER
   const videoPriority =
     mainParticipant === selectedParticipant || mainParticipant === screenShareParticipant ? 'high' : null;
 
