@@ -107,6 +107,7 @@ export default function Room() {
     console.log('zoomed? ' + zoomed)
   }
 
+  // hard coded positions, right and left side
   const position = zoomed ? {left: 200, top: 200} : {left: 700, top: 200}
   return (
     <Outline>
