@@ -12,6 +12,6 @@ export default function ToggleFullscreenButton() {
   const [isZoomed, toggleIsZoomed] = useZoomToggle()
 
   return (
-      <button onClick = { () => toggleIsZoomed() }>Zoom toggle</button>
+      <button onClick = {toggleIsZoomed}>Zoom toggle</button>
   )
 }

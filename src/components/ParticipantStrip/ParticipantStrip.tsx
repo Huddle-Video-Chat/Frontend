@@ -71,37 +71,48 @@ const Grid = styled('div')({
   gridRowGap: '20px',
 })
 
-/* Position and arrangement algorith lives here. */
+/* Position and arrangement algorith lives here. 
+
+*/
 
 
+interface ParticipantStripProps {
+  zoomed: boolean,
+}
 
-/* Without styled containers or scroll container */
-export default function ParticipantStrip() {
+
+// Without styled containers or scroll container 
+export default function ParticipantStrip({ zoomed }: ParticipantStripProps) {
   const {
     room: { localParticipant },
   } = useVideoContext();
   const participants = useParticipants();
   const [selectedParticipant, setSelectedParticipant] = useSelectedParticipant();
 
+  // Positions enabled by changing position to absolute inside Participant
   return (
-    <Grid>
-      <Participant
-        participant={localParticipant}
-        isSelected={selectedParticipant === localParticipant}
-        onClick={() => setSelectedParticipant(localParticipant)}
-        position = {{left: 125, top: 125}}
-      />
-      {
-        participants.map(participant => (
+    <>
+      
+        <Grid>
           <Participant
-            key={participant.sid}
-            participant={participant}
-            isSelected={selectedParticipant === participant}
-            onClick={() => setSelectedParticipant(participant)}
-            position = {{left: 700, top: 200}}
+            participant={localParticipant}
+            isSelected={selectedParticipant === localParticipant}
+            onClick={() => setSelectedParticipant(localParticipant)}
+            position={{ left: 125, top: 125 }}
           />
-        ))
-      }
-    </ Grid>
+          {
+            participants.map(participant => (
+              <Participant
+                key={participant.sid}
+                participant={participant}
+                isSelected={selectedParticipant === participant}
+                onClick={() => setSelectedParticipant(participant)}
+                position={{ left: 700, top: 200 }}
+              />
+            ))
+          }
+        </ Grid>
+        
+    </>
   );
 }

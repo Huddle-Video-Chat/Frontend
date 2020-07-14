@@ -63,6 +63,20 @@ function ViewButton({ onClick }: ViewButtonProps) {
   )
 }
 
+const DummyParticipants = styled('div')({
+  background: '#FF8E53',
+  borderRadius: '50%',
+
+  height: '50px',
+  width: '50px',
+
+  position: 'absolute',
+})
+
+const Positioner = styled('div')({
+  position: 'absolute',
+})
+
 /* Enters room after LocalVideoPreview, renders participantStrip and MainParticipant.
 Style the grid here? or inside participantStrip?
 What is the difference between participants and MainParticipant?
@@ -85,16 +99,28 @@ export default function Room() {
 
 // To test without main participant, without container
 export default function Room() {
-  // const [zoom, setZoom] = useState(true)
-  const [zoomed, toggleIsZoomed] = useZoomToggle()
+  const [zoomed, setZoom] = useState(true)
+  // using incorrect abstraction rn, will fix
+  // const [zoomed, toggleIsZoomed] = useZoomToggle()
   const clickButton = () => {
-    toggleIsZoomed()
+    setZoom(!zoomed)
     console.log('zoomed? ' + zoomed)
   }
+
+  const position = zoomed ? {left: 200, top: 200} : {left: 700, top: 200}
   return (
     <Outline>
       <ViewButton onClick={() => clickButton()} />
-      {zoomed ? <ParticipantStrip /> : null}
+      <Positioner style = {position}>
+        <ParticipantStrip zoomed={zoomed} />
+      </Positioner>
+      {zoomed ? null :
+        <>
+          <DummyParticipants style={{ left: 100, top: 100 }} />
+          <DummyParticipants style={{ left: 150, top: 100 }} />
+          <DummyParticipants style={{ left: 125, top: 150 }} />
+        </>
+      }
     </Outline>
   );
 }
