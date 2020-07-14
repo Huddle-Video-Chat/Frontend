@@ -3,7 +3,7 @@ import Participant from '../Participant/Participant';
 import { styled } from '@material-ui/core/styles';
 import useParticipants from '../../hooks/useParticipants/useParticipants';
 import useVideoContext from '../../hooks/useVideoContext/useVideoContext';
-// import useMousePosition from '../../hooks/useMousePosition/useMousePosition';
+import useMousePosition from '../../hooks/useMousePosition/useMousePosition';
 import useSelectedParticipant from '../VideoProvider/useSelectedParticipant/useSelectedParticipant';
 
 
@@ -83,12 +83,8 @@ export default function ParticipantStrip() {
   const participants = useParticipants();
   const [selectedParticipant, setSelectedParticipant] = useSelectedParticipant();
 
-  // const { x, y } = useMousePosition();
-  // var xPos: number = Number(x);
-  // var yPos: number = Number(y);
-
   return (
-    <>
+    <Grid>
       <Participant
         participant={localParticipant}
         isSelected={selectedParticipant === localParticipant}
@@ -106,6 +102,6 @@ export default function ParticipantStrip() {
           />
         ))
       }
-    </>
+    </ Grid>
   );
 }

@@ -5,7 +5,6 @@ import { Participant as IParticipant } from 'twilio-video';
 
 import { styled } from '@material-ui/core/styles';
 
-import './Participant.css';
 
 interface ParticipantProps {
   participant: IParticipant;
@@ -18,19 +17,16 @@ interface ParticipantProps {
 
 const Container = styled('div')({
   overflow: 'hidden',
-  border: '5px dotted red',
+  // border: '5px dotted red',
   borderRadius: '50%',
 
-  backgroundColor: 'blue',
+  backgroundColor: '#99aab5',
 
   width: '250px',
   height: '250px',
 
-  position: 'absolute',
-})
-
-const BorderTest = styled('div')({
-  border: '5px dahsed yellow',
+  // Uncomment to use position rather than CSS grid
+  // position: 'absolute',
 })
 
 export default function Participant({

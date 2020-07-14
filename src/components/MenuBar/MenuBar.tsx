@@ -5,17 +5,19 @@ import AppBar from '@material-ui/core/AppBar';
 import Button from '@material-ui/core/Button';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import TextField from '@material-ui/core/TextField';
-import ToggleFullscreenButton from './ToggleFullScreenButton/ToggleFullScreenButton';
 import Toolbar from '@material-ui/core/Toolbar';
-import Menu from './Menu/Menu';
 
 import { useAppState } from '../../state';
 import { useParams } from 'react-router-dom';
 import useRoomState from '../../hooks/useRoomState/useRoomState';
 import useVideoContext from '../../hooks/useVideoContext/useVideoContext';
 import { Typography } from '@material-ui/core';
+
+import ToggleZoomButton from './ToggleZoomButton/ToggleZoomButton';
 import FlipCameraButton from './FlipCameraButton/FlipCameraButton';
 import LocalAudioLevelIndicator from './DeviceSelector/LocalAudioLevelIndicator/LocalAudioLevelIndicator';
+import ToggleFullscreenButton from './ToggleFullScreenButton/ToggleFullScreenButton';
+import Menu from './Menu/Menu';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -96,6 +98,7 @@ export default function MenuBar() {
     <AppBar className={classes.container} position="static">
       <Toolbar className={classes.toolbar}>
         {roomState === 'disconnected' ? (
+          // Connected menu bar
           <form className={classes.form} onSubmit={handleSubmit}>
             {window.location.search.includes('customIdentity=true') || !user?.displayName ? (
               <TextField
@@ -130,11 +133,14 @@ export default function MenuBar() {
             </Button>
             {(isConnecting || isFetching) && <CircularProgress className={classes.loadingSpinner} />}
           </form>
-        ) : (
+        )
+        // Connected menu bar 
+        : (
           <h3>{roomName}</h3>
         )}
         <div className={classes.rightButtonContainer}>
           <FlipCameraButton />
+          {roomState === 'disconnected' ? null : <ToggleZoomButton />}
           <LocalAudioLevelIndicator />
           <ToggleFullscreenButton />
           <Menu />
