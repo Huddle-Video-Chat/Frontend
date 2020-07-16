@@ -13,7 +13,35 @@ interface ParticipantProps {
   onClick: () => void;
   isSelected: boolean;
   position: object;
+  diameter: number, 
 }
+
+
+
+
+// More api info on the materials UI thing, want to eliminate the wrapper div
+// What the actual fuck does Omit<> do??????
+interface ContainerProps {
+  diameter: number,
+}
+
+// const Container = styled(
+//   ({ diameter, ...other }: ContainerProps) => (
+//     <div {...other}></div>
+//   ),
+// )({
+//   overflow: 'hidden',
+//   border: '5px dotted red',
+//   borderRadius: '50%',
+
+//   backgroundColor: '#99aab5',
+
+//   width: (props: ContainerProps) => props.diameter,
+//   height: (props: ContainerProps) => props.diameter,
+
+//   // Uncomment to use position rather than CSS grid, for grid and position algorithm
+//   // position: 'absolute',
+// })
 
 const Container = styled('div')({
   overflow: 'hidden',
@@ -22,13 +50,17 @@ const Container = styled('div')({
 
   backgroundColor: '#99aab5',
 
-  width: '200px',
-  height: '200px',
+  width: '250px',
+  height: '250px',
 
   // Uncomment to use position rather than CSS grid, for grid and position algorithm
   position: 'absolute',
 })
 
+const Positioner = styled('div')({
+  border: '5px dashed green',
+  position: 'absolute',
+})
 
 export default function Participant({
   participant,
@@ -37,6 +69,7 @@ export default function Participant({
   onClick,
   isSelected,
   position,
+  diameter,
 }: ParticipantProps) {
 
 
@@ -50,13 +83,12 @@ export default function Participant({
 
   return (
     // testing to see if I can change render position of participant
-    
-      <Container style={position}>
+    // 
+      <Container style = {position}>
         <button onClick={clickButton}>{hear ? 'i am shut' : 'shut up'}</button>
         <ParticipantInfo participant={participant} onClick={onClick} isSelected={isSelected}>
           <ParticipantTracks participant={participant} disableAudio={hear} enableScreenShare={enableScreenShare} />
         </ParticipantInfo>
       </Container>
-    
   );
 }

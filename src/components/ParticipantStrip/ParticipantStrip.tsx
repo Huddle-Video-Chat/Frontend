@@ -110,13 +110,15 @@ function getArangementPositions(size: number, diameter: number, center: any) {
   for (let row = 0; row < size; row += 1) {
     // if last row is odd
     if (row > 0 && arrangement[row] % 2 !== arrangement[row - 1] % 2) {
-      // hypotnuse or some shit
+      // hypotnuse n math shit
       sizeY -= (2 - Math.sqrt(3)) * diameter / 2
     }
 
     let sizeX = -(arrangement[row] * diameter) / 2
     for (let i = 0; i < arrangement[row]; i += 1) {
       result.push({ left: sizeX + center.x, top: sizeY + center.y })
+      console.log(center.x)
+      console.log('position pushed: left: ' + sizeX + center.x + ' // top: ' + sizeY + center.y)
 
       // radius math here
       sizeX += diameter
@@ -131,18 +133,21 @@ function getArangementPositions(size: number, diameter: number, center: any) {
 }
 
 interface ParticipantStripProps {
+  position: object,
   zoomed: boolean,
 }
 
 // Without styled containers or scroll container 
-export default function ParticipantStrip({ zoomed }: ParticipantStripProps) {
+export default function ParticipantStrip({ zoomed, position }: ParticipantStripProps) {
   const {
     room: { localParticipant },
   } = useVideoContext();
   const participants = useParticipants();
   const [selectedParticipant, setSelectedParticipant] = useSelectedParticipant();
+  
+  const diameter = zoomed ? 250 : 100 
 
-  let arrangementPositions = getArangementPositions(participants.length + 1, 200, { x: 200, y: 200 })
+  let arrangementPositions = getArangementPositions(participants.length + 1, 250, {x: 200, y: 200})
 
   // Positions enabled by changing position to absolute inside Participant
   // Set disableAudio 
@@ -155,6 +160,7 @@ export default function ParticipantStrip({ zoomed }: ParticipantStripProps) {
           isSelected={selectedParticipant === localParticipant}
           onClick={() => setSelectedParticipant(localParticipant)}
           position={arrangementPositions.shift()}
+          diameter = {diameter}
         />
       </Outline>
       {
@@ -165,6 +171,7 @@ export default function ParticipantStrip({ zoomed }: ParticipantStripProps) {
             isSelected={selectedParticipant === participant}
             onClick={() => setSelectedParticipant(participant)}
             position={arrangementPositions.shift()}
+            diameter = {diameter}
           />
         ))
       }

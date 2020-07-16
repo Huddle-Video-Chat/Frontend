@@ -113,7 +113,7 @@ export default function Room() {
     <Outline>
       <ViewButton onClick={() => clickButton()} />
       <Positioner style = {position}>
-        <ParticipantStrip zoomed={zoomed} />
+        <ParticipantStrip position = {{x: 200, y: 200}} zoomed={zoomed} />
       </Positioner>
       {zoomed ? null :
         <>
