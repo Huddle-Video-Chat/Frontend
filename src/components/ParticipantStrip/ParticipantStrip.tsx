@@ -132,31 +132,32 @@ function getArangementPositions(size: number, diameter: number, center: any) {
 
 interface ParticipantStripProps {
   zoomed: boolean,
+  position: object
 }
 
 // Without styled containers or scroll container 
-export default function ParticipantStrip({ zoomed }: ParticipantStripProps) {
+export default function ParticipantStrip({ zoomed, position }: ParticipantStripProps) {
   const {
     room: { localParticipant },
   } = useVideoContext();
   const participants = useParticipants();
   const [selectedParticipant, setSelectedParticipant] = useSelectedParticipant();
 
-  let arrangementPositions = getArangementPositions(participants.length + 1, 200, { x: 200, y: 200 })
+  const diameter = zoomed ? 250 : 100
+  let arrangementPositions = getArangementPositions(participants.length + 1, diameter, {x: 200, y:200})
 
   // Positions enabled by changing position to absolute inside Participant
   // Set disableAudio 
   return (
     <>
 
-      <Outline>
         <Participant
           participant={localParticipant}
           isSelected={selectedParticipant === localParticipant}
           onClick={() => setSelectedParticipant(localParticipant)}
           position={arrangementPositions.shift()}
+          diameter={diameter}
         />
-      </Outline>
       {
         participants.map(participant => (
           <Participant
@@ -165,6 +166,7 @@ export default function ParticipantStrip({ zoomed }: ParticipantStripProps) {
             isSelected={selectedParticipant === participant}
             onClick={() => setSelectedParticipant(participant)}
             position={arrangementPositions.shift()}
+            diameter={diameter}
           />
         ))
       }
