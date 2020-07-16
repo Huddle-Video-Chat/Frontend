@@ -71,6 +71,10 @@ const Grid = styled('div')({
   gridRowGap: '20px',
 })
 
+const Outline = styled('div')({
+  border: '5px dotted red',
+})
+
 /* Position and arrangement algorith lives here. 
 
 */
@@ -90,29 +94,30 @@ export default function ParticipantStrip({ zoomed }: ParticipantStripProps) {
   const [selectedParticipant, setSelectedParticipant] = useSelectedParticipant();
 
   // Positions enabled by changing position to absolute inside Participant
+  // Set disableAudio 
   return (
     <>
-      
-        <Grid>
+      <Grid>
+        <Outline>
           <Participant
             participant={localParticipant}
             isSelected={selectedParticipant === localParticipant}
             onClick={() => setSelectedParticipant(localParticipant)}
-            position={{ left: 125, top: 125 }}
+            position={{ left: 100, top: 100 }}
           />
-          {
-            participants.map(participant => (
-              <Participant
-                key={participant.sid}
-                participant={participant}
-                isSelected={selectedParticipant === participant}
-                onClick={() => setSelectedParticipant(participant)}
-                position={{ left: 700, top: 200 }}
-              />
-            ))
-          }
-        </ Grid>
-        
+        </Outline>
+        {
+          participants.map(participant => (
+            <Participant
+              key={participant.sid}
+              participant={participant}
+              isSelected={selectedParticipant === participant}
+              onClick={() => setSelectedParticipant(participant)}
+              position={{ left: 200, top: 300 }}
+            />
+          ))
+        }
+      </ Grid>
     </>
   );
 }
