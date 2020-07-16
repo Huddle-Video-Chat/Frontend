@@ -22,7 +22,7 @@ import Menu from './Menu/Menu';
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     container: {
-      backgroundColor: theme.palette.background.default,
+      background: 'linear-gradient(90.66deg, #6EB3FB 0%, #99E98D 150%)',
     },
     toolbar: {
       [theme.breakpoints.down('xs')]: {
@@ -46,6 +46,9 @@ const useStyles = makeStyles((theme: Theme) =>
       marginLeft: theme.spacing(1),
       marginRight: theme.spacing(1),
       maxWidth: 200,
+      // backgroundColor: "white",
+      borderRadius: '10px',
+      // color: "black"
     },
     loadingSpinner: {
       marginLeft: '1em',
@@ -118,6 +121,7 @@ export default function MenuBar() {
               id="menu-room"
               label="Room"
               className={classes.textField}
+              // style={{backgroundColor: "white", color: "black"}}
               value={roomName}
               onChange={handleRoomNameChange}
               margin="dense"
@@ -125,7 +129,9 @@ export default function MenuBar() {
             <Button
               className={classes.joinButton}
               type="submit"
-              color="primary"
+              // color="white"
+              // sty
+              style={{ color: 'black', backgroundColor: 'white' }}
               variant="contained"
               disabled={isAcquiringLocalTracks || isConnecting || !name || !roomName || isFetching}
             >
@@ -133,9 +139,8 @@ export default function MenuBar() {
             </Button>
             {(isConnecting || isFetching) && <CircularProgress className={classes.loadingSpinner} />}
           </form>
-        )
-        // Connected menu bar 
-        : (
+        ) : (
+          // Connected menu bar
           <h3>{roomName}</h3>
         )}
         <div className={classes.rightButtonContainer}>

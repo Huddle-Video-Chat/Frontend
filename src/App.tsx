@@ -12,6 +12,7 @@ import useRoomState from './hooks/useRoomState/useRoomState';
 
 const Container = styled('div')({
   display: 'grid',
+  backgroundColor: 'white',
   gridTemplateRows: 'auto 1fr',
 });
 

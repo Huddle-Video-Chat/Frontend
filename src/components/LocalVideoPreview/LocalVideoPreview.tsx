@@ -12,22 +12,23 @@ const Container = styled('div')({
   borderRadius: '50%',
   width: '500px',
   height: '500px',
+  // backgroundColor: "green",
   background: 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)',
 
   display: 'flex',
   justifyContent: 'center',
 
   position: 'absolute',
-})
+});
 
 export default function LocalVideoPreview() {
   const { localTracks } = useVideoContext();
 
   const videoTrack = localTracks.find(track => track.name.includes('camera')) as LocalVideoTrack;
 
-  const { x, y } = useMousePosition();
-  var xPos: number = Number(x);
-  var yPos: number = Number(y);
+  // const { x, y } = useMousePosition();
+  var xPos: number = 0; //Number(x);
+  var yPos: number = 0; //Number(y);
 
   /* Original code
   return videoTrack ? (
@@ -48,11 +49,8 @@ export default function LocalVideoPreview() {
 
   // Hardcoded -250 for radius
   return videoTrack ? (
-    <Container style = {{left: xPos-250, top:yPos-250}}>
-      <VideoTrack track={videoTrack} isLocal x={xPos} y={yPos} />
+    <Container style={{ left: '37.5%', top: '20%' }}>
+      <VideoTrack track={videoTrack} isLocal />
     </Container>
-    
   ) : null;
-
-
 }
