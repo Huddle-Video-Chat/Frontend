@@ -17,16 +17,16 @@ interface ParticipantProps {
 
 const Container = styled('div')({
   overflow: 'hidden',
-  // border: '5px dotted red',
-  // borderRadius: '50%',
+  border: '5px dotted red',
+  borderRadius: '50%',
 
   backgroundColor: '#99aab5',
 
-  width: '250px',
-  height: '250px',
+  width: '200px',
+  height: '200px',
 
   // Uncomment to use position rather than CSS grid, for grid and position algorithm
-  // position: 'absolute',
+  position: 'absolute',
 })
 
 
@@ -41,7 +41,7 @@ export default function Participant({
 
 
   // setting disableAudio to hear, clicking button toggles setHear
-  // disableAudio will need to be set by participant strip in the future. 
+  // disableAudio will need to be set by participant strip in the future.
   function clickButton() {
     setHear(!hear)
     console.log('hear: ' + hear)
