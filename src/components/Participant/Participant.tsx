@@ -33,8 +33,8 @@ const Container = styled(
 
   // backgroundColor: '#99aab5',
 
-  width: '200px',
-  height: '200px',
+  width: '250px',
+  height: '250px',
 
   // Uncomment to use position rather than CSS grid, for grid and position algorithm
   position: 'relative',
