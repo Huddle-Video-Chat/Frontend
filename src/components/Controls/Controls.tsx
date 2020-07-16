@@ -32,6 +32,11 @@ const useStyles = makeStyles((theme: Theme) =>
       [theme.breakpoints.down('xs')]: {
         bottom: `${theme.sidebarMobileHeight + 3}px`,
       },
+      backgroundColor: '#EDEDED',
+      borderRadius: '10px',
+      color: 'green',
+      paddingLeft: '1%',
+      paddingRight: '1%',
     },
   })
 );

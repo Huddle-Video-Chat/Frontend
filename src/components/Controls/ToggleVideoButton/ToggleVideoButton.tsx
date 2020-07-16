@@ -12,6 +12,8 @@ const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     fab: {
       margin: theme.spacing(1),
+      color: '#86D1BC',
+      backgroundColor: 'white',
     },
   })
 );
