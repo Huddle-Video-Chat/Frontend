@@ -53,13 +53,19 @@ const MyButton = styled('button')({
   position: 'absolute',
 });
 
-interface ViewButtonProps {
+interface ButtonProps {
   onClick: () => void;
 }
 
-function ViewButton({ onClick }: ViewButtonProps) {
+function ViewButton({ onClick }: ButtonProps) {
   return (
     <MyButton onClick={onClick} style={{ left: 0, top: 0 }}>Change view</MyButton>
+  )
+}
+
+function HuddleButton({ onClick }: ButtonProps) {
+  return (
+    <MyButton onClick={onClick} style={{ left: '144px', top: 0 }}>Create Huddle</MyButton>
   )
 }
 
@@ -94,25 +100,58 @@ export default function Room() {
 }
 */
 
+let jsonData = {
+  id: 2,
+  user_id: 1,
+  huddle_id: 1,
+  users: [
+    1
+  ],
+  rooms: [
+    {
+      id: 1,
+      users: [
+        1
+      ]
+    }
+  ]
+}
 
 
 
 // To test without main participant, without container
 export default function Room() {
   const [zoomed, setZoom] = useState(true)
+  const position = zoomed ? {left: 150, top: 150} : {left: 500, top: 150}
+
+
+  const [huddles, setHuddles] = useState([{zoomed: zoomed, position: position}])
   // using incorrect abstraction rn, will fix
   // const [zoomed, toggleIsZoomed] = useZoomToggle()
-  const clickButton = () => {
+  const clickView = () => {
     setZoom(!zoomed)
     console.log('zoomed? ' + zoomed)
   }
 
+  const clickHuddle = () => {
+    let newHuddle = {zoomed: false, position: {left: 100, top: 100}}
+    // lol wtf does as any do
+    const newState = huddles.push(newHuddle) as any
+    setHuddles(newState)
+    console.log(huddles)
+  }
+
   // hard coded positions, right and left side
-  const position = zoomed ? {left: 200, top: 200} : {left: 700, top: 200}
   return (
     <Outline>
-      <ViewButton onClick={() => clickButton()} />
+      <ViewButton onClick={clickView} />
+      <HuddleButton onClick={clickHuddle} />
       <Positioner style = {position}>
+        {/* {
+          huddles.map(huddle => (
+            <ParticipantStrip zoomed={huddle.zoomed} position={huddle.position}/>
+          ))
+        } */}
         <ParticipantStrip zoomed={zoomed} position={position}/>
       </Positioner>
       {zoomed ? null :

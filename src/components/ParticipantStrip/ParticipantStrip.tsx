@@ -5,7 +5,6 @@ import useParticipants from '../../hooks/useParticipants/useParticipants';
 import useVideoContext from '../../hooks/useVideoContext/useVideoContext';
 import useMousePosition from '../../hooks/useMousePosition/useMousePosition';
 import useSelectedParticipant from '../VideoProvider/useSelectedParticipant/useSelectedParticipant';
-import { SSL_OP_NO_QUERY_MTU } from 'constants';
 
 
 /* Original code with container and scroll container
@@ -143,7 +142,7 @@ export default function ParticipantStrip({ zoomed, position }: ParticipantStripP
   const participants = useParticipants();
   const [selectedParticipant, setSelectedParticipant] = useSelectedParticipant();
 
-  const diameter = zoomed ? 250 : 100
+  const diameter = zoomed ? 300 : 170
   let arrangementPositions = getArangementPositions(participants.length + 1, diameter, {x: 200, y:200})
 
   // Positions enabled by changing position to absolute inside Participant
