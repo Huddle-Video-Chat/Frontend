@@ -6,15 +6,6 @@ import { Participant as IParticipant } from 'twilio-video';
 import { styled } from '@material-ui/core/styles';
 
 
-interface ParticipantProps {
-  participant: IParticipant;
-  disableAudio?: boolean;
-  enableScreenShare?: boolean;
-  onClick: () => void;
-  isSelected: boolean;
-  position: object;
-  diameter: number;
-}
 
 
 
@@ -53,6 +44,16 @@ const Container = styled(
 //   position: 'absolute',
 // })
 
+interface ParticipantProps {
+  participant: IParticipant;
+  disableAudio?: boolean;
+  enableScreenShare?: boolean;
+  onClick: () => void;
+  isSelected: boolean;
+  position: object;
+  diameter: number;
+  huddleID?: number;
+}
 
 export default function Participant({
   participant,
@@ -62,6 +63,7 @@ export default function Participant({
   isSelected,
   position,
   diameter,
+  huddleID,
 }: ParticipantProps) {
 
 
@@ -69,7 +71,6 @@ export default function Participant({
   // disableAudio will need to be set by participant strip in the future.
   function clickButton() {
     setHear(!hear)
-    console.log('hear: ' + hear)
   }
   const [hear, setHear] = useState(false)
 

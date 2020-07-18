@@ -8,7 +8,6 @@ export default function useFullScreenToggle() {
 
   const toggleIsZoomed = () => {
     setIsZoomed(!isZoomed)
-    console.log('click! zoom is ' + isZoomed)
   }
 
   return [isZoomed, toggleIsZoomed] as const;

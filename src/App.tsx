@@ -10,6 +10,8 @@ import Room from './components/Room/Room';
 import useHeight from './hooks/useHeight/useHeight';
 import useRoomState from './hooks/useRoomState/useRoomState';
 
+import axios from 'axios'
+
 const Container = styled('div')({
   display: 'grid',
   backgroundColor: 'white',
@@ -30,10 +32,29 @@ export default function App() {
   // will look good on mobile browsers even after the location bar opens or closes.
   const height = useHeight();
 
+  // Create or join room API call
+  if (roomState !== 'disconnected') {
+    fetch('url', {
+      method: 'POST',
+      headers: {'Content-type': 'application/json'},
+      body: 'name: testRoomName',
+    }).then(r => r.json()).then(response => {
+      const roomID = response
+    })
+  }
+
+  // post request doesnt work lol
+  function postRequest() {
+    axios.post('http://www.google.com').then((response: any) => {
+      console.log(response)
+    })
+  }
+
   return (
     <Container style={{ height }}>
       <MenuBar />
       <Main>
+        <button onClick={postRequest} >making a request to google.com</button>
         {roomState === 'disconnected' ? <LocalVideoPreview /> : <Room />}
         <Controls />
       </Main>
