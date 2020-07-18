@@ -11,6 +11,7 @@ import useHeight from './hooks/useHeight/useHeight';
 import useRoomState from './hooks/useRoomState/useRoomState';
 
 import axios from 'axios'
+import { useEffect, useState } from 'react';
 
 const Container = styled('div')({
   display: 'grid',
@@ -21,7 +22,6 @@ const Container = styled('div')({
 const Main = styled('main')({
   overflow: 'hidden',
 });
-
 export default function App() {
   const roomState = useRoomState();
 
@@ -49,10 +49,13 @@ export default function App() {
       console.log(response)
     })
   }
+  const [huddleState] = useState({});
+
+  console.log(huddleState);
 
   return (
     <Container style={{ height }}>
-      <MenuBar />
+      <MenuBar huddleState={huddleState} />
       <Main>
         <button onClick={postRequest} >making a request to google.com</button>
         {roomState === 'disconnected' ? <LocalVideoPreview /> : <Room />}
