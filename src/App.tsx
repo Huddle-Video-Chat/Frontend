@@ -10,6 +10,8 @@ import Room from './components/Room/Room';
 import useHeight from './hooks/useHeight/useHeight';
 import useRoomState from './hooks/useRoomState/useRoomState';
 
+import { useEffect, useState } from 'react';
+
 const Container = styled('div')({
   display: 'grid',
   backgroundColor: 'white',
@@ -19,7 +21,6 @@ const Container = styled('div')({
 const Main = styled('main')({
   overflow: 'hidden',
 });
-
 export default function App() {
   const roomState = useRoomState();
 
@@ -30,9 +31,13 @@ export default function App() {
   // will look good on mobile browsers even after the location bar opens or closes.
   const height = useHeight();
 
+  const [huddleState] = useState({});
+
+  console.log(huddleState);
+
   return (
     <Container style={{ height }}>
-      <MenuBar />
+      <MenuBar huddleState={huddleState} />
       <Main>
         {roomState === 'disconnected' ? <LocalVideoPreview /> : <Room />}
         <Controls />
