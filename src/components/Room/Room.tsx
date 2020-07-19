@@ -148,7 +148,7 @@ export default function Room() {
 
   const [testList, setTestList] = useState<Array<String>>([''])
 
-  const position = zoomed ? {left: 150, top: 150} : {left: 500, top: 150}
+  const position = zoomed ? {left: 300, top: 300} : {left: 500, top: 150}
 
 
   // using incorrect abstraction rn, will fix

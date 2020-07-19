@@ -26,9 +26,9 @@ export default function LocalVideoPreview() {
 
   const videoTrack = localTracks.find(track => track.name.includes('camera')) as LocalVideoTrack;
 
-  // const { x, y } = useMousePosition();
-  var xPos: number = 0; //Number(x);
-  var yPos: number = 0; //Number(y);
+  const { x, y } = useMousePosition();
+  var xPos: number = Number(x);
+  var yPos: number = Number(y);
 
   /* Original code
   return videoTrack ? (
@@ -49,7 +49,7 @@ export default function LocalVideoPreview() {
 
   // Hardcoded -250 for radius
   return videoTrack ? (
-    <Container style={{ left: '37.5%', top: '20%' }}>
+    <Container style={{ left: xPos, top: yPos }}>
       <VideoTrack track={videoTrack} isLocal />
     </Container>
   ) : null;

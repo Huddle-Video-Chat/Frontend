@@ -29,7 +29,9 @@ export default function App() {
   const {
     room: { localParticipant },
   } = useVideoContext();
-  console.log(localParticipant)
+
+  // console.log('local SID in APP:')
+  // console.log(localParticipant)
 
   // Here we would like the height of the main container to be the height of the viewport.
   // On some mobile browsers, 'height: 100vh' sets the height equal to that of the screen,
@@ -57,11 +59,10 @@ export default function App() {
   }
   const [huddleState] = useState({});
 
-  console.log(huddleState);
 
   return (
     <Container style={{ height }}>
-      <MenuBar huddleState={huddleState} />
+      <MenuBar  />
       <Main>
         <button onClick={postRequest} >making a request to google.com</button>
         {roomState === 'disconnected' ? <LocalVideoPreview /> : <Room />}

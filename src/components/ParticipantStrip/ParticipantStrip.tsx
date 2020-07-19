@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import Participant from '../Participant/Participant';
 import { styled } from '@material-ui/core/styles';
 import useParticipants from '../../hooks/useParticipants/useParticipants';
@@ -6,6 +6,7 @@ import useVideoContext from '../../hooks/useVideoContext/useVideoContext';
 import useMousePosition from '../../hooks/useMousePosition/useMousePosition';
 import useSelectedParticipant from '../VideoProvider/useSelectedParticipant/useSelectedParticipant';
 import useHuddleParticipants from '../../hooks/useHuddleParticipants/useHuddleParticipants';
+import useMouseDown from '../../hooks/useMouseDown/useMouseDown';
 
 import axios from 'axios';
 
@@ -138,6 +139,7 @@ interface ParticipantStripProps {
   position: object
 }
 
+
 // Without styled containers or scroll container
 export default function ParticipantStrip({ zoomed, position }: ParticipantStripProps) {
   const {
@@ -147,7 +149,6 @@ export default function ParticipantStrip({ zoomed, position }: ParticipantStripP
   const [selectedParticipant, setSelectedParticipant] = useSelectedParticipant();
 
   const modified = useHuddleParticipants()
-
 
   const diameter = zoomed ? 300 : 170
 
@@ -159,7 +160,7 @@ export default function ParticipantStrip({ zoomed, position }: ParticipantStripP
     console.log(participant)
   }
 
-  
+
   const APIresult = {
     id: 2,
     user_id: 'sid1',
@@ -178,18 +179,27 @@ export default function ParticipantStrip({ zoomed, position }: ParticipantStripP
       },
     ]
   }
-  
-  const [ thisHuddleID, setThisHuddleID ] = useState(APIresult.huddle_id)
+
+  const [thisHuddleID, setThisHuddleID] = useState(APIresult.huddle_id)
 
   function switchHuddle() {
     setThisHuddleID(1 - thisHuddleID)
   }
   // call room state at participant strip layer
 
-  console.log(localParticipant)
+  // console.log('localparticipant in participant strip: ')
+  // console.log(localParticipant)
+
+  const md = useMouseDown()
+  console.log('mouseDown: ' + md)
+
+  // const { x, y } = useMousePosition();
+  // var xPos: number = Number(x);
+  // var yPos: number = Number(y);
 
 
 
+  // arrangementPositions.shift()
   // Positions enabled by changing position to absolute inside Participant
   // Set disableAudio
   return (
@@ -203,7 +213,7 @@ export default function ParticipantStrip({ zoomed, position }: ParticipantStripP
         huddleID={thisHuddleID}
       />
       {/*ONLY MAP THE PARTICIPANTS IN YOUR HUDDLE*/}
-      {/* {
+      {
         participants.map(participant => (
           <Participant
             key={participant.sid}
@@ -214,13 +224,13 @@ export default function ParticipantStrip({ zoomed, position }: ParticipantStripP
             diameter={diameter}
           />
         ))
-      } */}
-      {
+      }
+      {/* {
         modified.map(p => {
           if (p.huddleID === thisHuddleID) {
             return (
               <Participant
-                key={'p.participant.sid'}
+                key={p.participant.sid}
                 participant={p.participant}
                 isSelected={selectedParticipant === p.participant}
                 onClick={() => clickParticipant(p.participant)}
@@ -230,7 +240,7 @@ export default function ParticipantStrip({ zoomed, position }: ParticipantStripP
             )
           }
         })
-      }
+      } */}
     </>
   );
 }

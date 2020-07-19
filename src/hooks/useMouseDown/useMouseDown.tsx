@@ -3,16 +3,24 @@ import { useState, useEffect } from 'react';
 const useMouseDown = () => {
   const [mouseDown, setMouseDown] = useState(false);
 
-  const updateMousePosition = (ev: any) => {
+  const updateMouseDown = (ev: any) => {
     setMouseDown(true);
   };
 
-  useEffect(() => {
-    window.addEventListener('mousedown', updateMousePosition);
+  const updateMouseUp = (ev: any) => {
+    setMouseDown(false)
+  }
 
-    return () => window.removeEventListener('mousemove', updateMousePosition);
+  useEffect(() => {
+    window.addEventListener('mousedown', updateMouseDown);
+    window.addEventListener('mouseup', updateMouseUp)
+    return () => {
+      window.removeEventListener('mousedown', updateMouseDown)
+      window.removeEventListener('mouseup', updateMouseUp)
+    };
   }, []);
 
+  // console.log(mouseDown)
   return mouseDown;
 };
 

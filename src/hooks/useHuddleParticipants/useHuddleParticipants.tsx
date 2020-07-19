@@ -55,9 +55,10 @@ export default function useHuddleParticipants() {
             // })
             
             // need to push participant with sid === userID
+            // this comes from the API. 
             userList.push({participant: participants[0], huddleID: huddleID})
 
-            console.log('pushed user ' + userID)
+            // console.log('pushed user ' + userID)
         })
     })
 
@@ -82,5 +83,6 @@ export default function useHuddleParticipants() {
     // })
 
     // Returns a list of {participant: p, huddleID: huddle_id} objects
+    // console.log(userList)
     return userList;
 }

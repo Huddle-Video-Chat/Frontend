@@ -111,7 +111,7 @@ export default function MenuBar(huddleState: any) {
       },
       // responseType: 'json'
     }).then(function(response) {
-      console.log(response);
+      // console.log(response);
     });
 
     getToken(name, roomName).then(token => connect(token));
@@ -123,7 +123,7 @@ export default function MenuBar(huddleState: any) {
         {roomState === 'disconnected' ? (
           // Connected menu bar
           <div>
-            <form className={classes.form} onSubmit={handleSubmit}>
+            {/* <form className={classes.form} onSubmit={handleSubmit}> */}
             {window.location.search.includes('customIdentity=true') || !user?.displayName ? (
               <TextField
                 id="menu-name"
@@ -160,7 +160,7 @@ export default function MenuBar(huddleState: any) {
               Join Room
             </Button>
             {(isConnecting || isFetching) && <CircularProgress className={classes.loadingSpinner} />}
-            </form>
+            
           </div>
         ) : (
           // Connected menu bar
