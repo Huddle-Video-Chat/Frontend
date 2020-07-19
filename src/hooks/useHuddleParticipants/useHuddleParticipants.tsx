@@ -36,26 +36,6 @@ export default function useHuddleParticipants() {
 
   const rooms = APIresult.rooms;
 
-<<<<<<< HEAD
-    let userList: { participant: RemoteParticipant; huddleID: number; }[] = []
-    rooms.map(huddle => {
-        const huddleID = huddle.id
-        const users = huddle.users
-        users.map(userID => {
-            // participants.map(p => {
-            //     if (true) {
-            //         userList.push({participant: p, huddleID: huddleID})
-            //     }
-            // })
-            
-            // need to push participant with sid === userID
-            // this comes from the API. 
-            userList.push({participant: participants[0], huddleID: huddleID})
-
-            // console.log('pushed user ' + userID)
-        })
-    })
-=======
   let userList: { participant: RemoteParticipant; huddleID: number }[] = [];
   rooms.map(huddle => {
     const huddleID = huddle.id;
@@ -69,7 +49,6 @@ export default function useHuddleParticipants() {
 
       // need to push participant with sid === userID
       userList.push({ participant: participants[0], huddleID: huddleID });
->>>>>>> 2823ec13a70eafe99774a133676157798bad2c26
 
       console.log('pushed user ' + userID);
     });
@@ -94,13 +73,6 @@ export default function useHuddleParticipants() {
   //     return {participant: p, huddleID: 2}
   // })
 
-<<<<<<< HEAD
-    // Returns a list of {participant: p, huddleID: huddle_id} objects
-    // console.log(userList)
-    return userList;
-}
-=======
   // Returns a list of {participant: p, huddleID: huddle_id} objects
   return userList;
 }
->>>>>>> 2823ec13a70eafe99774a133676157798bad2c26

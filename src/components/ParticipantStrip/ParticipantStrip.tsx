@@ -151,13 +151,18 @@ export default function ParticipantStrip({ zoomed, position }: ParticipantStripP
   const modified = useHuddleParticipants()
 
   const [huddleState, setHuddleState] = useState(null);
-  
+
+  var newState: any
+
+
+
   function clickParticipant(participant: any) {
     setSelectedParticipant(participant)
     console.log(participant)
   }
 
-  if (huddleState == null) {
+  if (huddleState === null) {
+    console.log('running post request ...')
     const requestOptions = {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -168,87 +173,133 @@ export default function ParticipantStrip({ zoomed, position }: ParticipantStripP
     fetch(url, requestOptions)
       .then(response => response.json())
       .then(data => {
-        setHuddleState(data);
-      });
-  } else {
-    const requestOptions = {
-      method: 'GET',
-      headers: { 'Content-Type': 'application/json' },
-    };
 
-    var url = 'https://aqueous-woodland-13891.herokuapp.com/room/state?';
-    url += '&id=' + room.sid;
-    url += '&user_id=' + localParticipant.sid;
 
-    fetch(url, requestOptions)
-      .then(response => response.json())
-      .then(data => {
-        setHuddleState(data);
+        participants.map(p => {
+          const huddleID = data.users[p.sid]
+          if (newState[huddleID] === null) {
+            newState[huddleID] = []
+          }
+          console.log('pushed ' + p)
+          newState[huddleID].push(p)
+        })
+
+        setHuddleState(newState);
+        console.log('newState: ' + newState)
       });
   }
+  // else {
+  //   const requestOptions = {
+  //     method: 'GET',
+  //     headers: { 'Content-Type': 'application/json' },
+  //   };
 
-  console.log(huddleState);
+  //   var url = 'https://aqueous-woodland-13891.herokuapp.com/room/state?';
+  //   url += '&id=' + room.sid;
+  //   url += '&user_id=' + localParticipant.sid;
 
-  // console.log('localparticipant in participant strip: ')
-  // console.log(localParticipant)
+  //   fetch(url, requestOptions)
+  //     .then(response => response.json())
+  //     .then(data => {
+  //       setHuddleState(data);
+
+  //     });
+  // }
+
 
   const md = useMouseDown()
   console.log('mouseDown: ' + md)
   // const diameter = zoomed ? 250 : 100
 
   const diameter = zoomed ? 300 : 170;
-  let arrangementPositions = getArangementPositions(participants.length + 1, diameter, {position});
-
-  // const { x, y } = useMousePosition();
-  // var xPos: number = Number(x);
-  // var yPos: number = Number(y);
+  let arrangementPositions = getArangementPositions(participants.length + 1, diameter, { left: 200, top: 200 });
 
 
+  const otherParticipants: any[] = []
 
-  // arrangementPositions.shift()
-  // Positions enabled by changing position to absolute inside Participant
-  // Set disableAudio
+  // placeholder for this huddle ID
+  const thisHuddleID = 1
 
-  console.log(localParticipant.sid);
   return (
     <>
-      <Participant
-        participant={localParticipant}
-        isSelected={selectedParticipant === localParticipant}
-        onClick={() => clickParticipant(localParticipant)}
-        position={arrangementPositions.shift()}
-        diameter={diameter}
-        // huddleID={thisHuddleID}
-      />
-      {/*ONLY MAP THE PARTICIPANTS IN YOUR HUDDLE*/}
-      {
-        participants.map(participant => (
+      {zoomed ?
+        // zoomed in, ours in center large, don't render others
+        <>
           <Participant
-            key={participant.sid}
-            participant={participant}
-            isSelected={selectedParticipant === participant}
-            onClick={() => clickParticipant(participant)}
+            participant={localParticipant}
+            isSelected={selectedParticipant === localParticipant}
+            onClick={() => clickParticipant(localParticipant)}
             position={arrangementPositions.shift()}
             diameter={diameter}
+          // huddleID={thisHuddleID}
           />
-        ))
-      }
-      {/* {
-        modified.map(p => {
-          if (p.huddleID === thisHuddleID) {
-            return (
+          {/*ONLY MAP THE PARTICIPANTS IN YOUR HUDDLE*/}
+          {
+            participants.map(participant => (
               <Participant
-                key={p.participant.sid}
-                participant={p.participant}
-                isSelected={selectedParticipant === p.participant}
-                onClick={() => clickParticipant(p.participant)}
+                key={participant.sid}
+                participant={participant}
+                isSelected={selectedParticipant === participant}
+                onClick={() => clickParticipant(participant)}
                 position={arrangementPositions.shift()}
                 diameter={diameter}
               />
-            )
+            ))
           }
-        })
-      } */}
+          {/* {
+            newState[thisHuddleID].map((participant: any) => (
+              <Participant
+                key={participant.sid}
+                participant={participant}
+                isSelected={selectedParticipant === participant}
+                onClick={() => clickParticipant(participant)}
+                position={arrangementPositions.shift()}
+                diameter={diameter}
+              />
+            ))
+          } */}
+        </> :
+        // zoomed out, ours in the center, others on the edges
+        <>
+          <Participant
+            participant={localParticipant}
+            isSelected={selectedParticipant === localParticipant}
+            onClick={() => clickParticipant(localParticipant)}
+            position={arrangementPositions.shift()}
+            diameter={diameter}
+          // huddleID={thisHuddleID}
+          />
+          {
+            participants.map(participant => (
+              <Participant
+                key={participant.sid}
+                participant={participant}
+                isSelected={selectedParticipant === participant}
+                onClick={() => clickParticipant(participant)}
+                position={arrangementPositions.shift()}
+                diameter={diameter}
+              />
+            ))
+          }
+
+          {/* other positions, other huddles*/}
+          {
+            otherParticipants.map(participant => (
+              <Participant
+                key={participant.sid}
+                participant={participant}
+                isSelected={selectedParticipant === participant}
+                onClick={() => clickParticipant(participant)}
+                position={arrangementPositions.shift()}
+                diameter={diameter}
+              />
+            ))
+          }
+        </>
+
+      }
+
+
     </>
   );
 }
