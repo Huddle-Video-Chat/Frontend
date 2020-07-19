@@ -11,7 +11,7 @@ import useHeight from './hooks/useHeight/useHeight';
 import useRoomState from './hooks/useRoomState/useRoomState';
 import useVideoContext from './hooks/useVideoContext/useVideoContext';
 
-import axios from 'axios'
+import axios from 'axios';
 import { useEffect, useState } from 'react';
 
 const Container = styled('div')({
@@ -44,18 +44,20 @@ export default function App() {
   if (roomState !== 'disconnected') {
     fetch('url', {
       method: 'POST',
-      headers: {'Content-type': 'application/json'},
+      headers: { 'Content-type': 'application/json' },
       body: 'name: testRoomName',
-    }).then(r => r.json()).then(response => {
-      const roomID = response
     })
+      .then(r => r.json())
+      .then(response => {
+        const roomID = response;
+      });
   }
 
   // post request doesnt work lol
   function postRequest() {
     axios.post('http://www.google.com').then((response: any) => {
-      console.log(response)
-    })
+      console.log(response);
+    });
   }
   const [huddleState] = useState({});
 
@@ -64,7 +66,7 @@ export default function App() {
     <Container style={{ height }}>
       <MenuBar  />
       <Main>
-        <button onClick={postRequest} >making a request to google.com</button>
+        <button onClick={postRequest}>making a request to google.com</button>
         {roomState === 'disconnected' ? <LocalVideoPreview /> : <Room />}
         <Controls />
       </Main>

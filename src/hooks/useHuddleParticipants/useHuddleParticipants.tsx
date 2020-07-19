@@ -1,18 +1,17 @@
 import { useEffect, useState } from 'react';
 import { RemoteParticipant } from 'twilio-video';
 import useParticipants from '../useParticipants/useParticipants';
-import useVideoContext from '../useVideoContext/useVideoContext'
+import useVideoContext from '../useVideoContext/useVideoContext';
 
 export default function useHuddleParticipants() {
-    const participants = useParticipants()
-    const {
-        room: { localParticipant },
-      } = useVideoContext();
-    
-    // Room state API call
+  const participants = useParticipants();
+  const {
+    room: { localParticipant },
+  } = useVideoContext();
 
+  // Room state API call
 
-    /*
+  /*
   - id (int) — id of room
   - user_id (int) — id of user
   - huddle_id (int) — id of current huddle
@@ -22,27 +21,22 @@ export default function useHuddleParticipants() {
       - users (list: int) — list of all users in huddle
   */
 
-    const APIresult = {
-        id: 2,
-        user_id: 'sid1',
-        huddle_id: 1,
-        users: [
-            'sid1',
-            'sid2',
-        ],
-        rooms: [
-            {
-                id: 1,
-                users: [
-                    'sid1',
-                    'sid2',
-                ]
-            },
-        ]
-    }
+  const APIresult = {
+    id: 2,
+    user_id: 'sid1',
+    huddle_id: 1,
+    users: ['sid1', 'sid2'],
+    rooms: [
+      {
+        id: 1,
+        users: ['sid1', 'sid2'],
+      },
+    ],
+  };
 
-    const rooms = APIresult.rooms
+  const rooms = APIresult.rooms;
 
+<<<<<<< HEAD
     let userList: { participant: RemoteParticipant; huddleID: number; }[] = []
     rooms.map(huddle => {
         const huddleID = huddle.id
@@ -61,28 +55,52 @@ export default function useHuddleParticipants() {
             // console.log('pushed user ' + userID)
         })
     })
+=======
+  let userList: { participant: RemoteParticipant; huddleID: number }[] = [];
+  rooms.map(huddle => {
+    const huddleID = huddle.id;
+    const users = huddle.users;
+    users.map(userID => {
+      // participants.map(p => {
+      //     if (true) {
+      //         userList.push({participant: p, huddleID: huddleID})
+      //     }
+      // })
 
-    // let huddleUserIDs: string[]
-    // APIresult.rooms.map(huddle => {
-    //     if (huddle.id == APIresult.huddle_id) {
-    //         huddleUserIDs = huddle.users
-    //     }
-    // })
+      // need to push participant with sid === userID
+      userList.push({ participant: participants[0], huddleID: huddleID });
+>>>>>>> 2823ec13a70eafe99774a133676157798bad2c26
 
-    // let huddleList
-    // participants.map(p => {
-    //     if (huddleUserIDs.includes('sht')) {
+      console.log('pushed user ' + userID);
+    });
+  });
 
-    //     }
-    // })
+  // let huddleUserIDs: string[]
+  // APIresult.rooms.map(huddle => {
+  //     if (huddle.id == APIresult.huddle_id) {
+  //         huddleUserIDs = huddle.users
+  //     }
+  // })
 
+  // let huddleList
+  // participants.map(p => {
+  //     if (huddleUserIDs.includes('sht')) {
 
-    // const huddleParticipants = participants.map(p => {
-    //     p.sid === 
-    //     return {participant: p, huddleID: 2}
-    // })
+  //     }
+  // })
 
+  // const huddleParticipants = participants.map(p => {
+  //     p.sid ===
+  //     return {participant: p, huddleID: 2}
+  // })
+
+<<<<<<< HEAD
     // Returns a list of {participant: p, huddleID: huddle_id} objects
     // console.log(userList)
     return userList;
 }
+=======
+  // Returns a list of {participant: p, huddleID: huddle_id} objects
+  return userList;
+}
+>>>>>>> 2823ec13a70eafe99774a133676157798bad2c26

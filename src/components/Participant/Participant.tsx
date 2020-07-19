@@ -5,19 +5,21 @@ import { Participant as IParticipant } from 'twilio-video';
 
 import { styled } from '@material-ui/core/styles';
 
-
-
-
-
-interface ContainerProps {
-  diameter: number,
+interface ParticipantProps {
+  participant: IParticipant;
+  disableAudio?: boolean;
+  enableScreenShare?: boolean;
+  onClick: () => void;
+  isSelected: boolean;
+  position: object;
+  diameter: number;
 }
 
-const Container = styled(
-  ({ diameter }: ContainerProps) => (
-    <div />
-  ),
-)({
+interface ContainerProps {
+  diameter: number;
+}
+
+const Container = styled(({ diameter }: ContainerProps) => <div />)({
   // overflow: 'hidden',
   // border: '5px dotted red',
   // borderRadius: '50%',
@@ -29,7 +31,7 @@ const Container = styled(
 
   // Uncomment to use position rather than CSS grid, for grid and position algorithm
   position: 'relative',
-})
+});
 
 // const Positioner = styled('div')({
 //   overflow: 'hidden',
@@ -65,14 +67,12 @@ export default function Participant({
   diameter,
   huddleID,
 }: ParticipantProps) {
-
-
   // setting disableAudio to hear, clicking button toggles setHear
   // disableAudio will need to be set by participant strip in the future.
   function clickButton() {
-    setHear(!hear)
+    setHear(!hear);
   }
-  const [hear, setHear] = useState(false)
+  const [hear, setHear] = useState(false);
 
   const Positioner = styled('div')({
     overflow: 'hidden',
@@ -85,21 +85,20 @@ export default function Participant({
     height: diameter,
 
     position: 'absolute',
-  })
+  });
 
   return (
     // testing to see if I can change render position of participant
 
     <Positioner style={position}>
-
-
-      <button onClick={clickButton}>{hear ? 'i am shut' : 'shut up'}</button>
+      {/* <button onClick={clickButton}>{hear ? 'i am shut' : 'shut up'}</button> */}
       <ParticipantInfo participant={participant} onClick={onClick} isSelected={isSelected}>
-        <ParticipantTracks participant={participant} disableAudio={hear} enableScreenShare={enableScreenShare} />
+        <ParticipantTracks
+          participant={participant}
+          disableAudio={disableAudio}
+          enableScreenShare={enableScreenShare}
+        />
       </ParticipantInfo>
-
-
     </Positioner>
-
   );
 }
