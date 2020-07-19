@@ -46,6 +46,17 @@ const Container = styled(({ diameter }: ContainerProps) => <div />)({
 //   position: 'absolute',
 // })
 
+interface ParticipantProps {
+  participant: IParticipant;
+  disableAudio?: boolean;
+  enableScreenShare?: boolean;
+  onClick: () => void;
+  isSelected: boolean;
+  position: object;
+  diameter: number;
+  huddleID?: number;
+}
+
 export default function Participant({
   participant,
   disableAudio,
@@ -54,12 +65,12 @@ export default function Participant({
   isSelected,
   position,
   diameter,
+  huddleID,
 }: ParticipantProps) {
   // setting disableAudio to hear, clicking button toggles setHear
   // disableAudio will need to be set by participant strip in the future.
   function clickButton() {
     setHear(!hear);
-    console.log('hear: ' + hear);
   }
   const [hear, setHear] = useState(false);
 

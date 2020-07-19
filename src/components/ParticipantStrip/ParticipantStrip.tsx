@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Participant from '../Participant/Participant';
 import { styled } from '@material-ui/core/styles';
 import useParticipants from '../../hooks/useParticipants/useParticipants';
@@ -6,6 +6,9 @@ import useVideoContext from '../../hooks/useVideoContext/useVideoContext';
 import useMousePosition from '../../hooks/useMousePosition/useMousePosition';
 import useSelectedParticipant from '../VideoProvider/useSelectedParticipant/useSelectedParticipant';
 import { useState } from 'react';
+import useHuddleParticipants from '../../hooks/useHuddleParticipants/useHuddleParticipants';
+
+import axios from 'axios';
 
 /* Original code with container and scroll container
 Renders yourself as a normal participant as selected participant = local participant */
@@ -71,8 +74,8 @@ const Grid = styled('div')({
   gridRowGap: '20px',
 });
 
-const Outline = styled('div')({
-  border: '5px dotted blue',
+const Positioner = styled('div')({
+  position: 'absolute',
 });
 
 /* Position and arrangement algorith lives here. */
@@ -115,9 +118,7 @@ function getArangementPositions(size: number, diameter: number, center: any) {
 
     let sizeX = -(arrangement[row] * diameter) / 2;
     for (let i = 0; i < arrangement[row]; i += 1) {
-      result.push({ left: sizeX + center.x, top: sizeY + center.y });
-      console.log(center.x);
-      console.log('position pushed: left: ' + sizeX + center.x + ' // top: ' + sizeY + center.y);
+      result.push({ left: sizeX + center.left, top: sizeY + center.top });
 
       // radius math here
       sizeX += diameter;
@@ -196,20 +197,38 @@ export default function ParticipantStrip({ zoomed, position }: ParticipantStripP
       <Participant
         participant={localParticipant}
         isSelected={selectedParticipant === localParticipant}
-        onClick={() => setSelectedParticipant(localParticipant)}
+        onClick={() => clickParticipant(localParticipant)}
         position={arrangementPositions.shift()}
         diameter={diameter}
+        huddleID={thisHuddleID}
       />
-      {participants.map(participant => (
-        <Participant
-          key={participant.sid}
-          participant={participant}
-          isSelected={selectedParticipant === participant}
-          onClick={() => setSelectedParticipant(participant)}
-          position={arrangementPositions.shift()}
-          diameter={diameter}
-        />
-      ))}
+      {/*ONLY MAP THE PARTICIPANTS IN YOUR HUDDLE*/}
+      {/* {
+        participants.map(participant => (
+          <Participant
+            key={participant.sid}
+            participant={participant}
+            isSelected={selectedParticipant === participant}
+            onClick={() => clickParticipant(participant)}
+            position={arrangementPositions.shift()}
+            diameter={diameter}
+          />
+        ))
+      } */}
+      {modified.map(p => {
+        if (p.huddleID === thisHuddleID) {
+          return (
+            <Participant
+              key={p.participant.sid}
+              participant={p.participant}
+              isSelected={selectedParticipant === p.participant}
+              onClick={() => clickParticipant(p.participant)}
+              position={arrangementPositions.shift()}
+              diameter={diameter}
+            />
+          );
+        }
+      })}
     </>
   );
 }

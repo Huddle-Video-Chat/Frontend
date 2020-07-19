@@ -19,6 +19,8 @@ import LocalAudioLevelIndicator from './DeviceSelector/LocalAudioLevelIndicator/
 import ToggleFullscreenButton from './ToggleFullScreenButton/ToggleFullScreenButton';
 import Menu from './Menu/Menu';
 
+import axios from 'axios';
+
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     container: {
@@ -64,7 +66,7 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-export default function MenuBar() {
+export default function MenuBar(huddleState: any) {
   const classes = useStyles();
   const { URLRoomName } = useParams();
   const { user, getToken, isFetching } = useAppState();
@@ -73,6 +75,10 @@ export default function MenuBar() {
 
   const [name, setName] = useState<string>(user?.displayName || '');
   const [roomName, setRoomName] = useState<string>('');
+
+  // const [id] = useState('huddle');
+
+  // huddleState[huddleId] = 23;
 
   useEffect(() => {
     if (URLRoomName) {
@@ -88,13 +94,27 @@ export default function MenuBar() {
     setRoomName(event.target.value);
   };
 
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    // If this app is deployed as a twilio function, don't change the URL because routing isn't supported.
-    if (!window.location.origin.includes('twil.io')) {
-      window.history.replaceState(null, '', window.encodeURI(`/room/${roomName}${window.location.search || ''}`));
-    }
-    getToken(name, roomName).then(token => connect(token));
+  const handleSubmit = () => {
+    // event.preventDefault();
+
+    // axios.post('https://aqueous-woodland-13891.herokuapp.com/room/join?first=andy&last=jiang&id=dasd&user_id=sd&username=da;sdf')
+    // .then(res => {
+    //   console.log(res)
+    // });
+
+    axios({
+      method: 'post',
+      url:
+        'https://aqueous-woodland-13891.herokuapp.com/room/join?first=andy&last=jiang&id=dasd&user_id=sd&username=dasdf',
+      headers: {
+        'Access-Control-Allow-Origin': '*',
+      },
+      // responseType: 'json'
+    }).then(function(response) {
+      console.log(response);
+    });
+
+    // getToken(name, roomName).then(token => connect(token));
   };
 
   return (
@@ -102,7 +122,8 @@ export default function MenuBar() {
       <Toolbar className={classes.toolbar}>
         {roomState === 'disconnected' ? (
           // Connected menu bar
-          <form className={classes.form} onSubmit={handleSubmit}>
+          <div>
+            {/* <form className={classes.form} onSubmit={handleSubmit}> */}
             {window.location.search.includes('customIdentity=true') || !user?.displayName ? (
               <TextField
                 id="menu-name"
@@ -129,6 +150,7 @@ export default function MenuBar() {
             <Button
               className={classes.joinButton}
               type="submit"
+              onClick={handleSubmit}
               // color="white"
               // sty
               style={{ color: 'black', backgroundColor: 'white' }}
@@ -138,7 +160,7 @@ export default function MenuBar() {
               Join Room
             </Button>
             {(isConnecting || isFetching) && <CircularProgress className={classes.loadingSpinner} />}
-          </form>
+          </div>
         ) : (
           // Connected menu bar
           <h3>{roomName}</h3>

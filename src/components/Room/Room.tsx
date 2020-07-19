@@ -6,6 +6,10 @@ import { ClickAwayListener } from '@material-ui/core';
 
 import useZoomToggle from '../../hooks/useZoomToggle/useZoomToggle';
 
+import useHuddleParticipants from '../../hooks/useHuddleParticipants/useHuddleParticipants';
+
+import axios from 'axios';
+
 const Container = styled('div')(({ theme }) => ({
   position: 'relative',
   height: '100%',
@@ -68,7 +72,15 @@ function ViewButton({ onClick }: ButtonProps) {
 function HuddleButton({ onClick }: ButtonProps) {
   return (
     <MyButton onClick={onClick} style={{ left: '144px', top: 0 }}>
-      Create Huddle
+      Switch huddle
+    </MyButton>
+  );
+}
+
+function ListButton({ onClick }: ButtonProps) {
+  return (
+    <MyButton onClick={onClick} style={{ left: '288px', top: 0 }}>
+      List info
     </MyButton>
   );
 }
@@ -104,6 +116,16 @@ export default function Room() {
 }
 */
 
+/*
+- id (int) — id of room
+- user_id (int) — id of user
+- huddle_id (int) — id of current huddle
+- users (list: int) — list of all user ids in this room
+- rooms (list: object) — list of all huddles in the room
+    - id (int) — id of huddle
+    - users (list: int) — list of all users in huddle
+*/
+
 let jsonData = {
   id: 2,
   user_id: 1,
@@ -120,31 +142,43 @@ let jsonData = {
 interface RoomProps {}
 
 // To test without main participant, without container
-export default function Room({}: RoomProps) {
+export default function Room() {
   const [zoomed, setZoom] = useState(true);
+  const [huddle, setHuddle] = useState(1);
+  const huddleParticipants = useHuddleParticipants();
+
+  const [testList, setTestList] = useState<Array<String>>(['']);
+
   const position = zoomed ? { left: 150, top: 150 } : { left: 500, top: 150 };
 
-  const [huddles, setHuddles] = useState([{ zoomed: zoomed, position: position }]);
   // using incorrect abstraction rn, will fix
   // const [zoomed, toggleIsZoomed] = useZoomToggle()
   const clickView = () => {
     setZoom(!zoomed);
-    console.log('zoomed? ' + zoomed);
   };
 
+  // toggles huddle between 1, 0
   const clickHuddle = () => {
-    let newHuddle = { zoomed: false, position: { left: 100, top: 100 } };
-    // lol wtf does as any do
-    const newState = huddles.push(newHuddle) as any;
-    setHuddles(newState);
-    console.log(huddles);
+    setHuddle(1 - huddle);
   };
+
+  const clickList = () => {
+    axios.post('google.com').then((response: any) => {
+      console.log(response);
+    });
+    // console.log(huddleParticipants)
+  };
+
+  const huddleID = jsonData.huddle_id;
+
+  // const filteredList = huddleParticipants.filter(user => user.huddleID === huddleID)
 
   // hard coded positions, right and left side
   return (
     <Outline>
-      {/* <ViewButton onClick={clickView} />
-      <HuddleButton onClick={clickHuddle} /> */}
+      <ViewButton onClick={clickView} />
+      <HuddleButton onClick={clickHuddle} />
+      <ListButton onClick={clickList} />
       <Positioner style={position}>
         {/* {
           huddles.map(huddle => (
