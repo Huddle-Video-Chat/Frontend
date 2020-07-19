@@ -148,13 +148,28 @@ export default function ParticipantStrip({ zoomed, position }: ParticipantStripP
 
   const [huddleState, setHuddleState] = useState(null);
 
-  const requestOptions = {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-  };
-
   if (huddleState == null) {
+    const requestOptions = {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+    };
+
     var url = 'https://aqueous-woodland-13891.herokuapp.com/room/join?first=andy&last=jiang&username=da;sdf';
+    url += '&id=' + room.sid;
+    url += '&user_id=' + localParticipant.sid;
+
+    fetch(url, requestOptions)
+      .then(response => response.json())
+      .then(data => {
+        setHuddleState(data);
+      });
+  } else {
+    const requestOptions = {
+      method: 'GET',
+      headers: { 'Content-Type': 'application/json' },
+    };
+
+    var url = 'https://aqueous-woodland-13891.herokuapp.com/room/state?';
     url += '&id=' + room.sid;
     url += '&user_id=' + localParticipant.sid;
 
