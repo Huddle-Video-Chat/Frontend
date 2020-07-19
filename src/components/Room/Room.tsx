@@ -29,7 +29,7 @@ const FakeParticipant = styled('div')({
   color: 'white',
   height: 48,
   padding: '0 30px',
-})
+});
 
 const Outline = styled('div')({
   position: 'relative',
@@ -39,7 +39,7 @@ const Outline = styled('div')({
   background: '#7289DA',
   // border: '5px dashed green',
   boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',
-})
+});
 
 const MyButton = styled('button')({
   background: 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)',
@@ -59,14 +59,18 @@ interface ButtonProps {
 
 function ViewButton({ onClick }: ButtonProps) {
   return (
-    <MyButton onClick={onClick} style={{ left: 0, top: 0 }}>Change view</MyButton>
-  )
+    <MyButton onClick={onClick} style={{ left: 0, top: 0 }}>
+      Change view
+    </MyButton>
+  );
 }
 
 function HuddleButton({ onClick }: ButtonProps) {
   return (
-    <MyButton onClick={onClick} style={{ left: '144px', top: 0 }}>Create Huddle</MyButton>
-  )
+    <MyButton onClick={onClick} style={{ left: '144px', top: 0 }}>
+      Create Huddle
+    </MyButton>
+  );
 }
 
 const DummyParticipants = styled('div')({
@@ -77,11 +81,11 @@ const DummyParticipants = styled('div')({
   width: '50px',
 
   position: 'absolute',
-})
+});
 
 const Positioner = styled('div')({
   position: 'absolute',
-})
+});
 
 /* Enters room after LocalVideoPreview, renders participantStrip and MainParticipant.
 Style the grid here? or inside participantStrip?
@@ -104,63 +108,58 @@ let jsonData = {
   id: 2,
   user_id: 1,
   huddle_id: 1,
-  users: [
-    1
-  ],
+  users: [1],
   rooms: [
     {
       id: 1,
-      users: [
-        1
-      ]
-    }
-  ]
-}
+      users: [1],
+    },
+  ],
+};
 
-
+interface RoomProps {}
 
 // To test without main participant, without container
-export default function Room() {
-  const [zoomed, setZoom] = useState(true)
-  const position = zoomed ? {left: 150, top: 150} : {left: 500, top: 150}
+export default function Room({}: RoomProps) {
+  const [zoomed, setZoom] = useState(true);
+  const position = zoomed ? { left: 150, top: 150 } : { left: 500, top: 150 };
 
-
-  const [huddles, setHuddles] = useState([{zoomed: zoomed, position: position}])
+  const [huddles, setHuddles] = useState([{ zoomed: zoomed, position: position }]);
   // using incorrect abstraction rn, will fix
   // const [zoomed, toggleIsZoomed] = useZoomToggle()
   const clickView = () => {
-    setZoom(!zoomed)
-    console.log('zoomed? ' + zoomed)
-  }
+    setZoom(!zoomed);
+    console.log('zoomed? ' + zoomed);
+  };
 
   const clickHuddle = () => {
-    let newHuddle = {zoomed: false, position: {left: 100, top: 100}}
+    let newHuddle = { zoomed: false, position: { left: 100, top: 100 } };
     // lol wtf does as any do
-    const newState = huddles.push(newHuddle) as any
-    setHuddles(newState)
-    console.log(huddles)
-  }
+    const newState = huddles.push(newHuddle) as any;
+    setHuddles(newState);
+    console.log(huddles);
+  };
 
   // hard coded positions, right and left side
   return (
     <Outline>
-      <ViewButton onClick={clickView} />
-      <HuddleButton onClick={clickHuddle} />
-      <Positioner style = {position}>
+      {/* <ViewButton onClick={clickView} />
+      <HuddleButton onClick={clickHuddle} /> */}
+      <Positioner style={position}>
         {/* {
           huddles.map(huddle => (
             <ParticipantStrip zoomed={huddle.zoomed} position={huddle.position}/>
           ))
         } */}
-        <ParticipantStrip zoomed={zoomed} position={position}/>
+        <ParticipantStrip zoomed={zoomed} position={position} />
       </Positioner>
-      {zoomed ? null :
+      {/* {zoomed ? null :
         <>
           <DummyParticipants style={{ left: 100, top: 100 }} />
           <DummyParticipants style={{ left: 150, top: 100 }} />
           <DummyParticipants style={{ left: 125, top: 150 }} />
         </>
-      }
+      } */}
     </Outline>
   );
 }
