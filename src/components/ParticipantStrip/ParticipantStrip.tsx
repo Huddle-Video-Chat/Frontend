@@ -186,6 +186,8 @@ export default function ParticipantStrip({ zoomed, position }: ParticipantStripP
   }
   // call room state at participant strip layer
 
+  console.log(localParticipant)
+
 
 
   // Positions enabled by changing position to absolute inside Participant
@@ -218,7 +220,7 @@ export default function ParticipantStrip({ zoomed, position }: ParticipantStripP
           if (p.huddleID === thisHuddleID) {
             return (
               <Participant
-                key={p.participant.sid}
+                key={'p.participant.sid'}
                 participant={p.participant}
                 isSelected={selectedParticipant === p.participant}
                 onClick={() => clickParticipant(p.participant)}
