@@ -102,17 +102,17 @@ export default function MenuBar(huddleState: any) {
     //   console.log(res)
     // });
 
-    axios({
-      method: 'post',
-      url:
-        'https://aqueous-woodland-13891.herokuapp.com/room/join?first=andy&last=jiang&id=dasd&user_id=sd&username=dasdf',
-      headers: {
-        'Access-Control-Allow-Origin': '*',
-      },
-      // responseType: 'json'
-    }).then(function(response) {
-      // console.log(response);
-    });
+    // axios({
+    //   method: 'post',
+    //   url:
+    //     'https://aqueous-woodland-13891.herokuapp.com/room/join?first=andy&last=jiang&id=dasd&user_id=sd&username=dasdf',
+    //   headers: {
+    //     'Access-Control-Allow-Origin': '*',
+    //   },
+    //   // responseType: 'json'
+    // }).then(function(response) {
+    //   // console.log(response);
+    // });
 
     getToken(name, roomName).then(token => connect(token));
   };
@@ -160,7 +160,6 @@ export default function MenuBar(huddleState: any) {
               Join Room
             </Button>
             {(isConnecting || isFetching) && <CircularProgress className={classes.loadingSpinner} />}
-            
           </div>
         ) : (
           // Connected menu bar
