@@ -5,6 +5,16 @@ import { Participant as IParticipant } from 'twilio-video';
 import Participant from '../Participant/Participant';
 
 import { styled } from '@material-ui/core/styles';
+import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    huddle: {
+      overflow: 'visible',
+      border: '5px dashed red',
+    },
+  })
+);
 
 function nextSquareRoot(num: number) {
   if (Math.floor(Math.sqrt(num)) === Math.sqrt(num)) {
@@ -70,6 +80,7 @@ export default function Huddle({
   onClick,
   selectedParticipant,
 }: HuddleProps) {
+  const classes = useStyles();
   // // setting disableAudio to hear, clicking button toggles setHear
   // // disableAudio will need to be set by participant strip in the future.
   // function clickButton() {
@@ -82,10 +93,9 @@ export default function Huddle({
     border: '5px dotted green',
     borderRadius: '50%',
     backgroundColor: '#99aab5',
-
-    // width: diameter,
-    // height: diameter,
-
+    width: '500px!important',
+    height: '500px!important',
+    transform: 'scale(2)',
     position: 'absolute',
   });
 
@@ -96,7 +106,7 @@ export default function Huddle({
   return (
     // testing to see if I can change render position of participant
 
-    <div onClick={huddleID => onClick}>
+    <div onClick={huddleID => onClick} className={classes.huddle}>
       <Positioner style={position}>
         {participants.map(participant => (
           <Participant
