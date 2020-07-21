@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Huddle from '../Huddle/Huddle';
 import { styled } from '@material-ui/core/styles';
 import useParticipants from '../../hooks/useParticipants/useParticipants';
@@ -167,37 +167,45 @@ export default function ParticipantStrip({ zoomed, position }: ParticipantStripP
         setHuddleState(newState);
         console.log(newState);
       });
-  } else {
-    // const requestOptions = {
-    //   method: 'GET',
-    //   headers: { 'Content-Type': 'application/json' },
-    // };
-    // var url = 'https://aqueous-woodland-13891.herokuapp.com/room/state';
-    // url += '?id=' + room.sid;
-    // url += '&user_id=' + localParticipant.sid;
-    // fetch(url, requestOptions)
-    //   .then(response => response.json())
-    //   .then(data => {
-    //     var newState: {
-    //       [key: string]: any,
-    //     } = {};
-    //     participants.map(p => {
-    //       const huddleID: string = data.users[p.sid]
-    //       if (newState[huddleID] === undefined) {
-    //         newState[huddleID] = []
-    //       }
-    //       newState[huddleID].push(p)
-    //     })
-    //     const huddleID: string = data.huddle_id
-    //     if (newState[huddleID] === undefined) {
-    //       newState[huddleID] = []
-    //     }
-    //     newState[huddleID].push(localParticipant)
-    //     setJoined(true);
-    //     setHuddleState(newState);
-    //     console.log(newState)
-    //   });
   }
+
+  useEffect(() => {
+    setTimeout(() => {
+      const requestOptions = {
+        method: 'GET',
+        headers: { 'Content-Type': 'application/json' },
+      };
+      var url = 'https://aqueous-woodland-13891.herokuapp.com/room/state';
+      url += '?id=' + room.sid;
+      url += '&user_id=' + localParticipant.sid;
+      fetch(url, requestOptions)
+        .then(response => response.json())
+        .then(data => {
+          var newState: {
+            [key: string]: any;
+          } = {};
+          participants.map(p => {
+            const huddleID: string = data.users[p.sid];
+            if (newState[huddleID] === undefined) {
+              newState[huddleID] = [];
+            }
+            newState[huddleID].push(p);
+          });
+          const huddleID: string = data.huddle_id;
+          if (newState[huddleID] === undefined) {
+            newState[huddleID] = [];
+          }
+          newState[huddleID].push(localParticipant);
+          setJoined(true);
+
+          if (newState !== huddleState) {
+            setHuddleState(newState);
+          }
+
+          console.log(newState);
+        });
+    }, 1000);
+  });
 
   // const md = useMouseDown()
   // console.log('mouseDown: ' + md)
