@@ -79,6 +79,7 @@ export default function Huddle({
   onClick,
   selectedParticipant,
 }: HuddleProps) {
+  console.log('huddle...')
   const classes = useStyles();
   // // setting disableAudio to hear, clicking button toggles setHear
   // // disableAudio will need to be set by participant strip in the future.
@@ -101,6 +102,8 @@ export default function Huddle({
   let arrangementPositions = getArangementPositions(participants.length + 1, diameter, position);
 
   function onParticipantClick() {}
+
+  console.log('huddle return ...')
 
   return (
     // testing to see if I can change render position of participant

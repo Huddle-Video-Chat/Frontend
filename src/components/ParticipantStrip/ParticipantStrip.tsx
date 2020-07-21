@@ -96,6 +96,7 @@ interface ParticipantStripProps {
 
 // Without styled containers or scroll container
 export default function ParticipantStrip({ zoomed, position }: ParticipantStripProps) {
+  console.log('participant strip...')
   const {
     room: { localParticipant },
   } = useVideoContext();
@@ -117,6 +118,8 @@ export default function ParticipantStrip({ zoomed, position }: ParticipantStripP
   //   console.log(participant)
   // }
 
+
+  
   async function joinHuddle(huddle: string) {
     const requestOptions = {
       method: 'POST',
@@ -131,6 +134,7 @@ export default function ParticipantStrip({ zoomed, position }: ParticipantStripP
       .then(response => response.json())
       .then(data => console.log(data));
   }
+  
 
   if (!joined) {
     console.log('Joining room ' + room.sid);
@@ -165,6 +169,7 @@ export default function ParticipantStrip({ zoomed, position }: ParticipantStripP
 
         setJoined(true);
         setHuddleState(newState);
+        console.log('new state: ')
         console.log(newState);
       });
   } else {
@@ -199,16 +204,9 @@ export default function ParticipantStrip({ zoomed, position }: ParticipantStripP
     //   });
   }
 
-  // const md = useMouseDown()
-  // console.log('mouseDown: ' + md)
-  // const diameter = zoomed ? 250 : 100
+
 
   const diameter = zoomed ? 300 : 170;
-
-  // const otherParticipants: any[] = []
-
-  // // placeholder for this huddle ID
-  // const thisHuddleID = 1
 
   function getPosition(huddleID: string) {
     return { left: parseInt(huddleID) * 500, top: 300 };
@@ -217,27 +215,33 @@ export default function ParticipantStrip({ zoomed, position }: ParticipantStripP
   
   const huddlePositions = [
     {left: 0, top: 0},
-    {left: window.screen.width / 4, top: window.screen.height / 2},
-    {left: 3 * window.screen.width / 4, top: window.screen.height / 2},
-    {left: window.screen.width / 2, top: window.screen.height / 4},
-    {left: window.screen.width / 2, top: 3 * window.screen.height / 4},
+    {left: window.innerWidth / 4, top: window.innerHeight / 2},
+    {left: 3 * window.innerWidth / 4, top: window.innerHeight / 2},
+    {left: window.innerWidth / 2, top: window.innerHeight / 4},
+    {left: window.innerWidth / 2, top: 3 * window.innerHeight / 4},
   ]
+
 
   return (
     <>
       {//zoomed ?
       // zoomed in, ours in center large, don't render others
       Object.keys(huddleState).map(huddle => {
+        console.log('huddle thing:')
+        console.log(huddle)
+        console.log('huddle state')
+        console.log(huddleState)
         var huddleParticipants: [] = huddleState[huddle];
-        const position = huddlePositions[parseInt(huddle)];
+        const tempPosition = huddlePositions[parseInt(huddle)];
 
         return (
           <Huddle
             onClick={joinHuddle}
-            diameter={300}
+            // diameter of the participant
+            diameter={150}
             huddleID={huddle}
             participants={huddleParticipants}
-            position={position}
+            position={tempPosition}
             selectedParticipant={selectedParticipant}
           />
         );

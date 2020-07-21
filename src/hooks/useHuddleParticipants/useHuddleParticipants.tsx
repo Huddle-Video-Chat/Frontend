@@ -50,7 +50,6 @@ export default function useHuddleParticipants() {
       // need to push participant with sid === userID
       userList.push({ participant: participants[0], huddleID: huddleID });
 
-      console.log('pushed user ' + userID);
     });
   });
 

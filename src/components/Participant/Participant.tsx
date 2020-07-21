@@ -67,6 +67,7 @@ export default function Participant({
   diameter,
   huddleID,
 }: ParticipantProps) {
+  console.log('participant...')
   // setting disableAudio to hear, clicking button toggles setHear
   // disableAudio will need to be set by participant strip in the future.
   function clickButton() {
@@ -81,13 +82,13 @@ export default function Participant({
 
     backgroundColor: '#99aab5',
 
-    width: '200px',
-    height: '200px',
-
-    display: '',
+    width: '150px',
+    height: '150px',
 
     position: 'absolute',
   });
+
+  console.log('participant return...')
 
   return (
     // testing to see if I can change render position of participant
