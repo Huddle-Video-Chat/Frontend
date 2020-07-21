@@ -214,13 +214,22 @@ export default function ParticipantStrip({ zoomed, position }: ParticipantStripP
     return { left: parseInt(huddleID) * 500, top: 300 };
   }
 
+  
+  const huddlePositions = [
+    {left: 0, top: 0},
+    {left: window.screen.width / 4, top: window.screen.height / 2},
+    {left: 3 * window.screen.width / 4, top: window.screen.height / 2},
+    {left: window.screen.width / 2, top: window.screen.height / 4},
+    {left: window.screen.width / 2, top: 3 * window.screen.height / 4},
+  ]
+
   return (
     <>
       {//zoomed ?
       // zoomed in, ours in center large, don't render others
       Object.keys(huddleState).map(huddle => {
         var huddleParticipants: [] = huddleState[huddle];
-        var position = getPosition(huddle);
+        const position = huddlePositions[parseInt(huddle)];
 
         return (
           <Huddle

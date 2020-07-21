@@ -81,8 +81,10 @@ export default function Participant({
 
     backgroundColor: '#99aab5',
 
-    width: diameter,
-    height: diameter,
+    width: '200px',
+    height: '200px',
+
+    display: '',
 
     position: 'absolute',
   });
