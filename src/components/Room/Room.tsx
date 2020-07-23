@@ -41,7 +41,7 @@ const Outline = styled('div')({
   display: 'grid',
 
   background: '#7289DA',
-  // border: '5px dashed green',
+  border: '5px dashed green',
   boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',
 });
 
@@ -179,13 +179,13 @@ export default function Room() {
       <ViewButton onClick={clickView} />
       <HuddleButton onClick={clickHuddle} />
       <ListButton onClick={clickList} />
-      <Positioner style={position}>
+      <Positioner style={{ left: 0, top: 0 }}>
         {/* {
           huddles.map(huddle => (
             <ParticipantStrip zoomed={huddle.zoomed} position={huddle.position}/>
           ))
         } */}
-        <ParticipantStrip zoomed={zoomed} position={position} />
+        <ParticipantStrip zoomed={zoomed} position={{ left: 0, top: 0 }} />
       </Positioner>
       {/* {zoomed ? null :
         <>

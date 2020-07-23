@@ -12,6 +12,7 @@ const useStyles = makeStyles((theme: Theme) =>
     huddle: {
       overflow: 'visible',
       border: '5px dashed red',
+      display: 'flex',
     },
   })
 );
@@ -37,7 +38,6 @@ function getArrangementNumbers(size: number) {
 }
 
 function getArangementPositions(size: number, diameter: number, center: any) {
-  let index = 0;
   let arrangement = getArrangementNumbers(size);
   let sizeY = -(size * diameter) / 2;
   let result: any[] = [];
@@ -50,11 +50,10 @@ function getArangementPositions(size: number, diameter: number, center: any) {
 
     let sizeX = -(arrangement[row] * diameter) / 2;
     for (let i = 0; i < arrangement[row]; i += 1) {
-      result.push({ left: sizeX + center.left, top: sizeY + center.top });
+      result.push({ left: sizeX + center.left + diameter / 2, top: sizeY + center.top + diameter / 2 });
 
       // radius math here
       sizeX += diameter;
-      index += 1;
     }
 
     // next level
@@ -80,6 +79,7 @@ export default function Huddle({
   onClick,
   selectedParticipant,
 }: HuddleProps) {
+  console.log('huddle...');
   const classes = useStyles();
   // // setting disableAudio to hear, clicking button toggles setHear
   // // disableAudio will need to be set by participant strip in the future.
@@ -93,8 +93,8 @@ export default function Huddle({
     border: '5px dotted green',
     borderRadius: '50%',
     backgroundColor: '#99aab5',
-    width: '500px!important',
-    height: '500px!important',
+    width: (nextSquareRoot(participants.length) * 100) / Math.sqrt(2),
+    height: (nextSquareRoot(participants.length) * 100) / Math.sqrt(2),
     transform: 'scale(2)',
     position: 'absolute',
   });
@@ -102,6 +102,8 @@ export default function Huddle({
   let arrangementPositions = getArangementPositions(participants.length + 1, diameter, position);
 
   function onParticipantClick() {}
+
+  console.log('huddle return ...');
 
   return (
     // testing to see if I can change render position of participant

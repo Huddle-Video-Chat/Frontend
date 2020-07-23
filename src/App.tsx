@@ -53,20 +53,12 @@ export default function App() {
       });
   }
 
-  // post request doesnt work lol
-  function postRequest() {
-    axios.post('http://www.google.com').then((response: any) => {
-      console.log(response);
-    });
-  }
   const [huddleState] = useState({});
-
 
   return (
     <Container style={{ height }}>
-      <MenuBar  />
+      <MenuBar />
       <Main>
-        <button onClick={postRequest}>making a request to google.com</button>
         {roomState === 'disconnected' ? <LocalVideoPreview /> : <Room />}
         <Controls />
       </Main>
