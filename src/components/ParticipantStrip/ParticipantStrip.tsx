@@ -96,7 +96,6 @@ interface ParticipantStripProps {
 
 // Without styled containers or scroll container
 export default function ParticipantStrip({ zoomed, position }: ParticipantStripProps) {
-  console.log('participant strip...');
   const {
     room: { localParticipant },
   } = useVideoContext();
@@ -113,10 +112,6 @@ export default function ParticipantStrip({ zoomed, position }: ParticipantStripP
   const [huddleState, setHuddleState] = useState(stateStarter);
   const [joined, setJoined] = useState(false);
 
-  // function clickParticipant(participant: any) {
-  //   setSelectedParticipant(participant)
-  //   console.log(participant)
-  // }
 
   async function joinHuddle(huddle: string) {
     const requestOptions = {
@@ -166,50 +161,43 @@ export default function ParticipantStrip({ zoomed, position }: ParticipantStripP
 
         setJoined(true);
         setHuddleState(newState);
-        console.log('new state: ');
-        console.log(newState);
+
       });
   } else {
-    // const requestOptions = {
-    //   method: 'GET',
-    //   headers: { 'Content-Type': 'application/json' },
-    // };
-    // var url = 'https://huddle-video.herokuapp.com/room/state';
-    // url += '?id=' + room.sid;
-    // url += '&user_id=' + localParticipant.sid;
-    // fetch(url, requestOptions)
-    //   .then(response => response.json())
-    //   .then(data => {
-    //     var newState: {
-    //       [key: string]: any,
-    //     } = {};
-    //     participants.map(p => {
-    //       const huddleID: string = data.users[p.sid]
-    //       if (newState[huddleID] === undefined) {
-    //         newState[huddleID] = []
-    //       }
-    //       newState[huddleID].push(p)
-    //     })
-    //     const huddleID: string = data.huddle_id
-    //     if (newState[huddleID] === undefined) {
-    //       newState[huddleID] = []
-    //     }
-    //     newState[huddleID].push(localParticipant)
-    //     setJoined(true);
-    //     setHuddleState(newState);
-    //     console.log(newState)
-    //   });
+    const requestOptions = {
+      method: 'GET',
+      headers: { 'Content-Type': 'application/json' },
+    };
+    var url = 'https://huddle-video.herokuapp.com/room/state';
+    url += '?id=' + room.sid;
+    url += '&user_id=' + localParticipant.sid;
+    fetch(url, requestOptions)
+      .then(response => response.json())
+      .then(data => {
+        var newState: {
+          [key: string]: any,
+        } = {};
+        participants.map(p => {
+          const huddleID: string = data.users[p.sid]
+          if (newState[huddleID] === undefined) {
+            newState[huddleID] = []
+          }
+          newState[huddleID].push(p)
+        })
+        const huddleID: string = data.huddle_id
+        if (newState[huddleID] === undefined) {
+          newState[huddleID] = []
+        }
+        newState[huddleID].push(localParticipant)
+        setJoined(true);
+        setHuddleState(newState);
+      });
   }
 
-  const diameter = zoomed ? 300 : 170;
-
-  function getPosition(huddleID: string) {
-    return { left: parseInt(huddleID) * 500, top: 300 };
-  }
 
   const huddlePositions = [
     { left: 0, top: 0 },
-    { left: window.innerWidth / 4, top: window.innerHeight / 2 },
+    { left: (window.innerWidth / 4) - 200, top: (window.innerHeight / 2) - 200 },
     { left: (3 * window.innerWidth) / 4, top: window.innerHeight / 2 },
     { left: window.innerWidth / 2, top: window.innerHeight / 4 },
     { left: window.innerWidth / 2, top: (3 * window.innerHeight) / 4 },
@@ -220,12 +208,11 @@ export default function ParticipantStrip({ zoomed, position }: ParticipantStripP
       {//zoomed ?
       // zoomed in, ours in center large, don't render others
       Object.keys(huddleState).map(huddle => {
-        console.log('huddle thing:');
-        console.log(huddle);
-        console.log('huddle state');
-        console.log(huddleState);
         var huddleParticipants: [] = huddleState[huddle];
-        const tempPosition = huddlePositions[parseInt(huddle)];
+        var tempPosition = huddlePositions[parseInt(huddle)];
+        if (!tempPosition) {
+          tempPosition = huddlePositions[1]
+        }
 
         return (
           <Huddle

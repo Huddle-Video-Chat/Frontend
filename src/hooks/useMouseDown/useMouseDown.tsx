@@ -20,7 +20,6 @@ const useMouseDown = () => {
     };
   }, []);
 
-  // console.log(mouseDown)
   return mouseDown;
 };
 

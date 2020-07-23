@@ -37,6 +37,7 @@ function getArrangementNumbers(size: number) {
   return arrangement;
 }
 
+// diameter of PARTICIPANT
 function getArangementPositions(size: number, diameter: number, center: any) {
   let arrangement = getArrangementNumbers(size);
   let sizeY = -(size * diameter) / 2;
@@ -59,12 +60,14 @@ function getArangementPositions(size: number, diameter: number, center: any) {
     // next level
     sizeY += diameter;
   }
+  console.log('position algorithm result:')
+  console.log(result)
   return result;
 }
 
 interface HuddleProps {
   participants: IParticipant[];
-  position: object;
+  position: any;
   huddleID: string;
   diameter: number;
   onClick: (huddleID: string) => void;
@@ -79,7 +82,6 @@ export default function Huddle({
   onClick,
   selectedParticipant,
 }: HuddleProps) {
-  console.log('huddle...');
   const classes = useStyles();
   // // setting disableAudio to hear, clicking button toggles setHear
   // // disableAudio will need to be set by participant strip in the future.
@@ -88,40 +90,53 @@ export default function Huddle({
   // }
   // const [hear, setHear] = useState(false);
 
+  const adjustedHuddleDiameter = nextSquareRoot(participants.length) * 200
+
   const Positioner = styled('div')({
-    overflow: 'hidden',
+    // overflow: 'hidden',
     border: '5px dotted green',
     borderRadius: '50%',
     backgroundColor: '#99aab5',
-    //width: (nextSquareRoot(participants.length) * 100) / Math.sqrt(2),
-    //height: (nextSquareRoot(participants.length) * 100) / Math.sqrt(2),
-    width: '200px',
-    height: '200px',
+    width: adjustedHuddleDiameter,
+    height: adjustedHuddleDiameter,
+    // width: '200px',
+    // height: '200px',
     position: 'absolute',
     padding: '20px',
   });
 
+  // math stuff (nextSquareRoot(participants.length) * 100) / Math.sqrt(2)
+
+  // second argument is diameter of PARTICIPANT
   let arrangementPositions = getArangementPositions(participants.length + 1, diameter, position);
 
-  function onParticipantClick() {}
+  function onParticipantClick() { }
 
-  console.log('huddle return ...');
+
+
 
   return (
     // testing to see if I can change render position of participant
 
     <div onClick={huddleID => onClick} className={classes.huddle}>
       <Positioner style={position}>
-        {participants.map(participant => (
-          <Participant
-            key={participant.sid}
-            participant={participant}
-            isSelected={selectedParticipant === participant}
-            onClick={onParticipantClick}
-            position={arrangementPositions.shift()}
-            diameter={diameter}
-          />
-        ))}
+        {participants.map(participant => {
+          // adjusting for radius of circle
+          const arrangedP = arrangementPositions.shift()
+          const adjustedPosition = { left: arrangedP.left - adjustedHuddleDiameter / 2, right: arrangedP.top - adjustedHuddleDiameter / 2 }
+          return (
+            <Participant
+              key={participant.sid}
+              participant={participant}
+              isSelected={selectedParticipant === participant}
+              onClick={onParticipantClick}
+              position={arrangedP}
+              diameter={diameter}
+            />
+          )
+        }
+        )
+        }
       </Positioner>
     </div>
   );
