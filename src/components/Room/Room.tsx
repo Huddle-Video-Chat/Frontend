@@ -24,7 +24,6 @@ const Container = styled('div')(({ theme }) => ({
     gridGap: '6px',
   },
 }));
-
 const FakeParticipant = styled('div')({
   background: 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)',
   border: 0,
@@ -34,13 +33,12 @@ const FakeParticipant = styled('div')({
   height: 48,
   padding: '0 30px',
 });
-
 const Outline = styled('div')({
   position: 'relative',
   height: '100%',
   display: 'grid',
 
-  background: '#7289DA',
+  background: 'rgba(255, 255, 255, 0.5)',
   border: '5px dashed green',
   boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',
 });
@@ -179,13 +177,13 @@ export default function Room() {
       <ViewButton onClick={clickView} />
       <HuddleButton onClick={clickHuddle} />
       <ListButton onClick={clickList} />
-      <Positioner style={{left: 0, top: 0}}>
+      <Positioner style={{ left: 0, top: 0 }}>
         {/* {
           huddles.map(huddle => (
             <ParticipantStrip zoomed={huddle.zoomed} position={huddle.position}/>
           ))
         } */}
-        <ParticipantStrip zoomed={zoomed} position={{left: 0, top: 0}} />
+        <ParticipantStrip zoomed={zoomed} position={{ left: 0, top: 0 }} />
       </Positioner>
       {/* {zoomed ? null :
         <>

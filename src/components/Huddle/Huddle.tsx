@@ -50,7 +50,7 @@ function getArangementPositions(size: number, diameter: number, center: any) {
 
     let sizeX = -(arrangement[row] * diameter) / 2;
     for (let i = 0; i < arrangement[row]; i += 1) {
-      result.push({ left: sizeX + center.left + (diameter / 2), top: sizeY + center.top + (diameter / 2)});
+      result.push({ left: sizeX + center.left + diameter / 2, top: sizeY + center.top + diameter / 2 });
 
       // radius math here
       sizeX += diameter;
@@ -79,7 +79,7 @@ export default function Huddle({
   onClick,
   selectedParticipant,
 }: HuddleProps) {
-  console.log('huddle...')
+  console.log('huddle...');
   const classes = useStyles();
   // // setting disableAudio to hear, clicking button toggles setHear
   // // disableAudio will need to be set by participant strip in the future.
@@ -93,23 +93,25 @@ export default function Huddle({
     border: '5px dotted green',
     borderRadius: '50%',
     backgroundColor: '#99aab5',
-    width: nextSquareRoot(participants.length) * 100 / Math.sqrt(2),
-    height: nextSquareRoot(participants.length) * 100 / Math.sqrt(2),
-    transform: 'scale(2)',
+    //width: (nextSquareRoot(participants.length) * 100) / Math.sqrt(2),
+    //height: (nextSquareRoot(participants.length) * 100) / Math.sqrt(2),
+    width: '200px',
+    height: '200px',
     position: 'absolute',
+    padding: '20px',
   });
 
   let arrangementPositions = getArangementPositions(participants.length + 1, diameter, position);
 
   function onParticipantClick() {}
 
-  console.log('huddle return ...')
+  console.log('huddle return ...');
 
   return (
     // testing to see if I can change render position of participant
 
     <div onClick={huddleID => onClick} className={classes.huddle}>
-      <Positioner style={position} >
+      <Positioner style={position}>
         {participants.map(participant => (
           <Participant
             key={participant.sid}

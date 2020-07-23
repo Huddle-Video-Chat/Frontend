@@ -96,7 +96,7 @@ interface ParticipantStripProps {
 
 // Without styled containers or scroll container
 export default function ParticipantStrip({ zoomed, position }: ParticipantStripProps) {
-  console.log('participant strip...')
+  console.log('participant strip...');
   const {
     room: { localParticipant },
   } = useVideoContext();
@@ -118,15 +118,13 @@ export default function ParticipantStrip({ zoomed, position }: ParticipantStripP
   //   console.log(participant)
   // }
 
-
-  
   async function joinHuddle(huddle: string) {
     const requestOptions = {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
     };
 
-    var url = 'https://aqueous-woodland-13891.herokuapp.com/huddle/join';
+    var url = 'https://huddle-video.herokuapp.com/huddle/join';
     url += '?id=' + room.sid;
     url += '&user_id=' + localParticipant.sid;
     url += '&new_huddle_id' + huddle;
@@ -134,7 +132,6 @@ export default function ParticipantStrip({ zoomed, position }: ParticipantStripP
       .then(response => response.json())
       .then(data => console.log(data));
   }
-  
 
   if (!joined) {
     console.log('Joining room ' + room.sid);
@@ -142,7 +139,7 @@ export default function ParticipantStrip({ zoomed, position }: ParticipantStripP
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
     };
-    var url = 'https://aqueous-woodland-13891.herokuapp.com/room/join?first=andy&last=jiang&username=da;sdf';
+    var url = 'https://huddle-video.herokuapp.com/room/join?first=andy&last=jiang&username=da;sdf';
     url += '&id=' + room.sid;
     url += '&user_id=' + localParticipant.sid;
 
@@ -169,7 +166,7 @@ export default function ParticipantStrip({ zoomed, position }: ParticipantStripP
 
         setJoined(true);
         setHuddleState(newState);
-        console.log('new state: ')
+        console.log('new state: ');
         console.log(newState);
       });
   } else {
@@ -177,7 +174,7 @@ export default function ParticipantStrip({ zoomed, position }: ParticipantStripP
     //   method: 'GET',
     //   headers: { 'Content-Type': 'application/json' },
     // };
-    // var url = 'https://aqueous-woodland-13891.herokuapp.com/room/state';
+    // var url = 'https://huddle-video.herokuapp.com/room/state';
     // url += '?id=' + room.sid;
     // url += '&user_id=' + localParticipant.sid;
     // fetch(url, requestOptions)
@@ -204,33 +201,29 @@ export default function ParticipantStrip({ zoomed, position }: ParticipantStripP
     //   });
   }
 
-
-
   const diameter = zoomed ? 300 : 170;
 
   function getPosition(huddleID: string) {
     return { left: parseInt(huddleID) * 500, top: 300 };
   }
 
-  
   const huddlePositions = [
-    {left: 0, top: 0},
-    {left: window.innerWidth / 4, top: window.innerHeight / 2},
-    {left: 3 * window.innerWidth / 4, top: window.innerHeight / 2},
-    {left: window.innerWidth / 2, top: window.innerHeight / 4},
-    {left: window.innerWidth / 2, top: 3 * window.innerHeight / 4},
-  ]
-
+    { left: 0, top: 0 },
+    { left: window.innerWidth / 4, top: window.innerHeight / 2 },
+    { left: (3 * window.innerWidth) / 4, top: window.innerHeight / 2 },
+    { left: window.innerWidth / 2, top: window.innerHeight / 4 },
+    { left: window.innerWidth / 2, top: (3 * window.innerHeight) / 4 },
+  ];
 
   return (
     <>
       {//zoomed ?
       // zoomed in, ours in center large, don't render others
       Object.keys(huddleState).map(huddle => {
-        console.log('huddle thing:')
-        console.log(huddle)
-        console.log('huddle state')
-        console.log(huddleState)
+        console.log('huddle thing:');
+        console.log(huddle);
+        console.log('huddle state');
+        console.log(huddleState);
         var huddleParticipants: [] = huddleState[huddle];
         const tempPosition = huddlePositions[parseInt(huddle)];
 

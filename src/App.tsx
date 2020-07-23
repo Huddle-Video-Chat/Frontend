@@ -55,10 +55,9 @@ export default function App() {
 
   const [huddleState] = useState({});
 
-
   return (
     <Container style={{ height }}>
-      <MenuBar  />
+      <MenuBar />
       <Main>
         {roomState === 'disconnected' ? <LocalVideoPreview /> : <Room />}
         <Controls />

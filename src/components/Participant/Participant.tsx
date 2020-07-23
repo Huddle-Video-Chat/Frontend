@@ -26,25 +26,28 @@ const Container = styled(({ diameter }: ContainerProps) => <div />)({
 
   // backgroundColor: '#99aab5',
 
-  width: '250px',
-  height: '250px',
+  width: '100px',
+  height: '100px',
 
   // Uncomment to use position rather than CSS grid, for grid and position algorithm
   position: 'relative',
 });
 
-// const Positioner = styled('div')({
-//   overflow: 'hidden',
-//   border: '5px dotted blue',
-//   borderRadius: '50%',
+const Positioner = styled('div')({
+  overflow: 'hidden',
 
-//   backgroundColor: '#99aab5',
+  border: '5px dotted blue',
+  borderRadius: '50%',
 
-//   width: '250px',
-//   height: '250px',
+  backgroundColor: '#99aab5',
 
-//   position: 'absolute',
-// })
+  width: '100px',
+  height: '100px',
+
+  position: 'absolute',
+
+  objectFit: 'contain',
+});
 
 interface ParticipantProps {
   participant: IParticipant;
@@ -67,7 +70,7 @@ export default function Participant({
   diameter,
   huddleID,
 }: ParticipantProps) {
-  console.log('participant...')
+  console.log('participant...');
   // setting disableAudio to hear, clicking button toggles setHear
   // disableAudio will need to be set by participant strip in the future.
   function clickButton() {
@@ -82,13 +85,20 @@ export default function Participant({
 
     backgroundColor: '#99aab5',
 
-    width: '150px',
-    height: '150px',
+    width: '100%',
+    height: '100%',
 
-    position: 'absolute',
+    objectFit: 'contain',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+
+    left: 'auto !important',
+    top: 'auto !important',
   });
 
-  console.log('participant return...')
+  console.log('participant return...');
 
   return (
     // testing to see if I can change render position of participant

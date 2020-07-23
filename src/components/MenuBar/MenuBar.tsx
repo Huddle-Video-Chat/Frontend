@@ -24,7 +24,10 @@ import axios from 'axios';
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     container: {
-      background: 'linear-gradient(90.66deg, #6EB3FB 0%, #99E98D 150%)',
+      backgroundImage: 'linear-gradient(to bottom, rgba(110,179,251,0.8), rgba(153,233,141, 0.8), rgba(255,255,255,0))',
+      backgroundColor: 'transparent',
+      boxShadow: 'none',
+      height: '20vh',
     },
     toolbar: {
       [theme.breakpoints.down('xs')]: {
@@ -97,7 +100,7 @@ export default function MenuBar(huddleState: any) {
   const handleSubmit = () => {
     // event.preventDefault();
 
-    // axios.post('https://aqueous-woodland-13891.herokuapp.com/room/join?first=andy&last=jiang&id=dasd&user_id=sd&username=da;sdf')
+    // axios.post('https://huddle-video.herokuapp.com/room/join?first=andy&last=jiang&id=dasd&user_id=sd&username=da;sdf')
     // .then(res => {
     //   console.log(res)
     // });
@@ -105,7 +108,7 @@ export default function MenuBar(huddleState: any) {
     // axios({
     //   method: 'post',
     //   url:
-    //     'https://aqueous-woodland-13891.herokuapp.com/room/join?first=andy&last=jiang&id=dasd&user_id=sd&username=dasdf',
+    //     'https://huddle-video.herokuapp.com/room/join?first=andy&last=jiang&id=dasd&user_id=sd&username=dasdf',
     //   headers: {
     //     'Access-Control-Allow-Origin': '*',
     //   },
