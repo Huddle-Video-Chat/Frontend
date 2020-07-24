@@ -2,6 +2,7 @@ import React from 'react';
 import { styled } from '@material-ui/core/styles';
 
 import Controls from './components/Controls/Controls';
+import Chat from './components/Chat/Chat';
 import LocalVideoPreview from './components/LocalVideoPreview/LocalVideoPreview';
 import MenuBar from './components/MenuBar/MenuBar';
 import ReconnectingNotification from './components/ReconnectingNotification/ReconnectingNotification';
@@ -61,6 +62,7 @@ export default function App() {
       <Main>
         {roomState === 'disconnected' ? <LocalVideoPreview /> : <Room />}
         <Controls />
+        <Chat />
       </Main>
       <ReconnectingNotification />
     </Container>
