@@ -3,93 +3,9 @@ import Huddle from '../Huddle/Huddle';
 import { styled } from '@material-ui/core/styles';
 import useParticipants from '../../hooks/useParticipants/useParticipants';
 import useVideoContext from '../../hooks/useVideoContext/useVideoContext';
-import useMousePosition from '../../hooks/useMousePosition/useMousePosition';
 import useSelectedParticipant from '../VideoProvider/useSelectedParticipant/useSelectedParticipant';
-import useHuddleParticipants from '../../hooks/useHuddleParticipants/useHuddleParticipants';
-import useMouseDown from '../../hooks/useMouseDown/useMouseDown';
-
-// import axios from 'axios';
-
-/* Original code with container and scroll container
-Renders yourself as a normal participant as selected participant = local participant */
-
-/*
-const Container = styled('aside')(({ theme }) => ({
-  padding: '0.5em',
-  overflowY: 'auto',
-  [theme.breakpoints.down('xs')]: {
-    overflowY: 'initial',
-    overflowX: 'auto',
-    padding: 0,
-    display: 'flex',
-  },
-}));
-
-const ScrollContainer = styled('div')(({ theme }) => ({
-  [theme.breakpoints.down('xs')]: {
-    display: 'flex',
-  },
-}));
-
-export default function ParticipantStrip() {
-  const {
-    room: { localParticipant },
-  } = useVideoContext();
-  const participants = useParticipants();
-  const [selectedParticipant, setSelectedParticipant] = useSelectedParticipant();
-
-  return (
-    <Container>
-      <ScrollContainer>
-        <div className = "local-cropper" >
-          <Participant
-            participant={localParticipant}
-            isSelected={selectedParticipant === localParticipant}
-            onClick={() => setSelectedParticipant(localParticipant)}
-        />
-        </div>
-        {participants.map(participant => (
-          <div className = "participant-cropper">
-            <Participant
-              key={participant.sid}
-              participant={participant}
-              isSelected={selectedParticipant === participant}
-              onClick={() => setSelectedParticipant(participant)}
-            />
-          </div>
-        ))}
-      </ScrollContainer>
-    </Container>
-  );
-}
-*/
-
-/* This is where the grid layout will need to live and maybe the circle cropper for participant. */
-// const Grid = styled('div')({
-//   margin: '20px auto',
-//   display: 'grid',
-//   gridTemplateColumns: '250px 250px',
-//   gridRow: 'auto auto',
-//   gridColumnGap: '20px',
-//   gridRowGap: '20px',
-// });
-
-// const Positioner = styled('div')({
-//   position: 'absolute',
-// });
-
-/* Position and arrangement algorith lives here. */
-
-// Takes size of this participant strip, returns next square root
-
-// // Takes size of this participant strip, returns array of how many circles are in each row.
-// // arrangement[0] has the number of circles in the first ( 0th ) row
-
-//   return result;
-// }
 
 interface ParticipantStripProps {
-  // position: object,
   zoomed: boolean;
   position: object;
 }
@@ -103,8 +19,6 @@ export default function ParticipantStrip({ zoomed, position }: ParticipantStripP
   const [selectedParticipant, setSelectedParticipant] = useSelectedParticipant();
   const { room } = useVideoContext();
   const [huddleID, setHuddleID] = useState('')
-
-  // const modified = useHuddleParticipants()
 
   var stateStarter: {
     [key: string]: any;
@@ -224,7 +138,7 @@ export default function ParticipantStrip({ zoomed, position }: ParticipantStripP
         return (
           <Huddle
             onClick={joinHuddle}
-            // diameter of the participant
+            // diameter of the PARTICIPANT
             diameter={150}
             huddleID={huddle}
             participants={huddleParticipants}
@@ -234,79 +148,6 @@ export default function ParticipantStrip({ zoomed, position }: ParticipantStripP
           />
         );
       })
-      // <>
-      //   <Participant
-      //     participant={localParticipant}
-      //     isSelected={selectedParticipant === localParticipant}
-      //     onClick={() => clickParticipant(localParticipant)}
-      //     position={arrangementPositions.shift()}
-      //     diameter={diameter}
-      //   // huddleID={thisHuddleID}
-      //   />
-      //   {/*ONLY MAP THE PARTICIPANTS IN YOUR HUDDLE*/}
-      //   {
-      //     participants.map(participant => (
-      //       <Participant
-      //         key={participant.sid}
-      //         participant={participant}
-      //         isSelected={selectedParticipant === participant}
-      //         onClick={() => clickParticipant(participant)}
-      //         position={arrangementPositions.shift()}
-      //         diameter={diameter}
-      //       />
-      //     ))
-      //   }
-      //   {/* {
-      //     newState[thisHuddleID].map((participant: any) => (
-      //       <Participant
-      //         key={participant.sid}
-      //         participant={participant}
-      //         isSelected={selectedParticipant === participant}
-      //         onClick={() => clickParticipant(participant)}
-      //         position={arrangementPositions.shift()}
-      //         diameter={diameter}
-      //       />
-      //     ))
-      //   } */}
-      // </>
-      // :
-      // // zoomed out, ours in the center, others on the edges
-      // <>
-      //   <Participant
-      //     participant={localParticipant}
-      //     isSelected={selectedParticipant === localParticipant}
-      //     onClick={() => clickParticipant(localParticipant)}
-      //     position={arrangementPositions.shift()}
-      //     diameter={diameter}
-      //   // huddleID={thisHuddleID}
-      //   />
-      //   {
-      //     participants.map(participant => (
-      //       <Participant
-      //         key={participant.sid}
-      //         participant={participant}
-      //         isSelected={selectedParticipant === participant}
-      //         onClick={() => clickParticipant(participant)}
-      //         position={arrangementPositions.shift()}
-      //         diameter={diameter}
-      //       />
-      //     ))
-      //   }
-
-      //   {/* other positions, other huddles*/}
-      //   {
-      //     otherParticipants.map(participant => (
-      //       <Participant
-      //         key={participant.sid}
-      //         participant={participant}
-      //         isSelected={selectedParticipant === participant}
-      //         onClick={() => clickParticipant(participant)}
-      //         position={arrangementPositions.shift()}
-      //         diameter={diameter}
-      //       />
-      //     ))
-      //   }
-      // </>
       }
     </>
   );

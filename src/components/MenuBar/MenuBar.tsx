@@ -27,7 +27,7 @@ const useStyles = makeStyles((theme: Theme) =>
       backgroundImage: 'linear-gradient(to bottom, rgba(110,179,251,0.8), rgba(153,233,141, 0.8), rgba(255,255,255,0))',
       backgroundColor: 'transparent',
       boxShadow: 'none',
-      height: '5vh',
+      height: '10vh',
     },
     toolbar: {
       [theme.breakpoints.down('xs')]: {
@@ -79,10 +79,6 @@ export default function MenuBar(huddleState: any) {
   const [name, setName] = useState<string>(user?.displayName || '');
   const [roomName, setRoomName] = useState<string>('');
 
-  // const [id] = useState('huddle');
-
-  // huddleState[huddleId] = 23;
-
   useEffect(() => {
     if (URLRoomName) {
       setRoomName(URLRoomName);
@@ -126,7 +122,7 @@ export default function MenuBar(huddleState: any) {
         {roomState === 'disconnected' ? (
           // Connected menu bar
           <div>
-            {/* <form className={classes.form} onSubmit={handleSubmit}> */}
+            <form className={classes.form} onSubmit={handleSubmit}>
             {window.location.search.includes('customIdentity=true') || !user?.displayName ? (
               <TextField
                 id="menu-name"
@@ -163,6 +159,7 @@ export default function MenuBar(huddleState: any) {
               Join Room
             </Button>
             {(isConnecting || isFetching) && <CircularProgress className={classes.loadingSpinner} />}
+            </form>
           </div>
         ) : (
           // Connected menu bar

@@ -51,7 +51,7 @@ function getArangementPositions(size: number, diameter: number, center: any) {
 
     let sizeX = -(arrangement[row] * diameter) / 2;
     for (let i = 0; i < arrangement[row]; i += 1) {
-      result.push({ left: sizeX + center.left - diameter / 2, top: sizeY + center.top - diameter / 2 });
+      result.push({ left: sizeX + center.x - diameter / 2, top: sizeY + center.y - diameter / 2 });
 
       // radius math here
       sizeX += diameter;
@@ -85,13 +85,6 @@ export default function Huddle({
   disableAudio,
 }: HuddleProps) {
   const classes = useStyles();
-  // // setting disableAudio to hear, clicking button toggles setHear
-  // // disableAudio will need to be set by participant strip in the future.
-  // function clickButton() {
-  //   setHear(!hear);
-  // }
-  // const [hear, setHear] = useState(false);
-
   const adjustedHuddleDiameter = nextSquareRoot(participants.length) * 200
 
   const Positioner = styled('div')({
@@ -110,8 +103,8 @@ export default function Huddle({
   // math stuff (nextSquareRoot(participants.length) * 100) / Math.sqrt(2)
 
   // second argument is diameter of PARTICIPANT
-  const center = {left: position.left - adjustedHuddleDiameter/2, top: position.top - adjustedHuddleDiameter/2}
-  let arrangementPositions = getArangementPositions(participants.length + 1, diameter, position);
+  const center = {x: position.left - adjustedHuddleDiameter/2, y: position.top - adjustedHuddleDiameter/2}
+  let arrangementPositions = getArangementPositions(participants.length + 1, diameter, center);
 
   function onParticipantClick() { }
 

@@ -1,14 +1,9 @@
 import React, { useState } from 'react';
 import ParticipantStrip from '../ParticipantStrip/ParticipantStrip';
 import { styled } from '@material-ui/core/styles';
-import MainParticipant from '../MainParticipant/MainParticipant';
-import { ClickAwayListener } from '@material-ui/core';
-
-import useZoomToggle from '../../hooks/useZoomToggle/useZoomToggle';
-
+import useVideoContext from '../../hooks/useVideoContext/useVideoContext';
 import useHuddleParticipants from '../../hooks/useHuddleParticipants/useHuddleParticipants';
 
-import axios from 'axios';
 
 const Outline = styled('div')({
   position: 'relative',
@@ -53,14 +48,6 @@ function HuddleButton({ onClick }: ButtonProps) {
   );
 }
 
-function ListButton({ onClick }: ButtonProps) {
-  return (
-    <MyButton onClick={onClick} style={{ left: '288px', top: 0 }}>
-      List info
-    </MyButton>
-  );
-}
-
 function AddHuddle({ onClick }: ButtonProps) {
   return (
     <MyButton onClick={onClick} style={{ left: '432px', top: 0 }}>
@@ -69,36 +56,9 @@ function AddHuddle({ onClick }: ButtonProps) {
   );
 }
 
-const DummyParticipants = styled('div')({
-  background: '#FF8E53',
-  borderRadius: '50%',
-
-  height: '50px',
-  width: '50px',
-
-  position: 'absolute',
-});
-
 const Positioner = styled('div')({
   position: 'absolute',
 });
-
-/* Enters room after LocalVideoPreview, renders participantStrip and MainParticipant.
-Style the grid here? or inside participantStrip?
-What is the difference between participants and MainParticipant?
-*/
-
-/* Original code */
-/*
-export default function Room() {
-  return (
-    <Container>
-      <ParticipantStrip />
-      <MainParticipant />
-    </Container>
-  );
-}
-*/
 
 /*
 - id (int) — id of room
@@ -110,28 +70,17 @@ export default function Room() {
     - users (list: int) — list of all users in huddle
 */
 
-let jsonData = {
-  id: 2,
-  user_id: 1,
-  huddle_id: 1,
-  users: [1],
-  rooms: [
-    {
-      id: 1,
-      users: [1],
-    },
-  ],
-};
-
-interface RoomProps {}
-
 // To test without main participant, without container
 export default function Room() {
   const [zoomed, setZoom] = useState(true);
   const [huddle, setHuddle] = useState(1);
   const huddleParticipants = useHuddleParticipants();
 
-  const [testList, setTestList] = useState<Array<String>>(['']);
+  const {
+    room: { localParticipant },
+  } = useVideoContext();
+  const { room } = useVideoContext();
+
 
   const position = zoomed ? { left: 150, top: 150 } : { left: 500, top: 150 };
 
@@ -147,10 +96,17 @@ export default function Room() {
   };
 
   const addHuddle = () => {
-    return;
-  };
+    console.log('Joining room ' + room.sid);
+    const requestOptions = {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+    };
+    var url = 'https://huddle-video.herokuapp.com/huddle/create';
+    url += '?id=' + room.sid;
+    url += '&user_id=' + localParticipant.sid;
 
-  const huddleID = jsonData.huddle_id;
+    fetch(url, requestOptions);
+  };
 
   // const filteredList = huddleParticipants.filter(user => user.huddleID === huddleID)
 
@@ -161,20 +117,8 @@ export default function Room() {
       <HuddleButton onClick={clickHuddle} />
       <AddHuddle onClick={addHuddle} />
       <Positioner style={{ left: 0, top: 0 }}>
-        {/* {
-          huddles.map(huddle => (
-            <ParticipantStrip zoomed={huddle.zoomed} position={huddle.position}/>
-          ))
-        } */}
         <ParticipantStrip zoomed={zoomed} position={{ left: 0, top: 0 }} />
       </Positioner>
-      {/* {zoomed ? null :
-        <>
-          <DummyParticipants style={{ left: 100, top: 100 }} />
-          <DummyParticipants style={{ left: 150, top: 100 }} />
-          <DummyParticipants style={{ left: 125, top: 150 }} />
-        </>
-      } */}
     </Outline>
   );
 }
