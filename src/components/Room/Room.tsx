@@ -3,6 +3,7 @@ import ParticipantStrip from '../ParticipantStrip/ParticipantStrip';
 import { styled } from '@material-ui/core/styles';
 import MainParticipant from '../MainParticipant/MainParticipant';
 import { ClickAwayListener } from '@material-ui/core';
+import useVideoContext from '../../hooks/useVideoContext/useVideoContext';
 
 import useZoomToggle from '../../hooks/useZoomToggle/useZoomToggle';
 
@@ -131,6 +132,11 @@ export default function Room() {
   const [huddle, setHuddle] = useState(1);
   const huddleParticipants = useHuddleParticipants();
 
+  const {
+    room: { localParticipant },
+  } = useVideoContext();
+  const { room } = useVideoContext();
+
   const [testList, setTestList] = useState<Array<String>>(['']);
 
   const position = zoomed ? { left: 150, top: 150 } : { left: 500, top: 150 };
@@ -147,7 +153,16 @@ export default function Room() {
   };
 
   const addHuddle = () => {
-    return;
+    console.log('Joining room ' + room.sid);
+    const requestOptions = {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+    };
+    var url = 'https://huddle-video.herokuapp.com/huddle/create';
+    url += '?id=' + room.sid;
+    url += '&user_id=' + localParticipant.sid;
+
+    fetch(url, requestOptions);
   };
 
   const huddleID = jsonData.huddle_id;
