@@ -15,37 +15,6 @@ interface ParticipantProps {
   diameter: number;
 }
 
-interface ContainerProps {
-  diameter: number;
-}
-
-const Container = styled(({ diameter }: ContainerProps) => <div />)({
-  // overflow: 'hidden',
-  // border: '5px dotted red',
-  // borderRadius: '50%',
-
-  // backgroundColor: '#99aab5',
-
-  width: '250px',
-  height: '250px',
-
-  // Uncomment to use position rather than CSS grid, for grid and position algorithm
-  position: 'relative',
-});
-
-// const Positioner = styled('div')({
-//   overflow: 'hidden',
-//   border: '5px dotted blue',
-//   borderRadius: '50%',
-
-//   backgroundColor: '#99aab5',
-
-//   width: '250px',
-//   height: '250px',
-
-//   position: 'absolute',
-// })
-
 interface ParticipantProps {
   participant: IParticipant;
   disableAudio?: boolean;
@@ -67,7 +36,6 @@ export default function Participant({
   diameter,
   huddleID,
 }: ParticipantProps) {
-  console.log('participant...');
   // setting disableAudio to hear, clicking button toggles setHear
   // disableAudio will need to be set by participant strip in the future.
   function clickButton() {
@@ -85,10 +53,16 @@ export default function Participant({
     width: '150px',
     height: '150px',
 
+    objectFit: 'contain',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+
+    // left: 'auto !important',
+    // top: 'auto !important',
     position: 'absolute',
   });
-
-  console.log('participant return...');
 
   return (
     // testing to see if I can change render position of participant
@@ -105,3 +79,5 @@ export default function Participant({
     </Positioner>
   );
 }
+
+export const MemoParticipant = React.memo(Participant);

@@ -24,7 +24,10 @@ import axios from 'axios';
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     container: {
-      background: 'linear-gradient(90.66deg, #6EB3FB 0%, #99E98D 150%)',
+      backgroundImage: 'linear-gradient(to bottom, rgba(110,179,251,0.8), rgba(153,233,141, 0.8), rgba(255,255,255,0))',
+      backgroundColor: 'transparent',
+      boxShadow: 'none',
+      height: '10vh',
     },
     toolbar: {
       [theme.breakpoints.down('xs')]: {
@@ -76,10 +79,6 @@ export default function MenuBar(huddleState: any) {
   const [name, setName] = useState<string>(user?.displayName || '');
   const [roomName, setRoomName] = useState<string>('');
 
-  // const [id] = useState('huddle');
-
-  // huddleState[huddleId] = 23;
-
   useEffect(() => {
     if (URLRoomName) {
       setRoomName(URLRoomName);
@@ -97,7 +96,7 @@ export default function MenuBar(huddleState: any) {
   const handleSubmit = () => {
     // event.preventDefault();
 
-    // axios.post('https://aqueous-woodland-13891.herokuapp.com/room/join?first=andy&last=jiang&id=dasd&user_id=sd&username=da;sdf')
+    // axios.post('https://huddle-video.herokuapp.com/room/join?first=andy&last=jiang&id=dasd&user_id=sd&username=da;sdf')
     // .then(res => {
     //   console.log(res)
     // });
@@ -105,7 +104,7 @@ export default function MenuBar(huddleState: any) {
     // axios({
     //   method: 'post',
     //   url:
-    //     'https://aqueous-woodland-13891.herokuapp.com/room/join?first=andy&last=jiang&id=dasd&user_id=sd&username=dasdf',
+    //     'https://huddle-video.herokuapp.com/room/join?first=andy&last=jiang&id=dasd&user_id=sd&username=dasdf',
     //   headers: {
     //     'Access-Control-Allow-Origin': '*',
     //   },
@@ -123,43 +122,44 @@ export default function MenuBar(huddleState: any) {
         {roomState === 'disconnected' ? (
           // Connected menu bar
           <div>
-            {/* <form className={classes.form} onSubmit={handleSubmit}> */}
-            {window.location.search.includes('customIdentity=true') || !user?.displayName ? (
+            <form className={classes.form} onSubmit={handleSubmit}>
+              {window.location.search.includes('customIdentity=true') || !user?.displayName ? (
+                <TextField
+                  id="menu-name"
+                  label="Name"
+                  className={classes.textField}
+                  value={name}
+                  onChange={handleNameChange}
+                  margin="dense"
+                />
+              ) : (
+                <Typography className={classes.displayName} variant="body1">
+                  {user.displayName}
+                </Typography>
+              )}
               <TextField
-                id="menu-name"
-                label="Name"
+                id="menu-room"
+                label="Room"
                 className={classes.textField}
-                value={name}
-                onChange={handleNameChange}
+                // style={{backgroundColor: "white", color: "black"}}
+                value={roomName}
+                onChange={handleRoomNameChange}
                 margin="dense"
               />
-            ) : (
-              <Typography className={classes.displayName} variant="body1">
-                {user.displayName}
-              </Typography>
-            )}
-            <TextField
-              id="menu-room"
-              label="Room"
-              className={classes.textField}
-              // style={{backgroundColor: "white", color: "black"}}
-              value={roomName}
-              onChange={handleRoomNameChange}
-              margin="dense"
-            />
-            <Button
-              className={classes.joinButton}
-              type="submit"
-              onClick={handleSubmit}
-              // color="white"
-              // sty
-              style={{ color: 'black', backgroundColor: 'white' }}
-              variant="contained"
-              disabled={isAcquiringLocalTracks || isConnecting || !name || !roomName || isFetching}
-            >
-              Join Room
-            </Button>
-            {(isConnecting || isFetching) && <CircularProgress className={classes.loadingSpinner} />}
+              <Button
+                className={classes.joinButton}
+                type="submit"
+                onClick={handleSubmit}
+                // color="white"
+                // sty
+                style={{ color: 'black', backgroundColor: 'white' }}
+                variant="contained"
+                disabled={isAcquiringLocalTracks || isConnecting || !name || !roomName || isFetching}
+              >
+                Join Room
+              </Button>
+              {(isConnecting || isFetching) && <CircularProgress className={classes.loadingSpinner} />}
+            </form>
           </div>
         ) : (
           // Connected menu bar
