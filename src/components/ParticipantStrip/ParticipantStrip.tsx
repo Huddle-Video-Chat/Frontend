@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Huddle from '../Huddle/Huddle';
 import { styled } from '@material-ui/core/styles';
 import useParticipants from '../../hooks/useParticipants/useParticipants';
@@ -112,7 +112,6 @@ export default function ParticipantStrip({ zoomed, position }: ParticipantStripP
   const [huddleState, setHuddleState] = useState(stateStarter);
   const [joined, setJoined] = useState(false);
 
-
   async function joinHuddle(huddle: string) {
     const requestOptions = {
       method: 'POST',
@@ -161,43 +160,49 @@ export default function ParticipantStrip({ zoomed, position }: ParticipantStripP
 
         setJoined(true);
         setHuddleState(newState);
-
-      });
-  } else {
-    const requestOptions = {
-      method: 'GET',
-      headers: { 'Content-Type': 'application/json' },
-    };
-    var url = 'https://huddle-video.herokuapp.com/room/state';
-    url += '?id=' + room.sid;
-    url += '&user_id=' + localParticipant.sid;
-    fetch(url, requestOptions)
-      .then(response => response.json())
-      .then(data => {
-        var newState: {
-          [key: string]: any,
-        } = {};
-        participants.map(p => {
-          const huddleID: string = data.users[p.sid]
-          if (newState[huddleID] === undefined) {
-            newState[huddleID] = []
-          }
-          newState[huddleID].push(p)
-        })
-        const huddleID: string = data.huddle_id
-        if (newState[huddleID] === undefined) {
-          newState[huddleID] = []
-        }
-        newState[huddleID].push(localParticipant)
-        setJoined(true);
-        setHuddleState(newState);
       });
   }
+  useEffect(() => {
+    setTimeout(() => {
+      const requestOptions = {
+        method: 'GET',
+        headers: { 'Content-Type': 'application/json' },
+      };
+      var url = 'https://huddle-video.herokuapp.com/room/state';
+      url += '?id=' + room.sid;
+      url += '&user_id=' + localParticipant.sid;
+      fetch(url, requestOptions)
+        .then(response => response.json())
+        .then(data => {
+          var newState: {
+            [key: string]: any;
+          } = {};
+          participants.map(p => {
+            const huddleID: string = data.users[p.sid];
+            if (newState[huddleID] === undefined) {
+              newState[huddleID] = [];
+            }
+            newState[huddleID].push(p);
+          });
+          const huddleID: string = data.huddle_id;
+          if (newState[huddleID] === undefined) {
+            newState[huddleID] = [];
+          }
+          newState[huddleID].push(localParticipant);
+          setJoined(true);
 
+          if (newState !== huddleState) {
+            setHuddleState(newState);
+          }
+
+          console.log(newState);
+        });
+    }, 1000);
+  });
 
   const huddlePositions = [
     { left: 0, top: 0 },
-    { left: (window.innerWidth / 4) - 200, top: (window.innerHeight / 2) - 200 },
+    { left: window.innerWidth / 4 - 200, top: window.innerHeight / 2 - 200 },
     { left: (3 * window.innerWidth) / 4, top: window.innerHeight / 2 },
     { left: window.innerWidth / 2, top: window.innerHeight / 4 },
     { left: window.innerWidth / 2, top: (3 * window.innerHeight) / 4 },
@@ -211,7 +216,7 @@ export default function ParticipantStrip({ zoomed, position }: ParticipantStripP
         var huddleParticipants: [] = huddleState[huddle];
         var tempPosition = huddlePositions[parseInt(huddle)];
         if (!tempPosition) {
-          tempPosition = huddlePositions[1]
+          tempPosition = huddlePositions[1];
         }
 
         return (

@@ -10,7 +10,6 @@ import useHuddleParticipants from '../../hooks/useHuddleParticipants/useHuddlePa
 
 import axios from 'axios';
 
-
 const Outline = styled('div')({
   position: 'relative',
   height: '100%',
@@ -58,6 +57,14 @@ function ListButton({ onClick }: ButtonProps) {
   return (
     <MyButton onClick={onClick} style={{ left: '288px', top: 0 }}>
       List info
+    </MyButton>
+  );
+}
+
+function AddHuddle({ onClick }: ButtonProps) {
+  return (
+    <MyButton onClick={onClick} style={{ left: '432px', top: 0 }}>
+      Add Huddle
     </MyButton>
   );
 }
@@ -139,7 +146,9 @@ export default function Room() {
     setHuddle(1 - huddle);
   };
 
-
+  const addHuddle = () => {
+    return;
+  };
 
   const huddleID = jsonData.huddle_id;
 
@@ -150,6 +159,7 @@ export default function Room() {
     <Outline>
       <ViewButton onClick={clickView} />
       <HuddleButton onClick={clickHuddle} />
+      <AddHuddle onClick={addHuddle} />
       <Positioner style={{ left: 0, top: 0 }}>
         {/* {
           huddles.map(huddle => (
