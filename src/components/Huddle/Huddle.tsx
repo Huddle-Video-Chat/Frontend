@@ -82,6 +82,7 @@ export default function Huddle({
   diameter,
   onClick,
   selectedParticipant,
+  disableAudio,
 }: HuddleProps) {
   const classes = useStyles();
   // // setting disableAudio to hear, clicking button toggles setHear
@@ -114,6 +115,8 @@ export default function Huddle({
 
   function onParticipantClick() { }
 
+  const adjustedPosition = {left: position.left - adjustedHuddleDiameter / 2, top: position.top - adjustedHuddleDiameter / 2}
+
 
 
 
@@ -121,11 +124,10 @@ export default function Huddle({
     // testing to see if I can change render position of participant
 
     <div onClick={huddleID => onClick} className={classes.huddle}>
-      <Positioner style={position}>
+      <Positioner style={adjustedPosition}>
         {participants.map(participant => {
           // adjusting for radius of circle
           const arrangedP = arrangementPositions.shift()
-          const adjustedPosition = { left: arrangedP.left - adjustedHuddleDiameter / 2, right: arrangedP.top - adjustedHuddleDiameter / 2 }
           return (
             <Participant
               key={participant.sid}
@@ -134,6 +136,7 @@ export default function Huddle({
               onClick={onParticipantClick}
               position={arrangedP}
               diameter={diameter}
+              disableAudio={disableAudio}
             />
           )
         }
