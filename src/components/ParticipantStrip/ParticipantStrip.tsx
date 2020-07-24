@@ -102,6 +102,7 @@ export default function ParticipantStrip({ zoomed, position }: ParticipantStripP
   const participants = useParticipants();
   const [selectedParticipant, setSelectedParticipant] = useSelectedParticipant();
   const { room } = useVideoContext();
+  const [huddleID, setHuddleID] = useState('')
 
   // const modified = useHuddleParticipants()
 
@@ -185,6 +186,7 @@ export default function ParticipantStrip({ zoomed, position }: ParticipantStripP
             newState[huddleID].push(p);
           });
           const huddleID: string = data.huddle_id;
+          setHuddleID(huddleID)
           if (newState[huddleID] === undefined) {
             newState[huddleID] = [];
           }
@@ -228,6 +230,7 @@ export default function ParticipantStrip({ zoomed, position }: ParticipantStripP
             participants={huddleParticipants}
             position={tempPosition}
             selectedParticipant={selectedParticipant}
+            disableAudio={huddleID !== huddle}
           />
         );
       })
