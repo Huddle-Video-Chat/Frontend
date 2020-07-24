@@ -59,7 +59,7 @@ export default function App() {
       <Main>
         {roomState === 'disconnected' ? <LocalVideoPreview /> : <Room />}
         <Controls />
-        <Chat />
+        {/* <Chat /> */}
       </Main>
       <ReconnectingNotification />
     </Container>

@@ -18,7 +18,9 @@ export default function ParticipantStrip({ zoomed, position }: ParticipantStripP
   const participants: RemoteParticipant[] = useParticipants();
   const [selectedParticipant, setSelectedParticipant] = useSelectedParticipant();
   const { room } = useVideoContext();
-  const [huddleID, setHuddleID] = useState('');
+  // const [huddleID, setHuddleID] = useState('');
+
+  console.log('hellow from praticpant strigp');
 
   return (
     <HuddleVisualizer

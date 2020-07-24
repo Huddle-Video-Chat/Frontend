@@ -60,8 +60,6 @@ function getArangementPositions(size: number, diameter: number, center: any) {
     // next level
     sizeY += diameter;
   }
-  console.log('position algorithm result:');
-  console.log(result);
   return result;
 }
 
