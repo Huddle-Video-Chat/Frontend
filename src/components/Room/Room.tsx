@@ -4,7 +4,6 @@ import { styled } from '@material-ui/core/styles';
 import useVideoContext from '../../hooks/useVideoContext/useVideoContext';
 import useHuddleParticipants from '../../hooks/useHuddleParticipants/useHuddleParticipants';
 
-
 const Outline = styled('div')({
   position: 'relative',
   height: '100%',
@@ -81,7 +80,6 @@ export default function Room() {
   } = useVideoContext();
   const { room } = useVideoContext();
 
-
   const position = zoomed ? { left: 150, top: 150 } : { left: 500, top: 150 };
 
   // using incorrect abstraction rn, will fix
@@ -95,27 +93,26 @@ export default function Room() {
     setHuddle(1 - huddle);
   };
 
-  const addHuddle = () => {
-    console.log('Joining room ' + room.sid);
-    const requestOptions = {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-    };
-    var url = 'https://huddle-video.herokuapp.com/huddle/create';
-    url += '?id=' + room.sid;
-    url += '&user_id=' + localParticipant.sid;
+  // const addHuddle = () => {
+  //   //console.log('Joining room ' + room.sid);
+  //   const requestOptions = {
+  //     method: 'POST',
+  //     headers: { 'Content-Type': 'application/json' },
+  //   };
+  //   var url = 'https://huddle-video.herokuapp.com/huddle/create';
+  //   url += '?id=' + room.sid;
+  //   url += '&user_id=' + localParticipant.sid;
 
-    fetch(url, requestOptions);
-  };
+  //   fetch(url, requestOptions);
+  // };
 
   // const filteredList = huddleParticipants.filter(user => user.huddleID === huddleID)
 
   // hard coded positions, right and left side
   return (
     <Outline>
-      <ViewButton onClick={clickView} />
-      <HuddleButton onClick={clickHuddle} />
-      <AddHuddle onClick={addHuddle} />
+      {/* <ViewButton onClick={clickView} /> */}
+      {/* <HuddleButton onClick={clickHuddle} /> */}
       <Positioner style={{ left: 0, top: 0 }}>
         <ParticipantStrip zoomed={zoomed} />
       </Positioner>

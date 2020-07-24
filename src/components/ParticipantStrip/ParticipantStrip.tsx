@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import Huddle from '../Huddle/Huddle';
-import { styled } from '@material-ui/core/styles';
+import HuddleVisualizer from '../HuddleVisualizer/HuddleVisualizer';
 import useParticipants from '../../hooks/useParticipants/useParticipants';
 import useVideoContext from '../../hooks/useVideoContext/useVideoContext';
 import useSelectedParticipant from '../VideoProvider/useSelectedParticipant/useSelectedParticipant';
+import { RemoteParticipant } from 'twilio-video';
 
 interface ParticipantStripProps {
   zoomed: boolean;
@@ -14,11 +14,12 @@ export default function ParticipantStrip({ zoomed }: ParticipantStripProps) {
   const {
     room: { localParticipant },
   } = useVideoContext();
-  const participants = useParticipants();
+  const participants: RemoteParticipant[] = useParticipants();
   const [selectedParticipant, setSelectedParticipant] = useSelectedParticipant();
   const { room } = useVideoContext();
-  const [huddleID, setHuddleID] = useState('')
+  // const [huddleID, setHuddleID] = useState('');
 
+<<<<<<< HEAD
   var stateStarter: {
     [key: string]: any;
   } = {};
@@ -153,5 +154,16 @@ export default function ParticipantStrip({ zoomed }: ParticipantStripProps) {
       })
       }
     </>
+=======
+  console.log('hellow from praticpant strigp');
+
+  return (
+    <HuddleVisualizer
+      localParticipant={localParticipant}
+      participants={participants}
+      selectedParticipant={selectedParticipant}
+      room={room}
+    />
+>>>>>>> 9364056da77380ffcc35bc9b208ae5485ff5e5a4
   );
 }

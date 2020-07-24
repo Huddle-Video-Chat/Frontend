@@ -15,8 +15,6 @@ interface ParticipantProps {
   diameter: number;
 }
 
-
-
 interface ParticipantProps {
   participant: IParticipant;
   disableAudio?: boolean;
@@ -66,7 +64,6 @@ export default function Participant({
     position: 'absolute',
   });
 
-
   return (
     // testing to see if I can change render position of participant
 
@@ -82,3 +79,5 @@ export default function Participant({
     </Positioner>
   );
 }
+
+export const MemoParticipant = React.memo(Participant);

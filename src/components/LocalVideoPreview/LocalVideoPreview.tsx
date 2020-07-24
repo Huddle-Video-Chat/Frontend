@@ -23,10 +23,9 @@ export default function LocalVideoPreview() {
 
   const videoTrack = localTracks.find(track => track.name.includes('camera')) as LocalVideoTrack;
 
-
   // Hardcoded -250 for radius
   return videoTrack ? (
-    <Container style={{ left: window.innerWidth/2 - 250, top: window.innerHeight/2 - 250 }}>
+    <Container style={{ left: window.innerWidth / 2 - 250, top: window.innerHeight / 2 - 250 }}>
       <VideoTrack track={videoTrack} isLocal />
     </Container>
   ) : null;

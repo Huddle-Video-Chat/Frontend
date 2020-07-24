@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import ParticipantInfo from '../ParticipantInfo/ParticipantInfo';
 import ParticipantTracks from '../ParticipantTracks/ParticipantTracks';
 import { Participant as IParticipant } from 'twilio-video';
-import Participant from '../Participant/Participant';
+import Participant, { MemoParticipant } from '../Participant/Participant';
 
 import { styled } from '@material-ui/core/styles';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
@@ -60,8 +60,6 @@ function getArangementPositions(size: number, diameter: number, center: any) {
     // next level
     sizeY += diameter;
   }
-  console.log('position algorithm result:')
-  console.log(result)
   return result;
 }
 
@@ -92,10 +90,13 @@ export default function Huddle({
   const center = {x: position.left - adjustedHuddleDiameter/2, y: position.top - adjustedHuddleDiameter/2}
   let arrangementPositions = getArangementPositions(participants.length + 1, diameter, center);
 
+  const adjustedPosition = {
+    left: position.left - adjustedHuddleDiameter / 2,
+    top: position.top - adjustedHuddleDiameter / 2,
+  };
+  
   function onParticipantClick() { }
-
   // adjusting the center
-  const adjustedPosition = {left: position.left - adjustedHuddleDiameter / 2, top: position.top - adjustedHuddleDiameter / 2}
 
   const Positioner = styled('div')({
     // overflow: 'hidden',
@@ -117,13 +118,13 @@ export default function Huddle({
   return (
     // testing to see if I can change render position of participant
 
-    <div onClick={huddleID => onClick} className={classes.huddle}>
-      <Positioner style={adjustedPosition}>
+    <div onClick={() => onClick(huddleID)} className={classes.huddle}>
+      <Positioner style={adjustedPosition} onClick={() => onClick(huddleID)}>
         {participants.map(participant => {
           // adjusting for radius of circle
-          const arrangedP = arrangementPositions.shift()
+          const arrangedP = arrangementPositions.shift();
           return (
-            <Participant
+            <MemoParticipant
               key={participant.sid}
               participant={participant}
               isSelected={selectedParticipant === participant}
@@ -132,10 +133,8 @@ export default function Huddle({
               diameter={diameter}
               disableAudio={disableAudio}
             />
-          )
-        }
-        )
-        }
+          );
+        })}
       </Positioner>
     </div>
   );
