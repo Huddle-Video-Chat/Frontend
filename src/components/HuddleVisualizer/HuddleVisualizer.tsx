@@ -154,6 +154,7 @@ export default function HuddleVisualizer({
             participants={huddleParticipants}
             position={tempPosition}
             selectedParticipant={selectedParticipant}
+            disableAudio={false}
           />
         );
       })}
