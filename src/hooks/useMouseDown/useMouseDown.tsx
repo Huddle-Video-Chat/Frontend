@@ -8,15 +8,15 @@ const useMouseDown = () => {
   };
 
   const updateMouseUp = (ev: any) => {
-    setMouseDown(false)
-  }
+    setMouseDown(false);
+  };
 
   useEffect(() => {
     window.addEventListener('mousedown', updateMouseDown);
-    window.addEventListener('mouseup', updateMouseUp)
+    window.addEventListener('mouseup', updateMouseUp);
     return () => {
-      window.removeEventListener('mousedown', updateMouseDown)
-      window.removeEventListener('mouseup', updateMouseUp)
+      window.removeEventListener('mousedown', updateMouseDown);
+      window.removeEventListener('mouseup', updateMouseUp);
     };
   }, []);
 
