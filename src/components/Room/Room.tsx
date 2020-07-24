@@ -153,7 +153,7 @@ export default function Room() {
   };
 
   const addHuddle = () => {
-    console.log('Joining room ' + room.sid);
+    //console.log('Joining room ' + room.sid);
     const requestOptions = {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },

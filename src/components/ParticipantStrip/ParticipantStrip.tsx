@@ -1,14 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import Huddle from '../Huddle/Huddle';
-import { styled } from '@material-ui/core/styles';
+import HuddleVisualizer from '../HuddleVisualizer/HuddleVisualizer';
 import useParticipants from '../../hooks/useParticipants/useParticipants';
 import useVideoContext from '../../hooks/useVideoContext/useVideoContext';
-import useMousePosition from '../../hooks/useMousePosition/useMousePosition';
 import useSelectedParticipant from '../VideoProvider/useSelectedParticipant/useSelectedParticipant';
-import useHuddleParticipants from '../../hooks/useHuddleParticipants/useHuddleParticipants';
-import useMouseDown from '../../hooks/useMouseDown/useMouseDown';
-
-// import axios from 'axios';
+import { RemoteParticipant } from 'twilio-video';
 
 /* Original code with container and scroll container
 Renders yourself as a normal participant as selected participant = local participant */
@@ -99,212 +94,18 @@ export default function ParticipantStrip({ zoomed, position }: ParticipantStripP
   const {
     room: { localParticipant },
   } = useVideoContext();
-  const participants = useParticipants();
+  const participants: RemoteParticipant[] = useParticipants();
   const [selectedParticipant, setSelectedParticipant] = useSelectedParticipant();
   const { room } = useVideoContext();
 
   // const modified = useHuddleParticipants()
 
-  var stateStarter: {
-    [key: string]: any;
-  } = {};
-
-  const [huddleState, setHuddleState] = useState(stateStarter);
-  const [joined, setJoined] = useState(false);
-
-  async function joinHuddle(huddle: string) {
-    const requestOptions = {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-    };
-
-    var url = 'https://huddle-video.herokuapp.com/huddle/join';
-    url += '?id=' + room.sid;
-    url += '&user_id=' + localParticipant.sid;
-    url += '&new_huddle_id' + huddle;
-    fetch(url, requestOptions)
-      .then(response => response.json())
-      .then(data => console.log(data));
-  }
-
-  if (!joined) {
-    console.log('Joining room ' + room.sid);
-    const requestOptions = {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-    };
-    var url = 'https://huddle-video.herokuapp.com/room/join?first=andy&last=jiang&username=da;sdf';
-    url += '&id=' + room.sid;
-    url += '&user_id=' + localParticipant.sid;
-
-    fetch(url, requestOptions)
-      .then(response => response.json())
-      .then(data => {
-        var newState: {
-          [key: string]: any;
-        } = {};
-
-        participants.map(p => {
-          const huddleID: string = data.users[p.sid];
-          if (newState[huddleID] === undefined) {
-            newState[huddleID] = [];
-          }
-          newState[huddleID].push(p);
-        });
-
-        const huddleID: string = data.huddle_id;
-        if (newState[huddleID] === undefined) {
-          newState[huddleID] = [];
-        }
-        newState[huddleID].push(localParticipant);
-
-        setJoined(true);
-        setHuddleState(newState);
-      });
-  }
-  useEffect(() => {
-    setTimeout(() => {
-      const requestOptions = {
-        method: 'GET',
-        headers: { 'Content-Type': 'application/json' },
-      };
-      var url = 'https://huddle-video.herokuapp.com/room/state';
-      url += '?id=' + room.sid;
-      url += '&user_id=' + localParticipant.sid;
-      fetch(url, requestOptions)
-        .then(response => response.json())
-        .then(data => {
-          var newState: {
-            [key: string]: any;
-          } = {};
-          participants.map(p => {
-            const huddleID: string = data.users[p.sid];
-            if (newState[huddleID] === undefined) {
-              newState[huddleID] = [];
-            }
-            newState[huddleID].push(p);
-          });
-          const huddleID: string = data.huddle_id;
-          if (newState[huddleID] === undefined) {
-            newState[huddleID] = [];
-          }
-          newState[huddleID].push(localParticipant);
-          setJoined(true);
-
-          if (newState !== huddleState) {
-            setHuddleState(newState);
-          }
-
-          console.log(newState);
-        });
-    }, 1000);
-  });
-
-  const huddlePositions = [
-    { left: 0, top: 0 },
-    { left: window.innerWidth / 4 - 200, top: window.innerHeight / 2 - 200 },
-    { left: (3 * window.innerWidth) / 4, top: window.innerHeight / 2 },
-    { left: window.innerWidth / 2, top: window.innerHeight / 4 },
-    { left: window.innerWidth / 2, top: (3 * window.innerHeight) / 4 },
-  ];
-
   return (
-    <>
-      {//zoomed ?
-      // zoomed in, ours in center large, don't render others
-      Object.keys(huddleState).map(huddle => {
-        var huddleParticipants: [] = huddleState[huddle];
-        var tempPosition = huddlePositions[parseInt(huddle)];
-        if (!tempPosition) {
-          tempPosition = huddlePositions[1];
-        }
-
-        return (
-          <Huddle
-            onClick={joinHuddle}
-            // diameter of the participant
-            diameter={150}
-            huddleID={huddle}
-            participants={huddleParticipants}
-            position={tempPosition}
-            selectedParticipant={selectedParticipant}
-          />
-        );
-      })
-      // <>
-      //   <Participant
-      //     participant={localParticipant}
-      //     isSelected={selectedParticipant === localParticipant}
-      //     onClick={() => clickParticipant(localParticipant)}
-      //     position={arrangementPositions.shift()}
-      //     diameter={diameter}
-      //   // huddleID={thisHuddleID}
-      //   />
-      //   {/*ONLY MAP THE PARTICIPANTS IN YOUR HUDDLE*/}
-      //   {
-      //     participants.map(participant => (
-      //       <Participant
-      //         key={participant.sid}
-      //         participant={participant}
-      //         isSelected={selectedParticipant === participant}
-      //         onClick={() => clickParticipant(participant)}
-      //         position={arrangementPositions.shift()}
-      //         diameter={diameter}
-      //       />
-      //     ))
-      //   }
-      //   {/* {
-      //     newState[thisHuddleID].map((participant: any) => (
-      //       <Participant
-      //         key={participant.sid}
-      //         participant={participant}
-      //         isSelected={selectedParticipant === participant}
-      //         onClick={() => clickParticipant(participant)}
-      //         position={arrangementPositions.shift()}
-      //         diameter={diameter}
-      //       />
-      //     ))
-      //   } */}
-      // </>
-      // :
-      // // zoomed out, ours in the center, others on the edges
-      // <>
-      //   <Participant
-      //     participant={localParticipant}
-      //     isSelected={selectedParticipant === localParticipant}
-      //     onClick={() => clickParticipant(localParticipant)}
-      //     position={arrangementPositions.shift()}
-      //     diameter={diameter}
-      //   // huddleID={thisHuddleID}
-      //   />
-      //   {
-      //     participants.map(participant => (
-      //       <Participant
-      //         key={participant.sid}
-      //         participant={participant}
-      //         isSelected={selectedParticipant === participant}
-      //         onClick={() => clickParticipant(participant)}
-      //         position={arrangementPositions.shift()}
-      //         diameter={diameter}
-      //       />
-      //     ))
-      //   }
-
-      //   {/* other positions, other huddles*/}
-      //   {
-      //     otherParticipants.map(participant => (
-      //       <Participant
-      //         key={participant.sid}
-      //         participant={participant}
-      //         isSelected={selectedParticipant === participant}
-      //         onClick={() => clickParticipant(participant)}
-      //         position={arrangementPositions.shift()}
-      //         diameter={diameter}
-      //       />
-      //     ))
-      //   }
-      // </>
-      }
-    </>
+    <HuddleVisualizer
+      localParticipant={localParticipant}
+      participants={participants}
+      selectedParticipant={selectedParticipant}
+      room={room}
+    />
   );
 }

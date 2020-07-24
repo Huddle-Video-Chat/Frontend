@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import ParticipantInfo from '../ParticipantInfo/ParticipantInfo';
 import ParticipantTracks from '../ParticipantTracks/ParticipantTracks';
 import { Participant as IParticipant } from 'twilio-video';
-import Participant from '../Participant/Participant';
+import Participant, { MemoParticipant } from '../Participant/Participant';
 
 import { styled } from '@material-ui/core/styles';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
@@ -60,8 +60,8 @@ function getArangementPositions(size: number, diameter: number, center: any) {
     // next level
     sizeY += diameter;
   }
-  console.log('position algorithm result:')
-  console.log(result)
+  console.log('position algorithm result:');
+  console.log(result);
   return result;
 }
 
@@ -90,7 +90,7 @@ export default function Huddle({
   // }
   // const [hear, setHear] = useState(false);
 
-  const adjustedHuddleDiameter = nextSquareRoot(participants.length) * 200
+  const adjustedHuddleDiameter = nextSquareRoot(participants.length) * 200;
 
   const Positioner = styled('div')({
     // overflow: 'hidden',
@@ -110,10 +110,7 @@ export default function Huddle({
   // second argument is diameter of PARTICIPANT
   let arrangementPositions = getArangementPositions(participants.length + 1, diameter, position);
 
-  function onParticipantClick() { }
-
-
-
+  function onParticipantClick() {}
 
   return (
     // testing to see if I can change render position of participant
@@ -122,10 +119,13 @@ export default function Huddle({
       <Positioner style={position}>
         {participants.map(participant => {
           // adjusting for radius of circle
-          const arrangedP = arrangementPositions.shift()
-          const adjustedPosition = { left: arrangedP.left - adjustedHuddleDiameter / 2, right: arrangedP.top - adjustedHuddleDiameter / 2 }
+          const arrangedP = arrangementPositions.shift();
+          const adjustedPosition = {
+            left: arrangedP.left - adjustedHuddleDiameter / 2,
+            right: arrangedP.top - adjustedHuddleDiameter / 2,
+          };
           return (
-            <Participant
+            <MemoParticipant
               key={participant.sid}
               participant={participant}
               isSelected={selectedParticipant === participant}
@@ -133,10 +133,8 @@ export default function Huddle({
               position={arrangedP}
               diameter={diameter}
             />
-          )
-        }
-        )
-        }
+          );
+        })}
       </Positioner>
     </div>
   );
