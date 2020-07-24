@@ -121,8 +121,8 @@ export default function Huddle({
   return (
     // testing to see if I can change render position of participant
 
-    <div onClick={huddleID => onClick} className={classes.huddle}>
-      <Positioner style={adjustedPosition}>
+    <div onClick={() => onClick(huddleID)} className={classes.huddle}>
+      <Positioner style={adjustedPosition} onClick={() => onClick(huddleID)}>
         {participants.map(participant => {
           // adjusting for radius of circle
           const arrangedP = arrangementPositions.shift();

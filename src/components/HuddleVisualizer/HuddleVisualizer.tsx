@@ -61,7 +61,7 @@ export default function HuddleVisualizer({
     var url = 'https://huddle-video.herokuapp.com/huddle/join';
     url += '?id=' + room.sid;
     url += '&user_id=' + localParticipant.sid;
-    url += '&new_huddle_id' + huddle;
+    url += '&new_huddle_id=' + huddle;
     fetch(url, requestOptions)
       .then(response => response.json())
       .then(data => updateState(data));
