@@ -15,40 +15,6 @@ interface ParticipantProps {
   diameter: number;
 }
 
-interface ContainerProps {
-  diameter: number;
-}
-
-const Container = styled(({ diameter }: ContainerProps) => <div />)({
-  // overflow: 'hidden',
-  // border: '5px dotted red',
-  // borderRadius: '50%',
-
-  // backgroundColor: '#99aab5',
-
-  width: '100px',
-  height: '100px',
-
-  // Uncomment to use position rather than CSS grid, for grid and position algorithm
-  position: 'relative',
-});
-
-const Positioner = styled('div')({
-  overflow: 'hidden',
-
-  border: '5px dotted blue',
-  borderRadius: '50%',
-
-  backgroundColor: '#99aab5',
-
-  width: '100px',
-  height: '100px',
-
-  position: 'absolute',
-
-  objectFit: 'contain',
-});
-
 interface ParticipantProps {
   participant: IParticipant;
   disableAudio?: boolean;

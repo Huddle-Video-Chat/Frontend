@@ -79,10 +79,6 @@ export default function MenuBar(huddleState: any) {
   const [name, setName] = useState<string>(user?.displayName || '');
   const [roomName, setRoomName] = useState<string>('');
 
-  // const [id] = useState('huddle');
-
-  // huddleState[huddleId] = 23;
-
   useEffect(() => {
     if (URLRoomName) {
       setRoomName(URLRoomName);
@@ -126,43 +122,44 @@ export default function MenuBar(huddleState: any) {
         {roomState === 'disconnected' ? (
           // Connected menu bar
           <div>
-            {/* <form className={classes.form} onSubmit={handleSubmit}> */}
-            {window.location.search.includes('customIdentity=true') || !user?.displayName ? (
+            <form className={classes.form} onSubmit={handleSubmit}>
+              {window.location.search.includes('customIdentity=true') || !user?.displayName ? (
+                <TextField
+                  id="menu-name"
+                  label="Name"
+                  className={classes.textField}
+                  value={name}
+                  onChange={handleNameChange}
+                  margin="dense"
+                />
+              ) : (
+                <Typography className={classes.displayName} variant="body1">
+                  {user.displayName}
+                </Typography>
+              )}
               <TextField
-                id="menu-name"
-                label="Name"
+                id="menu-room"
+                label="Room"
                 className={classes.textField}
-                value={name}
-                onChange={handleNameChange}
+                // style={{backgroundColor: "white", color: "black"}}
+                value={roomName}
+                onChange={handleRoomNameChange}
                 margin="dense"
               />
-            ) : (
-              <Typography className={classes.displayName} variant="body1">
-                {user.displayName}
-              </Typography>
-            )}
-            <TextField
-              id="menu-room"
-              label="Room"
-              className={classes.textField}
-              // style={{backgroundColor: "white", color: "black"}}
-              value={roomName}
-              onChange={handleRoomNameChange}
-              margin="dense"
-            />
-            <Button
-              className={classes.joinButton}
-              type="submit"
-              onClick={handleSubmit}
-              // color="white"
-              // sty
-              style={{ color: 'black', backgroundColor: 'white' }}
-              variant="contained"
-              disabled={isAcquiringLocalTracks || isConnecting || !name || !roomName || isFetching}
-            >
-              Join Room
-            </Button>
-            {(isConnecting || isFetching) && <CircularProgress className={classes.loadingSpinner} />}
+              <Button
+                className={classes.joinButton}
+                type="submit"
+                onClick={handleSubmit}
+                // color="white"
+                // sty
+                style={{ color: 'black', backgroundColor: 'white' }}
+                variant="contained"
+                disabled={isAcquiringLocalTracks || isConnecting || !name || !roomName || isFetching}
+              >
+                Join Room
+              </Button>
+              {(isConnecting || isFetching) && <CircularProgress className={classes.loadingSpinner} />}
+            </form>
           </div>
         ) : (
           // Connected menu bar

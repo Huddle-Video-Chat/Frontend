@@ -84,7 +84,6 @@ export default function ParticipantStrip() {
 // }
 
 interface ParticipantStripProps {
-  // position: object,
   zoomed: boolean;
   position: object;
 }
@@ -97,8 +96,7 @@ export default function ParticipantStrip({ zoomed, position }: ParticipantStripP
   const participants: RemoteParticipant[] = useParticipants();
   const [selectedParticipant, setSelectedParticipant] = useSelectedParticipant();
   const { room } = useVideoContext();
-
-  // const modified = useHuddleParticipants()
+  const [huddleID, setHuddleID] = useState('');
 
   return (
     <HuddleVisualizer

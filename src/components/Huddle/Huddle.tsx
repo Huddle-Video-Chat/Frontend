@@ -51,7 +51,7 @@ function getArangementPositions(size: number, diameter: number, center: any) {
 
     let sizeX = -(arrangement[row] * diameter) / 2;
     for (let i = 0; i < arrangement[row]; i += 1) {
-      result.push({ left: sizeX + center.left + diameter / 2, top: sizeY + center.top + diameter / 2 });
+      result.push({ left: sizeX + center.x - diameter / 2, top: sizeY + center.y - diameter / 2 });
 
       // radius math here
       sizeX += diameter;
@@ -72,6 +72,7 @@ interface HuddleProps {
   diameter: number;
   onClick: (huddleID: string) => void;
   selectedParticipant: any;
+  disableAudio: boolean;
 }
 
 export default function Huddle({
@@ -81,6 +82,7 @@ export default function Huddle({
   diameter,
   onClick,
   selectedParticipant,
+  disableAudio,
 }: HuddleProps) {
   const classes = useStyles();
   // // setting disableAudio to hear, clicking button toggles setHear
@@ -108,22 +110,24 @@ export default function Huddle({
   // math stuff (nextSquareRoot(participants.length) * 100) / Math.sqrt(2)
 
   // second argument is diameter of PARTICIPANT
-  let arrangementPositions = getArangementPositions(participants.length + 1, diameter, position);
+  const center = { x: position.left - adjustedHuddleDiameter / 2, y: position.top - adjustedHuddleDiameter / 2 };
+  let arrangementPositions = getArangementPositions(participants.length + 1, diameter, center);
 
   function onParticipantClick() {}
+
+  const adjustedPosition = {
+    left: position.left - adjustedHuddleDiameter / 2,
+    top: position.top - adjustedHuddleDiameter / 2,
+  };
 
   return (
     // testing to see if I can change render position of participant
 
     <div onClick={huddleID => onClick} className={classes.huddle}>
-      <Positioner style={position}>
+      <Positioner style={adjustedPosition}>
         {participants.map(participant => {
           // adjusting for radius of circle
           const arrangedP = arrangementPositions.shift();
-          const adjustedPosition = {
-            left: arrangedP.left - adjustedHuddleDiameter / 2,
-            right: arrangedP.top - adjustedHuddleDiameter / 2,
-          };
           return (
             <MemoParticipant
               key={participant.sid}
@@ -132,6 +136,7 @@ export default function Huddle({
               onClick={onParticipantClick}
               position={arrangedP}
               diameter={diameter}
+              disableAudio={disableAudio}
             />
           );
         })}
