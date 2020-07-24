@@ -7,11 +7,10 @@ import useSelectedParticipant from '../VideoProvider/useSelectedParticipant/useS
 
 interface ParticipantStripProps {
   zoomed: boolean;
-  position: object;
 }
 
 // Without styled containers or scroll container
-export default function ParticipantStrip({ zoomed, position }: ParticipantStripProps) {
+export default function ParticipantStrip({ zoomed }: ParticipantStripProps) {
   const {
     room: { localParticipant },
   } = useVideoContext();
@@ -68,6 +67,7 @@ export default function ParticipantStrip({ zoomed, position }: ParticipantStripP
         });
 
         const huddleID: string = data.huddle_id;
+        setHuddleID(huddleID)
         if (newState[huddleID] === undefined) {
           newState[huddleID] = [];
         }
@@ -116,8 +116,9 @@ export default function ParticipantStrip({ zoomed, position }: ParticipantStripP
     }, 1000);
   });
 
+  // hardcoded huddle positions, very temporary
   const huddlePositions = [
-    { left: 0, top: 0 },
+    { left: window.innerWidth / 2, top: window.innerHeight / 2 },
     { left: window.innerWidth / 4, top: window.innerHeight / 2 },
     { left: (3 * window.innerWidth) / 4, top: window.innerHeight / 2 },
     { left: window.innerWidth / 2, top: window.innerHeight / 4 },
@@ -142,8 +143,10 @@ export default function ParticipantStrip({ zoomed, position }: ParticipantStripP
             diameter={150}
             huddleID={huddle}
             participants={huddleParticipants}
+            // center coordinates given, need to be adjusted to left right before usage
             position={tempPosition}
             selectedParticipant={selectedParticipant}
+            // disabling audio for all participants not in your huddle
             disableAudio={huddleID !== huddle}
           />
         );

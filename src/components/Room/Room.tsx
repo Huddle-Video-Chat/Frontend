@@ -117,7 +117,7 @@ export default function Room() {
       <HuddleButton onClick={clickHuddle} />
       <AddHuddle onClick={addHuddle} />
       <Positioner style={{ left: 0, top: 0 }}>
-        <ParticipantStrip zoomed={zoomed} position={{ left: 0, top: 0 }} />
+        <ParticipantStrip zoomed={zoomed} />
       </Positioner>
     </Outline>
   );

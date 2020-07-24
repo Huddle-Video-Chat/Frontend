@@ -86,6 +86,16 @@ export default function Huddle({
 }: HuddleProps) {
   const classes = useStyles();
   const adjustedHuddleDiameter = nextSquareRoot(participants.length) * 200
+  // math stuff (nextSquareRoot(participants.length) * 100) / Math.sqrt(2)
+
+  // second argument is diameter of PARTICIPANT
+  const center = {x: position.left - adjustedHuddleDiameter/2, y: position.top - adjustedHuddleDiameter/2}
+  let arrangementPositions = getArangementPositions(participants.length + 1, diameter, center);
+
+  function onParticipantClick() { }
+
+  // adjusting the center
+  const adjustedPosition = {left: position.left - adjustedHuddleDiameter / 2, top: position.top - adjustedHuddleDiameter / 2}
 
   const Positioner = styled('div')({
     // overflow: 'hidden',
@@ -100,15 +110,6 @@ export default function Huddle({
     padding: '20px',
   });
 
-  // math stuff (nextSquareRoot(participants.length) * 100) / Math.sqrt(2)
-
-  // second argument is diameter of PARTICIPANT
-  const center = {x: position.left - adjustedHuddleDiameter/2, y: position.top - adjustedHuddleDiameter/2}
-  let arrangementPositions = getArangementPositions(participants.length + 1, diameter, center);
-
-  function onParticipantClick() { }
-
-  const adjustedPosition = {left: position.left - adjustedHuddleDiameter / 2, top: position.top - adjustedHuddleDiameter / 2}
 
 
 
