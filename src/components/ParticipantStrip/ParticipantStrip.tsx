@@ -7,11 +7,10 @@ import { RemoteParticipant } from 'twilio-video';
 
 interface ParticipantStripProps {
   zoomed: boolean;
-  position: object;
 }
 
 // Without styled containers or scroll container
-export default function ParticipantStrip({ zoomed, position }: ParticipantStripProps) {
+export default function ParticipantStrip({ zoomed }: ParticipantStripProps) {
   const {
     room: { localParticipant },
   } = useVideoContext();

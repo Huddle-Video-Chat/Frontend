@@ -11,7 +11,7 @@ const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     huddle: {
       overflow: 'visible',
-      border: '5px dashed red',
+      border: '2px dashed grey',
       display: 'flex',
     },
   })
@@ -83,20 +83,25 @@ export default function Huddle({
   disableAudio,
 }: HuddleProps) {
   const classes = useStyles();
-  // // setting disableAudio to hear, clicking button toggles setHear
-  // // disableAudio will need to be set by participant strip in the future.
-  // function clickButton() {
-  //   setHear(!hear);
-  // }
-  // const [hear, setHear] = useState(false);
-
   const adjustedHuddleDiameter = nextSquareRoot(participants.length) * 200;
+  // second argument is diameter of PARTICIPANT
+  const center = { x: position.left - adjustedHuddleDiameter / 2, y: position.top - adjustedHuddleDiameter / 2 };
+  let arrangementPositions = getArangementPositions(participants.length + 1, diameter, center);
+
+  const adjustedPosition = {
+    left: position.left - adjustedHuddleDiameter / 2,
+    top: position.top - adjustedHuddleDiameter / 2,
+  };
+
+  function onParticipantClick() {}
+  // adjusting the center
 
   const Positioner = styled('div')({
     // overflow: 'hidden',
-    border: '5px dotted green',
+    // debugging border
+    // border: '5px dotted green',
     borderRadius: '50%',
-    backgroundColor: '#99aab5',
+    // backgroundColor: '#99aab5',
     width: adjustedHuddleDiameter,
     height: adjustedHuddleDiameter,
     position: 'absolute',
@@ -105,20 +110,10 @@ export default function Huddle({
     justifyContent: 'center',
     alignItems: 'center',
     padding: '20px',
+
+    display: 'grid',
+    gridTemplateColumns: 'repeat(2, 1fr)',
   });
-
-  // math stuff (nextSquareRoot(participants.length) * 100) / Math.sqrt(2)
-
-  // second argument is diameter of PARTICIPANT
-  const center = { x: position.left - adjustedHuddleDiameter / 2, y: position.top - adjustedHuddleDiameter / 2 };
-  let arrangementPositions = getArangementPositions(participants.length + 1, diameter, center);
-
-  function onParticipantClick() {}
-
-  const adjustedPosition = {
-    left: position.left - adjustedHuddleDiameter / 2,
-    top: position.top - adjustedHuddleDiameter / 2,
-  };
 
   return (
     // testing to see if I can change render position of participant

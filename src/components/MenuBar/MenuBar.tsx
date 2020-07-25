@@ -13,7 +13,6 @@ import useRoomState from '../../hooks/useRoomState/useRoomState';
 import useVideoContext from '../../hooks/useVideoContext/useVideoContext';
 import { Typography } from '@material-ui/core';
 
-import ToggleZoomButton from './ToggleZoomButton/ToggleZoomButton';
 import FlipCameraButton from './FlipCameraButton/FlipCameraButton';
 import LocalAudioLevelIndicator from './DeviceSelector/LocalAudioLevelIndicator/LocalAudioLevelIndicator';
 import ToggleFullscreenButton from './ToggleFullScreenButton/ToggleFullScreenButton';
@@ -167,7 +166,6 @@ export default function MenuBar(huddleState: any) {
         )}
         <div className={classes.rightButtonContainer}>
           <FlipCameraButton />
-          {roomState === 'disconnected' ? null : <ToggleZoomButton />}
           <LocalAudioLevelIndicator />
           <ToggleFullscreenButton />
           <Menu />

@@ -63,7 +63,9 @@ const useStyles = makeStyles((theme: Theme) =>
     identity: {
       background: 'rgba(0, 0, 0, 0.7)',
       padding: '0.1em 0.3em',
-      margin: 0,
+      // centering the name?
+      // margin: 0,
+      margin: 'auto',
       display: 'flex',
       alignItems: 'center',
     },
@@ -112,7 +114,8 @@ export default function ParticipantInfo({ participant, onClick, isSelected, chil
             <ParticipantConnectionIndicator participant={participant} />
             {participant.identity}
           </h4>
-          <NetworkQualityLevel qualityLevel={networkQualityLevel} />
+          {/* removing network quailty indicator, needs to be done conditionally in the future */}
+          {/* <NetworkQualityLevel qualityLevel={networkQualityLevel} /> */}
         </div>
         <div>
           <AudioLevelIndicator audioTrack={audioTrack} background="white" />

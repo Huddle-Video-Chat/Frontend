@@ -146,7 +146,7 @@ export default function HuddleVisualizer({
 
   const huddlePositions = [
     { left: 0, top: 0 },
-    { left: window.innerWidth / 4 - 200, top: window.innerHeight / 2 - 200 },
+    { left: window.innerWidth / 4, top: window.innerHeight / 2 },
     { left: (3 * window.innerWidth) / 4, top: window.innerHeight / 2 },
     { left: window.innerWidth / 2, top: window.innerHeight / 4 },
     { left: window.innerWidth / 2, top: (3 * window.innerHeight) / 4 },
