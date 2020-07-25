@@ -11,7 +11,7 @@ const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     huddle: {
       overflow: 'visible',
-      border: '5px dashed red',
+      // border: '5px dashed red',
       display: 'flex',
     },
   })
@@ -84,8 +84,6 @@ export default function Huddle({
 }: HuddleProps) {
   const classes = useStyles();
   const adjustedHuddleDiameter = nextSquareRoot(participants.length) * 200
-  // math stuff (nextSquareRoot(participants.length) * 100) / Math.sqrt(2)
-
   // second argument is diameter of PARTICIPANT
   const center = {x: position.left - adjustedHuddleDiameter/2, y: position.top - adjustedHuddleDiameter/2}
   let arrangementPositions = getArangementPositions(participants.length + 1, diameter, center);
@@ -100,15 +98,19 @@ export default function Huddle({
 
   const Positioner = styled('div')({
     // overflow: 'hidden',
-    border: '5px dotted green',
+    // debugging border
+    // border: '5px dotted green',
     borderRadius: '50%',
-    backgroundColor: '#99aab5',
+    // backgroundColor: '#99aab5',
     width: adjustedHuddleDiameter,
     height: adjustedHuddleDiameter,
     // width: '200px',
     // height: '200px',
     position: 'absolute',
     padding: '20px',
+
+    display: 'grid',
+    gridTemplateColumns: 'repeat(2, 1fr)',
   });
 
 

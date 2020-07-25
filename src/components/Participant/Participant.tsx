@@ -45,11 +45,12 @@ export default function Participant({
 
   const Positioner = styled('div')({
     overflow: 'hidden',
-    border: '5px dotted blue',
+    // border: '5px dotted blue',
     borderRadius: '50%',
 
-    backgroundColor: '#99aab5',
+    // backgroundColor: '#99aab5',
 
+    // hardcoded width and height
     width: '150px',
     height: '150px',
 
@@ -61,7 +62,7 @@ export default function Participant({
 
     // left: 'auto !important',
     // top: 'auto !important',
-    position: 'absolute',
+    // position: 'absolute',
   });
 
   return (

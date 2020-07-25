@@ -11,7 +11,7 @@ const Outline = styled('div')({
   overflow: 'visible',
 
   background: 'rgba(255, 255, 255, 0.5)',
-  border: '5px dashed green',
+  // border: '5px dashed green',
   boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',
 });
 
