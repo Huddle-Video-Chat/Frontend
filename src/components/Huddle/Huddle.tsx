@@ -99,9 +99,11 @@ export default function Huddle({
     backgroundColor: '#99aab5',
     width: adjustedHuddleDiameter,
     height: adjustedHuddleDiameter,
-    // width: '200px',
-    // height: '200px',
     position: 'absolute',
+    overflow: 'hidden',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
     padding: '20px',
   });
 

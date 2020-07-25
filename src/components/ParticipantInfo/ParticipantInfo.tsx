@@ -26,6 +26,7 @@ const useStyles = makeStyles((theme: Theme) =>
       height: '200px',
       overflow: 'hidden',
       cursor: 'pointer',
+      objectFit: 'contain',
       '& video': {
         filter: 'none',
       },

@@ -54,14 +54,10 @@ export default function Participant({
     height: '150px',
 
     objectFit: 'contain',
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'center',
 
     // left: 'auto !important',
     // top: 'auto !important',
-    position: 'absolute',
+    // position: 'absolute',
   });
 
   return (
