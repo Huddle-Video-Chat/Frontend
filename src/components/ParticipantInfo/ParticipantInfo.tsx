@@ -62,7 +62,9 @@ const useStyles = makeStyles((theme: Theme) =>
     identity: {
       background: 'rgba(0, 0, 0, 0.7)',
       padding: '0.1em 0.3em',
-      margin: 0,
+      // centering the name?
+      // margin: 0,
+      margin: 'auto',
       display: 'flex',
       alignItems: 'center',
     },
