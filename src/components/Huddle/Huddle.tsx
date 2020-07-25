@@ -11,7 +11,7 @@ const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     huddle: {
       overflow: 'visible',
-      // border: '5px dashed red',
+      border: '2px dashed grey',
       display: 'flex',
     },
   })

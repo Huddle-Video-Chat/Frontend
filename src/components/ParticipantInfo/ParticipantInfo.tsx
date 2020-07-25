@@ -113,7 +113,8 @@ export default function ParticipantInfo({ participant, onClick, isSelected, chil
             <ParticipantConnectionIndicator participant={participant} />
             {participant.identity}
           </h4>
-          <NetworkQualityLevel qualityLevel={networkQualityLevel} />
+          {/* removing network quailty indicator, needs to be done conditionally in the future */}
+          {/* <NetworkQualityLevel qualityLevel={networkQualityLevel} /> */}
         </div>
         <div>
           <AudioLevelIndicator audioTrack={audioTrack} background="white" />
