@@ -83,7 +83,7 @@ export default function Huddle({
   disableAudio,
 }: HuddleProps) {
   const classes = useStyles();
-  const adjustedHuddleDiameter = nextSquareRoot(participants.length) * 200;
+  const adjustedHuddleDiameter = nextSquareRoot(participants.length) * 180;
   // second argument is diameter of PARTICIPANT
   const center = { x: position.left - adjustedHuddleDiameter / 2, y: position.top - adjustedHuddleDiameter / 2 };
   let arrangementPositions = getArangementPositions(participants.length + 1, diameter, center);
@@ -99,15 +99,14 @@ export default function Huddle({
   const Positioner = styled('div')({
     // overflow: 'hidden',
     // debugging border
-    // border: '5px dotted green',
+    border: '5px dotted green',
     borderRadius: '50%',
     // backgroundColor: '#99aab5',
     width: adjustedHuddleDiameter,
     height: adjustedHuddleDiameter,
     position: 'absolute',
     overflow: 'hidden',
-    display: 'flex',
-    justifyContent: 'center',
+    justifyItems: 'center',
     alignItems: 'center',
     padding: '20px',
 

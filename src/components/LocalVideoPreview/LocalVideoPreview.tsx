@@ -14,6 +14,7 @@ const Container = styled('div')({
 
   display: 'flex',
   justifyContent: 'center',
+  alignItems: 'center',
 
   position: 'absolute',
 });

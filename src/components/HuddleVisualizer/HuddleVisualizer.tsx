@@ -99,21 +99,21 @@ export default function HuddleVisualizer({
 
   console.log(state);
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      const requestOptions = {
-        method: 'GET',
-        headers: { 'Content-Type': 'application/json' },
-      };
-      var url = 'https://huddle-video.herokuapp.com/room/state';
-      url += '?id=' + room.sid;
-      url += '&user_id=' + localParticipant.sid;
-      fetch(url, requestOptions)
-        .then(response => response.json())
-        .then(data => updateState(data));
-    }, 5000);
-    return () => clearInterval(interval);
-  }, []);
+  // useEffect(() => {
+  //   const interval = setInterval(() => {
+  //     const requestOptions = {
+  //       method: 'GET',
+  //       headers: { 'Content-Type': 'application/json' },
+  //     };
+  //     var url = 'https://huddle-video.herokuapp.com/room/state';
+  //     url += '?id=' + room.sid;
+  //     url += '&user_id=' + localParticipant.sid;
+  //     fetch(url, requestOptions)
+  //       .then(response => response.json())
+  //       .then(data => updateState(data));
+  //   }, 5000);
+  //   return () => clearInterval(interval);
+  // }, []);
 
   function updateState(data: any) {
     console.log(data);

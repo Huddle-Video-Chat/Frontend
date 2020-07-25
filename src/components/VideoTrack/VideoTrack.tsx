@@ -6,9 +6,10 @@ import { Track } from 'twilio-video';
 import './VideoTrack.css';
 
 const Video = styled('video')({
-  width: '100%',
-  maxHeight: '100%',
-  objectFit: 'contain',
+  width: '100% !important',
+  height: '73%',
+  objectFit: 'cover',
+  borderRadius: '100px',
 });
 
 interface VideoTrackProps {
@@ -60,7 +61,5 @@ export default function VideoTrack({ track, isLocal, priority, x, y }: VideoTrac
   );
   */
 
-  return (
-    <Video ref={ref} style={style} className="video"/>
-  )
+  return <Video ref={ref} style={style} className="video" />;
 }

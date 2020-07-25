@@ -53,7 +53,6 @@ const useStyles = makeStyles((theme: Theme) =>
       flexDirection: 'column',
       justifyContent: 'space-between',
       height: '100%',
-      padding: '0.4em',
       width: '100%',
       background: 'transparent',
     },

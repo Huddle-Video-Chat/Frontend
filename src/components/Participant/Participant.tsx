@@ -44,21 +44,20 @@ export default function Participant({
   const [hear, setHear] = useState(false);
 
   const Positioner = styled('div')({
-    overflow: 'hidden',
-    // border: '5px dotted blue',
-    borderRadius: '50%',
+    //overflow: 'hidden',
+    border: '2px dotted blue',
 
     // backgroundColor: '#99aab5',
 
     // hardcoded width and height
     width: '150px',
     height: '150px',
-
+    margin: '0px',
     objectFit: 'contain',
-
-    // left: 'auto !important',
-    // top: 'auto !important',
-    // position: 'absolute',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: '100px',
   });
 
   return (
