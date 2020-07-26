@@ -69,31 +69,22 @@ interface HuddleProps {
   huddleID: string;
   diameter: number;
   onClick: (huddleID: string) => void;
-  selectedParticipant: any;
   disableAudio: boolean;
 }
 
-export default function Huddle({
-  participants,
-  position,
-  huddleID,
-  diameter,
-  onClick,
-  selectedParticipant,
-  disableAudio,
-}: HuddleProps) {
+export default function Huddle({ participants, position, huddleID, diameter, onClick, disableAudio }: HuddleProps) {
   const classes = useStyles();
-  const adjustedHuddleDiameter = nextSquareRoot(participants.length) * 200
+  const adjustedHuddleDiameter = nextSquareRoot(participants.length) * 200;
   // second argument is diameter of PARTICIPANT
-  const center = {x: position.left - adjustedHuddleDiameter/2, y: position.top - adjustedHuddleDiameter/2}
+  const center = { x: position.left - adjustedHuddleDiameter / 2, y: position.top - adjustedHuddleDiameter / 2 };
   let arrangementPositions = getArangementPositions(participants.length + 1, diameter, center);
 
   const adjustedPosition = {
     left: position.left - adjustedHuddleDiameter / 2,
     top: position.top - adjustedHuddleDiameter / 2,
   };
-  
-  function onParticipantClick() { }
+
+  function onParticipantClick() {}
   // adjusting the center
 
   const Positioner = styled('div')({
@@ -113,10 +104,6 @@ export default function Huddle({
     gridTemplateColumns: 'repeat(2, 1fr)',
   });
 
-
-
-
-
   return (
     // testing to see if I can change render position of participant
 
@@ -129,7 +116,7 @@ export default function Huddle({
             <MemoParticipant
               key={participant.sid}
               participant={participant}
-              isSelected={selectedParticipant === participant}
+              isSelected={false}
               onClick={onParticipantClick}
               position={arrangedP}
               diameter={diameter}

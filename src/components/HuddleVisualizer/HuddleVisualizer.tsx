@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import Huddle from '../Huddle/Huddle';
 import { styled } from '@material-ui/core/styles';
 import { RemoteParticipant } from 'twilio-video';
+import useParticipants from '../../hooks/useParticipants/useParticipants';
+import useVideoContext from '../../hooks/useVideoContext/useVideoContext';
 
 const MyButton = styled('button')({
   background: 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)',
@@ -23,26 +25,23 @@ interface State {
 
 interface HuddleVisualizerProps {
   // position: object,
-  room: any;
-  localParticipant: any;
-  participants: RemoteParticipant[];
-  selectedParticipant: any;
+  // room: any;
+  // localParticipant: any;
+  // participants: RemoteParticipant[];
 }
 
 // Without styled containers or scroll container
-export default function HuddleVisualizer({
-  room,
-  localParticipant,
-  participants,
-  selectedParticipant,
-}: HuddleVisualizerProps) {
+export default function HuddleVisualizer({}: // room,
+// localParticipant,
+// participants,
+HuddleVisualizerProps) {
+  const participants: RemoteParticipant[] = useParticipants();
+  const { room } = useVideoContext();
+  const localParticipant = room.localParticipant;
+
   var stateStarter: {
     [key: string]: any;
   } = {};
-
-  // const [huddleState, setHuddleState] = useState(stateStarter);
-  // const [joined, setJoined] = useState(false);
-  // const [stateCounter, setStateCounter] = useState(-1);
 
   const [state, setState] = useState<State>({
     state: {},
@@ -111,37 +110,39 @@ export default function HuddleVisualizer({
       fetch(url, requestOptions)
         .then(response => response.json())
         .then(data => updateState(data));
-    }, 5000);
+    }, 1000);
     return () => clearInterval(interval);
-  }, []);
+  });
 
   function updateState(data: any) {
-    console.log(data);
-    var newState: {
-      [key: string]: any;
-    } = {};
-    participants.map(p => {
-      const huddleID: string = data.users[p.sid];
+    if (data.state_counter !== state.counter) {
+      console.log(data);
+      var newState: {
+        [key: string]: any;
+      } = {};
+      participants.map(p => {
+        const huddleID: string = data.users[p.sid];
+        if (newState[huddleID] === undefined) {
+          newState[huddleID] = [];
+        }
+        newState[huddleID].push(p);
+      });
+      const huddleID: string = data.huddle_id;
       if (newState[huddleID] === undefined) {
         newState[huddleID] = [];
       }
-      newState[huddleID].push(p);
-    });
-    const huddleID: string = data.huddle_id;
-    if (newState[huddleID] === undefined) {
-      newState[huddleID] = [];
+      newState[huddleID].push(localParticipant);
+
+      console.log(data.state_counter);
+      console.log(state.counter);
+
+      setState({
+        state: newState,
+        joined: true,
+        counter: data.state_counter,
+        huddle: parseInt(data.huddle_id),
+      });
     }
-    newState[huddleID].push(localParticipant);
-
-    console.log(data.state_counter);
-    console.log(state.counter);
-
-    setState({
-      state: newState,
-      joined: true,
-      counter: data.state_counter,
-      huddle: parseInt(data.huddle_id),
-    });
   }
 
   const huddlePositions = [
@@ -170,7 +171,6 @@ export default function HuddleVisualizer({
             huddleID={huddle}
             participants={huddleParticipants}
             position={tempPosition}
-            selectedParticipant={selectedParticipant}
           />
         );
       })}

@@ -23,10 +23,10 @@ import axios from 'axios';
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     container: {
-      backgroundImage: 'linear-gradient(to bottom, rgba(110,179,251,0.8), rgba(153,233,141, 0.8), rgba(255,255,255,0))',
+      backgroundImage: 'linear-gradient(to right, rgba(110,179,251,0.8), rgba(153,233,141, 0.8))',
       backgroundColor: 'transparent',
       boxShadow: 'none',
-      height: '10vh',
+      height: '8vh',
     },
     toolbar: {
       [theme.breakpoints.down('xs')]: {
