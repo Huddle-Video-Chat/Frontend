@@ -11,22 +11,16 @@ interface ParticipantStripProps {
 
 // Without styled containers or scroll container
 export default function ParticipantStrip({ zoomed }: ParticipantStripProps) {
-  const {
-    room: { localParticipant },
-  } = useVideoContext();
+  // const {
+  //   room: { localParticipant },
+  // } = useVideoContext();
   const participants: RemoteParticipant[] = useParticipants();
-  const [selectedParticipant, setSelectedParticipant] = useSelectedParticipant();
+  // const [selectedParticipant, setSelectedParticipant] = useSelectedParticipant();
   const { room } = useVideoContext();
   // const [huddleID, setHuddleID] = useState('');
 
-  console.log('hellow from praticpant strigp');
+  console.log('participants:');
+  console.log(participants);
 
-  return (
-    <HuddleVisualizer
-      localParticipant={localParticipant}
-      participants={participants}
-      selectedParticipant={selectedParticipant}
-      room={room}
-    />
-  );
+  return <HuddleVisualizer />;
 }

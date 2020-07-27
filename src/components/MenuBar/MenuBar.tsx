@@ -17,17 +17,16 @@ import { Typography } from '@material-ui/core';
 import FlipCameraButton from './FlipCameraButton/FlipCameraButton';
 import LocalAudioLevelIndicator from './DeviceSelector/LocalAudioLevelIndicator/LocalAudioLevelIndicator';
 import ToggleFullscreenButton from './ToggleFullScreenButton/ToggleFullScreenButton';
+import AddHuddleButton from './AddHuddleButton/AddHuddleButton';
 import Menu from './Menu/Menu';
-
-import axios from 'axios';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     container: {
-      backgroundImage: 'linear-gradient(to bottom, rgba(110,179,251,0.8), rgba(153,233,141, 0.8), rgba(255,255,255,0))',
+      backgroundImage: 'linear-gradient(to left, #F6AAB0, #A3B0F7)',
       backgroundColor: 'transparent',
       boxShadow: 'none',
-      height: '10vh',
+      height: '7vh',
     },
     toolbar: {
       [theme.breakpoints.down('xs')]: {
@@ -44,7 +43,7 @@ const useStyles = makeStyles((theme: Theme) =>
       flexWrap: 'wrap',
       alignItems: 'center',
       [theme.breakpoints.up('md')]: {
-        marginLeft: '2.2em',
+        marginLeft: '0em',
       },
     },
     textField: {
@@ -102,25 +101,6 @@ export default function MenuBar(huddleState: any) {
   // };
 
   const handleSubmit = () => {
-    // event.preventDefault();
-
-    // axios.post('https://huddle-video.herokuapp.com/room/join?first=andy&last=jiang&id=dasd&user_id=sd&username=da;sdf')
-    // .then(res => {
-    //   console.log(res)
-    // });
-
-    // axios({
-    //   method: 'post',
-    //   url:
-    //     'https://huddle-video.herokuapp.com/room/join?first=andy&last=jiang&id=dasd&user_id=sd&username=dasdf',
-    //   headers: {
-    //     'Access-Control-Allow-Origin': '*',
-    //   },
-    //   // responseType: 'json'
-    // }).then(function(response) {
-    //   // console.log(response);
-    // });
-
     getToken(name, roomName).then(token => connect(token));
   };
 
@@ -139,6 +119,7 @@ export default function MenuBar(huddleState: any) {
                   value={name}
                   onChange={handleNameChange}
                   margin="dense"
+                  variant="outlined"
                 />
               ) : (
                 <Typography className={classes.displayName} variant="body1">
