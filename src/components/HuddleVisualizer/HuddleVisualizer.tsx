@@ -192,7 +192,6 @@ export default function HuddleVisualizer({ }: // room,
   let num: number = 0;
 
   const [zoomed, setZoomed] = useState(false)
-
   function toggleZoom() {
     setZoomed(!zoomed)
   }

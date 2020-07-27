@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, JSXElementConstructor } from 'react';
 import ParticipantInfo from '../ParticipantInfo/ParticipantInfo';
 import ParticipantTracks from '../ParticipantTracks/ParticipantTracks';
 import { Participant as IParticipant } from 'twilio-video';
@@ -16,6 +16,41 @@ const useStyles = makeStyles((theme: Theme) =>
     },
   })
 );
+
+// trying different container styles, need to be able to pass more complex arguments for css
+// interface ContainerProps {
+//   diameter: number,
+//   border: boolean,
+//   style: object,
+//   onClick: () => void,
+//   contents: any,
+// }
+
+// function Container({diameter, border, style, onClick, contents} : ContainerProps) {
+  
+//   const Pos = styled('div')({
+//     // overflow: 'hidden',
+//     // debugging border
+//     border: border ? '3px solid #A4B0F7' : 'null',
+//     borderRadius: '50%',
+//     // backgroundColor: '#99aab5',
+//     width: diameter,
+//     height: diameter,
+//     position: 'absolute',
+//     overflow: 'hidden',
+//     justifyItems: 'center',
+//     alignItems: 'center',
+//     padding: '20px',
+  
+//     display: 'grid',
+//     gridTemplateColumns: 'repeat(2, 1fr)',
+//   });
+//   return (
+//     <Pos>
+//       {contents}
+//     </Pos>
+//   )
+// }
 
 function nextSquareRoot(num: number) {
   if (Math.floor(Math.sqrt(num)) === Math.sqrt(num)) {
@@ -75,7 +110,7 @@ interface HuddleProps {
 export default function Huddle({ participants, position, huddleID, participantDiameter, onClick, disableAudio }: HuddleProps) {
   const classes = useStyles();
   const adjustedHuddleDiameter = (nextSquareRoot(participants.length) + Math.sqrt(2) - 1) * participantDiameter;
-  
+
   const center = { x: position.left - adjustedHuddleDiameter / 2, y: position.top - adjustedHuddleDiameter / 2 };
   let arrangementPositions = getArangementPositions(participants.length + 1, participantDiameter, center);
 
@@ -90,7 +125,7 @@ export default function Huddle({ participants, position, huddleID, participantDi
   const Positioner = styled('div')({
     // overflow: 'hidden',
     // debugging border
-    border: '3px dotted black',
+    border: '3px solid #A4B0F7',
     borderRadius: '50%',
     // backgroundColor: '#99aab5',
     width: adjustedHuddleDiameter,
@@ -106,12 +141,10 @@ export default function Huddle({ participants, position, huddleID, participantDi
   });
 
   return (
-    // testing to see if I can change render position of participant
-
     <div onClick={() => onClick(huddleID)} className={classes.huddle}>
       <Positioner style={adjustedPosition} onClick={() => onClick(huddleID)}>
         {participants.map(participant => {
-          // adjusting for radius of circle
+          // position does nothing atm
           const arrangedP = arrangementPositions.shift();
           return (
             <MemoParticipant
@@ -128,4 +161,35 @@ export default function Huddle({ participants, position, huddleID, participantDi
       </Positioner>
     </div>
   );
+
+  // return (
+  //   // testing to see if I can change render position of participant
+
+  //   <div onClick={() => onClick(huddleID)} className={classes.huddle}>
+  //     {Container(
+  //       adjustedHuddleDiameter, 
+  //       true, 
+  //       adjustedPosition,
+  //       onClick(huddleID)
+        
+  //       participants.map(participant => {
+  //         // adjusting for radius of circle
+  //         const arrangedP = arrangementPositions.shift();
+  //         return (
+  //           <MemoParticipant
+  //             key={participant.sid}
+  //             participant={participant}
+  //             isSelected={false}
+  //             onClick={onParticipantClick}
+  //             position={arrangedP}
+  //             participantDiameter={participantDiameter}
+  //             disableAudio={disableAudio}
+  //           />
+  //         );
+  //       })
+
+  //       )}
+
+  //   </div>
+  // );
 }

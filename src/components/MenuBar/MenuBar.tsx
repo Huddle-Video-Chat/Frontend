@@ -147,7 +147,6 @@ export default function MenuBar(huddleState: any) {
           <h3>{roomName}</h3>
         )}
         <div className={classes.rightButtonContainer}>
-          <AddHuddleButton />
           <FlipCameraButton />
           <LocalAudioLevelIndicator />
           <ToggleFullscreenButton />
