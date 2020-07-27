@@ -16,6 +16,7 @@ import { Typography } from '@material-ui/core';
 import FlipCameraButton from './FlipCameraButton/FlipCameraButton';
 import LocalAudioLevelIndicator from './DeviceSelector/LocalAudioLevelIndicator/LocalAudioLevelIndicator';
 import ToggleFullscreenButton from './ToggleFullScreenButton/ToggleFullScreenButton';
+import AddHuddleButton from './AddHuddleButton/AddHuddleButton';
 import Menu from './Menu/Menu';
 
 import axios from 'axios';
@@ -165,6 +166,7 @@ export default function MenuBar(huddleState: any) {
           <h3>{roomName}</h3>
         )}
         <div className={classes.rightButtonContainer}>
+          <AddHuddleButton />
           <FlipCameraButton />
           <LocalAudioLevelIndicator />
           <ToggleFullscreenButton />

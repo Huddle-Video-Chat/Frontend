@@ -30,11 +30,7 @@ export default function Room() {
   return (
     <Outline>
       <Positioner style={{ left: 0, top: 0 }}>
-        <HuddleVisualizer
-        // localParticipant={room.localParticipant}
-        // participants={participants}
-        // room={room}
-        />
+        <HuddleVisualizer />
       </Positioner>
     </Outline>
   );
