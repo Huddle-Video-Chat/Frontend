@@ -21,7 +21,8 @@ const useStyles = makeStyles((theme: Theme) =>
       margin: theme.spacing(1),
       '&[disabled]': {
         color: 'rgba(225, 225, 225, 0.8)',
-        backgroundColor: 'rgba(175, 175, 175, 0.6);',
+        backgroundColor: '#F2F2F2 !important',
+        boxShadow: '3px 3px 7px rgba(0, 0, 0, 0.14), -2px -1px 3px rgba(255, 255, 255, 0.74) !important',
       },
     },
   })

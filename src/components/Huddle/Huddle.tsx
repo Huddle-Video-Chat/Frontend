@@ -105,7 +105,7 @@ export default function Huddle({
     width: adjustedHuddleDiameter,
     height: adjustedHuddleDiameter,
     position: 'absolute',
-    overflow: 'hidden',
+    // overflow: 'hidden',
     justifyItems: 'center',
     alignItems: 'center',
     padding: '20px',
