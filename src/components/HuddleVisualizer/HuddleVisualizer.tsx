@@ -67,18 +67,20 @@ HuddleVisualizerProps) {
   }
 
   async function addHuddle() {
-    console.log('Adding huddle...');
-    const requestOptions = {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-    };
+    if (Object.keys(state.state).length < 6) {
+      console.log('Adding huddle...');
+      const requestOptions = {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+      };
 
-    var url = 'https://huddle-video.herokuapp.com/huddle/create';
-    url += '?id=' + room.sid;
-    url += '&user_id=' + localParticipant.sid;
-    fetch(url, requestOptions)
-      .then(response => response.json())
-      .then(data => updateState(data));
+      var url = 'https://huddle-video.herokuapp.com/huddle/create';
+      url += '?id=' + room.sid;
+      url += '&user_id=' + localParticipant.sid;
+      fetch(url, requestOptions)
+        .then(response => response.json())
+        .then(data => updateState(data));
+    }
   }
 
   if (!state.joined) {
@@ -145,23 +147,62 @@ HuddleVisualizerProps) {
     }
   }
 
-  const huddlePositions = [
-    { left: 0, top: 0 },
-    { left: window.innerWidth / 4, top: window.innerHeight / 2 },
-    { left: (3 * window.innerWidth) / 4, top: window.innerHeight / 2 },
-    { left: window.innerWidth / 2, top: window.innerHeight / 4 },
-    { left: window.innerWidth / 2, top: (3 * window.innerHeight) / 4 },
+  interface Position {
+    left: number;
+    top: number;
+  }
+
+  const huddlePositions: Position[][] = [
+    [{ left: 1 / 2, top: 1 / 2 }],
+    [
+      { left: 1 / 4, top: 1 / 2 },
+      { left: 3 / 4, top: 1 / 2 },
+    ],
+    [
+      { left: 1 / 6, top: 1 / 2 },
+      { left: 1 / 2, top: 1 / 2 },
+      { left: 5 / 6, top: 1 / 2 },
+    ],
+    [
+      { left: 1 / 4, top: 1 / 4 },
+      { left: 3 / 4, top: 1 / 4 },
+      { left: 1 / 4, top: 3 / 4 },
+      { left: 3 / 4, top: 3 / 4 },
+    ],
+    [
+      { left: 1 / 4, top: 1 / 4 },
+      { left: 3 / 4, top: 1 / 4 },
+      { left: 1 / 4, top: 3 / 4 },
+      { left: 3 / 4, top: 3 / 4 },
+      { left: 1 / 2, top: 1 / 2 },
+    ],
+    [
+      { left: 1 / 6, top: 1 / 4 },
+      { left: 1 / 2, top: 1 / 4 },
+      { left: 5 / 6, top: 1 / 4 },
+      { left: 1 / 6, top: 3 / 4 },
+      { left: 1 / 2, top: 3 / 4 },
+      { left: 5 / 6, top: 3 / 4 },
+    ],
   ];
+
+  console.log(huddlePositions);
+
+  let num: number = 0;
 
   return (
     <>
       <MyButton onClick={addHuddle}>Add Huddle</MyButton>
       {Object.keys(state.state).map(huddle => {
-        var huddleParticipants: [] = state.state[huddle];
-        var tempPosition = huddlePositions[parseInt(huddle)];
-        if (!tempPosition) {
-          tempPosition = huddlePositions[1];
-        }
+        let huddleParticipants: [] = state.state[huddle];
+        // var tempPosition = huddlePositions[parseInt(huddle)];
+        // if (!tempPosition) {
+        //   tempPosition = huddlePositions[1];
+        // }
+
+        let pos = huddlePositions[Object.keys(state.state).length - 1][num++];
+
+        // num++;
 
         return (
           <Huddle
@@ -170,7 +211,7 @@ HuddleVisualizerProps) {
             diameter={150}
             huddleID={huddle}
             participants={huddleParticipants}
-            position={tempPosition}
+            position={pos}
           />
         );
       })}

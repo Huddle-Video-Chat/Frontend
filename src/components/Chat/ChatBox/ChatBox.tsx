@@ -97,7 +97,7 @@ export default function ChatBox({ closeChat }: ChatBoxProps) {
       fetch(url, requestOptions)
         .then(response => response.json())
         .then(data => setMessages(data));
-    }, 1000);
+    }, 2000);
     return () => clearInterval(interval);
   });
 
