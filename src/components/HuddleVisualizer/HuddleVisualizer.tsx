@@ -12,6 +12,7 @@ const MyButton = styled('button')({
   boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',
   color: 'white',
   height: 48,
+  width: 120,
   padding: '0 30px',
 
   position: 'absolute',
@@ -31,10 +32,10 @@ interface HuddleVisualizerProps {
 }
 
 // Without styled containers or scroll container
-export default function HuddleVisualizer({}: // room,
-// localParticipant,
-// participants,
-HuddleVisualizerProps) {
+export default function HuddleVisualizer({ }: // room,
+  // localParticipant,
+  // participants,
+  HuddleVisualizerProps) {
   const participants: RemoteParticipant[] = useParticipants();
   const { room } = useVideoContext();
   const localParticipant = room.localParticipant;
@@ -190,26 +191,30 @@ HuddleVisualizerProps) {
 
   let num: number = 0;
 
+  const [zoomed, setZoomed] = useState(false)
+
+  function toggleZoom() {
+    setZoomed(!zoomed)
+  }
+
+  const huddleList: any[] = zoomed ? [state.huddle] : Object.keys(state.state)
+  const participantDiameter: number = zoomed ? 300 : 150
+
   return (
     <>
-      <MyButton onClick={addHuddle}>Add Huddle</MyButton>
-      {Object.keys(state.state).map(huddle => {
-        let huddleParticipants: [] = state.state[huddle];
-        // var tempPosition = huddlePositions[parseInt(huddle)];
-        // if (!tempPosition) {
-        //   tempPosition = huddlePositions[1];
-        // }
+      <MyButton style={{left: 0}} onClick={toggleZoom}>{zoomed ? 'Zoom out' : 'Zoom in'}</MyButton>
+      {zoomed ? null : <MyButton style={{left: 120}} onClick={addHuddle}>Add Huddle</MyButton>}
+      {huddleList.map(huddleID => {
+        let huddleParticipants: [] = state.state[huddleID];
 
-        let pos = huddlePositions[Object.keys(state.state).length - 1][num++];
-
-        // num++;
+        let pos = huddlePositions[huddleList.length - 1][num++];
 
         return (
           <Huddle
             onClick={joinHuddle}
-            disableAudio={parseInt(huddle) !== state.huddle}
-            diameter={150}
-            huddleID={huddle}
+            disableAudio={parseInt(huddleID) !== state.huddle}
+            participantDiameter={participantDiameter}
+            huddleID={huddleID}
             participants={huddleParticipants}
             position={pos}
           />

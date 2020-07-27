@@ -67,17 +67,17 @@ interface HuddleProps {
   participants: IParticipant[];
   position: any;
   huddleID: string;
-  diameter: number;
+  participantDiameter: number;
   onClick: (huddleID: string) => void;
   disableAudio: boolean;
 }
 
-export default function Huddle({ participants, position, huddleID, diameter, onClick, disableAudio }: HuddleProps) {
+export default function Huddle({ participants, position, huddleID, participantDiameter, onClick, disableAudio }: HuddleProps) {
   const classes = useStyles();
-  const adjustedHuddleDiameter = nextSquareRoot(participants.length) * 180;
-  // second argument is diameter of PARTICIPANT
+  const adjustedHuddleDiameter = (nextSquareRoot(participants.length) + Math.sqrt(2) - 1) * participantDiameter;
+  
   const center = { x: position.left - adjustedHuddleDiameter / 2, y: position.top - adjustedHuddleDiameter / 2 };
-  let arrangementPositions = getArangementPositions(participants.length + 1, diameter, center);
+  let arrangementPositions = getArangementPositions(participants.length + 1, participantDiameter, center);
 
   const adjustedPosition = {
     left: window.innerWidth * position.left - adjustedHuddleDiameter / 2,
@@ -90,7 +90,7 @@ export default function Huddle({ participants, position, huddleID, diameter, onC
   const Positioner = styled('div')({
     // overflow: 'hidden',
     // debugging border
-    // border: '5px dotted green',
+    border: '3px dotted black',
     borderRadius: '50%',
     // backgroundColor: '#99aab5',
     width: adjustedHuddleDiameter,
@@ -120,7 +120,7 @@ export default function Huddle({ participants, position, huddleID, diameter, onC
               isSelected={false}
               onClick={onParticipantClick}
               position={arrangedP}
-              diameter={diameter}
+              participantDiameter={participantDiameter}
               disableAudio={disableAudio}
             />
           );

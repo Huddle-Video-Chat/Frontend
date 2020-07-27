@@ -1,5 +1,5 @@
 import { styled } from '@material-ui/core/styles';
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { RemoteParticipant } from 'twilio-video';
 import useParticipants from '../../hooks/useParticipants/useParticipants';
 import useVideoContext from '../../hooks/useVideoContext/useVideoContext';
@@ -19,6 +19,13 @@ const Outline = styled('div')({
 const Positioner = styled('div')({
   position: 'absolute',
 });
+
+interface State {
+  state: any;
+  joined: boolean;
+  counter: number;
+  huddle: number;
+}
 
 export default function Room() {
   // const participants: RemoteParticipant[] = useParticipants();

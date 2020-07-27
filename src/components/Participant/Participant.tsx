@@ -5,15 +5,15 @@ import { Participant as IParticipant } from 'twilio-video';
 
 import { styled } from '@material-ui/core/styles';
 
-interface ParticipantProps {
-  participant: IParticipant;
-  disableAudio?: boolean;
-  enableScreenShare?: boolean;
-  onClick: () => void;
-  isSelected: boolean;
-  position: object;
-  diameter: number;
-}
+// interface ParticipantProps {
+//   participant: IParticipant;
+//   disableAudio?: boolean;
+//   enableScreenShare?: boolean;
+//   onClick: () => void;
+//   isSelected: boolean;
+//   position: object;
+//   diameter: number;
+// }
 
 interface ParticipantProps {
   participant: IParticipant;
@@ -22,7 +22,7 @@ interface ParticipantProps {
   onClick: () => void;
   isSelected: boolean;
   position: object;
-  diameter: number;
+  participantDiameter: number;
   huddleID?: number;
 }
 
@@ -33,7 +33,7 @@ export default function Participant({
   onClick,
   isSelected,
   position,
-  diameter,
+  participantDiameter,
   huddleID,
 }: ParticipantProps) {
   // setting disableAudio to hear, clicking button toggles setHear
@@ -50,14 +50,14 @@ export default function Participant({
     // backgroundColor: '#99aab5',
 
     // hardcoded width and height
-    width: '150px',
-    height: '150px',
+    width: participantDiameter.toString() + 'px',
+    height: participantDiameter.toString() + 'px',
     margin: '0px',
     objectFit: 'contain',
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    borderRadius: '100px',
+    borderRadius: '50%',
   });
 
   return (
