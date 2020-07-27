@@ -45,7 +45,7 @@ export default function Participant({
 
   const Positioner = styled('div')({
     //overflow: 'hidden',
-    border: '2px dotted blue',
+    // border: '2px dotted blue',
 
     // backgroundColor: '#99aab5',
 
@@ -65,13 +65,9 @@ export default function Participant({
 
     <Positioner style={position}>
       {/* <button onClick={clickButton}>{hear ? 'i am shut' : 'shut up'}</button> */}
-      <ParticipantInfo participant={participant} onClick={onClick} isSelected={isSelected}>
-        <ParticipantTracks
-          participant={participant}
-          disableAudio={disableAudio}
-          enableScreenShare={enableScreenShare}
-        />
-      </ParticipantInfo>
+      {/* <ParticipantInfo participant={participant} onClick={onClick} isSelected={isSelected}> */}
+      <ParticipantTracks participant={participant} disableAudio={disableAudio} enableScreenShare={enableScreenShare} />
+      {/* </ParticipantInfo> */}
     </Positioner>
   );
 }

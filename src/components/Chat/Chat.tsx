@@ -7,7 +7,7 @@ import ToggleChatButton from './ToggleChatButton/ToggleChatButton';
 import ChatBox from './ChatBox/ChatBox';
 
 export default function Chat() {
-  const [chatOpen, setChatOpen] = useState(true);
+  const [chatOpen, setChatOpen] = useState(false);
 
   function openChat() {
     setChatOpen(true);

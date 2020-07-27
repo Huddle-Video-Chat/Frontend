@@ -13,7 +13,7 @@ import useRoomState from './hooks/useRoomState/useRoomState';
 
 const Container = styled('div')({
   display: 'grid',
-  backgroundColor: 'white',
+  background: 'white',
   gridTemplateRows: 'auto 1fr',
 });
 
@@ -34,7 +34,14 @@ export default function App() {
     <Container style={{ height }}>
       <MenuBar />
       <Main>
-        {roomState === 'disconnected' ? <LocalVideoPreview /> : <Room />}
+        {roomState === 'disconnected' ? (
+          <LocalVideoPreview />
+        ) : (
+          <>
+            <Room />
+            <Chat />
+          </>
+        )}
         <Controls />
         {/* <Chat /> */}
       </Main>

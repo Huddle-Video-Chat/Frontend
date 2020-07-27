@@ -12,7 +12,7 @@ const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     fab: {
       margin: theme.spacing(1),
-      color: '#86D1BC',
+      color: '#CDAED4',
       backgroundColor: '#F2F2F2',
     },
   })

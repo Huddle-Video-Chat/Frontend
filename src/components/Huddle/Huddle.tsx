@@ -80,8 +80,8 @@ export default function Huddle({ participants, position, huddleID, diameter, onC
   let arrangementPositions = getArangementPositions(participants.length + 1, diameter, center);
 
   const adjustedPosition = {
-    left: position.left - adjustedHuddleDiameter / 2,
-    top: position.top - adjustedHuddleDiameter / 2,
+    left: window.innerWidth * position.left - adjustedHuddleDiameter / 2,
+    top: window.innerHeight * position.top - adjustedHuddleDiameter / 2,
   };
 
   function onParticipantClick() {}
@@ -90,7 +90,7 @@ export default function Huddle({ participants, position, huddleID, diameter, onC
   const Positioner = styled('div')({
     // overflow: 'hidden',
     // debugging border
-    border: '5px dotted green',
+    // border: '5px dotted green',
     borderRadius: '50%',
     // backgroundColor: '#99aab5',
     width: adjustedHuddleDiameter,

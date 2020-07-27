@@ -1,8 +1,9 @@
-import React, { useCallback, useRef, useState, useEffect } from 'react';
+import React, { ChangeEvent, FormEvent, useRef, useState, useEffect } from 'react';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import Close from '@material-ui/icons/Close';
 import { Fab, Button } from '@material-ui/core';
 import TextField from '@material-ui/core/TextField';
+import useVideoContext from '../../../hooks/useVideoContext/useVideoContext';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -11,7 +12,7 @@ const useStyles = makeStyles((theme: Theme) =>
       right: '7.5%',
       transform: 'translate(50%, 30px)',
       top: '3%',
-      backgroundColor: '#86D1BC',
+      backgroundColor: '#A3B0F7',
       width: '15vw',
       height: '94vh',
       display: 'flex',
@@ -29,15 +30,15 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     closeIcon: {},
     title: {
-      flexGrow: 10,
+      flexGrow: 3,
       alignSelf: 'center',
     },
     messageListContainer: {
-      flexGrow: 80,
+      flexGrow: 94,
       overflow: 'scroll',
     },
     senderContainer: {
-      flexGrow: 10,
+      flexGrow: 3,
     },
     messageContainer: {
       display: 'flex',
@@ -70,30 +71,61 @@ const useStyles = makeStyles((theme: Theme) =>
 interface ChatBoxProps {
   closeChat: () => void;
 }
+interface Chat {
+  username: string;
+  body: string;
+}
 
 export default function ChatBox({ closeChat }: ChatBoxProps) {
+  const { room } = useVideoContext();
+  const localParticipant = room.localParticipant;
+
   const classes = useStyles();
-  const body =
-    'This is the shorthand for flex-grow, flex-shrink and flex-basis combined. The second and third parameters (flex-shrink and flex-basis) are optional. The default is 0 1 auto, but if you set it with a single number value, it’s like 1 0.';
-  const [messages, setMessages] = useState([
-    { username: 'andyjiang', body: body },
-    { username: 'andyjiang', body: body },
-    { username: 'albert', body: body },
-    { username: 'andyjiang', body: body },
-    { username: 'andyjiang', body: body },
-    { username: 'andyjiang', body: body },
-    { username: 'andyjiang', body: body },
-    { username: 'andyjiang', body: body },
-    { username: 'andyjiang', body: body },
-    { username: 'andyjiang', body: body },
-    { username: 'andyjiang', body: body },
-  ]);
+  const [messages, setMessages] = useState<Chat[]>([]);
+  const [body, setBody] = useState<string>('');
 
   const messagesEndRef = useRef(document.createElement('div'));
 
   useEffect(() => {
-    messagesEndRef.current.scrollIntoView({ behavior: 'smooth' });
+    const interval = setInterval(() => {
+      const requestOptions = {
+        method: 'GET',
+        headers: { 'Content-Type': 'application/json' },
+      };
+      var url = 'https://huddle-video.herokuapp.com/messages/get';
+      url += '?id=' + room.sid;
+      fetch(url, requestOptions)
+        .then(response => response.json())
+        .then(data => setMessages(data));
+    }, 2000);
+    return () => clearInterval(interval);
   });
+
+  // useEffect(() => {
+  //   messagesEndRef.current.scrollIntoView({ behavior: 'smooth' });
+  // });
+
+  const handleSubmit = (e: any) => {
+    if (e.keyCode == 13) {
+      const requestOptions = {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+      };
+      var url = 'https://huddle-video.herokuapp.com/messages/send';
+      url += '?id=' + room.sid;
+      url += '&username=' + localParticipant.identity;
+      url += '&body=' + body;
+      fetch(url, requestOptions)
+        .then(response => response.json())
+        .then(data => setMessages(data));
+
+      setBody('');
+    }
+  };
+
+  const handleNameChange = (event: ChangeEvent<HTMLInputElement>) => {
+    setBody(event.target.value);
+  };
 
   return (
     <div className={classes.container}>
@@ -118,14 +150,17 @@ export default function ChatBox({ closeChat }: ChatBoxProps) {
         ))}
       </div>
       <div className={classes.senderContainer}>
+        {/* <form onSubmit={handleSubmit}> */}
         <TextField
           id="menu-name"
           label="Message"
           // className={classes.textField}
-          // value={name}
-          // onChange={handleNameChange}
+          value={body}
+          onKeyDown={handleSubmit}
+          onChange={handleNameChange}
           margin="dense"
         />
+        {/* </form> */}
       </div>
     </div>
   );

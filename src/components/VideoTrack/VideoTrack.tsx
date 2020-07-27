@@ -7,7 +7,7 @@ import './VideoTrack.css';
 
 const Video = styled('video')({
   width: '100% !important',
-  height: '73%',
+  height: '100%',
   objectFit: 'cover',
   borderRadius: '100px',
 });
