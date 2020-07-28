@@ -39,6 +39,13 @@ HuddleVisualizerProps) {
   const { room } = useVideoContext();
   const localParticipant = room.localParticipant;
 
+  console.log('participants');
+  console.log(participants);
+  console.log('room');
+  console.log(room);
+
+  console.log('Huddle Visualizer');
+
   var stateStarter: {
     [key: string]: any;
   } = {};
@@ -68,7 +75,7 @@ HuddleVisualizerProps) {
 
   async function addHuddle() {
     if (Object.keys(state.state).length < 6) {
-      console.log('Adding huddle...');
+      console.log('Creating huddle...');
       const requestOptions = {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -98,8 +105,6 @@ HuddleVisualizerProps) {
       .then(data => updateState(data));
   }
 
-  console.log(state);
-
   useEffect(() => {
     const interval = setInterval(() => {
       const requestOptions = {
@@ -118,7 +123,6 @@ HuddleVisualizerProps) {
 
   function updateState(data: any) {
     if (data.state_counter !== state.counter) {
-      console.log(data);
       var newState: {
         [key: string]: any;
       } = {};
@@ -134,9 +138,6 @@ HuddleVisualizerProps) {
         newState[huddleID] = [];
       }
       newState[huddleID].push(localParticipant);
-
-      console.log(data.state_counter);
-      console.log(state.counter);
 
       setState({
         state: newState,
@@ -185,8 +186,6 @@ HuddleVisualizerProps) {
       { left: 5 / 6, top: 3 / 4 },
     ],
   ];
-
-  console.log(huddlePositions);
 
   let num: number = 0;
 

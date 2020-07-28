@@ -1,8 +1,5 @@
 import { styled } from '@material-ui/core/styles';
 import React from 'react';
-import { RemoteParticipant } from 'twilio-video';
-import useParticipants from '../../hooks/useParticipants/useParticipants';
-import useVideoContext from '../../hooks/useVideoContext/useVideoContext';
 import HuddleVisualizer from '../HuddleVisualizer/HuddleVisualizer';
 
 const Outline = styled('div')({
@@ -26,6 +23,8 @@ export default function Room() {
 
   // console.log('participants:');
   // console.log(participants);
+
+  console.log('Room');
 
   return (
     <Outline>
