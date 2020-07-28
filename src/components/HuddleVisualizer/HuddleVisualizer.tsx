@@ -32,10 +32,10 @@ interface HuddleVisualizerProps {
 }
 
 // Without styled containers or scroll container
-export default function HuddleVisualizer({ }: // room,
-  // localParticipant,
-  // participants,
-  HuddleVisualizerProps) {
+export default function HuddleVisualizer({}: // room,
+// localParticipant,
+// participants,
+HuddleVisualizerProps) {
   const participants: RemoteParticipant[] = useParticipants();
   const { room } = useVideoContext();
   const localParticipant = room.localParticipant;
@@ -191,18 +191,24 @@ export default function HuddleVisualizer({ }: // room,
 
   let num: number = 0;
 
-  const [zoomed, setZoomed] = useState(false)
+  const [zoomed, setZoomed] = useState(false);
   function toggleZoom() {
-    setZoomed(!zoomed)
+    setZoomed(!zoomed);
   }
 
-  const huddleList: any[] = zoomed ? [state.huddle] : Object.keys(state.state)
-  const participantDiameter: number = zoomed ? 300 : 150
+  const huddleList: any[] = zoomed ? [state.huddle] : Object.keys(state.state);
+  const participantDiameter: number = zoomed ? 300 : 150;
 
   return (
     <>
-      <MyButton style={{left: 0}} onClick={toggleZoom}>{zoomed ? 'Zoom out' : 'Zoom in'}</MyButton>
-      {zoomed ? null : <MyButton style={{left: 120}} onClick={addHuddle}>Add Huddle</MyButton>}
+      <MyButton style={{ left: 0 }} onClick={toggleZoom}>
+        {zoomed ? 'Zoom out' : 'Zoom in'}
+      </MyButton>
+      {zoomed ? null : (
+        <MyButton style={{ left: 120 }} onClick={addHuddle}>
+          Add Huddle
+        </MyButton>
+      )}
       {huddleList.map(huddleID => {
         let huddleParticipants: [] = state.state[huddleID];
 

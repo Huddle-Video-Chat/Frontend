@@ -1,17 +1,16 @@
 import React from 'react';
-import useRoomState from '../../../hooks/useRoomState/useRoomState'
-
+import useRoomState from '../../../hooks/useRoomState/useRoomState';
 
 export default function AddHuddleButton() {
-    const roomState = useRoomState();
+  const roomState = useRoomState();
 
-    return (
+  return (
+    <>
+      {roomState !== 'disconnected' && (
         <>
-            {roomState !== 'disconnected' && (
-                <>
-                    <button>add huddle</button>
-                </>
-            )}
+          <button>add huddle</button>
         </>
-    );
+      )}
+    </>
+  );
 }

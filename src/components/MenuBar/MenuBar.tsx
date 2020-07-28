@@ -9,6 +9,7 @@ import Toolbar from '@material-ui/core/Toolbar';
 
 import { useAppState } from '../../state';
 import { useParams } from 'react-router-dom';
+import useRoomName from '../../hooks/useRoomName/useRoomName';
 import useRoomState from '../../hooks/useRoomState/useRoomState';
 import useVideoContext from '../../hooks/useVideoContext/useVideoContext';
 import { Typography } from '@material-ui/core';
@@ -67,29 +68,37 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
+export function getRoomName() {
+  const match = window.location.search.match(/roomName=(.*)&?/);
+  const roomName = match ? match[1] : window.sessionStorage.getItem('roomName');
+  return roomName;
+}
+
 export default function MenuBar(huddleState: any) {
   const classes = useStyles();
   const { URLRoomName } = useParams();
   const { user, getToken, isFetching } = useAppState();
   const { isConnecting, connect, isAcquiringLocalTracks } = useVideoContext();
   const roomState = useRoomState();
+  const passedRoomName = getRoomName();
 
   const [name, setName] = useState<string>(user?.displayName || '');
-  const [roomName, setRoomName] = useState<string>('');
-
+  const [roomName, setRoomName] = useState<string>('demo');
   useEffect(() => {
-    if (URLRoomName) {
-      setRoomName(URLRoomName);
+    console.log(passedRoomName);
+    console.log(roomName);
+    if (roomName) {
+      setRoomName(roomName);
     }
-  }, [URLRoomName]);
+  }, [roomName]);
 
   const handleNameChange = (event: ChangeEvent<HTMLInputElement>) => {
     setName(event.target.value);
   };
 
-  const handleRoomNameChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setRoomName(event.target.value);
-  };
+  // const handleRoomNameChange = (event: ChangeEvent<HTMLInputElement>) => {
+  //   setRoomName(event.target.value);
+  // };
 
   const handleSubmit = () => {
     getToken(name, roomName).then(token => connect(token));
@@ -117,7 +126,7 @@ export default function MenuBar(huddleState: any) {
                   {user.displayName}
                 </Typography>
               )}
-              <TextField
+              {/* <TextField
                 id="menu-room"
                 label="Room"
                 className={classes.textField}
@@ -125,8 +134,7 @@ export default function MenuBar(huddleState: any) {
                 value={roomName}
                 onChange={handleRoomNameChange}
                 margin="dense"
-                variant="outlined"
-              />
+              /> */}
               <Button
                 className={classes.joinButton}
                 type="submit"

@@ -20,8 +20,9 @@ const useStyles = makeStyles((theme: Theme) =>
     fab: {
       margin: theme.spacing(1),
       '&[disabled]': {
-        color: '#CDAED4',
-        backgroundColor: '#F2F2F2',
+        color: 'rgba(225, 225, 225, 0.8)',
+        backgroundColor: '#F2F2F2 !important',
+        boxShadow: '3px 3px 7px rgba(0, 0, 0, 0.14), -2px -1px 3px rgba(255, 255, 255, 0.74) !important',
       },
     },
   })

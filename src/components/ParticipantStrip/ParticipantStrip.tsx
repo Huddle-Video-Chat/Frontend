@@ -22,7 +22,5 @@ export default function ParticipantStrip({ zoomed }: ParticipantStripProps) {
   console.log('participants:');
   console.log(participants);
 
-  return (
-    <HuddleVisualizer />
-  );
+  return <HuddleVisualizer />;
 }

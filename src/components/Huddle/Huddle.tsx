@@ -27,7 +27,7 @@ const useStyles = makeStyles((theme: Theme) =>
 // }
 
 // function Container({diameter, border, style, onClick, contents} : ContainerProps) {
-  
+
 //   const Pos = styled('div')({
 //     // overflow: 'hidden',
 //     // debugging border
@@ -41,7 +41,7 @@ const useStyles = makeStyles((theme: Theme) =>
 //     justifyItems: 'center',
 //     alignItems: 'center',
 //     padding: '20px',
-  
+
 //     display: 'grid',
 //     gridTemplateColumns: 'repeat(2, 1fr)',
 //   });
@@ -107,7 +107,14 @@ interface HuddleProps {
   disableAudio: boolean;
 }
 
-export default function Huddle({ participants, position, huddleID, participantDiameter, onClick, disableAudio }: HuddleProps) {
+export default function Huddle({
+  participants,
+  position,
+  huddleID,
+  participantDiameter,
+  onClick,
+  disableAudio,
+}: HuddleProps) {
   const classes = useStyles();
   const adjustedHuddleDiameter = (nextSquareRoot(participants.length) + Math.sqrt(2) - 1) * participantDiameter;
 
@@ -131,7 +138,7 @@ export default function Huddle({ participants, position, huddleID, participantDi
     width: adjustedHuddleDiameter,
     height: adjustedHuddleDiameter,
     position: 'absolute',
-    overflow: 'hidden',
+    // overflow: 'hidden',
     justifyItems: 'center',
     alignItems: 'center',
     padding: '20px',
@@ -167,11 +174,11 @@ export default function Huddle({ participants, position, huddleID, participantDi
 
   //   <div onClick={() => onClick(huddleID)} className={classes.huddle}>
   //     {Container(
-  //       adjustedHuddleDiameter, 
-  //       true, 
+  //       adjustedHuddleDiameter,
+  //       true,
   //       adjustedPosition,
   //       onClick(huddleID)
-        
+
   //       participants.map(participant => {
   //         // adjusting for radius of circle
   //         const arrangedP = arrangementPositions.shift();
