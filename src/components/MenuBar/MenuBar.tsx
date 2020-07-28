@@ -26,7 +26,9 @@ const useStyles = makeStyles((theme: Theme) =>
       backgroundImage: 'linear-gradient(to left, #F6AAB0, #A3B0F7)',
       backgroundColor: 'transparent',
       boxShadow: 'none',
-      height: '7vh',
+      height: '9vh',
+      display: 'flex',
+      justifyContent: 'center',
     },
     toolbar: {
       [theme.breakpoints.down('xs')]: {
