@@ -22,11 +22,5 @@ export default function ParticipantStrip({ zoomed }: ParticipantStripProps) {
   console.log('participants:');
   console.log(participants);
 
-  return (
-    <HuddleVisualizer
-    // localParticipant={room.localParticipant}
-    // participants={participants}
-    // room={room}
-    />
-  );
+  return <HuddleVisualizer />;
 }
