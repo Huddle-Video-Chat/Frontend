@@ -38,9 +38,9 @@ export default function HuddleVisualizer({ }: // room,
   // localParticipant,
   // participants,
   HuddleVisualizerProps) {
-  const participants: RemoteParticipant[] = useParticipants();
-  const { room } = useVideoContext();
-  const localParticipant = room.localParticipant;
+  // const participants: RemoteParticipant[] = useParticipants();
+  // const { room } = useVideoContext();
+  // const localParticipant = room.localParticipant;
 
   const mapping  = useAPI();
   const state = mapping.state

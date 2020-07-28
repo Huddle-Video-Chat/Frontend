@@ -57,8 +57,8 @@ export default function useAPI() {
             }
             newState[huddleID].push(localParticipant);
 
-            console.log(data.state_counter);
-            console.log(state.counter);
+            console.log('new state...')
+            console.log(newState);
 
 
             setState({
@@ -121,5 +121,24 @@ export default function useAPI() {
         }
     }
 
-    return {state: state, joinHuddle: joinHuddle, addHuddle: addHuddle}
+    async function deleteUser() {
+        const requestOptions = {
+            method: 'DELETE',
+            headers: { 'Content-Type': 'application/json' },
+        };
+
+        var url = 'https://huddle-video.herokuapp.com/room/leave';
+        url += '?id=' + room.sid;
+        url += '&user_id=' + localParticipant.sid;
+        fetch(url, requestOptions);
+    }
+
+    return {
+        room: room,
+        state: state, 
+        localParticipant: localParticipant,
+        joinHuddle: joinHuddle, 
+        addHuddle: addHuddle, 
+        deleteUser: deleteUser, 
+    }
 }
