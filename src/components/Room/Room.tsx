@@ -31,9 +31,6 @@ export default function Room() {
   // const participants: RemoteParticipant[] = useParticipants();
   // const { room } = useVideoContext();
 
-  // console.log('participants:');
-  // console.log(participants);
-
   return (
     <Outline>
       <Positioner style={{ left: 0, top: 0 }}>
