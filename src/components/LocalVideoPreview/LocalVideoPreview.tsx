@@ -7,8 +7,8 @@ import { styled } from '@material-ui/core/styles';
 const Container = styled('div')({
   overflow: 'hidden',
   borderRadius: '50%',
-  width: '400px',
-  height: '400px',
+  width: '300px',
+  height: '300px',
   background: 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)',
 
   display: 'flex',
@@ -25,7 +25,7 @@ export default function LocalVideoPreview() {
 
   // Hardcoded -250 for radius
   return videoTrack ? (
-    <Container style={{ left: window.innerWidth / 2 - 200, top: window.innerHeight / 2 - 200 }}>
+    <Container style={{ left: window.innerWidth / 2 - 150, top: window.innerHeight / 2 - 150 }}>
       <VideoTrack track={videoTrack} isLocal />
     </Container>
   ) : null;

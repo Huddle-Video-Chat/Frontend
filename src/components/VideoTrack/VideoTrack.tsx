@@ -9,7 +9,7 @@ const Video = styled('video')({
   width: '100% !important',
   height: '100%',
   objectFit: 'cover',
-  borderRadius: '100px',
+  borderRadius: '50%',
 });
 
 interface VideoTrackProps {

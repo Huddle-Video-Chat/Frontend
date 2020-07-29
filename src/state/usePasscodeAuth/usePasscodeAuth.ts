@@ -2,7 +2,7 @@ import { useCallback, useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 
 export function getPasscode() {
-  const match = window.location.search.match(/passcode=(.*)&?/);
+  const match = window.location.search.match(/passcode=([0-9]*)&?/);
   const passcode = match ? match[1] : window.sessionStorage.getItem('passcode');
   return passcode;
 }
@@ -16,7 +16,6 @@ export function fetchToken(name: string, room: string, passcode: string) {
     body: JSON.stringify({ user_identity: name, room_name: room, passcode }),
   });
 }
-
 export function verifyPasscode(passcode: string) {
   return fetchToken('temp-name', 'temp-room', passcode).then(async res => {
     const jsonResponse = await res.json();
@@ -29,7 +28,6 @@ export function verifyPasscode(passcode: string) {
     }
   });
 }
-
 export function getErrorMessage(message: string) {
   switch (message) {
     case 'passcode incorrect':
@@ -66,7 +64,6 @@ export default function usePasscodeAuth() {
 
   useEffect(() => {
     const passcode = getPasscode();
-
     if (passcode) {
       verifyPasscode(passcode)
         .then(verification => {

@@ -116,7 +116,7 @@ export default function Huddle({
   disableAudio,
 }: HuddleProps) {
   const classes = useStyles();
-  const adjustedHuddleDiameter = (nextSquareRoot(participants.length) + Math.sqrt(2) - 1) * participantDiameter;
+  const adjustedHuddleDiameter = (nextSquareRoot(participants.length) + Math.sqrt(2) - 1) * participantDiameter * 1.5;
 
   const center = { x: position.left - adjustedHuddleDiameter / 2, y: position.top - adjustedHuddleDiameter / 2 };
   let arrangementPositions = getArangementPositions(participants.length + 1, participantDiameter, center);
