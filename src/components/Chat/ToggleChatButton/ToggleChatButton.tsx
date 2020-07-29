@@ -10,10 +10,11 @@ const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     fab: {
       margin: theme.spacing(1),
-      color: 'white',
-      backgroundColor: '#A3B0F7',
-      height: '50px',
-      width: '50px',
+      color: '#A3B0F7',
+      backgroundColor: '#f2f2f2 !important',
+      height: '40px',
+      width: '40px',
+      boxShadow: '3px 3px 7px rgba(0, 0, 0, 0.14), -2px -1px 3px rgba(255, 255, 255, 0.74) !important',
     },
     container: {
       display: 'flex',

@@ -9,7 +9,6 @@ const Outline = styled('div')({
   overflow: 'visible',
 
   background: '#F7F7F7',
-  // border: '5px dashed green',
   boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',
 });
 
@@ -25,12 +24,6 @@ interface State {
 }
 
 export default function Room() {
-  // const participants: RemoteParticipant[] = useParticipants();
-  // const { room } = useVideoContext();
-
-  // console.log('participants:');
-  // console.log(participants);
-
   console.log('Room');
 
   return (

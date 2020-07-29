@@ -26,7 +26,9 @@ const useStyles = makeStyles((theme: Theme) =>
       backgroundImage: 'linear-gradient(to left, #F6AAB0, #A3B0F7)',
       backgroundColor: 'transparent',
       boxShadow: 'none',
-      height: '7vh',
+      height: '60px',
+      display: 'flex',
+      justifyContent: 'center',
     },
     toolbar: {
       [theme.breakpoints.down('xs')]: {
@@ -80,12 +82,12 @@ export default function MenuBar(huddleState: any) {
   const { user, getToken, isFetching } = useAppState();
   const { isConnecting, connect, isAcquiringLocalTracks } = useVideoContext();
   const roomState = useRoomState();
-  const passedRoomName = getRoomName();
+  // const passedRoomName = useRoomName();
 
   const [name, setName] = useState<string>(user?.displayName || '');
-  const [roomName, setRoomName] = useState<string>('demo');
+  const [roomName, setRoomName] = useState<string>(useRoomName());
+
   useEffect(() => {
-    console.log(passedRoomName);
     console.log(roomName);
     if (roomName) {
       setRoomName(roomName);
