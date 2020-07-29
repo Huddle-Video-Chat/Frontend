@@ -60,6 +60,7 @@ interface HuddleProps {
   participantDiameter: number;
   onClick: (huddleID: string) => void;
   disableAudio: boolean;
+  zoomed: boolean;
 }
 
 export default function Huddle({
@@ -69,9 +70,12 @@ export default function Huddle({
   participantDiameter,
   onClick,
   disableAudio,
+  zoomed,
 }: HuddleProps) {
   const classes = useStyles();
   const adjustedHuddleDiameter = (nextSquareRoot(participants.length) + Math.sqrt(2) - 1) * participantDiameter * 1.5;
+  const gridTemplateColumns = zoomed ? 'repeat(' + Math.min(4, participants.length) + ', 1fr)' : 'repeat(2, 1fr)'
+  const border = zoomed ? 'null' : '3px solid #A4B0F7'
 
   const center = { x: position.left - adjustedHuddleDiameter / 2, y: position.top - adjustedHuddleDiameter / 2 };
   let arrangementPositions = getArrangementPositions(participants.length + 1, participantDiameter, center);
@@ -87,7 +91,7 @@ export default function Huddle({
   const Positioner = styled('div')({
     // overflow: 'hidden',
     // debugging border
-    border: '3px solid #A4B0F7',
+    border: border,
     borderRadius: '50%',
     // backgroundColor: '#99aab5',
     width: adjustedHuddleDiameter,
@@ -99,7 +103,7 @@ export default function Huddle({
     padding: '20px',
 
     display: 'grid',
-    gridTemplateColumns: 'repeat(2, 1fr)',
+    gridTemplateColumns: gridTemplateColumns,
   });
 
   return (
@@ -124,34 +128,4 @@ export default function Huddle({
     </div>
   );
 
-  // return (
-  //   // testing to see if I can change render position of participant
-
-  //   <div onClick={() => onClick(huddleID)} className={classes.huddle}>
-  //     {Container(
-  //       adjustedHuddleDiameter,
-  //       true,
-  //       adjustedPosition,
-  //       onClick(huddleID)
-
-  //       participants.map(participant => {
-  //         // adjusting for radius of circle
-  //         const arrangedP = arrangementPositions.shift();
-  //         return (
-  //           <MemoParticipant
-  //             key={participant.sid}
-  //             participant={participant}
-  //             isSelected={false}
-  //             onClick={onParticipantClick}
-  //             position={arrangedP}
-  //             participantDiameter={participantDiameter}
-  //             disableAudio={disableAudio}
-  //           />
-  //         );
-  //       })
-
-  //       )}
-
-  //   </div>
-  // );
 }

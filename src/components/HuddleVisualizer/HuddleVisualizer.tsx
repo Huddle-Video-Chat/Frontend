@@ -34,122 +34,19 @@ interface HuddleVisualizerProps {
 }
 
 // Without styled containers or scroll container
-export default function HuddleVisualizer({}: // room,
-// localParticipant,
-// participants,
-HuddleVisualizerProps) {
+export default function HuddleVisualizer({ }: // room,
+  // localParticipant,
+  // participants,
+  HuddleVisualizerProps) {
   // const participants: RemoteParticipant[] = useParticipants();
   // const { room } = useVideoContext();
   // const localParticipant = room.localParticipant;
 
-  const mapping = useAPI();
-  const state = mapping.state;
-  const joinHuddle = mapping.joinHuddle;
-  const addHuddle = mapping.addHuddle;
-
-  // const [state, setState] = useState<State>({
-  //   state: {},
-  //   joined: false,
-  //   counter: 0,
-  //   huddle: -1,
-  // });
-
-  // async function joinHuddle(huddle: string) {
-  //   console.log('Joining huddle...');
-  //   const requestOptions = {
-  //     method: 'POST',
-  //     headers: { 'Content-Type': 'application/json' },
-  //   };
-
-  //   var url = 'https://huddle-video.herokuapp.com/huddle/join';
-  //   url += '?id=' + room.sid;
-  //   url += '&user_id=' + localParticipant.sid;
-  //   url += '&new_huddle_id=' + huddle;
-  //   fetch(url, requestOptions)
-  //     .then(response => response.json())
-  //     .then(data => updateState(data));
-  // }
-
-  // async function addHuddle() {
-  //   if (Object.keys(state.state).length < 6) {
-  //     console.log('Adding huddle...');
-  //     const requestOptions = {
-  //       method: 'POST',
-  //       headers: { 'Content-Type': 'application/json' },
-  //     };
-
-  //     var url = 'https://huddle-video.herokuapp.com/huddle/create';
-  //     url += '?id=' + room.sid;
-  //     url += '&user_id=' + localParticipant.sid;
-  //     fetch(url, requestOptions)
-  //       .then(response => response.json())
-  //       .then(data => updateState(data));
-  //   }
-  // }
-
-  // if (!state.joined) {
-  //   console.log('Joining room...');
-  //   const requestOptions = {
-  //     method: 'POST',
-  //     headers: { 'Content-Type': 'application/json' },
-  //   };
-  //   var url = 'https://huddle-video.herokuapp.com/room/join?first=andy&last=jiang&username=da;sdf';
-  //   url += '&id=' + room.sid;
-  //   url += '&user_id=' + localParticipant.sid;
-
-  //   fetch(url, requestOptions)
-  //     .then(response => response.json())
-  //     .then(data => updateState(data));
-  // }
-
-  // console.log(state);
-
-  // function updateState(data: any) {
-  //   if (data.state_counter !== state.counter) {
-  //     console.log(data);
-  //     var newState: {
-  //       [key: string]: any;
-  //     } = {};
-  //     participants.map(p => {
-  //       const huddleID: string = data.users[p.sid];
-  //       if (newState[huddleID] === undefined) {
-  //         newState[huddleID] = [];
-  //       }
-  //       newState[huddleID].push(p);
-  //     });
-  //     const huddleID: string = data.huddle_id;
-  //     if (newState[huddleID] === undefined) {
-  //       newState[huddleID] = [];
-  //     }
-  //     newState[huddleID].push(localParticipant);
-
-  //     console.log(data.state_counter);
-  //     console.log(state.counter);
-
-  //     setState({
-  //       state: newState,
-  //       joined: true,
-  //       counter: data.state_counter,
-  //       huddle: parseInt(data.huddle_id),
-  //     });
-  //   }
-  // }
-
-  // useEffect(() => {
-  //   const interval = setInterval(() => {
-  //     const requestOptions = {
-  //       method: 'GET',
-  //       headers: { 'Content-Type': 'application/json' },
-  //     };
-  //     var url = 'https://huddle-video.herokuapp.com/room/state';
-  //     url += '?id=' + room.sid;
-  //     url += '&user_id=' + localParticipant.sid;
-  //     fetch(url, requestOptions)
-  //       .then(response => response.json())
-  //       .then(data => updateState(data));
-  //   }, 1000);
-  //   return () => clearInterval(interval);
-  // });
+  const mapping  = useAPI();
+  const state = mapping.state
+  const joinHuddle = mapping.joinHuddle
+  const addHuddle = mapping.addHuddle
+  
 
   interface Position {
     left: number;
@@ -227,6 +124,7 @@ HuddleVisualizerProps) {
             huddleID={huddleID}
             participants={huddleParticipants}
             position={pos}
+            zoomed={zoomed}
           />
         );
       })}

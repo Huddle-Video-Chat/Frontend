@@ -36,12 +36,6 @@ export default function Participant({
   participantDiameter,
   huddleID,
 }: ParticipantProps) {
-  // setting disableAudio to hear, clicking button toggles setHear
-  // disableAudio will need to be set by participant strip in the future.
-  function clickButton() {
-    setHear(!hear);
-  }
-  const [hear, setHear] = useState(false);
 
   const Positioner = styled('div')({
     //overflow: 'hidden',

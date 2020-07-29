@@ -9,7 +9,7 @@ const Outline = styled('div')({
   position: 'relative',
   height: '100%',
   display: 'grid',
-  overflow: 'visible',
+  overflow: 'auto',
 
   background: '#F7F7F7',
   // border: '5px dashed green',
