@@ -59,23 +59,25 @@ HuddleVisualizerProps) {
   });
 
   async function joinHuddle(huddle: string) {
-    console.log('Joining huddle...');
-    const requestOptions = {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-    };
+    if (parseInt(huddle) != state.huddle) {
+      console.log('Joining huddle...');
+      const requestOptions = {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+      };
 
-    var url = 'https://huddle-video.herokuapp.com/huddle/join';
-    url += '?id=' + room.sid;
-    url += '&user_id=' + localParticipant.sid;
-    url += '&new_huddle_id=' + huddle;
-    fetch(url, requestOptions)
-      .then(response => response.json())
-      .then(data => updateState(data));
+      var url = 'https://huddle-video.herokuapp.com/huddle/join';
+      url += '?id=' + room.sid;
+      url += '&user_id=' + localParticipant.sid;
+      url += '&new_huddle_id=' + huddle;
+      fetch(url, requestOptions)
+        .then(response => response.json())
+        .then(data => updateState(data));
+    }
   }
 
   async function addHuddle() {
-    if (Object.keys(state.state).length < 6) {
+    if (Object.keys(state.state).length < 6 && state.state[state.huddle].length > 1) {
       console.log('Creating huddle...');
       const requestOptions = {
         method: 'POST',
