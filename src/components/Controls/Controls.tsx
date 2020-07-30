@@ -6,10 +6,10 @@ import EndCallButton from './EndCallButton/EndCallButton';
 import ToggleAudioButton from './ToggleAudioButton/ToggleAudioButton';
 import ToggleVideoButton from './ToggleVideoButton/ToggleVideoButton';
 import ToggleScreenShareButton from './ToogleScreenShareButton/ToggleScreenShareButton';
+import InviteLinkButton from './InviteLinkButton/InviteLinkButton';
 
 import useIsUserActive from './useIsUserActive/useIsUserActive';
 import useRoomState from '../../hooks/useRoomState/useRoomState';
-
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     container: {
@@ -51,6 +51,11 @@ export default function Controls() {
 
   return (
     <div className={clsx(classes.container, { showControls })}>
+      {roomState !== 'disconnected' && (
+        <>
+          <InviteLinkButton />
+        </>
+      )}
       <ToggleAudioButton disabled={isReconnecting} />
       <ToggleVideoButton disabled={isReconnecting} />
       {roomState !== 'disconnected' && (

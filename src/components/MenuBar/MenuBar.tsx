@@ -69,7 +69,6 @@ const useStyles = makeStyles((theme: Theme) =>
     },
   })
 );
-
 export function getRoomName() {
   const match = window.location.search.match(/roomName=(.*)&?/);
   const roomName = match ? match[1] : window.sessionStorage.getItem('roomName');

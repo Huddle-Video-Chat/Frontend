@@ -7,7 +7,6 @@ import Tooltip from '@material-ui/core/Tooltip';
 
 import useVideoContext from '../../../hooks/useVideoContext/useVideoContext';
 import useAPI from '../../../hooks/useAPI/useAPI';
-
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     fab: {
@@ -18,7 +17,6 @@ const useStyles = makeStyles((theme: Theme) =>
     },
   })
 );
-
 export default function EndCallButton() {
   const classes = useStyles();
   // const { room } = useVideoContext();
