@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { RemoteParticipant } from 'twilio-video';
-import useDominantSpeaker from '../useDominantSpeaker/useDominantSpeaker';
+// import useDominantSpeaker from '../useDominantSpeaker/useDominantSpeaker';
 import useVideoContext from '../useVideoContext/useVideoContext';
 
 export default function useParticipants() {

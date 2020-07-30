@@ -22,10 +22,10 @@ export interface SettingsAction {
 
 export const initialSettings: Settings = {
   trackSwitchOffMode: undefined,
-  dominantSpeakerPriority: 'standard',
+  dominantSpeakerPriority: 'low',
   bandwidthProfileMode: 'grid',
-  maxTracks: isMobile ? '5' : '10',
-  maxAudioBitrate: '16000',
+  maxTracks: isMobile ? '5' : '50',
+  maxAudioBitrate: '8000',
   renderDimensionLow: 'low',
   renderDimensionStandard: '960p',
   renderDimensionHigh: 'wide1080p',
