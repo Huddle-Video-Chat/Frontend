@@ -134,6 +134,7 @@ export default function useAPI() {
   return {
     room: room,
     state: state,
+    participants: participants,
     localParticipant: localParticipant,
     joinHuddle: joinHuddle,
     addHuddle: addHuddle,

@@ -31,7 +31,14 @@ interface HuddleVisualizerProps {
 }
 
 // Without styled containers or scroll container
-export default function HuddleVisualizer({}: HuddleVisualizerProps) {
+export default function HuddleVisualizer({}: // room,
+// localParticipant,
+// participants,
+HuddleVisualizerProps) {
+  // const participants: RemoteParticipant[] = useParticipants();
+  // const { room } = useVideoContext();
+  // const localParticipant = room.localParticipant;
+
   const mapping = useAPI();
   const state = mapping.state;
   const joinHuddle = mapping.joinHuddle;
@@ -111,6 +118,7 @@ export default function HuddleVisualizer({}: HuddleVisualizerProps) {
             huddleID={huddleID}
             participants={huddleParticipants}
             position={pos}
+            zoomed={zoomed}
           />
         );
       })}

@@ -6,7 +6,7 @@ const Outline = styled('div')({
   position: 'relative',
   height: '100%',
   display: 'grid',
-  overflow: 'visible',
+  overflow: 'auto',
 
   background: '#F7F7F7',
   boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',
