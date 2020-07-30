@@ -75,7 +75,7 @@ export default function Huddle({
   const classes = useStyles();
   const adjustedHuddleDiameter = (nextSquareRoot(participants.length) + Math.sqrt(2) - 1) * participantDiameter * 1.5;
   const gridTemplateColumns = zoomed ? 'repeat(' + Math.min(4, participants.length) + ', 1fr)' : 'repeat(2, 1fr)';
-  const border = zoomed ? 'null' : '3px solid #A4B0F7';
+  const border = zoomed ? 'null' : '3px solid #A3B0F7';
 
   const center = { x: position.left - adjustedHuddleDiameter / 2, y: position.top - adjustedHuddleDiameter / 2 };
   let arrangementPositions = getArrangementPositions(participants.length + 1, participantDiameter, center);

@@ -12,14 +12,14 @@ const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     fab: {
       margin: theme.spacing(1),
-      color: '#86D1BC',
+      color: '#A3B0F7',
       backgroundColor: '#F2F2F2 !important',
       boxShadow: '3px 3px 7px rgba(0, 0, 0, 0.14), -2px -1px 3px rgba(255, 255, 255, 0.74) !important',
     },
   })
 );
 
-export default function ToggleVideoButton(props: { disabled?: boolean }) {
+export default function InviteLinkButton(props: { disabled?: boolean }) {
   const classes = useStyles();
   const roomName = useRoomName();
   const passcode = usePasscode();
