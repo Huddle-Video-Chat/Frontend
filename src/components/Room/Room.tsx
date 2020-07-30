@@ -1,18 +1,14 @@
 import { styled } from '@material-ui/core/styles';
-import React, { useState, useEffect } from 'react';
-import { RemoteParticipant } from 'twilio-video';
-import useParticipants from '../../hooks/useParticipants/useParticipants';
-import useVideoContext from '../../hooks/useVideoContext/useVideoContext';
+import React from 'react';
 import HuddleVisualizer from '../HuddleVisualizer/HuddleVisualizer';
 
 const Outline = styled('div')({
   position: 'relative',
   height: '100%',
   display: 'grid',
-  overflow: 'visible',
+  overflow: 'auto',
 
   background: '#F7F7F7',
-  // border: '5px dashed green',
   boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',
 });
 
@@ -28,8 +24,7 @@ interface State {
 }
 
 export default function Room() {
-  // const participants: RemoteParticipant[] = useParticipants();
-  // const { room } = useVideoContext();
+  console.log('Room');
 
   return (
     <Outline>

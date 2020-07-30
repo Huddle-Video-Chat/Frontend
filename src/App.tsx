@@ -13,15 +13,18 @@ import useRoomState from './hooks/useRoomState/useRoomState';
 
 const Container = styled('div')({
   display: 'grid',
-  background: 'white',
+  background: '#F7F7F7',
   gridTemplateRows: 'auto 1fr',
 });
 
 const Main = styled('main')({
-  overflow: 'visible',
+  overflow: 'hidden',
+  backgroundColor: '#F7F7F7',
 });
 export default function App() {
   const roomState = useRoomState();
+
+  console.log('App');
 
   // Here we would like the height of the main container to be the height of the viewport.
   // On some mobile browsers, 'height: 100vh' sets the height equal to that of the screen,
