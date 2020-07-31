@@ -1,12 +1,15 @@
 import { useCallback, useState, useEffect } from 'react';
-import fscreen from 'fscreen';
 
-export default function useFullScreenToggle() {
+export default function useZoomToggle() {
   const [isZoomed, setIsZoomed] = useState(true);
 
   const toggleIsZoomed = () => {
     setIsZoomed(!isZoomed);
   };
+
+  useEffect(() => {
+    
+  })
 
   return [isZoomed, toggleIsZoomed] as const;
 }

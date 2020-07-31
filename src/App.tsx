@@ -5,6 +5,8 @@ import Controls from './components/Controls/Controls';
 import Chat from './components/Chat/Chat';
 import LocalVideoPreview from './components/LocalVideoPreview/LocalVideoPreview';
 import MenuBar from './components/MenuBar/MenuBar';
+import ToggleZoomButton from './components/Controls/ToggleZoomButton/ToggleZoomButton'
+import AddHuddleButton from './components/Controls/AddHuddleButton/AddHuddleButton';
 import ReconnectingNotification from './components/ReconnectingNotification/ReconnectingNotification';
 import Room from './components/Room/Room';
 
@@ -36,6 +38,7 @@ export default function App() {
   return (
     <Container style={{ height }}>
       <MenuBar />
+      
       <Main>
         {roomState === 'disconnected' ? (
           <LocalVideoPreview />
@@ -43,6 +46,8 @@ export default function App() {
           <>
             <Room />
             <Chat />
+            <ToggleZoomButton />
+            <AddHuddleButton />
           </>
         )}
         <Controls />

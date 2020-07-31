@@ -42,7 +42,7 @@ export default function usePasscodeAuth() {
   const [passcode, setPass] = useState<string>(usePasscode());
 
   useEffect(() => {
-    console.log(passcode);
+    // console.log(passcode);
     if (passcode) {
       setPass(passcode);
     }

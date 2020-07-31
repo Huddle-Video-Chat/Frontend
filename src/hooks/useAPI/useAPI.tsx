@@ -23,7 +23,7 @@ export default function useAPI() {
   });
 
   if (!state.joined) {
-    console.log('Joining room...');
+    // console.log('Joining room...');
     const requestOptions = {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -39,7 +39,7 @@ export default function useAPI() {
 
   function updateState(data: any) {
     if (data.state_counter !== state.counter) {
-      console.log(data);
+      // console.log(data);
       var newState: {
         [key: string]: any;
       } = {};
@@ -56,8 +56,8 @@ export default function useAPI() {
       }
       newState[huddleID].push(localParticipant);
 
-      console.log('new state...');
-      console.log(newState);
+      // console.log('new state...');
+      // console.log(newState);
 
       setState({
         state: newState,
@@ -86,7 +86,7 @@ export default function useAPI() {
 
   async function joinHuddle(huddle: string) {
     if (parseInt(huddle) != state.huddle) {
-      console.log('Joining huddle...');
+      // console.log('Joining huddle...');
       const requestOptions = {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -104,7 +104,7 @@ export default function useAPI() {
 
   async function addHuddle() {
     if (Object.keys(state.state).length < 6 && state.state[state.huddle].length > 1) {
-      console.log('Adding huddle...');
+      // console.log('Adding huddle...');
       const requestOptions = {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
