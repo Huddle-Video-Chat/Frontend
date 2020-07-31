@@ -14,7 +14,7 @@ describe('the ToggleVideoButton component', () => {
     const wrapper = shallow(<ToggleVideoButton />);
     expect(wrapper.find('VideocamIcon').exists()).toBe(true);
     expect(wrapper.find('VideocamOffIcon').exists()).toBe(false);
-    expect(wrapper.prop('title')).toBe('Mute Video');
+    expect(wrapper.prop('title')).toBe('Hide Video');
   });
 
   it('should render correctly when video is disabled', () => {
@@ -22,7 +22,7 @@ describe('the ToggleVideoButton component', () => {
     const wrapper = shallow(<ToggleVideoButton />);
     expect(wrapper.find('VideocamIcon').exists()).toBe(false);
     expect(wrapper.find('VideocamOffIcon').exists()).toBe(true);
-    expect(wrapper.prop('title')).toBe('Unmute Video');
+    expect(wrapper.prop('title')).toBe('Show Video');
   });
 
   it('should call the correct toggle function when clicked', () => {

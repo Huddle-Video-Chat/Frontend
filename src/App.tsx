@@ -9,6 +9,7 @@ import ToggleZoomButton from './components/Controls/ToggleZoomButton/ToggleZoomB
 import AddHuddleButton from './components/Controls/AddHuddleButton/AddHuddleButton';
 import ReconnectingNotification from './components/ReconnectingNotification/ReconnectingNotification';
 import Room from './components/Room/Room';
+import { APIProvider } from './components/APIProvider'
 
 import useHeight from './hooks/useHeight/useHeight';
 import useRoomState from './hooks/useRoomState/useRoomState';
@@ -38,20 +39,23 @@ export default function App() {
   return (
     <Container style={{ height }}>
       <MenuBar />
-      
+
       <Main>
         {roomState === 'disconnected' ? (
           <LocalVideoPreview />
         ) : (
-          <>
-            <Room />
-            <Chat />
-            <ToggleZoomButton />
-            <AddHuddleButton />
-          </>
-        )}
+            // API needs the room to be connected first, so only called when roomState isn't disconnected
+            <APIProvider >
+
+              <Room />
+              {/* Consolidate the bottom three into one component */}
+              <Chat />
+              <ToggleZoomButton />
+              <AddHuddleButton />
+
+            </ APIProvider>
+          )}
         <Controls />
-        {/* <Chat /> */}
       </Main>
       <ReconnectingNotification />
     </Container>
