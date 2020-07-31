@@ -4,7 +4,7 @@ import { RemoteParticipant } from 'twilio-video';
 import useParticipants from '../../hooks/useParticipants/useParticipants';
 import useVideoContext from '../../hooks/useVideoContext/useVideoContext';
 import useAPIHook from './useAPIHook/useAPIHook'
-import useAPI from '../../hooks/useAPI/useAPI';
+
 
 export interface IState {
     state: any;

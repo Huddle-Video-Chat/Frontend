@@ -1,9 +1,5 @@
-import { Callback } from '../../../types';
-import EventEmitter from 'events';
-import { isMobile } from '../../../utils';
-import Video, { ConnectOptions, LocalTrack, Room, RemoteParticipant } from 'twilio-video';
-import { useCallback, useEffect, useRef, useState } from 'react';
-import useAPI from '../../../hooks/useAPI/useAPI';
+import { RemoteParticipant } from 'twilio-video';
+import { useEffect, useState } from 'react';
 import { IState } from '../index'
 import useParticipants from '../../../hooks/useParticipants/useParticipants';
 import useVideoContext from '../../../hooks/useVideoContext/useVideoContext';
