@@ -13,6 +13,10 @@ export interface IState {
     huddle: number;
 }
 
+interface APIProviderProps {
+    children: ReactNode
+}
+
 interface IAPIContext {
     state: IState,
     joinHuddle: (huddle: string) => void,
@@ -22,7 +26,7 @@ interface IAPIContext {
 
 export const APIContext = createContext<IAPIContext>(null!)
 
-export function APIProvider({children: ReactNode}) {
+export function APIProvider({children} : APIProviderProps) {
     const { room } = useVideoContext();
     const localParticipant = room.localParticipant;
 

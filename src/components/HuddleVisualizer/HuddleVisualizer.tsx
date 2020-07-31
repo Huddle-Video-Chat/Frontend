@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Huddle from '../Huddle/Huddle';
 import { styled } from '@material-ui/core/styles';
-import useAPI from '../../hooks/useAPI/useAPI';
 
 import useAPIContext from '../../hooks/useAPIContext/useAPIContext'
 

@@ -61,7 +61,7 @@ export default function Controls() {
       {roomState !== 'disconnected' && (
         <>
           {/* <ToggleScreenShareButton disabled={isReconnecting} /> */}
-          <EndCallButton />
+          {/* <EndCallButton /> */}
         </>
       )}
     </div>
