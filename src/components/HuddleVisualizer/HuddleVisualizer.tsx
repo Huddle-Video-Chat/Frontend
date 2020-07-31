@@ -3,6 +3,7 @@ import Huddle from '../Huddle/Huddle';
 import { styled } from '@material-ui/core/styles';
 import useAPI from '../../hooks/useAPI/useAPI';
 
+
 const MyButton = styled('button')({
   background: 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)',
   border: 0,
@@ -14,6 +15,12 @@ const MyButton = styled('button')({
   padding: '0 30px',
 
   position: 'absolute',
+});
+
+const Container = styled('div')({
+  display: 'grid',
+  background: '#F7F7F7',
+  gridTemplateRows: 'auto 1fr',
 });
 
 interface State {
@@ -97,18 +104,19 @@ HuddleVisualizerProps) {
 
   return (
     <>
-      <MyButton style={{ left: 0 }} onClick={toggleZoom}>
+      {/* <MyButton style={{ left: 0 }} onClick={toggleZoom}>
         {zoomed ? 'Zoom out' : 'Zoom in'}
       </MyButton>
       {zoomed ? null : (
         <MyButton style={{ left: 120 }} onClick={addHuddle}>
           Add Huddle
         </MyButton>
-      )}
+      )} */}
+      {/* <HuddleControls zoomed={zoomed} onClick={setZoomed}/> */}
       {huddleList.map(huddleID => {
         let huddleParticipants: [] = state.state[huddleID];
 
-        let pos = huddlePositions[huddleList.length - 1][num++];
+        let pos = huddlePositions[huddleList.length - 1][num++]
 
         return (
           <Huddle

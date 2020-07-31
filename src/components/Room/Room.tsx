@@ -24,7 +24,7 @@ interface State {
 }
 
 export default function Room() {
-  console.log('Room');
+  // console.log('Room');
 
   return (
     <Outline>

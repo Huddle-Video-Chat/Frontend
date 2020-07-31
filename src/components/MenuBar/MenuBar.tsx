@@ -17,7 +17,7 @@ import { Typography } from '@material-ui/core';
 import FlipCameraButton from './FlipCameraButton/FlipCameraButton';
 import LocalAudioLevelIndicator from './DeviceSelector/LocalAudioLevelIndicator/LocalAudioLevelIndicator';
 import ToggleFullscreenButton from './ToggleFullScreenButton/ToggleFullScreenButton';
-import AddHuddleButton from './AddHuddleButton/AddHuddleButton';
+
 import Menu from './Menu/Menu';
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -87,7 +87,7 @@ export default function MenuBar(huddleState: any) {
   const [roomName, setRoomName] = useState<string>(useRoomName());
 
   useEffect(() => {
-    console.log(roomName);
+    // console.log(roomName);
     if (roomName) {
       setRoomName(roomName);
     }

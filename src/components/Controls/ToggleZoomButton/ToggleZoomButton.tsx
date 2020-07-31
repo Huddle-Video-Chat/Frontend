@@ -1,16 +1,19 @@
-import React, { useCallback, useRef } from 'react';
+import React from 'react';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 
 import Fab from '@material-ui/core/Fab';
+import ZoomInIcon from '@material-ui/icons/ZoomIn';
+import ZoomOutIcon from '@material-ui/icons/ZoomOut';
 import Tooltip from '@material-ui/core/Tooltip';
-import Chat from '@material-ui/icons/Chat';
-import { Button } from '@material-ui/core';
+
+import useZoomToggle from '../../../hooks/useZoomToggle/useZoomToggle'
+
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     fab: {
       margin: theme.spacing(1),
-      color: '#f2aab2',
+      color: '#cdadd4',
       backgroundColor: '#f2f2f2 !important',
       height: '40px',
       width: '40px',
@@ -19,33 +22,37 @@ const useStyles = makeStyles((theme: Theme) =>
     container: {
       display: 'flex',
       position: 'absolute',
-      right: '4%',
+      right: '50%',
       transform: 'translate(50%, 30px)',
       top: '5%',
     },
-    maxWidth: {
+    noMaxWidth: {
       maxWidth: 'none',
     }
   })
 );
 
-interface ToggleChatButtonProps {
-  openChat: () => void;
-}
 
-export default function ToggleChatButton({ openChat }: ToggleChatButtonProps) {
-  const classes = useStyles();
+/* <Fab className={classes.fab} onClick={() => props.onClick(!props.zoomed)} data-cy-audio-toggle>
+        {props.zoomed ? <ZoomOutIcon /> : <ZoomInIcon />}
+      </Fab> */
+
+export default function ToggleZoomButton() {
+  const classes = useStyles()
+  const [ zoomed, toggleZoom ] = useZoomToggle()
 
   return (
     <div className={classes.container}>
       <Tooltip
-        title="Open Chat"
+        title={zoomed ? 'Zoom out' : 'Zoom in'}
         placement="bottom"
         PopperProps={{ disablePortal: true }}
-        onClick = {openChat}
+        onClick={toggleZoom}
+        classes={{ tooltip: classes.noMaxWidth }}
       >
-        <Fab className={classes.fab} onClick={openChat}>
-          <Chat />
+
+        <Fab className={classes.fab} data-cy-audio-toggle>
+          {zoomed ? <ZoomOutIcon /> : <ZoomInIcon />} 
         </Fab>
       </Tooltip>
     </div>
