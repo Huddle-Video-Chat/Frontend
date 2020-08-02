@@ -10,7 +10,7 @@ const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     fab: {
       margin: theme.spacing(1),
-      color: '#A3B0F7',
+      color: '#f2aab2',
       backgroundColor: '#f2f2f2 !important',
       height: '40px',
       width: '40px',
@@ -22,6 +22,9 @@ const useStyles = makeStyles((theme: Theme) =>
       right: '4%',
       transform: 'translate(50%, 30px)',
       top: '5%',
+    },
+    maxWidth: {
+      maxWidth: 'none',
     },
   })
 );
@@ -35,10 +38,10 @@ export default function ToggleChatButton({ openChat }: ToggleChatButtonProps) {
 
   return (
     <div className={classes.container}>
-      <Tooltip title="Open Chat" placement="left" PopperProps={{ disablePortal: true }}>
-        <Button className={classes.fab} onClick={openChat}>
+      <Tooltip title="Open Chat" placement="bottom" PopperProps={{ disablePortal: true }} onClick={openChat}>
+        <Fab className={classes.fab} onClick={openChat}>
           <Chat />
-        </Button>
+        </Fab>
       </Tooltip>
     </div>
   );

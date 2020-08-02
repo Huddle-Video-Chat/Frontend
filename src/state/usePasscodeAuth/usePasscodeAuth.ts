@@ -1,11 +1,6 @@
 import { useCallback, useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
-
-export function getPasscode() {
-  const match = window.location.search.match(/passcode=([0-9]*)&?/);
-  const passcode = match ? match[1] : window.sessionStorage.getItem('passcode');
-  return passcode;
-}
+import usePasscode from '../../hooks/usePasscode/usePasscode';
 
 export function fetchToken(name: string, room: string, passcode: string) {
   return fetch(`/token`, {
@@ -44,6 +39,14 @@ export default function usePasscodeAuth() {
 
   const [user, setUser] = useState<{ displayName: undefined; photoURL: undefined; passcode: string } | null>(null);
   const [isAuthReady, setIsAuthReady] = useState(false);
+  const [passcode, setPass] = useState<string>(usePasscode());
+
+  useEffect(() => {
+    // console.log(passcode);
+    if (passcode) {
+      setPass(passcode);
+    }
+  }, [passcode]);
 
   const getToken = useCallback(
     (name: string, room: string) => {
@@ -63,7 +66,6 @@ export default function usePasscodeAuth() {
   );
 
   useEffect(() => {
-    const passcode = getPasscode();
     if (passcode) {
       verifyPasscode(passcode)
         .then(verification => {

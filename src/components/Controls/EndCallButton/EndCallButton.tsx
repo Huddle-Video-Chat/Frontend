@@ -6,7 +6,7 @@ import Fab from '@material-ui/core/Fab';
 import Tooltip from '@material-ui/core/Tooltip';
 
 import useVideoContext from '../../../hooks/useVideoContext/useVideoContext';
-import useAPI from '../../../hooks/useAPI/useAPI';
+import useAPIContext from '../../../hooks/useAPIContext/useAPIContext';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -18,13 +18,10 @@ const useStyles = makeStyles((theme: Theme) =>
     },
   })
 );
-
 export default function EndCallButton() {
   const classes = useStyles();
-  // const { room } = useVideoContext();
-  const mapping = useAPI();
-  const room = mapping.room;
-  const deleteUser = mapping.deleteUser;
+  const { room } = useVideoContext();
+  const { deleteUser } = useAPIContext();
 
   function leaveRoom() {
     deleteUser();

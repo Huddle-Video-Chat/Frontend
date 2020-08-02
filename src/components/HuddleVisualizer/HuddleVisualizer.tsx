@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import Huddle from '../Huddle/Huddle';
 import { styled } from '@material-ui/core/styles';
-import useAPI from '../../hooks/useAPI/useAPI';
+
+import useAPIContext from '../../hooks/useAPIContext/useAPIContext';
 
 const MyButton = styled('button')({
   background: 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)',
@@ -14,6 +15,12 @@ const MyButton = styled('button')({
   padding: '0 30px',
 
   position: 'absolute',
+});
+
+const Container = styled('div')({
+  display: 'grid',
+  background: '#F7F7F7',
+  gridTemplateRows: 'auto 1fr',
 });
 
 interface State {
@@ -39,10 +46,12 @@ HuddleVisualizerProps) {
   // const { room } = useVideoContext();
   // const localParticipant = room.localParticipant;
 
-  const mapping = useAPI();
-  const state = mapping.state;
-  const joinHuddle = mapping.joinHuddle;
-  const addHuddle = mapping.addHuddle;
+  // const mapping = useAPI();
+  // const state = mapping.state;
+  // const joinHuddle = mapping.joinHuddle;
+  // const addHuddle = mapping.addHuddle;
+
+  const { state, joinHuddle, addHuddle } = useAPIContext();
 
   interface Position {
     left: number;
@@ -105,6 +114,7 @@ HuddleVisualizerProps) {
           Add Huddle
         </MyButton>
       )}
+      {/* <HuddleControls zoomed={zoomed} onClick={setZoomed}/> */}
       {huddleList.map(huddleID => {
         let huddleParticipants: [] = state.state[huddleID];
 

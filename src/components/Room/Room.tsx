@@ -16,15 +16,8 @@ const Positioner = styled('div')({
   position: 'absolute',
 });
 
-interface State {
-  state: any;
-  joined: boolean;
-  counter: number;
-  huddle: number;
-}
-
 export default function Room() {
-  console.log('Room');
+  // console.log('Room');
 
   return (
     <Outline>
