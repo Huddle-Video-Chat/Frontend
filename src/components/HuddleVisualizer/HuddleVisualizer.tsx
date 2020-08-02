@@ -115,7 +115,6 @@ HuddleVisualizerProps) {
           Add Huddle
         </MyButton>
       )}
-      {/* <HuddleControls zoomed={zoomed} onClick={setZoomed}/> */}
       {huddleList.map(huddleID => {
         let huddleParticipants: [] = state.state[huddleID];
 

@@ -26,11 +26,11 @@ interface IAPIContext {
 
 export const APIContext = createContext<IAPIContext>(null!)
 
-export function APIProvider({children} : APIProviderProps) {
+export function APIProvider({ children }: APIProviderProps) {
     const { room } = useVideoContext();
     const localParticipant = room.localParticipant;
 
-    const [ state, updateState ] = useAPIHook()
+    const [state, updateState] = useAPIHook()
 
     async function joinHuddle(huddle: string) {
         if (parseInt(huddle) != state.huddle) {
@@ -88,6 +88,7 @@ export function APIProvider({children} : APIProviderProps) {
                 deleteUser,
             }}
         >
+            {children}
         </APIContext.Provider>
     )
 }

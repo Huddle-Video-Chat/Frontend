@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { IState } from '../index'
 import useParticipants from '../../../hooks/useParticipants/useParticipants';
 import useVideoContext from '../../../hooks/useVideoContext/useVideoContext';
+import useRoomState from '../../../hooks/useRoomState/useRoomState';
 
 // DO NOT USE THIS HOOK ANYWHERE, ONLY USED IN APIPROVIDER
 
@@ -12,6 +13,7 @@ interface IData {
 
 export default function useAPIHook() {
     const participants: RemoteParticipant[] = useParticipants();
+    const roomState = useRoomState();
     const { room } = useVideoContext();
     const localParticipant = room.localParticipant;
 
@@ -22,7 +24,7 @@ export default function useAPIHook() {
         huddle: -1,
     });
 
-    if (!state.joined) {
+    if (roomState !== 'disconnected' && !state.joined) {
         console.log('Joining room...');
         const requestOptions = {
             method: 'POST',
@@ -38,19 +40,21 @@ export default function useAPIHook() {
     }
 
     useEffect(() => {
-        const interval = setInterval(() => {
-            const requestOptions = {
-                method: 'GET',
-                headers: { 'Content-Type': 'application/json' },
-            };
-            var url = 'https://huddle-video.herokuapp.com/room/state';
-            url += '?id=' + room.sid;
-            url += '&user_id=' + localParticipant.sid;
-            fetch(url, requestOptions)
-                .then(response => response.json())
-                .then(data => updateState(data));
-        }, 1000);
-        return () => clearInterval(interval);
+        if (roomState !== 'disconnected') {
+            const interval = setInterval(() => {
+                const requestOptions = {
+                    method: 'GET',
+                    headers: { 'Content-Type': 'application/json' },
+                };
+                var url = 'https://huddle-video.herokuapp.com/room/state';
+                url += '?id=' + room.sid;
+                url += '&user_id=' + localParticipant.sid;
+                fetch(url, requestOptions)
+                    .then(response => response.json())
+                    .then(data => updateState(data));
+            }, 1000);
+            return () => clearInterval(interval);
+        }
     });
 
     function updateState(data: any) {

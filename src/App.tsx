@@ -37,27 +37,27 @@ export default function App() {
   const height = useHeight();
 
   return (
-    <Container style={{ height }}>
-      <MenuBar />
+    <APIProvider>
+      <Container style={{ height }}>
+        <MenuBar />
 
-      <Main>
-        {roomState === 'disconnected' ? (
-          <LocalVideoPreview />
-        ) : (
-            // API needs the room to be connected first, so only called when roomState isn't disconnected
-            <APIProvider >
+        <Main>
+          {roomState === 'disconnected' ? (
+            <LocalVideoPreview />
+          ) : (
 
-              <Room />
-              {/* Consolidate the bottom three into one component */}
-              <Chat />
-              <ToggleZoomButton />
-              <AddHuddleButton />
-
-            </ APIProvider>
-          )}
-        <Controls />
-      </Main>
-      <ReconnectingNotification />
-    </Container>
+              <>
+                <Room />
+                {/* Consolidate the bottom three into one component */}
+                <Chat />
+                <ToggleZoomButton />
+                <AddHuddleButton />
+              </>
+            )}
+          <Controls />
+        </Main>
+        <ReconnectingNotification />
+      </Container>
+    </ APIProvider>
   );
 }
