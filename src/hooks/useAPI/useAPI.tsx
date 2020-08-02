@@ -28,7 +28,7 @@ export default function useAPI() {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
     };
-    var url = 'https://huddle-video.herokuapp.com/room/join?first=andy&last=jiang&username=da;sdf';
+    var url = 'https://huddle-video.herokuapp.com/room/join?first=first&last=last&username=username';
     url += '&id=' + room.sid;
     url += '&user_id=' + localParticipant.sid;
 
