@@ -22,12 +22,16 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-export default function Webview() {
+interface WebviewProps {
+  url: string;
+}
+
+export default function Webview({ url }: WebviewProps) {
   const classes = useStyles();
 
   return (
     <div className={classes.container}>
-      <iframe className={classes.webview} src="https://skribbl.io/?wFUCybnU3EQS" />
+      <iframe className={classes.webview} src={url} />
     </div>
   );
 }
