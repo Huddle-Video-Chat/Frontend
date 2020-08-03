@@ -14,6 +14,7 @@ import { APIProvider } from './components/APIProvider';
 import useHeight from './hooks/useHeight/useHeight';
 import useRoomState from './hooks/useRoomState/useRoomState';
 import Webview from './components/Webview/Webview';
+import HuddleVisualizer from './components/HuddleVisualizer/HuddleVisualizer';
 
 const Container = styled('div')({
   display: 'grid',
@@ -59,7 +60,7 @@ export default function App() {
 
               <Main>
                 <>
-                  <Room />
+                  <HuddleVisualizer />
                   {/* Consolidate the bottom three into one component */}
                   <Chat />
                   <ToggleZoomButton />

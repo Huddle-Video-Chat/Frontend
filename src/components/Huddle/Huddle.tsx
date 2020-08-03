@@ -50,7 +50,7 @@ export default function Huddle({
     top: window.innerHeight * position.top - adjustedHuddleDiameter / 2,
   };
 
-  function onParticipantClick() {}
+  function onParticipantClick() { }
   // adjusting the center
 
   const Positioner = styled('div')({
@@ -72,24 +72,22 @@ export default function Huddle({
   });
 
   return (
-    <div onClick={() => onClick(huddleID)} className={classes.huddle}>
-      <Positioner style={adjustedPosition} onClick={() => onClick(huddleID)}>
-        {participants.map(participant => {
-          // position does nothing atm
-          const arrangedP = arrangementPositions.shift();
-          return (
-            <MemoParticipant
-              key={participant.sid}
-              participant={participant}
-              isSelected={false}
-              onClick={onParticipantClick}
-              position={arrangedP}
-              participantDiameter={participantDiameter}
-              disableAudio={disableAudio}
-            />
-          );
-        })}
-      </Positioner>
-    </div>
+    <Positioner style={adjustedPosition} onClick={() => onClick(huddleID)}>
+      {participants.map(participant => {
+        // position does nothing atm
+        const arrangedP = arrangementPositions.shift();
+        return (
+          <MemoParticipant
+            key={participant.sid}
+            participant={participant}
+            isSelected={false}
+            onClick={onParticipantClick}
+            position={arrangedP}
+            participantDiameter={participantDiameter}
+            disableAudio={disableAudio}
+          />
+        );
+      })}
+    </Positioner>
   );
 }
