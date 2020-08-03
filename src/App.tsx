@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { styled } from '@material-ui/core/styles';
 
 import Controls from './components/Controls/Controls';
@@ -38,26 +38,40 @@ export default function App() {
   const height = useHeight();
 
   return (
-    <Container style={{ height }}>
-      <MenuBar />
+    <>
+      {roomState === 'disconnected' ? (
+        <>
+          <Container style={{ height }}>
+            <MenuBar />
 
-      <Main>
-        {roomState === 'disconnected' ? (
-          <LocalVideoPreview />
-        ) : (
-          // API needs the room to be connected first, so only called when roomState isn't disconnected
+            <Main>
+              <LocalVideoPreview />
+              <Controls />
+            </Main>
+            <ReconnectingNotification />
+          </Container>
+        </>
+      ) : (
+        <>
           <APIProvider>
-            <Room />
-            {/* Consolidate the bottom three into one component */}
-            <Chat />
-            <ToggleZoomButton />
-            <AddHuddleButton />
+            <Container style={{ height }}>
+              <MenuBar />
+
+              <Main>
+                <>
+                  <Room />
+                  {/* Consolidate the bottom three into one component */}
+                  <Chat />
+                  <ToggleZoomButton />
+                  <AddHuddleButton />
+                </>
+                <Controls />
+              </Main>
+              <ReconnectingNotification />
+            </Container>
           </APIProvider>
-        )}
-        <Controls />
-        {/* <Webview /> */}
-      </Main>
-      <ReconnectingNotification />
-    </Container>
+        </>
+      )}
+    </>
   );
 }

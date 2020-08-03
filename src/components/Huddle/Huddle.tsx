@@ -1,6 +1,4 @@
-import React, { useState, JSXElementConstructor } from 'react';
-import ParticipantInfo from '../ParticipantInfo/ParticipantInfo';
-import ParticipantTracks from '../ParticipantTracks/ParticipantTracks';
+import React from 'react';
 import { Participant as IParticipant } from 'twilio-video';
 import Participant, { MemoParticipant } from '../Participant/Participant';
 import { nextSquareRoot, getArrangementPositions } from '../../utils/algorithms';
@@ -17,41 +15,6 @@ const useStyles = makeStyles((theme: Theme) =>
     },
   })
 );
-
-// trying different container styles, need to be able to pass more complex arguments for css
-// interface ContainerProps {
-//   diameter: number,
-//   border: boolean,
-//   style: object,
-//   onClick: () => void,
-//   contents: any,
-// }
-
-// function Container({diameter, border, style, onClick, contents} : ContainerProps) {
-
-//   const Pos = styled('div')({
-//     // overflow: 'hidden',
-//     // debugging border
-//     border: border ? '3px solid #A4B0F7' : 'null',
-//     borderRadius: '50%',
-//     // backgroundColor: '#99aab5',
-//     width: diameter,
-//     height: diameter,
-//     position: 'absolute',
-//     overflow: 'hidden',
-//     justifyItems: 'center',
-//     alignItems: 'center',
-//     padding: '20px',
-
-//     display: 'grid',
-//     gridTemplateColumns: 'repeat(2, 1fr)',
-//   });
-//   return (
-//     <Pos>
-//       {contents}
-//     </Pos>
-//   )
-// }
 
 interface HuddleProps {
   participants: IParticipant[];
@@ -72,6 +35,8 @@ export default function Huddle({
   disableAudio,
   zoomed,
 }: HuddleProps) {
+  // shit, spaghetti code, need to clean up
+
   const classes = useStyles();
   const adjustedHuddleDiameter = (nextSquareRoot(participants.length) + Math.sqrt(2) - 1) * participantDiameter * 1.5;
   const gridTemplateColumns = zoomed ? 'repeat(' + Math.min(4, participants.length) + ', 1fr)' : 'repeat(2, 1fr)';

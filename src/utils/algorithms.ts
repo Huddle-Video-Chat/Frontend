@@ -10,7 +10,7 @@ function getArrangementNumbers(size: number) {
   let num = size;
   let nsr = nextSquareRoot(num);
   let arrangement = [];
-  while (num != 0) {
+  while (num !== 0) {
     let row = Math.min(nsr, num);
     num -= row;
     arrangement.push(row);

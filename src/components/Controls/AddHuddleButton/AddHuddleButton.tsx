@@ -6,6 +6,7 @@ import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 import Tooltip from '@material-ui/core/Tooltip';
 
 import useZoomToggle from '../../../hooks/useZoomToggle/useZoomToggle';
+import useAPIContext from '../../../hooks/useAPIContext/useAPIContext';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -36,18 +37,18 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export default function AddHuddleButton() {
   const classes = useStyles();
-  const [zoomed, zoomToggle] = useZoomToggle();
+  const { addHuddle, zoomed } = useAPIContext();
 
   return (
     <div className={classes.container}>
       <Tooltip
         title={'Add Huddle'}
+        classes={{ tooltip: classes.noMaxWidth }}
         placement="bottom"
         PopperProps={{ disablePortal: true }}
-        onClick={() => console.log(zoomed)}
-        classes={{ tooltip: classes.noMaxWidth }}
+        onClick={addHuddle}
       >
-        <Fab className={classes.fab} data-cy-audio-toggle>
+        <Fab className={classes.fab} disabled={zoomed} data-cy-audio-toggle>
           <AddCircleOutlineIcon />
         </Fab>
       </Tooltip>
