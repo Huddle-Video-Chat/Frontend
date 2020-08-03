@@ -38,6 +38,7 @@ export default function App() {
   // will look good on mobile browsers even after the location bar opens or closes.
   const height = useHeight();
 
+  // TODO: this is really fucking stupid code need to refractor.
   return (
     <>
       {roomState === 'disconnected' ? (
