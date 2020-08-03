@@ -7,6 +7,7 @@ import ZoomOutIcon from '@material-ui/icons/ZoomOut';
 import Tooltip from '@material-ui/core/Tooltip';
 
 import useZoomToggle from '../../../hooks/useZoomToggle/useZoomToggle'
+import useAPIContext from '../../../hooks/useAPIContext/useAPIContext';
 
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -28,7 +29,7 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     noMaxWidth: {
       maxWidth: 'none',
-    }
+    },
   })
 );
 
@@ -39,16 +40,16 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export default function ToggleZoomButton() {
   const classes = useStyles()
-  const [ zoomed, toggleZoom ] = useZoomToggle()
+  const { zoomed, toggleZoomed } = useAPIContext()
 
   return (
     <div className={classes.container}>
       <Tooltip
         title={zoomed ? 'Zoom out' : 'Zoom in'}
+        classes={{ tooltip: classes.noMaxWidth }}
         placement="bottom"
         PopperProps={{ disablePortal: true }}
-        onClick={toggleZoom}
-        classes={{ tooltip: classes.noMaxWidth }}
+        onClick={toggleZoomed}
       >
 
         <Fab className={classes.fab} data-cy-audio-toggle>

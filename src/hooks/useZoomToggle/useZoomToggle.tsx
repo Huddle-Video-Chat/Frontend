@@ -1,4 +1,4 @@
-import { useCallback, useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 
 export default function useZoomToggle() {
   const [isZoomed, setIsZoomed] = useState(true);

@@ -1,58 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Huddle from '../Huddle/Huddle';
 import { styled } from '@material-ui/core/styles';
 
 import useAPIContext from '../../hooks/useAPIContext/useAPIContext'
 
 
-const MyButton = styled('button')({
-  background: 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)',
-  border: 0,
-  borderRadius: 3,
-  boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',
-  color: 'white',
-  height: 48,
-  width: 120,
-  padding: '0 30px',
-
-  position: 'absolute',
-});
-
-const Container = styled('div')({
-  display: 'grid',
-  background: '#F7F7F7',
-  gridTemplateRows: 'auto 1fr',
-});
-
-interface State {
-  state: any;
-  joined: boolean;
-  counter: number;
-  huddle: number;
-}
-
-interface HuddleVisualizerProps {
-  // position: object,
-  // room: any;
-  // localParticipant: any;
-  // participants: RemoteParticipant[];
-}
-
 // Without styled containers or scroll container
-export default function HuddleVisualizer({}: // room,
-// localParticipant,
-// participants,
-HuddleVisualizerProps) {
-  // const participants: RemoteParticipant[] = useParticipants();
-  // const { room } = useVideoContext();
-  // const localParticipant = room.localParticipant;
-
-  // const mapping = useAPI();
-  // const state = mapping.state;
-  // const joinHuddle = mapping.joinHuddle;
-  // const addHuddle = mapping.addHuddle;
-
-  const { state, joinHuddle, addHuddle } = useAPIContext()
+export default function HuddleVisualizer() {
+  
+  const { state, joinHuddle, addHuddle, zoomed } = useAPIContext()
 
   interface Position {
     left: number;
@@ -95,10 +51,6 @@ HuddleVisualizerProps) {
 
   let num: number = 0;
 
-  const [zoomed, setZoomed] = useState(false);
-  function toggleZoom() {
-    setZoomed(!zoomed);
-  }
 
   const huddleList: any[] = zoomed ? [state.huddle] : Object.keys(state.state);
 
@@ -107,14 +59,6 @@ HuddleVisualizerProps) {
 
   return (
     <>
-      <MyButton style={{ left: 0 }} onClick={toggleZoom}>
-        {zoomed ? 'Zoom out' : 'Zoom in'}
-      </MyButton>
-      {zoomed ? null : (
-        <MyButton style={{ left: 120 }} onClick={addHuddle}>
-          Add Huddle
-        </MyButton>
-      )}
       {huddleList.map(huddleID => {
         let huddleParticipants: [] = state.state[huddleID];
 

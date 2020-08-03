@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { styled } from '@material-ui/core/styles';
 
 import Controls from './components/Controls/Controls';
@@ -37,27 +37,41 @@ export default function App() {
   const height = useHeight();
 
   return (
-    <APIProvider>
-      <Container style={{ height }}>
-        <MenuBar />
+    <>
+      {roomState === 'disconnected' ? (
+        <>
+          <Container style={{ height }}>
+            <MenuBar />
 
-        <Main>
-          {roomState === 'disconnected' ? (
-            <LocalVideoPreview />
-          ) : (
+            <Main>
+              <LocalVideoPreview />
+              <Controls />
+            </Main>
+            <ReconnectingNotification />
+          </Container>
+        </>
+      ) : (
+          <>
+            <APIProvider>
+              <Container style={{ height }}>
+                <MenuBar />
 
-              <>
-                <Room />
-                {/* Consolidate the bottom three into one component */}
-                <Chat />
-                <ToggleZoomButton />
-                <AddHuddleButton />
-              </>
-            )}
-          <Controls />
-        </Main>
-        <ReconnectingNotification />
-      </Container>
-    </ APIProvider>
+                <Main>
+                  <>
+                    <Room />
+                    {/* Consolidate the bottom three into one component */}
+                    <Chat />
+                    <ToggleZoomButton />
+                    <AddHuddleButton />
+
+                  </>
+                  <Controls />
+                </Main>
+                <ReconnectingNotification />
+              </Container>
+            </APIProvider>
+          </>
+        )}
+    </>
   );
 }

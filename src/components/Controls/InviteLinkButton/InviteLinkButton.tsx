@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import useRoomName from '../../../hooks/useRoomName/useRoomName';
 import usePasscode from '../../../hooks/usePasscode/usePasscode';
@@ -6,7 +6,6 @@ import usePasscode from '../../../hooks/usePasscode/usePasscode';
 import Fab from '@material-ui/core/Fab';
 import Tooltip from '@material-ui/core/Tooltip';
 import ShareIcon from '@material-ui/icons/Share';
-import useLocalVideoToggle from '../../../hooks/useLocalVideoToggle/useLocalVideoToggle';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

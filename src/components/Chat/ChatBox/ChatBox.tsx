@@ -1,7 +1,7 @@
-import React, { ChangeEvent, FormEvent, useRef, useState, useEffect } from 'react';
+import React, { ChangeEvent, useRef, useState, useEffect } from 'react';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import Close from '@material-ui/icons/Close';
-import { Fab, Button } from '@material-ui/core';
+import { Button } from '@material-ui/core';
 import TextField from '@material-ui/core/TextField';
 import useVideoContext from '../../../hooks/useVideoContext/useVideoContext';
 
@@ -106,7 +106,7 @@ export default function ChatBox({ closeChat }: ChatBoxProps) {
   // });
 
   const handleSubmit = (e: any) => {
-    if (e.keyCode == 13) {
+    if (e.keyCode === 13) {
       const requestOptions = {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
