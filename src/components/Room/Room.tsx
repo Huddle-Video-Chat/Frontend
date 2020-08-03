@@ -2,7 +2,6 @@ import { styled } from '@material-ui/core/styles';
 import React from 'react';
 import HuddleVisualizer from '../HuddleVisualizer/HuddleVisualizer';
 
-
 const Outline = styled('div')({
   position: 'relative',
   height: '100%',
@@ -16,7 +15,6 @@ const Outline = styled('div')({
 const Positioner = styled('div')({
   position: 'absolute',
 });
-
 
 export default function Room() {
   // console.log('Room');

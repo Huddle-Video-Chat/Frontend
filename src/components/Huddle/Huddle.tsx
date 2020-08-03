@@ -36,7 +36,7 @@ export default function Huddle({
   zoomed,
 }: HuddleProps) {
   // shit, spaghetti code, need to clean up
-  
+
   const classes = useStyles();
   const adjustedHuddleDiameter = (nextSquareRoot(participants.length) + Math.sqrt(2) - 1) * participantDiameter * 1.5;
   const gridTemplateColumns = zoomed ? 'repeat(' + Math.min(4, participants.length) + ', 1fr)' : 'repeat(2, 1fr)';

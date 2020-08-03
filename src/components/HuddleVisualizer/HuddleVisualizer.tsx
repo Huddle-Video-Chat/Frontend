@@ -2,13 +2,11 @@ import React, { useState } from 'react';
 import Huddle from '../Huddle/Huddle';
 import { styled } from '@material-ui/core/styles';
 
-import useAPIContext from '../../hooks/useAPIContext/useAPIContext'
-
+import useAPIContext from '../../hooks/useAPIContext/useAPIContext';
 
 // Without styled containers or scroll container
 export default function HuddleVisualizer() {
-  
-  const { state, joinHuddle, addHuddle, zoomed } = useAPIContext()
+  const { state, joinHuddle, addHuddle, zoomed } = useAPIContext();
 
   interface Position {
     left: number;
@@ -51,7 +49,6 @@ export default function HuddleVisualizer() {
 
   let num: number = 0;
 
-
   const huddleList: any[] = zoomed ? [state.huddle] : Object.keys(state.state);
 
   // percentages of window.innerHeight
@@ -62,7 +59,7 @@ export default function HuddleVisualizer() {
       {huddleList.map(huddleID => {
         let huddleParticipants: [] = state.state[huddleID];
 
-        let pos = huddlePositions[huddleList.length - 1][num++]
+        let pos = huddlePositions[huddleList.length - 1][num++];
 
         return (
           <Huddle

@@ -7,9 +7,7 @@ export default function useZoomToggle() {
     setIsZoomed(!isZoomed);
   };
 
-  useEffect(() => {
-    
-  })
+  useEffect(() => {});
 
   return [isZoomed, toggleIsZoomed] as const;
 }

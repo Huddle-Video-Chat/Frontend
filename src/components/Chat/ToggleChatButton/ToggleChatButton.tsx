@@ -24,7 +24,7 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     maxWidth: {
       maxWidth: 'none',
-    }
+    },
   })
 );
 
@@ -37,12 +37,7 @@ export default function ToggleChatButton({ openChat }: ToggleChatButtonProps) {
 
   return (
     <div className={classes.container}>
-      <Tooltip
-        title="Open Chat"
-        placement="bottom"
-        PopperProps={{ disablePortal: true }}
-        onClick = {openChat}
-      >
+      <Tooltip title="Open Chat" placement="bottom" PopperProps={{ disablePortal: true }} onClick={openChat}>
         <Fab className={classes.fab} onClick={openChat}>
           <Chat />
         </Fab>

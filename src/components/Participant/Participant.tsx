@@ -25,7 +25,6 @@ export default function Participant({
   participantDiameter,
   huddleID,
 }: ParticipantProps) {
-
   const Positioner = styled('div')({
     width: participantDiameter.toString() + 'px',
     height: participantDiameter.toString() + 'px',

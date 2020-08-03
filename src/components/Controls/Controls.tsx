@@ -47,7 +47,7 @@ export default function Controls() {
   const roomState = useRoomState();
   const isReconnecting = roomState === 'reconnecting';
   const isUserActive = useIsUserActive();
-  const showControls = isUserActive || roomState === 'disconnected'
+  const showControls = isUserActive || roomState === 'disconnected';
 
   return (
     <div className={clsx(classes.container, { showControls })}>

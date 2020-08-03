@@ -5,14 +5,15 @@ import Controls from './components/Controls/Controls';
 import Chat from './components/Chat/Chat';
 import LocalVideoPreview from './components/LocalVideoPreview/LocalVideoPreview';
 import MenuBar from './components/MenuBar/MenuBar';
-import ToggleZoomButton from './components/Controls/ToggleZoomButton/ToggleZoomButton'
+import ToggleZoomButton from './components/Controls/ToggleZoomButton/ToggleZoomButton';
 import AddHuddleButton from './components/Controls/AddHuddleButton/AddHuddleButton';
 import ReconnectingNotification from './components/ReconnectingNotification/ReconnectingNotification';
 import Room from './components/Room/Room';
-import { APIProvider } from './components/APIProvider'
+import { APIProvider } from './components/APIProvider';
 
 import useHeight from './hooks/useHeight/useHeight';
 import useRoomState from './hooks/useRoomState/useRoomState';
+import Webview from './components/Webview/Webview';
 
 const Container = styled('div')({
   display: 'grid',
@@ -51,27 +52,26 @@ export default function App() {
           </Container>
         </>
       ) : (
-          <>
-            <APIProvider>
-              <Container style={{ height }}>
-                <MenuBar />
+        <>
+          <APIProvider>
+            <Container style={{ height }}>
+              <MenuBar />
 
-                <Main>
-                  <>
-                    <Room />
-                    {/* Consolidate the bottom three into one component */}
-                    <Chat />
-                    <ToggleZoomButton />
-                    <AddHuddleButton />
-
-                  </>
-                  <Controls />
-                </Main>
-                <ReconnectingNotification />
-              </Container>
-            </APIProvider>
-          </>
-        )}
+              <Main>
+                <>
+                  <Room />
+                  {/* Consolidate the bottom three into one component */}
+                  <Chat />
+                  <ToggleZoomButton />
+                  <AddHuddleButton />
+                </>
+                <Controls />
+              </Main>
+              <ReconnectingNotification />
+            </Container>
+          </APIProvider>
+        </>
+      )}
     </>
   );
 }
