@@ -21,6 +21,7 @@ const useStyles = makeStyles((theme: Theme) =>
 export default function EndCallButton() {
   const classes = useStyles();
   const { room } = useVideoContext();
+
   const { deleteUser } = useAPIContext()
 
   function leaveRoom() {
