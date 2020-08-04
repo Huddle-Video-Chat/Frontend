@@ -41,13 +41,9 @@ export default function Participant({
 
     <Positioner style={position}>
       {/* <button onClick={clickButton}>{hear ? 'i am shut' : 'shut up'}</button> */}
-      <ParticipantInfo participant={participant} onClick={onClick} isSelected={isSelected}>
-        <ParticipantTracks
-          participant={participant}
-          disableAudio={disableAudio}
-          enableScreenShare={enableScreenShare}
-        />
-      </ParticipantInfo>
+      {/* <ParticipantInfo participant={participant} onClick={onClick} isSelected={isSelected}> */}
+      <ParticipantTracks participant={participant} disableAudio={disableAudio} enableScreenShare={enableScreenShare} />
+      {/* </ParticipantInfo> */}
     </Positioner>
   );
 }
