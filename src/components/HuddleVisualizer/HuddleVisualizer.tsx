@@ -64,7 +64,7 @@ export default function HuddleVisualizer() {
         return (
           <Huddle
             onClick={joinHuddle}
-            disableAudio={parseInt(huddleID) !== state.huddle}
+            inHuddle={parseInt(huddleID) === state.huddle}
             participantDiameter={participantDiameter}
             huddleID={huddleID}
             participants={huddleParticipants}

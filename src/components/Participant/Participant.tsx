@@ -1,8 +1,8 @@
-import React from 'react';
-import ParticipantTracks from '../ParticipantTracks/ParticipantTracks';
-import { Participant as IParticipant } from 'twilio-video';
-
 import { styled } from '@material-ui/core/styles';
+import React from 'react';
+import { Participant as IParticipant } from 'twilio-video';
+import ParticipantTracks from '../ParticipantTracks/ParticipantTracks';
+import ParticipantInfo from '../ParticipantInfo/ParticipantInfo';
 
 interface ParticipantProps {
   participant: IParticipant;
@@ -41,9 +41,13 @@ export default function Participant({
 
     <Positioner style={position}>
       {/* <button onClick={clickButton}>{hear ? 'i am shut' : 'shut up'}</button> */}
-      {/* <ParticipantInfo participant={participant} onClick={onClick} isSelected={isSelected}> */}
-      <ParticipantTracks participant={participant} disableAudio={disableAudio} enableScreenShare={enableScreenShare} />
-      {/* </ParticipantInfo> */}
+      <ParticipantInfo participant={participant} onClick={onClick} isSelected={isSelected}>
+        <ParticipantTracks
+          participant={participant}
+          disableAudio={disableAudio}
+          enableScreenShare={enableScreenShare}
+        />
+      </ParticipantInfo>
     </Positioner>
   );
 }
