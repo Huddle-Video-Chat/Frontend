@@ -1,6 +1,7 @@
 import { styled } from '@material-ui/core/styles';
-import React from 'react';
+import React, { useEffect } from 'react';
 import HuddleVisualizer from '../HuddleVisualizer/HuddleVisualizer';
+import useAPIContext from '../../hooks/useAPIContext/useAPIContext';
 
 const Outline = styled('div')({
   position: 'relative',
@@ -18,6 +19,15 @@ const Positioner = styled('div')({
 
 export default function Room() {
   // console.log('Room');
+  const { deleteUser } = useAPIContext();
+
+  useEffect(() => {
+    console.log('Room render');
+    return () => {
+      console.log('unmount');
+      deleteUser();
+    };
+  }, []);
 
   return (
     <Outline>

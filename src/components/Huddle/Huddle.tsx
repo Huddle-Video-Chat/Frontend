@@ -72,24 +72,22 @@ export default function Huddle({
   });
 
   return (
-    <div onClick={() => onClick(huddleID)} className={classes.huddle}>
-      <Positioner style={adjustedPosition} onClick={() => onClick(huddleID)}>
-        {participants.map(participant => {
-          // position does nothing atm
-          const arrangedP = arrangementPositions.shift();
-          return (
-            <MemoParticipant
-              key={participant.sid}
-              participant={participant}
-              isSelected={inHuddle}
-              onClick={onParticipantClick}
-              position={arrangedP}
-              participantDiameter={participantDiameter}
-              disableAudio={!inHuddle}
-            />
-          );
-        })}
-      </Positioner>
-    </div>
+    <Positioner style={adjustedPosition} onClick={() => onClick(huddleID)}>
+      {participants.map(participant => {
+        // position does nothing atm
+        const arrangedP = arrangementPositions.shift();
+        return (
+          <MemoParticipant
+            key={participant.sid}
+            participant={participant}
+            isSelected={inHuddle}
+            onClick={onParticipantClick}
+            position={arrangedP}
+            participantDiameter={participantDiameter}
+            disableAudio={!inHuddle}
+          />
+        );
+      })}
+    </Positioner>
   );
 }
