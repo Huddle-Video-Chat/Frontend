@@ -10,6 +10,7 @@ import InviteLinkButton from './InviteLinkButton/InviteLinkButton';
 
 import useIsUserActive from '../../hooks/useIsUserActive/useIsUserActive';
 import useRoomState from '../../hooks/useRoomState/useRoomState';
+
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     container: {
