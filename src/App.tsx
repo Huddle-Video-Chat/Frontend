@@ -74,6 +74,6 @@ export default function App() {
           </APIProvider>
         </>
       )}
-    </>
+    </>  
   );
 }

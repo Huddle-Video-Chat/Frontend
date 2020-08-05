@@ -57,21 +57,6 @@ export default function useAPIHook() {
     }
   });
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      const requestOptions = {
-        method: 'GET',
-        headers: { 'Content-Type': 'application/json' },
-      };
-      var url = 'https://huddle-video.herokuapp.com/room/state';
-      url += '?id=' + room.sid;
-      url += '&user_id=' + localParticipant.sid;
-      fetch(url, requestOptions)
-        .then(response => response.json())
-        .then(data => updateState(data));
-    }, 1000);
-    return () => clearInterval(interval);
-  });
 
   function updateState(data: any) {
     if (data.state_counter !== state.counter) {

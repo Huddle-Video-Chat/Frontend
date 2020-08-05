@@ -5,7 +5,6 @@ import Fab from '@material-ui/core/Fab';
 import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 import Tooltip from '@material-ui/core/Tooltip';
 
-import useZoomToggle from '../../../hooks/useZoomToggle/useZoomToggle';
 import useAPIContext from '../../../hooks/useAPIContext/useAPIContext';
 
 const useStyles = makeStyles((theme: Theme) =>

@@ -30,8 +30,8 @@ export function APIProvider({ children }: APIProviderProps) {
   const { room } = useVideoContext();
   const localParticipant = room.localParticipant;
 
-  const [zoomed, toggleZoomed] = useZoomToggle();
-  const [state, updateState] = useAPIHook();
+  const [ zoomed, toggleZoomed ] = useZoomToggle();
+  const [ state, updateState ] = useAPIHook();
 
   async function joinHuddle(huddle: string) {
     if (parseInt(huddle) !== state.huddle) {

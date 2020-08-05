@@ -6,7 +6,6 @@ import ZoomInIcon from '@material-ui/icons/ZoomIn';
 import ZoomOutIcon from '@material-ui/icons/ZoomOut';
 import Tooltip from '@material-ui/core/Tooltip';
 
-import useZoomToggle from '../../../hooks/useZoomToggle/useZoomToggle';
 import useAPIContext from '../../../hooks/useAPIContext/useAPIContext';
 
 const useStyles = makeStyles((theme: Theme) =>
