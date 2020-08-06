@@ -19,15 +19,15 @@ const Positioner = styled('div')({
 
 export default function Room() {
   // console.log('Room');
-  const { deleteUser } = useAPIContext()
+  const { deleteUser } = useAPIContext();
 
   useEffect(() => {
-    console.log('Room render')
+    console.log('Room render');
     return () => {
-      console.log('unmount')
-      deleteUser()
-    }
-  }, [])
+      console.log('unmount');
+      deleteUser();
+    };
+  }, []);
 
   return (
     <Outline>

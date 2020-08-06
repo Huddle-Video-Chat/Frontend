@@ -22,7 +22,7 @@ interface HuddleProps {
   huddleID: string;
   participantDiameter: number;
   onClick: (huddleID: string) => void;
-  disableAudio: boolean;
+  inHuddle: boolean;
   zoomed: boolean;
 }
 
@@ -32,7 +32,7 @@ export default function Huddle({
   huddleID,
   participantDiameter,
   onClick,
-  disableAudio,
+  inHuddle,
   zoomed,
 }: HuddleProps) {
   // shit, spaghetti code, need to clean up
@@ -50,7 +50,7 @@ export default function Huddle({
     top: window.innerHeight * position.top - adjustedHuddleDiameter / 2,
   };
 
-  function onParticipantClick() { }
+  function onParticipantClick() {}
   // adjusting the center
 
   const Positioner = styled('div')({
@@ -80,11 +80,11 @@ export default function Huddle({
           <MemoParticipant
             key={participant.sid}
             participant={participant}
-            isSelected={false}
+            isSelected={inHuddle}
             onClick={onParticipantClick}
             position={arrangedP}
             participantDiameter={participantDiameter}
-            disableAudio={disableAudio}
+            disableAudio={!inHuddle}
           />
         );
       })}

@@ -14,7 +14,6 @@ const Outline = styled('div')({
   boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',
 });
 
-
 // Without styled containers or scroll container
 export default function HuddleVisualizer() {
   const { state, joinHuddle, zoomed } = useAPIContext();
@@ -66,7 +65,7 @@ export default function HuddleVisualizer() {
   const participantDiameter: number = zoomed ? 300 : 150;
 
   return (
-    <Outline >
+    <Outline>
       {huddleList.map(huddleID => {
         let huddleParticipants: [] = state.state[huddleID];
 
@@ -75,7 +74,7 @@ export default function HuddleVisualizer() {
         return (
           <Huddle
             onClick={joinHuddle}
-            disableAudio={parseInt(huddleID) !== state.huddle}
+            inHuddle={parseInt(huddleID) === state.huddle}
             participantDiameter={participantDiameter}
             huddleID={huddleID}
             participants={huddleParticipants}
@@ -84,6 +83,6 @@ export default function HuddleVisualizer() {
           />
         );
       })}
-    </ Outline>
+    </Outline>
   );
 }

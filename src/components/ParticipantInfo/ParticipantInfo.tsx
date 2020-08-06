@@ -99,6 +99,8 @@ export default function ParticipantInfo({ participant, onClick, isSelected, chil
 
   const classes = useStyles();
 
+  console.log(isVideoSwitchedOff);
+
   return (
     <div
       className={clsx(classes.container, {
@@ -107,14 +109,14 @@ export default function ParticipantInfo({ participant, onClick, isSelected, chil
       onClick={onClick}
       data-cy-participant={participant.identity}
     >
-      <div className={clsx(classes.infoContainer, { [classes.hideVideo]: !isVideoEnabled })}>
+      {/* <div className={clsx(classes.infoContainer, { [classes.hideVideo]: !isVideoEnabled })}>
         <div className={classes.infoRow}>
           <h4 className={classes.identity}>
             <ParticipantConnectionIndicator participant={participant} />
             {participant.identity}
           </h4>
-          {/* removing network quailty indicator, needs to be done conditionally in the future */}
-          {/* <NetworkQualityLevel qualityLevel={networkQualityLevel} /> */}
+          removing network quailty indicator, needs to be done conditionally in the future
+          <NetworkQualityLevel qualityLevel={networkQualityLevel} />
         </div>
         <div>
           <AudioLevelIndicator audioTrack={audioTrack} background="white" />
@@ -122,7 +124,7 @@ export default function ParticipantInfo({ participant, onClick, isSelected, chil
           {isScreenShareEnabled && <ScreenShare />}
           {isSelected && <PinIcon />}
         </div>
-      </div>
+      </div> */}
       {isVideoSwitchedOff && <BandwidthWarning />}
       {children}
     </div>
