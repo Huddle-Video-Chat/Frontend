@@ -9,16 +9,18 @@ const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     container: {
       position: 'absolute',
-      right: '7.5%',
-      transform: 'translate(50%, 30px)',
-      top: '3%',
-      backgroundColor: '#A3B0F7',
-      width: '15vw',
-      height: '94vh',
+      right: '15px',
+      // transform: 'translate(50%, 30px)',
+      top: '9%',
+      backgroundColor: '#EDAAB7',
+      width: '250px',
+      height: '85%',
       display: 'flex',
       flexDirection: 'column',
-      padding: '1%',
-      margin: '0px',
+      padding: '2%',
+      margin: '20px',
+      borderRadius: '15px',
+      boxShadow: '4px 4px 17px rgba(0, 0, 0, 0.13)',
     },
     topBar: {
       display: 'flex',
@@ -58,6 +60,7 @@ const useStyles = makeStyles((theme: Theme) =>
     h1: {
       margin: '0px',
       textAlign: 'center',
+      color: '#ffffff',
     },
     h2: {
       margin: '0px',
