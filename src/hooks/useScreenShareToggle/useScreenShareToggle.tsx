@@ -1,6 +1,7 @@
 import { useState, useCallback, useRef } from 'react';
 import useVideoContext from '../useVideoContext/useVideoContext';
 import { LogLevels, Track } from 'twilio-video';
+import useAPIContext from '../../hooks/useAPIContext/useAPIContext';
 
 interface MediaStreamTrackPublishOptions {
   name?: string;
@@ -12,6 +13,7 @@ export default function useScreenShareToggle() {
   const { room, onError } = useVideoContext();
   const [isSharing, setIsSharing] = useState(false);
   const stopScreenShareRef = useRef<() => void>(null!);
+  const { state } = useAPIContext();
 
   const shareScreen = useCallback(() => {
     navigator.mediaDevices
@@ -31,7 +33,7 @@ export default function useScreenShareToggle() {
         // set to 'high' via track.setPriority()
         room.localParticipant
           .publishTrack(track, {
-            name: 'screen', // Tracks can be named to easily find them later
+            name: 'screen ' + state.huddle, // Tracks can be named to easily find them later
             priority: 'low', // Priority is set to high by the subscriber when the video track is rendered
           } as MediaStreamTrackPublishOptions)
           .then(trackPublication => {
