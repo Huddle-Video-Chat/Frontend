@@ -3,6 +3,7 @@ import { Participant, Track } from 'twilio-video';
 import Publication from '../Publication/Publication';
 import usePublications from '../../hooks/usePublications/usePublications';
 import useVideoContext from '../../hooks/useVideoContext/useVideoContext';
+import useAPIContext from '../../hooks/useAPIContext/useAPIContext';
 
 interface ParticipantTracksProps {
   participant: Participant;
@@ -28,6 +29,7 @@ export default function ParticipantTracks({
   const { room } = useVideoContext();
   const publications = usePublications(participant);
   const isLocal = participant === room.localParticipant;
+  const { state } = useAPIContext()
 
   let filteredPublications;
 

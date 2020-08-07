@@ -39,6 +39,7 @@ export default function useAPIHook() {
       .then(data => updateState(data));
   }
 
+  // make SURE useAPIHook is only called inside a CONNECTED ROOM
   useEffect(() => {
     if (roomState !== 'disconnected') {
       const interval = setInterval(() => {
@@ -52,13 +53,15 @@ export default function useAPIHook() {
         fetch(url, requestOptions)
           .then(response => response.json())
           .then(data => updateState(data));
-      }, 1000);
+      }, 500);
       return () => clearInterval(interval);
     }
   });
 
 
+
   function updateState(data: any) {
+    console.log('updating state ...')
     if (data.state_counter !== state.counter) {
       // console.log(data);
       var newState: {
@@ -83,6 +86,11 @@ export default function useAPIHook() {
         counter: data.state_counter,
         huddle: parseInt(data.huddle_id),
       });
+
+      console.log('set state with')
+      console.log(newState)
+      console.log('set huddle with')
+      console.log(parseInt(data.huddle_id))
     }
   }
 

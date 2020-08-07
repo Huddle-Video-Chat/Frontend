@@ -38,18 +38,22 @@ export default function AddHuddleButton() {
   const classes = useStyles();
   const { addHuddle, zoomed } = useAPIContext();
 
+  const tooltipMessage = zoomed ? 'Cannot add huddle while zoomed in' : 'Add Huddle'
   return (
     <div className={classes.container}>
       <Tooltip
-        title={'Add Huddle'}
+        title={tooltipMessage}
         classes={{ tooltip: classes.noMaxWidth }}
         placement="bottom"
         PopperProps={{ disablePortal: true }}
         onClick={addHuddle}
+        style={{ cursor: zoomed ? 'not-allowed' : 'pointer' }}
       >
-        <Fab className={classes.fab} disabled={zoomed} data-cy-audio-toggle>
-          <AddCircleOutlineIcon />
-        </Fab>
+        <div>
+          <Fab className={classes.fab} disabled={zoomed} data-cy-audio-toggle>
+            <AddCircleOutlineIcon />
+          </Fab>
+        </div>
       </Tooltip>
     </div>
   );

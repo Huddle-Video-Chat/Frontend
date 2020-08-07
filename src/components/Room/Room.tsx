@@ -21,13 +21,13 @@ export default function Room() {
   // console.log('Room');
   const { deleteUser } = useAPIContext();
 
-  useEffect(() => {
-    console.log('Room render');
-    return () => {
-      console.log('unmount');
-      deleteUser();
-    };
-  }, []);
+  // useEffect(() => {
+  //   console.log('Room render');
+  //   return () => {
+  //     console.log('unmount');
+  //     deleteUser();
+  //   };
+  // }, []);
 
   return (
     <Outline>

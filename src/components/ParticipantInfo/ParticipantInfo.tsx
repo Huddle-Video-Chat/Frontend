@@ -99,7 +99,7 @@ export default function ParticipantInfo({ participant, onClick, isSelected, chil
 
   const classes = useStyles();
 
-  console.log(isVideoSwitchedOff);
+  // console.log(isVideoSwitchedOff);
 
   return (
     <div

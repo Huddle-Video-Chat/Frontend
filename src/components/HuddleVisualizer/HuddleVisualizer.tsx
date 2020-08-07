@@ -7,7 +7,7 @@ import useAPIContext from '../../hooks/useAPIContext/useAPIContext';
 const Outline = styled('div')({
   position: 'relative',
   height: '100%',
-  display: 'grid',
+  // display: 'grid',
   overflow: 'auto',
 
   background: '#F7F7F7',

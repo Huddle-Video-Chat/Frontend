@@ -14,7 +14,7 @@ export default function useScreenShareParticipant() {
   const { state } = useAPIContext();
 
   useEffect(() => {
-    console.log('name');
+    console.log('screen shrae use effect');
     console.log('screen ' + state.huddle);
     if (room.state === 'connected') {
       const updateScreenShareParticipant = () => {
@@ -48,7 +48,7 @@ export default function useScreenShareParticipant() {
         room.localParticipant.off('trackUnpublished', updateScreenShareParticipant);
       };
     }
-  }, [room]);
+  }, [room, state]);
 
   return screenShareParticipant;
 }

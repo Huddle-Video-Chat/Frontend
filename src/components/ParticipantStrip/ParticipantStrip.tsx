@@ -19,8 +19,8 @@ export default function ParticipantStrip({ zoomed }: ParticipantStripProps) {
   const { room } = useVideoContext();
   // const [huddleID, setHuddleID] = useState('');
 
-  console.log('participants:');
-  console.log(participants);
+  // console.log('participants:');
+  // console.log(participants);
 
   return <HuddleVisualizer />;
 }
