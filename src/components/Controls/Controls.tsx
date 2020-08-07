@@ -61,7 +61,7 @@ export default function Controls() {
       <ToggleVideoButton disabled={isReconnecting} />
       {roomState !== 'disconnected' && (
         <>
-          {/* <ToggleScreenShareButton disabled={isReconnecting} /> */}
+          <ToggleScreenShareButton disabled={isReconnecting} />
           <EndCallButton />
         </>
       )}

@@ -5,6 +5,7 @@ import { nextSquareRoot, getArrangementPositions } from '../../utils/algorithms'
 
 import { styled } from '@material-ui/core/styles';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+import usePublications from '../../hooks/usePublications/usePublications';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -82,6 +83,7 @@ export default function Huddle({
             participant={participant}
             isSelected={inHuddle}
             onClick={onParticipantClick}
+            enableScreenShare={true}
             position={arrangedP}
             participantDiameter={participantDiameter}
             disableAudio={!inHuddle}

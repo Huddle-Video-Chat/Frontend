@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import useVideoContext from '../useVideoContext/useVideoContext';
 
 import { Participant, TrackPublication } from 'twilio-video';
+import useAPIContext from '../useAPIContext/useAPIContext';
 
 /*
   Returns the participant that is sharing their screen (if any). This hook assumes that only one participant
@@ -10,8 +11,11 @@ import { Participant, TrackPublication } from 'twilio-video';
 export default function useScreenShareParticipant() {
   const { room } = useVideoContext();
   const [screenShareParticipant, setScreenShareParticipant] = useState<Participant>();
+  const { state } = useAPIContext();
 
   useEffect(() => {
+    console.log('name');
+    console.log('screen ' + state.huddle);
     if (room.state === 'connected') {
       const updateScreenShareParticipant = () => {
         setScreenShareParticipant(
@@ -20,7 +24,7 @@ export default function useScreenShareParticipant() {
             .concat(room.localParticipant)
             .find((participant: Participant) =>
               Array.from<TrackPublication>(participant.tracks.values()).find(track =>
-                track.trackName.includes('screen')
+                track.trackName.includes('screen ' + state.huddle)
               )
             )
         );
