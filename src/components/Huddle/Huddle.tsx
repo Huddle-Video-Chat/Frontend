@@ -42,7 +42,7 @@ export default function Huddle({
   // shit, spaghetti code, need to clean up
 
   const classes = useStyles();
-  const { state } = useAPIContext()
+  const { state } = useAPIContext();
   const adjustedHuddleDiameter = (nextSquareRoot(participants.length) + Math.sqrt(2) - 1) * participantDiameter * 1.5;
   const gridTemplateColumns = zoomed ? 'repeat(' + Math.min(4, participants.length) + ', 1fr)' : 'repeat(2, 1fr)';
   const border = zoomed ? 'null' : '3px solid #A3B0F7';
@@ -55,7 +55,7 @@ export default function Huddle({
     top: window.innerHeight * position.top - adjustedHuddleDiameter / 2,
   };
 
-  function onParticipantClick() { }
+  function onParticipantClick() {}
   // adjusting the center
 
   const Positioner = styled('div')({
@@ -76,16 +76,16 @@ export default function Huddle({
     gridTemplateColumns: gridTemplateColumns,
   });
 
-  const tooltipMessage = (state.huddle === parseInt(huddleID)) ? 'My huddle' : 'Click to join'
+  const tooltipMessage = state.huddle === parseInt(huddleID) ? 'My huddle' : 'Click to join';
   return (
-    <Positioner style={adjustedPosition} >
-      <Tooltip
-        title={zoomed ? '' : tooltipMessage}
-        placement='top'
-        PopperProps={{ disablePortal: true }}
-        onClick={() => onClick(huddleID)}
-        style={adjustedPosition}
-      >
+    <Tooltip
+      title={zoomed ? '' : tooltipMessage}
+      placement="top"
+      PopperProps={{ disablePortal: true }}
+      onClick={() => onClick(huddleID)}
+      style={adjustedPosition}
+    >
+      <Positioner style={adjustedPosition}>
         <div>
           {participants.map(participant => {
             // position does nothing atm
@@ -104,7 +104,7 @@ export default function Huddle({
             );
           })}
         </div>
-      </Tooltip>
-    </Positioner>
+      </Positioner>
+    </Tooltip>
   );
 }
