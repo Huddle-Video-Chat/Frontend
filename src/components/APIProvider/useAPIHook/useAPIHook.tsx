@@ -86,11 +86,6 @@ export default function useAPIHook() {
         counter: data.state_counter,
         huddle: parseInt(data.huddle_id),
       });
-
-      console.log('set state with')
-      console.log(newState)
-      console.log('set huddle with')
-      console.log(parseInt(data.huddle_id))
     }
   }
 

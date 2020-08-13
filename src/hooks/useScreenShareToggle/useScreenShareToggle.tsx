@@ -31,6 +31,8 @@ export default function useScreenShareToggle() {
         // All video tracks are published with 'low' priority. This works because the video
         // track that is displayed in the 'MainParticipant' component will have it's priority
         // set to 'high' via track.setPriority()
+        console.log('inside toggle')
+        console.log(state.huddle)
         room.localParticipant
           .publishTrack(track, {
             name: 'screen ' + state.huddle, // Tracks can be named to easily find them later
@@ -56,7 +58,7 @@ export default function useScreenShareToggle() {
           onError(error);
         }
       });
-  }, [room, onError]);
+  }, [room, state, onError]);
 
   const toggleScreenShare = useCallback(() => {
     !isSharing ? shareScreen() : stopScreenShareRef.current();

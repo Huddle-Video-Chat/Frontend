@@ -14,10 +14,11 @@ export default function useScreenShareParticipant() {
   const { state } = useAPIContext();
 
   useEffect(() => {
-    console.log('screen shrae use effect');
-    console.log('screen ' + state.huddle);
     if (room.state === 'connected') {
       const updateScreenShareParticipant = () => {
+        console.log('Root level array')
+        console.log(Array.from<Participant>(room.participants.values()).concat(room.localParticipant))
+
         setScreenShareParticipant(
           Array.from<Participant>(room.participants.values())
             // the screenshare participant could be the localParticipant
