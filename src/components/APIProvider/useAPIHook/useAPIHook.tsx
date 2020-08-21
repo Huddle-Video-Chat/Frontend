@@ -58,10 +58,8 @@ export default function useAPIHook() {
     }
   });
 
-
-
   function updateState(data: any) {
-    console.log('updating state ...')
+    console.log('updating state ...');
     if (data.state_counter !== state.counter) {
       // console.log(data);
       var newState: {
@@ -86,11 +84,6 @@ export default function useAPIHook() {
         counter: data.state_counter,
         huddle: parseInt(data.huddle_id),
       });
-
-      console.log('set state with')
-      console.log(newState)
-      console.log('set huddle with')
-      console.log(parseInt(data.huddle_id))
     }
   }
 
