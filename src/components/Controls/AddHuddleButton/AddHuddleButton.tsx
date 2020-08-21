@@ -12,11 +12,11 @@ const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     fab: {
       margin: theme.spacing(1),
-      color: '#a7aff4',
-      backgroundColor: '#f2f2f2 !important',
-      height: '40px',
-      width: '40px',
-      boxShadow: '3px 3px 7px rgba(0, 0, 0, 0.14), -2px -1px 3px rgba(255, 255, 255, 0.74) !important',
+      color: '#ffffff',
+      backgroundColor: '#a7aff4 !important',
+      height: '55px',
+      width: '55px',
+      boxShadow: '3px 3px 7px rgba(0, 0, 0, 0.14) !important',
     },
     container: {
       display: 'flex',
@@ -38,11 +38,11 @@ const useStyles = makeStyles((theme: Theme) =>
 export default function AddHuddleButton() {
   const classes = useStyles();
   const { addHuddle, zoomed } = useAPIContext();
-  const [isScreenShared] = useScreenShareToggle()
+  const [isScreenShared] = useScreenShareToggle();
 
-  const disableAddHuddleButton = zoomed || isScreenShared
+  const disableAddHuddleButton = zoomed || isScreenShared;
 
-  const tooltipMessage = zoomed ? 'Cannot add huddle while zoomed in' : 'Add Huddle'
+  const tooltipMessage = zoomed ? 'Cannot add huddle while zoomed in' : 'Add Huddle';
   return (
     <div className={classes.container}>
       <Tooltip
