@@ -43,8 +43,8 @@ export default function Huddle({
   // shit, spaghetti code, need to clean up
 
   const classes = useStyles();
-  const { state } = useAPIContext()
-  const [isScreenShared] = useScreenShareToggle()
+  const { state } = useAPIContext();
+  const [isScreenShared] = useScreenShareToggle();
   const adjustedHuddleDiameter = (nextSquareRoot(participants.length) + Math.sqrt(2) - 1) * participantDiameter * 1.5;
   const gridTemplateColumns = zoomed ? 'repeat(' + Math.min(4, participants.length) + ', 1fr)' : 'repeat(2, 1fr)';
   const border = zoomed ? 'null' : '3px solid #A3B0F7';
@@ -57,7 +57,7 @@ export default function Huddle({
     top: window.innerHeight * position.top - adjustedHuddleDiameter / 2,
   };
 
-  function onParticipantClick() { }
+  function onParticipantClick() {}
   // adjusting the center
 
   const Positioner = styled('div')({
@@ -78,26 +78,27 @@ export default function Huddle({
     gridTemplateColumns: gridTemplateColumns,
   });
 
-  let tooltipMessage = (state.huddle === parseInt(huddleID)) ? 'My huddle' : 'Click to join'
+  let tooltipMessage = state.huddle === parseInt(huddleID) ? 'My huddle' : 'Click to join';
+  tooltipMessage = state.huddle === parseInt(huddleID) ? 'My huddle' : 'Click to join';
   if (isScreenShared) {
-    tooltipMessage = 'Cannot move huddles while sharing screen'
+    tooltipMessage = 'Cannot move huddles while sharing screen';
   }
 
   function huddleClick() {
     if (!isScreenShared) {
-      onClick(huddleID)
+      onClick(huddleID);
     }
   }
 
   return (
-    <Positioner style={adjustedPosition} >
-      <Tooltip
-        title={zoomed ? '' : tooltipMessage}
-        placement='top'
-        PopperProps={{ disablePortal: true }}
-        onClick={() => huddleClick()}
-        style={adjustedPosition}
-      >
+    <Tooltip
+      title={zoomed ? '' : tooltipMessage}
+      placement="top"
+      PopperProps={{ disablePortal: true }}
+      onClick={() => onClick(huddleID)}
+      style={adjustedPosition}
+    >
+      <Positioner style={adjustedPosition}>
         <div>
           {participants.map(participant => {
             // position does nothing atm
@@ -116,7 +117,7 @@ export default function Huddle({
             );
           })}
         </div>
-      </Tooltip>
-    </Positioner>
+      </Positioner>
+    </Tooltip>
   );
 }

@@ -16,8 +16,8 @@ export default function useScreenShareParticipant() {
   useEffect(() => {
     if (room.state === 'connected') {
       const updateScreenShareParticipant = () => {
-        console.log('Root level array')
-        console.log(Array.from<Participant>(room.participants.values()).concat(room.localParticipant))
+        console.log('Root level array');
+        console.log(Array.from<Participant>(room.participants.values()).concat(room.localParticipant));
 
         setScreenShareParticipant(
           Array.from<Participant>(room.participants.values())

@@ -58,10 +58,8 @@ export default function useAPIHook() {
     }
   });
 
-
-
   function updateState(data: any) {
-    console.log('updating state ...')
+    console.log('updating state ...');
     if (data.state_counter !== state.counter) {
       // console.log(data);
       var newState: {
