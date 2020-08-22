@@ -6,7 +6,6 @@ import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 import Tooltip from '@material-ui/core/Tooltip';
 
 import useAPIContext from '../../../hooks/useAPIContext/useAPIContext';
-import useScreenShareToggle from '../../../hooks/useScreenShareToggle/useScreenShareToggle';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -37,12 +36,19 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export default function AddHuddleButton() {
   const classes = useStyles();
-  const { addHuddle, zoomed } = useAPIContext();
-  const [isScreenShared] = useScreenShareToggle();
+  const { addHuddle, zoomed, isSharing } = useAPIContext();
 
-  const disableAddHuddleButton = zoomed || isScreenShared;
+  const disableAddHuddleButton = zoomed || isSharing;
 
-  const tooltipMessage = zoomed ? 'Cannot add huddle while zoomed in' : 'Add Huddle';
+  let tooltipMessage
+  if (zoomed) {
+    tooltipMessage = 'Cannot add huddle while zoomed in'
+  } else if (isSharing) {
+    tooltipMessage = 'Cannot add huddle while sharing screen'
+  } else {
+    tooltipMessage = 'Add huddle'
+  }
+  
   return (
     <div className={classes.container}>
       <Tooltip
