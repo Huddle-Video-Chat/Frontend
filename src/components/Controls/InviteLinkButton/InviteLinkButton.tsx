@@ -11,8 +11,8 @@ const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     fab: {
       margin: theme.spacing(1),
-      color: 'white',
-      backgroundColor: '#A3B0F7 !important',
+      color: '#A3B0F7',
+      backgroundColor: 'white !important',
       boxShadow: '3px 3px 7px rgba(0, 0, 0, 0.14) !important',
     },
   })
