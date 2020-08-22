@@ -33,12 +33,13 @@ const useStyles = makeStyles((theme: Theme) =>
       [theme.breakpoints.down('xs')]: {
         bottom: `${theme.sidebarMobileHeight + 3}px`,
       },
-      backgroundColor: '#F7F7F7',
+      backgroundColor: '#A3B0F7',
       borderRadius: '50px',
       color: 'green',
       paddingLeft: '1%',
       paddingRight: '1%',
-      boxShadow: '3px 3px 7px rgba(0, 0, 0, 0.07), -5px -3px 8px rgba(255, 255, 255, 0.83)',
+      boxShadow: '3px 3px 7px rgba(0, 0, 0, 0.07)',
+      padding: '11px 25px',
     },
   })
 );
