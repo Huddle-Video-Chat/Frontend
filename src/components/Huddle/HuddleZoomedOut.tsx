@@ -1,7 +1,7 @@
 import React from 'react';
 import { Participant as IParticipant } from 'twilio-video';
 import Participant, { MemoParticipant } from '../Participant/Participant';
-import { nextSquareRoot, getArrangementPositions } from '../../utils/algorithms';
+import { nextSquareRoot, getArrangementPositions, getArrangementPositionsZoomed } from '../../utils/algorithms';
 
 import { styled } from '@material-ui/core/styles';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
@@ -10,6 +10,7 @@ import Tooltip from '@material-ui/core/Tooltip';
 import usePublications from '../../hooks/usePublications/usePublications';
 import useAPIContext from '../../hooks/useAPIContext/useAPIContext';
 import useScreenShareToggle from '../../hooks/useScreenShareToggle/useScreenShareToggle';
+import useScreenShareParticipant from '../../hooks/useScreenShareParticipant/useScreenShareParticipant';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -25,55 +26,39 @@ interface HuddleProps {
   participants: IParticipant[];
   position: any;
   huddleID: string;
-  participantDiameter: number;
   onClick: (huddleID: string) => void;
   inHuddle: boolean;
-  zoomed: boolean;
 }
 
-export default function Huddle({
-  participants,
-  position,
-  huddleID,
-  participantDiameter,
-  onClick,
-  inHuddle,
-  zoomed,
-}: HuddleProps) {
-  // shit, spaghetti code, need to clean up
-
+export default function HuddleZoomedOut({ participants, position, huddleID, onClick, inHuddle }: HuddleProps) {
   const classes = useStyles();
   const { state } = useAPIContext();
   const [isScreenShared] = useScreenShareToggle();
-  const adjustedHuddleDiameter = (nextSquareRoot(participants.length) + Math.sqrt(2) - 1) * participantDiameter * 1.5;
-  const gridTemplateColumns = zoomed ? 'repeat(' + Math.min(4, participants.length) + ', 1fr)' : 'repeat(2, 1fr)';
-  const border = zoomed ? 'null' : '3px solid #A3B0F7';
+  const size = (window.innerHeight * 1) / 5;
+
+  const adjustedHuddleDiameter = (nextSquareRoot(participants.length) + Math.sqrt(2) - 1) * size * 1.5;
+  const gridTemplateColumns = 'repeat(2, 1fr)';
+  const border = '3px solid #A3B0F7';
 
   const center = { x: position.left - adjustedHuddleDiameter / 2, y: position.top - adjustedHuddleDiameter / 2 };
-  let arrangementPositions = getArrangementPositions(participants.length + 1, participantDiameter, center);
+  let arrangementPositions = getArrangementPositions(participants.length + 1, size, center);
 
   const adjustedPosition = {
     left: window.innerWidth * position.left - adjustedHuddleDiameter / 2,
     top: window.innerHeight * position.top - adjustedHuddleDiameter / 2,
   };
 
-  function onParticipantClick() {}
   // adjusting the center
 
   const Positioner = styled('div')({
-    // overflow: 'hidden',
-    // debugging border
     border: border,
     borderRadius: '50%',
-    // backgroundColor: '#99aab5',
     width: adjustedHuddleDiameter,
     height: adjustedHuddleDiameter,
     position: 'absolute',
-    // overflow: 'hidden',
     justifyItems: 'center',
     alignItems: 'center',
     padding: '20px',
-
     display: 'grid',
     gridTemplateColumns: gridTemplateColumns,
   });
@@ -92,7 +77,7 @@ export default function Huddle({
 
   return (
     <Tooltip
-      title={zoomed ? '' : tooltipMessage}
+      title={tooltipMessage}
       placement="top"
       PopperProps={{ disablePortal: true }}
       onClick={() => onClick(huddleID)}
@@ -108,10 +93,10 @@ export default function Huddle({
                 key={participant.sid}
                 participant={participant}
                 isSelected={inHuddle}
-                onClick={onParticipantClick}
-                enableScreenShare={true}
+                onClick={huddleClick}
+                enableScreenShare={false}
                 position={arrangedP}
-                participantDiameter={participantDiameter}
+                size={size}
                 disableAudio={!inHuddle}
               />
             );
