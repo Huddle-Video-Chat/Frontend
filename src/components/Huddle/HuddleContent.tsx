@@ -28,7 +28,7 @@ export default function HuddleZoomedIn({}: HuddleProps) {
   const participants: any[] = state.state[state.huddle];
   const size: number = (window.innerHeight * 1) / 5;
 
-  const adjustedHuddleDiameter = (nextSquareRoot(participants.length) + Math.sqrt(2) - 1) * size * 1.5;
+  const adjustedHuddleDiameter = (nextSquareRoot(participants.length) + Math.sqrt(2) - 1) * size;
   const gridTemplateColumns = 'repeat(' + Math.min(4, participants.length) + ', 1fr)';
   const border = 'null';
 

@@ -32,7 +32,7 @@ export default function HuddleZoomedOut({ participants, position, huddleID, onCl
   const { state, isSharing } = useAPIContext();
   const size = (window.innerHeight * 1) / 5;
 
-  const adjustedHuddleDiameter = (nextSquareRoot(participants.length) + Math.sqrt(2) - 1) * size * 1.5;
+  const adjustedHuddleDiameter = (nextSquareRoot(participants.length) + Math.sqrt(2) - 1) * size;
   const gridTemplateColumns = 'repeat(2, 1fr)';
   const border = '3px solid #A3B0F7';
 
@@ -61,10 +61,10 @@ export default function HuddleZoomedOut({ participants, position, huddleID, onCl
 
 
   let tooltipMessage
-  if (isSharing) {
-    tooltipMessage = 'Cannot move huddles while sharing screen'
-  } else if (state.huddle === parseInt(huddleID)) {
+  if (state.huddle === parseInt(huddleID)) {
     tooltipMessage = 'My huddle'
+  } else if (isSharing) {
+    tooltipMessage = 'Cannot move huddles while sharing screen'
   } else {
     tooltipMessage = 'Click to join'
   }
