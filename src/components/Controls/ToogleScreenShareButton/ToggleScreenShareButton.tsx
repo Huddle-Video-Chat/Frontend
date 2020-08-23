@@ -6,9 +6,9 @@ import ScreenShare from '@material-ui/icons/ScreenShare';
 import StopScreenShare from '@material-ui/icons/StopScreenShare';
 import Tooltip from '@material-ui/core/Tooltip';
 
-import useScreenShareToggle from '../../../hooks/useScreenShareToggle/useScreenShareToggle';
 import useScreenShareParticipant from '../../../hooks/useScreenShareParticipant/useScreenShareParticipant';
 import useVideoContext from '../../../hooks/useVideoContext/useVideoContext';
+import useAPIContext from '../../../hooks/useAPIContext/useAPIContext';
 
 export const SCREEN_SHARE_TEXT = 'Share Screen';
 export const STOP_SCREEN_SHARE_TEXT = 'Stop Sharing Screen';
@@ -28,8 +28,8 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export default function ToggleScreenShareButton(props: { disabled?: boolean }) {
   const classes = useStyles();
-  const [isScreenShared, toggleScreenShare] = useScreenShareToggle();
   const screenShareParticipant = useScreenShareParticipant();
+  const { isSharing, toggleScreenShare } = useAPIContext();
   const { room } = useVideoContext();
   const disableScreenShareButton = screenShareParticipant && screenShareParticipant !== room.localParticipant;
   const isScreenShareSupported = navigator.mediaDevices && navigator.mediaDevices.getDisplayMedia;
@@ -37,7 +37,7 @@ export default function ToggleScreenShareButton(props: { disabled?: boolean }) {
 
   let tooltipMessage = SCREEN_SHARE_TEXT;
 
-  if (isScreenShared) {
+  if (isSharing) {
     tooltipMessage = STOP_SCREEN_SHARE_TEXT;
   }
 
@@ -60,7 +60,7 @@ export default function ToggleScreenShareButton(props: { disabled?: boolean }) {
         {/* The div element is needed because a disabled button will not emit hover events and we want to display
           a tooltip when screen sharing is disabled */}
         <Fab className={classes.fab} onClick={toggleScreenShare} disabled={isDisabled}>
-          {isScreenShared ? <StopScreenShare /> : <ScreenShare />}
+          {isSharing ? <StopScreenShare /> : <ScreenShare />}
         </Fab>
       </div>
     </Tooltip>

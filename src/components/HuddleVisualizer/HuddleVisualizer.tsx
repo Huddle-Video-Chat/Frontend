@@ -81,7 +81,7 @@ export default function HuddleVisualizer() {
 
   let num: number = 0;
 
-  const huddleList: any[] = zoomed ? [state.huddle] : Object.keys(state.state);
+  const huddleList: any[] = Object.keys(state.state);
 
   return (
     <Outline>
@@ -92,6 +92,7 @@ export default function HuddleVisualizer() {
           <HuddleZoomedIn />
         )
       ) : (
+        // <HuddleZoomedOut />
         huddleList.map(huddleID => {
           let huddleParticipants: [] = state.state[huddleID];
 

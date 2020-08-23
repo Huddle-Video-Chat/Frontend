@@ -7,10 +7,7 @@ import { styled } from '@material-ui/core/styles';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import Tooltip from '@material-ui/core/Tooltip';
 
-import usePublications from '../../hooks/usePublications/usePublications';
 import useAPIContext from '../../hooks/useAPIContext/useAPIContext';
-import useScreenShareToggle from '../../hooks/useScreenShareToggle/useScreenShareToggle';
-import useScreenShareParticipant from '../../hooks/useScreenShareParticipant/useScreenShareParticipant';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -32,8 +29,7 @@ interface HuddleProps {
 
 export default function HuddleZoomedOut({ participants, position, huddleID, onClick, inHuddle }: HuddleProps) {
   const classes = useStyles();
-  const { state } = useAPIContext();
-  const [isScreenShared] = useScreenShareToggle();
+  const { state, isSharing } = useAPIContext();
   const size = (window.innerHeight * 1) / 5;
 
   const adjustedHuddleDiameter = (nextSquareRoot(participants.length) + Math.sqrt(2) - 1) * size * 1.5;
@@ -63,14 +59,17 @@ export default function HuddleZoomedOut({ participants, position, huddleID, onCl
     gridTemplateColumns: gridTemplateColumns,
   });
 
-  let tooltipMessage = state.huddle === parseInt(huddleID) ? 'My huddle' : 'Click to join';
-  tooltipMessage = state.huddle === parseInt(huddleID) ? 'My huddle' : 'Click to join';
-  if (isScreenShared) {
+  let tooltipMessage;
+  if (isSharing) {
     tooltipMessage = 'Cannot move huddles while sharing screen';
+  } else if (state.huddle === parseInt(huddleID)) {
+    tooltipMessage = 'My huddle';
+  } else {
+    tooltipMessage = 'Click to join';
   }
 
   function huddleClick() {
-    if (!isScreenShared) {
+    if (!isSharing) {
       onClick(huddleID);
     }
   }
