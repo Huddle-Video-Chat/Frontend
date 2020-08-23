@@ -1,5 +1,6 @@
 import React from 'react';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+
 import useRoomName from '../../../hooks/useRoomName/useRoomName';
 import usePasscode from '../../../hooks/usePasscode/usePasscode';
 
@@ -20,7 +21,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export default function InviteLinkButton(props: { disabled?: boolean }) {
   const classes = useStyles();
-  const roomName = useRoomName();
+  const roomName = useRoomName()[0];
   const passcode = usePasscode();
   const url = window.location.href;
   const copyLink = () => {
