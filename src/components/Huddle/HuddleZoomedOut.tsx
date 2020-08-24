@@ -8,6 +8,7 @@ import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import Tooltip from '@material-ui/core/Tooltip';
 
 import useAPIContext from '../../hooks/useAPIContext/useAPIContext';
+import Pic from '../../img/group_icon.png';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -74,6 +75,47 @@ export default function HuddleZoomedOut({ participants, position, huddleID, onCl
     }
   }
 
+  let count = 0
+
+  let contents
+  if (participants.length > 4) {
+    contents = participants.slice(0, 3).map(participant => {
+      const arrangedP = arrangementPositions.shift();
+      return (
+        <MemoParticipant
+          key={participant.sid}
+          participant={participant}
+          isSelected={inHuddle}
+          onClick={huddleClick}
+          enableScreenShare={false}
+          position={arrangedP}
+          size={size}
+          disableAudio={!inHuddle}
+        />
+      )
+    })
+
+    contents.push (
+      <img src="../../img/thankyou.jpeg" alt="Thank you"></img>
+    )
+  } else {
+    contents = participants.map(participant => {
+      const arrangedP = arrangementPositions.shift();
+      return (
+        <MemoParticipant
+          key={participant.sid}
+          participant={participant}
+          isSelected={inHuddle}
+          onClick={huddleClick}
+          enableScreenShare={false}
+          position={arrangedP}
+          size={size}
+          disableAudio={!inHuddle}
+        />
+      )
+    })
+  }
+
   return (
     <Tooltip
       title={tooltipMessage}
@@ -82,11 +124,14 @@ export default function HuddleZoomedOut({ participants, position, huddleID, onCl
       onClick={() => onClick(huddleID)}
       style={adjustedPosition}
     >
-      <Positioner style={adjustedPosition}>
-        <div>
-          {participants.map(participant => {
-            // position does nothing atm
+      <Positioner style={adjustedPosition} >
+        {contents}
+        {/* {participants.map(participant => {
+          // position does nothing atm bc were using grid
+          // if statement to prevent more than 4 ppl showing up
+          if (count < 4) {
             const arrangedP = arrangementPositions.shift();
+            count += 1
             return (
               <MemoParticipant
                 key={participant.sid}
@@ -99,8 +144,8 @@ export default function HuddleZoomedOut({ participants, position, huddleID, onCl
                 disableAudio={!inHuddle}
               />
             );
-          })}
-        </div>
+          }
+        })} */}
       </Positioner>
     </Tooltip>
   );
