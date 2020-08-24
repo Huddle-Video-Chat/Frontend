@@ -136,29 +136,7 @@ export default function HuddleZoomedOut({ participants, position, huddleID, onCl
       onClick={() => onClick(huddleID)}
       style={adjustedPosition}
     >
-      <Positioner style={adjustedPosition}>
-        {contents}
-        {/* {participants.map(participant => {
-          // position does nothing atm bc were using grid
-          // if statement to prevent more than 4 ppl showing up
-          if (count < 4) {
-            const arrangedP = arrangementPositions.shift();
-            count += 1
-            return (
-              <MemoParticipant
-                key={participant.sid}
-                participant={participant}
-                isSelected={inHuddle}
-                onClick={huddleClick}
-                enableScreenShare={false}
-                position={arrangedP}
-                size={size}
-                disableAudio={!inHuddle}
-              />
-            );
-          }
-        })} */}
-      </Positioner>
+      <Positioner style={adjustedPosition}>{contents}</Positioner>
     </Tooltip>
   );
 }
