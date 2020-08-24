@@ -5,10 +5,10 @@ import { nextSquareRoot, getArrangementPositions, getArrangementPositionsZoomed 
 
 import { styled } from '@material-ui/core/styles';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+import PeopleIcon from '@material-ui/icons/People';
 import Tooltip from '@material-ui/core/Tooltip';
-
+import Stepbro from '../../img/stepbro.png';
 import useAPIContext from '../../hooks/useAPIContext/useAPIContext';
-import Pic from '../../img/group_icon.png';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -75,9 +75,9 @@ export default function HuddleZoomedOut({ participants, position, huddleID, onCl
     }
   }
 
-  let count = 0
+  let count = 0;
 
-  let contents
+  let contents;
   if (participants.length > 4) {
     contents = participants.slice(0, 3).map(participant => {
       const arrangedP = arrangementPositions.shift();
@@ -92,12 +92,24 @@ export default function HuddleZoomedOut({ participants, position, huddleID, onCl
           size={size}
           disableAudio={!inHuddle}
         />
-      )
-    })
+      );
+    });
 
-    contents.push (
-      <img src="../../img/thankyou.jpeg" alt="Thank you"></img>
-    )
+    contents.push(
+      <div
+        style={{
+          borderRadius: '50%',
+          backgroundColor: '#A3B0F7',
+          width: size,
+          height: size,
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}
+      >
+        <PeopleIcon style={{ width: '5em', height: '5em' }} />
+      </div>
+    );
   } else {
     contents = participants.map(participant => {
       const arrangedP = arrangementPositions.shift();
@@ -112,8 +124,8 @@ export default function HuddleZoomedOut({ participants, position, huddleID, onCl
           size={size}
           disableAudio={!inHuddle}
         />
-      )
-    })
+      );
+    });
   }
 
   return (
@@ -124,9 +136,7 @@ export default function HuddleZoomedOut({ participants, position, huddleID, onCl
       onClick={() => onClick(huddleID)}
       style={adjustedPosition}
     >
-      <Positioner style={adjustedPosition} >
-        {contents}
-      </Positioner>
+      <Positioner style={adjustedPosition}>{contents}</Positioner>
     </Tooltip>
   );
 }
