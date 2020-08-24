@@ -36,7 +36,7 @@ export default function HuddleZoomedOut({ participants, position, huddleID, onCl
   const [isScreenShared] = useScreenShareToggle();
   const size = (window.innerHeight * 1) / 5;
 
-  const adjustedHuddleDiameter = (nextSquareRoot(participants.length) + Math.sqrt(2) - 1) * size * 1.5;
+  const adjustedHuddleDiameter = (nextSquareRoot(participants.length) + Math.sqrt(2) - 1) * size * 2;
   const gridTemplateColumns = 'repeat(2, 1fr)';
   const border = '3px solid #A3B0F7';
 
@@ -51,7 +51,10 @@ export default function HuddleZoomedOut({ participants, position, huddleID, onCl
   // adjusting the center
 
   const Positioner = styled('div')({
-    border: border,
+    border: inHuddle ? 'none' : border,
+    backgroundImage: inHuddle ? 'url("https://i.imgur.com/o4EznhC.gif")' : 'none',
+    backgroundPosition: 'center',
+    backgroundSize: adjustedHuddleDiameter * 1.5,
     borderRadius: '50%',
     width: adjustedHuddleDiameter,
     height: adjustedHuddleDiameter,
