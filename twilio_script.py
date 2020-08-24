@@ -13,7 +13,7 @@ if name == "albert":
   my_whitelist = "ALBERT_WHITELIST="
 elif name == "vicky":
   # REPLACE LINE BELOW WITH YOUR ABSOLUTE PATH
-  folder_path = "/Users/zgong/sum2020/Backend/backend-new/"
+  folder_path = "/Users/vickyli/Desktop/work/dev/backend-new/"
   my_whitelist = "VICKY_WHITELIST="
 elif name == "armaam":
   # REPLACE LINE BELOW WITH YOUR ABSOLUTE PATH

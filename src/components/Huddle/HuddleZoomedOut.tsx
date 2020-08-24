@@ -55,7 +55,7 @@ export default function HuddleZoomedOut({ participants, position, huddleID, onCl
     position: 'absolute',
     justifyItems: 'center',
     alignItems: 'center',
-    padding: '100px',
+    padding: '20px',
     display: 'grid',
     gridTemplateColumns: gridTemplateColumns,
   });
