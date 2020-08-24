@@ -17,9 +17,9 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-interface HuddleProps {}
+interface HuddleProps { }
 
-export default function HuddleZoomedIn({}: HuddleProps) {
+export default function HuddleZoomedIn({ }: HuddleProps) {
   const classes = useStyles();
   const { state } = useAPIContext();
   const participants: any[] = state.state[state.huddle];
@@ -37,7 +37,7 @@ export default function HuddleZoomedIn({}: HuddleProps) {
     top: adjustedHuddleDiameter / 2,
   };
 
-  function onParticipantClick() {}
+  function onParticipantClick() { }
   // adjusting the center
 
   const Positioner = styled('div')({
@@ -57,24 +57,22 @@ export default function HuddleZoomedIn({}: HuddleProps) {
 
   return (
     <Positioner style={adjustedPosition}>
-      <div>
-        {participants.map(participant => {
-          // position does nothing atm
-          const arrangedP = arrangementPositions.shift();
-          return (
-            <MemoParticipant
-              key={participant.sid}
-              participant={participant}
-              isSelected={true}
-              onClick={onParticipantClick}
-              enableScreenShare={false}
-              position={arrangedP}
-              size={size}
-              disableAudio={false}
-            />
-          );
-        })}
-      </div>
+      {participants.map(participant => {
+        // position does nothing atm
+        const arrangedP = arrangementPositions.shift();
+        return (
+          <MemoParticipant
+            key={participant.sid}
+            participant={participant}
+            isSelected={true}
+            onClick={onParticipantClick}
+            enableScreenShare={false}
+            position={arrangedP}
+            size={size}
+            disableAudio={false}
+          />
+        );
+      })}
     </Positioner>
   );
 }
