@@ -7,6 +7,7 @@ import usePasscode from '../../../hooks/usePasscode/usePasscode';
 import Fab from '@material-ui/core/Fab';
 import Tooltip from '@material-ui/core/Tooltip';
 import ShareIcon from '@material-ui/icons/Share';
+import SuccessMessage from '../../SuccessMessage/SuccessMessage';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -36,10 +37,13 @@ export default function InviteLinkButton(props: { disabled?: boolean }) {
   };
 
   return (
-    <Tooltip title={'Copy Invite'} placement="top" PopperProps={{ disablePortal: true }}>
-      <Fab className={classes.fab} onClick={copyLink} disabled={props.disabled}>
-        <ShareIcon />
-      </Fab>
-    </Tooltip>
+    <div>
+      <Tooltip title={'Copy Invite'} placement="top" PopperProps={{ disablePortal: true }}>
+        <Fab className={classes.fab} onClick={copyLink} disabled={props.disabled}>
+          <ShareIcon />
+        </Fab>
+      </Tooltip>
+      {/* <SuccessMessage /> */}
+    </div>
   );
 }

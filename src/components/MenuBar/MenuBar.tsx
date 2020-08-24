@@ -151,7 +151,7 @@ export default function MenuBar(huddleState: any) {
                 variant="contained"
                 disabled={isAcquiringLocalTracks || isConnecting || !name || !roomName || isFetching}
               >
-                {getRoomName(isFirst)}
+                {getRoomName(first)}
               </Button>
               {(isConnecting || isFetching) && <CircularProgress className={classes.loadingSpinner} />}
             </form>
