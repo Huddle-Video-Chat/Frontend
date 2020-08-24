@@ -25,7 +25,7 @@ export default function InviteLinkButton(props: { disabled?: boolean }) {
   const roomName = useRoomName()[0];
   const passcode = usePasscode();
   const url = window.location.href;
-  const copyLink = () => {
+  const handleCopy = () => {
     var placeHolder = url + '?passcode=' + passcode + '&roomName=' + roomName;
     var dummy = document.createElement('textarea');
     dummy.setAttribute('id', 'dummy_id');
@@ -39,7 +39,7 @@ export default function InviteLinkButton(props: { disabled?: boolean }) {
   return (
     <div>
       <Tooltip title={'Copy Invite'} placement="top" PopperProps={{ disablePortal: true }}>
-        <Fab className={classes.fab} onClick={copyLink} disabled={props.disabled}>
+        <Fab className={classes.fab} onClick={handleCopy} disabled={props.disabled}>
           <ShareIcon />
         </Fab>
       </Tooltip>
