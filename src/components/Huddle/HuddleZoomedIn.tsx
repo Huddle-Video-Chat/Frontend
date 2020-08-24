@@ -1,6 +1,6 @@
 import React from 'react';
 import { MemoParticipant } from '../Participant/Participant';
-import { nextSquareRoot, getArrangementPositionsZoomed } from '../../utils/algorithms';
+import { nextSquareRoot, getArrangementPositionsZoomed, getArrangementPositions } from '../../utils/algorithms';
 
 import { styled } from '@material-ui/core/styles';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
@@ -29,8 +29,10 @@ export default function HuddleZoomedIn({ }: HuddleProps) {
   const gridTemplateColumns = 'repeat(' + Math.min(4, participants.length) + ', 1fr)';
   const border = 'null';
 
-  const center = { x: adjustedHuddleDiameter / 2, y: adjustedHuddleDiameter / 2 };
-  let arrangementPositions = getArrangementPositionsZoomed(participants.length + 1, size, center);
+  const center = { x: window.innerHeight / 2, y: window.innerWidth / 2 };
+  // let arrangementPositions = getArrangementPositionsZoomed(participants.length + 1, size, center);
+
+  let arrangementPositions = getArrangementPositions(participants.length, size, center)
 
   const adjustedPosition = {
     left: adjustedHuddleDiameter / 2,
