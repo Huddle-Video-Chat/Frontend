@@ -17,9 +17,9 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-interface HuddleProps {}
+interface HuddleZoomedInProps {}
 
-export default function HuddleZoomedIn({}: HuddleProps) {
+export default function HuddleZoomedIn({}: HuddleZoomedInProps) {
   const classes = useStyles();
   const { state } = useAPIContext();
   const participants: any[] = state.state[state.huddle];

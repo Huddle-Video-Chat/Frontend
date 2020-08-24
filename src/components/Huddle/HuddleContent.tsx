@@ -19,9 +19,9 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-interface HuddleProps {}
+interface HuddleContentProps {}
 
-export default function HuddleZoomedIn({}: HuddleProps) {
+export default function HuddleContent({}: HuddleContentProps) {
   const classes = useStyles();
   const { state } = useAPIContext();
   const screenSharingParticipant = useScreenShareParticipant();

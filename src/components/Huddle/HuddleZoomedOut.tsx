@@ -20,7 +20,7 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-interface HuddleProps {
+interface HuddleZoomedOutProps {
   participants: IParticipant[];
   position: any;
   huddleID: string;
@@ -28,7 +28,7 @@ interface HuddleProps {
   inHuddle: boolean;
 }
 
-export default function HuddleZoomedOut({ participants, position, huddleID, onClick, inHuddle }: HuddleProps) {
+export default function HuddleZoomedOut({ participants, position, huddleID, onClick, inHuddle }: HuddleZoomedOutProps) {
   const classes = useStyles();
   const { state, isSharing } = useAPIContext();
   const size = (window.innerHeight * 1) / 5;
