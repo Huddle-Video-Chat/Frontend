@@ -69,10 +69,21 @@ const useStyles = makeStyles((theme: Theme) =>
     },
   })
 );
-export function getRoomName() {
-  const match = window.location.search.match(/roomName=(.*)&?/);
-  const roomName = match ? match[1] : window.sessionStorage.getItem('roomName');
-  return roomName;
+export function getRoomName(first: boolean) {
+  // const match = window.location.search.match(/roomName=(.*)&?/);
+  // const rmName = match ? match[1] : window.sessionStorage.getItem('roomName');
+  // var roomMessage = 'Create Room';
+  // console.log(rmName);
+  // if (rmName != null) {
+  //   roomMessage = 'Join Room';
+  // }
+  // return roomMessage;
+  console.log(first);
+  if (first) {
+    return 'Create Room';
+  } else {
+    return 'Join Room';
+  }
 }
 
 export default function MenuBar(huddleState: any) {
@@ -83,10 +94,13 @@ export default function MenuBar(huddleState: any) {
   // const passedRoomName = useRoomName();
 
   const [name, setName] = useState<string>(user?.displayName || '');
-  const [roomName, setRoomName] = useState<string>(useRoomName());
+  //const [roomName, setRoomName, isFirst] = useRoomName();
+  const roomInfo = useRoomName();
+  const [roomName, setRoomName] = useState(roomInfo[0]);
+  const first = roomInfo[1];
 
   useEffect(() => {
-    // console.log(roomName);
+    console.log(roomName);
     if (roomName) {
       setRoomName(roomName);
     }
@@ -126,15 +140,7 @@ export default function MenuBar(huddleState: any) {
                   {user.displayName}
                 </Typography>
               )}
-              {/* <TextField
-                id="menu-room"
-                label="Room"
-                className={classes.textField}
-                // style={{backgroundColor: "white", color: "black"}}
-                value={roomName}
-                onChange={handleRoomNameChange}
-                margin="dense"
-              /> */}
+
               <Button
                 className={classes.joinButton}
                 type="submit"
@@ -145,7 +151,7 @@ export default function MenuBar(huddleState: any) {
                 variant="contained"
                 disabled={isAcquiringLocalTracks || isConnecting || !name || !roomName || isFetching}
               >
-                Join Room
+                {getRoomName(first)}
               </Button>
               {(isConnecting || isFetching) && <CircularProgress className={classes.loadingSpinner} />}
             </form>

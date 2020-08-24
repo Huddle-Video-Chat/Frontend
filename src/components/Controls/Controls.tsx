@@ -33,7 +33,7 @@ const useStyles = makeStyles((theme: Theme) =>
       [theme.breakpoints.down('xs')]: {
         bottom: `${theme.sidebarMobileHeight + 3}px`,
       },
-      backgroundColor: '#A3B0F7',
+      background: 'linear-gradient(90deg, #B4B0E4 0%, #D4AEC5 98.94%);',
       borderRadius: '50px',
       color: 'green',
       paddingLeft: '1%',

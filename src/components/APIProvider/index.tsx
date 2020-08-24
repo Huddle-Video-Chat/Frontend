@@ -2,6 +2,7 @@ import React, { createContext, ReactNode } from 'react';
 import useVideoContext from '../../hooks/useVideoContext/useVideoContext';
 import useAPIHook from './useAPIHook/useAPIHook';
 import useZoomToggle from './useZoomToggle/useZoomToggle';
+import useScreenShareToggle from './useScreenShareToggle/useScreenShareToggle';
 
 export interface IState {
   state: any;
@@ -15,9 +16,10 @@ interface IAPIContext {
   joinHuddle: (huddle: string) => void;
   addHuddle: () => void;
   deleteUser: () => void;
-
   zoomed: boolean;
   toggleZoomed: () => void;
+  isSharing: boolean;
+  toggleScreenShare: () => void;
 }
 
 interface APIProviderProps {
@@ -30,8 +32,9 @@ export function APIProvider({ children }: APIProviderProps) {
   const { room } = useVideoContext();
   const localParticipant = room.localParticipant;
 
-  const [ zoomed, toggleZoomed ] = useZoomToggle();
-  const [ state, updateState ] = useAPIHook();
+  const [zoomed, toggleZoomed] = useZoomToggle();
+  const [state, updateState] = useAPIHook();
+  const [isSharing, toggleScreenShare] = useScreenShareToggle(state);
 
   async function joinHuddle(huddle: string) {
     if (parseInt(huddle) !== state.huddle) {
@@ -89,6 +92,8 @@ export function APIProvider({ children }: APIProviderProps) {
         deleteUser,
         zoomed,
         toggleZoomed,
+        isSharing,
+        toggleScreenShare,
       }}
     >
       {children}

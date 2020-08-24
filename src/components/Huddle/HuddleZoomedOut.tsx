@@ -5,12 +5,10 @@ import { nextSquareRoot, getArrangementPositions, getArrangementPositionsZoomed 
 
 import { styled } from '@material-ui/core/styles';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+import PeopleIcon from '@material-ui/icons/People';
 import Tooltip from '@material-ui/core/Tooltip';
-
-import usePublications from '../../hooks/usePublications/usePublications';
+import Stepbro from '../../img/stepbro.png';
 import useAPIContext from '../../hooks/useAPIContext/useAPIContext';
-import useScreenShareToggle from '../../hooks/useScreenShareToggle/useScreenShareToggle';
-import useScreenShareParticipant from '../../hooks/useScreenShareParticipant/useScreenShareParticipant';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -32,11 +30,10 @@ interface HuddleProps {
 
 export default function HuddleZoomedOut({ participants, position, huddleID, onClick, inHuddle }: HuddleProps) {
   const classes = useStyles();
-  const { state } = useAPIContext();
-  const [isScreenShared] = useScreenShareToggle();
+  const { state, isSharing } = useAPIContext();
   const size = (window.innerHeight * 1) / 5;
 
-  const adjustedHuddleDiameter = (nextSquareRoot(participants.length) + Math.sqrt(2) - 1) * size * 2;
+  const adjustedHuddleDiameter = (nextSquareRoot(Math.min(participants.length, 4)) + Math.sqrt(2) - 1) * size;
   const gridTemplateColumns = 'repeat(2, 1fr)';
   const border = '3px solid #A3B0F7';
 
@@ -66,16 +63,72 @@ export default function HuddleZoomedOut({ participants, position, huddleID, onCl
     gridTemplateColumns: gridTemplateColumns,
   });
 
-  let tooltipMessage = state.huddle === parseInt(huddleID) ? 'My huddle' : 'Click to join';
-  tooltipMessage = state.huddle === parseInt(huddleID) ? 'My huddle' : 'Click to join';
-  if (isScreenShared) {
+  let tooltipMessage;
+  if (state.huddle === parseInt(huddleID)) {
+    tooltipMessage = 'My huddle';
+  } else if (isSharing) {
     tooltipMessage = 'Cannot move huddles while sharing screen';
+  } else {
+    tooltipMessage = 'Click to join';
   }
 
   function huddleClick() {
-    if (!isScreenShared) {
+    if (!isSharing) {
       onClick(huddleID);
     }
+  }
+
+  let count = 0;
+
+  let contents;
+  if (participants.length > 4) {
+    contents = participants.slice(0, 3).map(participant => {
+      const arrangedP = arrangementPositions.shift();
+      return (
+        <MemoParticipant
+          key={participant.sid}
+          participant={participant}
+          isSelected={inHuddle}
+          onClick={huddleClick}
+          enableScreenShare={false}
+          position={arrangedP}
+          size={size}
+          disableAudio={!inHuddle}
+        />
+      );
+    });
+
+    contents.push(
+      <div
+        style={{
+          borderRadius: '50%',
+          backgroundColor: '#A3B0F7',
+          width: size,
+          height: size,
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}
+      >
+        <PeopleIcon style={{ width: '5em', height: '5em' }} />
+      </div>
+    );
+  } else {
+    contents = participants.map(participant => {
+      const arrangedP = arrangementPositions.shift();
+      return (
+        <MemoParticipant
+          key={participant.sid}
+          participant={participant}
+          isSelected={inHuddle}
+          onClick={huddleClick}
+          enableScreenShare={false}
+          position={arrangedP}
+          size={size}
+          disableAudio={!inHuddle}
+        />
+      );
+    });
   }
 
   return (
@@ -86,26 +139,7 @@ export default function HuddleZoomedOut({ participants, position, huddleID, onCl
       onClick={() => onClick(huddleID)}
       style={adjustedPosition}
     >
-      <Positioner style={adjustedPosition}>
-        <div>
-          {participants.map(participant => {
-            // position does nothing atm
-            const arrangedP = arrangementPositions.shift();
-            return (
-              <MemoParticipant
-                key={participant.sid}
-                participant={participant}
-                isSelected={inHuddle}
-                onClick={huddleClick}
-                enableScreenShare={false}
-                position={arrangedP}
-                size={size}
-                disableAudio={!inHuddle}
-              />
-            );
-          })}
-        </div>
-      </Positioner>
+      <Positioner style={adjustedPosition}>{contents}</Positioner>
     </Tooltip>
   );
 }
