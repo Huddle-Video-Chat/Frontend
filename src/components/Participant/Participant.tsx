@@ -38,7 +38,7 @@ export default function Participant({
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    borderRadius: enableScreenShare ? '5%' : '50%',
+    borderRadius: enableScreenShare ? '2.8125%/5%' : '50%',
     overflow: 'hidden',
 
     position: zoomed ? 'absolute' : 'static',
