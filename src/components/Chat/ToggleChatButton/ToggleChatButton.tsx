@@ -18,9 +18,9 @@ const useStyles = makeStyles((theme: Theme) =>
     container: {
       display: 'flex',
       position: 'absolute',
-      right: '4%',
+      right: '2%',
       transform: 'translate(50%, 30px)',
-      top: '5%',
+      top: '3%',
     },
     maxWidth: {
       maxWidth: 'none',

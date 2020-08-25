@@ -23,7 +23,7 @@ const useStyles = makeStyles((theme: Theme) =>
       position: 'absolute',
       right: '50%',
       transform: 'translate(50%, 30px)',
-      top: '5%',
+      top: '3%',
     },
     noMaxWidth: {
       maxWidth: 'none',

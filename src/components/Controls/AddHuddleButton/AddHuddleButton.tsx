@@ -13,8 +13,8 @@ const useStyles = makeStyles((theme: Theme) =>
       margin: theme.spacing(1),
       color: '#ffffff',
       backgroundColor: '#a7aff4 !important',
-      height: '55px',
-      width: '55px',
+      height: '5vh',
+      width: '5vh',
       boxShadow: '3px 3px 7px rgba(0, 0, 0, 0.14) !important',
     },
     container: {
@@ -22,7 +22,7 @@ const useStyles = makeStyles((theme: Theme) =>
       position: 'absolute',
       right: '95%',
       transform: 'translate(50%, 30px)',
-      top: '5%',
+      top: '3%',
     },
     noMaxWidth: {
       maxWidth: 'none',

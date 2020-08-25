@@ -13,6 +13,8 @@ const useStyles = makeStyles((theme: Theme) =>
     fab: {
       margin: theme.spacing(1),
       color: 'red !important',
+      height: '5vh',
+      width: '5vh',
       backgroundColor: '#F2F2F2 !important',
       boxShadow: '3px 3px 7px rgba(0, 0, 0, 0.14) !important',
     },
