@@ -80,8 +80,8 @@ export default function HuddleContent({}: HuddleContentProps) {
             isSelected={true}
             onClick={onParticipantClick}
             enableScreenShare={true}
-            size={window.innerHeight * 0.6}
-            aspectRatio={16 / 9}
+            size={window.innerWidth * 0.7}
+            aspectRatio={16 / 10}
             disableAudio={false}
             contentView={true}
           />

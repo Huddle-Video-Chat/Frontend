@@ -33,8 +33,8 @@ export default function Participant({
   const { zoomed } = useAPIContext();
 
   const Positioner = styled('div')({
-    width: aspectRatio !== undefined ? (size * aspectRatio).toString() + 'px' : size.toString() + 'px',
-    height: size.toString() + 'px',
+    height: aspectRatio !== undefined ? (size / aspectRatio).toString() + 'px' : size.toString() + 'px',
+    width: size.toString() + 'px',
     margin: '1vh auto',
     objectFit: 'contain',
     display: 'flex',
