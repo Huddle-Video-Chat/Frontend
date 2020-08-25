@@ -19,7 +19,7 @@ const Outline = styled('div')({
 
 // Without styled containers or scroll container
 export default function HuddleVisualizer() {
-  const { state, joinHuddle, zoomed } = useAPIContext();
+  const { state, joinHuddle, zoomed, toggleZoomed } = useAPIContext();
   const screenSharing: boolean = useScreenShareParticipant() !== undefined;
   interface Position {
     left: number;
@@ -97,11 +97,12 @@ export default function HuddleVisualizer() {
           let huddleParticipants: [] = state.state[huddleID];
 
           let pos = huddlePositions[huddleList.length - 1][num++];
+          let inHuddle = parseInt(huddleID) === state.huddle;
 
           return (
             <HuddleZoomedOut
-              onClick={joinHuddle}
-              inHuddle={parseInt(huddleID) === state.huddle}
+              onClick={inHuddle ? toggleZoomed : joinHuddle}
+              inHuddle={inHuddle}
               huddleID={huddleID}
               participants={huddleParticipants}
               position={pos}

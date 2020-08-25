@@ -32,9 +32,6 @@ export default function HuddleContent({}: HuddleContentProps) {
   const gridTemplateColumns = 'repeat(' + Math.min(4, participants.length) + ', 1fr)';
   const border = 'null';
 
-  const center = { x: adjustedHuddleDiameter / 2, y: adjustedHuddleDiameter / 2 };
-  let arrangementPositions = getArrangementPositionsZoomed(participants.length + 1, size, center);
-
   const adjustedPosition = {
     left: adjustedHuddleDiameter / 2,
     top: adjustedHuddleDiameter / 2,
@@ -60,16 +57,23 @@ export default function HuddleContent({}: HuddleContentProps) {
 
   const Content = styled('div')({
     width: '80vw',
+    height: '100%',
     padding: '5%',
+    backgroundColor: 'red',
+    justifyContent: 'center',
+    alignItems: 'center',
   });
 
   const ParticipantStrip = styled('div')({
     width: '20vw',
-    height: '100vh',
+    height: '100%',
     display: 'flex',
     flexDirection: 'column',
     overflow: 'scroll',
     padding: '5%',
+    backgroundColor: 'green',
+    justifyContent: 'center',
+    alignItems: 'center',
   });
 
   return (
@@ -93,18 +97,19 @@ export default function HuddleContent({}: HuddleContentProps) {
 
       <ParticipantStrip>
         {participants.map(participant => {
-          // position does nothing atm
-          const arrangedP = arrangementPositions.shift();
+          console.log(participants.length);
           return (
-            <MemoParticipant
-              key={participant.sid}
-              participant={participant}
-              isSelected={true}
-              onClick={onParticipantClick}
-              enableScreenShare={false}
-              size={size}
-              disableAudio={false}
-            />
+            <div style={{ backgroundColor: 'blue', height: 'auto', width: 'auto' }}>
+              <MemoParticipant
+                key={participant.sid}
+                participant={participant}
+                isSelected={true}
+                onClick={onParticipantClick}
+                enableScreenShare={false}
+                size={size}
+                disableAudio={false}
+              />
+            </div>
           );
         })}
       </ParticipantStrip>
