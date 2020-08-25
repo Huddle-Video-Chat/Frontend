@@ -29,7 +29,7 @@ const useStyles = makeStyles((theme: Theme) =>
 export default function ToggleScreenShareButton(props: { disabled?: boolean }) {
   const classes = useStyles();
   const screenShareParticipant = useScreenShareParticipant();
-  const { isSharing, toggleScreenShare } = useAPIContext();
+  const { isSharing, toggleScreenShare, zoomed, toggleZoomed } = useAPIContext();
   const { room } = useVideoContext();
   const disableScreenShareButton = screenShareParticipant && screenShareParticipant !== room.localParticipant;
   const isScreenShareSupported = navigator.mediaDevices && navigator.mediaDevices.getDisplayMedia;
@@ -49,6 +49,13 @@ export default function ToggleScreenShareButton(props: { disabled?: boolean }) {
     tooltipMessage = SHARE_NOT_SUPPORTED_TEXT;
   }
 
+  function onClick() {
+    toggleScreenShare();
+    if (!zoomed) {
+      toggleZoomed();
+    }
+  }
+
   return (
     <Tooltip
       title={tooltipMessage}
@@ -59,7 +66,7 @@ export default function ToggleScreenShareButton(props: { disabled?: boolean }) {
       <div>
         {/* The div element is needed because a disabled button will not emit hover events and we want to display
           a tooltip when screen sharing is disabled */}
-        <Fab className={classes.fab} onClick={toggleScreenShare} disabled={isDisabled}>
+        <Fab className={classes.fab} onClick={onClick} disabled={isDisabled}>
           {isSharing ? <StopScreenShare /> : <ScreenShare />}
         </Fab>
       </div>
