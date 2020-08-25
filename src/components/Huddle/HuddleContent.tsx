@@ -99,17 +99,15 @@ export default function HuddleContent({}: HuddleContentProps) {
         {participants.map(participant => {
           console.log(participants.length);
           return (
-            <div style={{ backgroundColor: 'blue', height: 'auto', width: 'auto' }}>
-              <MemoParticipant
-                key={participant.sid}
-                participant={participant}
-                isSelected={true}
-                onClick={onParticipantClick}
-                enableScreenShare={false}
-                size={size}
-                disableAudio={false}
-              />
-            </div>
+            <MemoParticipant
+              key={participant.sid}
+              participant={participant}
+              isSelected={true}
+              onClick={onParticipantClick}
+              enableScreenShare={false}
+              size={size}
+              disableAudio={false}
+            />
           );
         })}
       </ParticipantStrip>
