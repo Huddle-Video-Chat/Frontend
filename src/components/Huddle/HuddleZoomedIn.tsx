@@ -72,6 +72,7 @@ export default function HuddleZoomedIn({}: HuddleZoomedInProps) {
             position={arrangedP}
             size={size}
             disableAudio={false}
+            contentView={true}
           />
         );
       })}

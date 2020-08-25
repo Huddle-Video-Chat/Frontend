@@ -94,6 +94,7 @@ export default function HuddleZoomedOut({ participants, position, huddleID, onCl
           position={arrangedP}
           size={size}
           disableAudio={!inHuddle}
+          contentView={true}
         />
       );
     });
@@ -126,6 +127,7 @@ export default function HuddleZoomedOut({ participants, position, huddleID, onCl
           position={arrangedP}
           size={size}
           disableAudio={!inHuddle}
+          contentView={true}
         />
       );
     });
