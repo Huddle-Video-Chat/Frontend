@@ -21,6 +21,7 @@ elif name == "armaam":
   my_whitelist = "ARMAAN_WHITELIST="
 else:
   print('unknown user argument')
+  exit()
 
 
 reading_file = open(folder_path + file_name, "r")

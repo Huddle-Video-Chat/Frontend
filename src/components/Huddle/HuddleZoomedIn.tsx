@@ -20,19 +20,13 @@ const useStyles = makeStyles((theme: Theme) =>
 interface HuddleZoomedInProps {}
 
 export default function HuddleZoomedIn({}: HuddleZoomedInProps) {
-  const classes = useStyles();
   const { state } = useAPIContext();
   const participants: any[] = state.state[state.huddle];
   const size = (window.innerHeight * 1) / 3;
 
   const adjustedHuddleDiameter = (nextSquareRoot(participants.length) + Math.sqrt(2) - 1) * size;
-  const gridTemplateColumns = 'repeat(' + Math.min(4, participants.length) + ', 1fr)';
-  const border = 'null';
 
   const center = { x: window.innerHeight / 2, y: window.innerWidth / 2 };
-  // let arrangementPositions = getArrangementPositionsZoomed(participants.length + 1, size, center);
-
-  let arrangementPositions = getArrangementPositions(participants.length, size, center);
 
   const adjustedPosition = {
     left: adjustedHuddleDiameter / 2,
@@ -42,26 +36,42 @@ export default function HuddleZoomedIn({}: HuddleZoomedInProps) {
   function onParticipantClick() {}
   // adjusting the center
 
+  // DOESN'T WORK ATM
+  const gridTemplateColumns = () => {
+    const len = participants.length;
+    if (len < 2) {
+      return 'repeat(1, 1fr)';
+    } else if (len < 5) {
+      return 'repeat(2, 1fr)';
+    } else if (len < 7) {
+      return 'repeat(3, 1fr)';
+    } else if (len < 12) {
+      return 'repeat(4, 1fr)';
+    } else {
+      return 'repeat(5, 1fr)';
+    }
+  };
+
   const Positioner = styled('div')({
-    border: border,
-    borderRadius: '0%',
+    border: 'null',
     width: '100%',
     height: '100%',
-    position: 'absolute',
+    // position: 'absolute',
     justifyItems: 'center',
     alignItems: 'center',
-    padding: '20px',
+    // padding: '20px',
     left: '0px !important',
     top: '0px !important',
     display: 'grid',
-    gridTemplateColumns: gridTemplateColumns,
+
+    gridTemplateColumns: gridTemplateColumns(),
+    columnGap: '20px',
+    rowGap: '20px',
   });
 
   return (
-    <Positioner style={adjustedPosition}>
+    <Positioner>
       {participants.map(participant => {
-        // position does nothing atm
-        const arrangedP = arrangementPositions.shift();
         return (
           <MemoParticipant
             key={participant.sid}
@@ -69,7 +79,6 @@ export default function HuddleZoomedIn({}: HuddleZoomedInProps) {
             isSelected={true}
             onClick={onParticipantClick}
             enableScreenShare={false}
-            position={arrangedP}
             size={size}
             disableAudio={false}
             contentView={true}
