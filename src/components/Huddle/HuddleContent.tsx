@@ -50,7 +50,6 @@ export default function HuddleZoomedIn({}: HuddleProps) {
     height: '100%',
     position: 'absolute',
     justifyItems: 'center',
-    alignItems: 'center',
     left: '0px !important',
     top: '0px !important',
     display: 'flex',
