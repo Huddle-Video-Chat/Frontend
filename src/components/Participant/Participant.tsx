@@ -28,7 +28,7 @@ export default function Participant({
   aspectRatio,
   huddleID,
 }: ParticipantProps) {
-  const { zoomed } = useAPIContext()
+  const { zoomed } = useAPIContext();
 
   const Positioner = styled('div')({
     width: aspectRatio !== undefined ? (size * aspectRatio).toString() + 'px' : size.toString() + 'px',
@@ -38,7 +38,7 @@ export default function Participant({
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    borderRadius: enableScreenShare ? '5%' : '50%',
+    borderRadius: enableScreenShare ? '2.8125%/5%' : '50%',
     overflow: 'hidden',
 
     position: zoomed ? 'absolute' : 'static',

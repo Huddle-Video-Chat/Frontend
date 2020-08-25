@@ -17,9 +17,9 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-interface HuddleProps { }
+interface HuddleZoomedInProps {}
 
-export default function HuddleZoomedIn({ }: HuddleProps) {
+export default function HuddleZoomedIn({}: HuddleZoomedInProps) {
   const classes = useStyles();
   const { state } = useAPIContext();
   const participants: any[] = state.state[state.huddle];
@@ -32,14 +32,14 @@ export default function HuddleZoomedIn({ }: HuddleProps) {
   const center = { x: window.innerHeight / 2, y: window.innerWidth / 2 };
   // let arrangementPositions = getArrangementPositionsZoomed(participants.length + 1, size, center);
 
-  let arrangementPositions = getArrangementPositions(participants.length, size, center)
+  let arrangementPositions = getArrangementPositions(participants.length, size, center);
 
   const adjustedPosition = {
     left: adjustedHuddleDiameter / 2,
     top: adjustedHuddleDiameter / 2,
   };
 
-  function onParticipantClick() { }
+  function onParticipantClick() {}
   // adjusting the center
 
   const Positioner = styled('div')({
