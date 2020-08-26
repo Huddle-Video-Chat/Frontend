@@ -14,17 +14,17 @@ const useStyles = makeStyles((theme: Theme) =>
       margin: theme.spacing(1),
       color: 'white',
       backgroundColor: '#cdadd4 !important',
-      height: '55px',
-      width: '55px',
+      height: '5vh',
+      width: '5vh',
       boxShadow: '3px 3px 7px rgba(0, 0, 0, 0.14) !important',
     },
-    container: {
-      display: 'flex',
-      position: 'absolute',
-      right: '50%',
-      transform: 'translate(50%, 30px)',
-      top: '3%',
-    },
+    // container: {
+    //   display: 'flex',
+    //   position: 'absolute',
+    //   right: '50%',
+    //   transform: 'translate(50%, 30px)',
+    //   top: '3%',
+    // },
     noMaxWidth: {
       maxWidth: 'none',
     },
@@ -40,18 +40,18 @@ export default function ToggleZoomButton() {
   const { zoomed, toggleZoomed } = useAPIContext();
 
   return (
-    <div className={classes.container}>
-      <Tooltip
-        title={zoomed ? 'Zoom out' : 'Zoom in'}
-        classes={{ tooltip: classes.noMaxWidth }}
-        placement="bottom"
-        PopperProps={{ disablePortal: true }}
-        onClick={toggleZoomed}
-      >
-        <Fab className={classes.fab} data-cy-audio-toggle>
-          {zoomed ? <ZoomOutIcon /> : <ZoomInIcon />}
-        </Fab>
-      </Tooltip>
-    </div>
+    // <div className={classes.container}>
+    <Tooltip
+      title={zoomed ? 'Zoom out' : 'Zoom in'}
+      classes={{ tooltip: classes.noMaxWidth }}
+      placement="bottom"
+      PopperProps={{ disablePortal: true }}
+      onClick={toggleZoomed}
+    >
+      <Fab className={classes.fab} data-cy-audio-toggle>
+        {zoomed ? <ZoomOutIcon /> : <ZoomInIcon />}
+      </Fab>
+    </Tooltip>
+    // </div>
   );
 }

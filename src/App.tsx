@@ -2,7 +2,9 @@ import React, { useState } from 'react';
 import { styled } from '@material-ui/core/styles';
 
 import Controls from './components/Controls/Controls';
+import NavBar from './components/Controls/NavBar';
 import Chat from './components/Chat/Chat';
+import Bots from './components/Bots/Bots';
 import LocalVideoPreview from './components/LocalVideoPreview/LocalVideoPreview';
 import MenuBar from './components/MenuBar/MenuBar';
 import ToggleZoomButton from './components/Controls/ToggleZoomButton/ToggleZoomButton';
@@ -62,16 +64,18 @@ export default function App() {
                   <HuddleVisualizer />
                   {/* Consolidate the bottom three into one component */}
                   <Chat />
-                  <ToggleZoomButton />
-                  <AddHuddleButton />
+                  {/* <ToggleZoomButton />
+                  <AddHuddleButton /> */}
+                  <Bots />
                 </>
                 <Controls />
+                <NavBar />
               </Main>
               <ReconnectingNotification />
             </Container>
           </APIProvider>
         </>
       )}
-    </>  
+    </>
   );
 }

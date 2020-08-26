@@ -8,6 +8,7 @@ import useScreenShareParticipant from '../../hooks/useScreenShareParticipant/use
 
 import useAPIContext from '../../hooks/useAPIContext/useAPIContext';
 import { Participant } from 'twilio-video';
+import Webview from '../Webview/Webview';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -74,6 +75,8 @@ export default function HuddleContent({}: HuddleContentProps) {
     <Positioner style={adjustedPosition}>
       <Content>
         {screenSharingParticipant !== undefined ? (
+          // <Codenames size={window.innerWidth*0.71} aspectRatio={1200/700} />
+
           <MemoParticipant
             key={screenSharingParticipant?.sid}
             participant={screenSharingParticipant}
@@ -86,7 +89,13 @@ export default function HuddleContent({}: HuddleContentProps) {
             contentView={true}
           />
         ) : (
-          <></>
+          <>
+            {state.bot !== null ? (
+              <Webview url={state.bot} size={window.innerWidth * 0.65} aspectRatio={1200 / 700} />
+            ) : (
+              <></>
+            )}
+          </>
         )}
       </Content>
 

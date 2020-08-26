@@ -31,11 +31,11 @@ const useStyles = makeStyles((theme: Theme) =>
 export default function ToggleScreenShareButton(props: { disabled?: boolean }) {
   const classes = useStyles();
   const screenShareParticipant = useScreenShareParticipant();
-  const { isSharing, toggleScreenShare, zoomed, toggleZoomed } = useAPIContext();
+  const { state, isSharing, toggleScreenShare, zoomed, toggleZoomed } = useAPIContext();
   const { room } = useVideoContext();
   const disableScreenShareButton = screenShareParticipant && screenShareParticipant !== room.localParticipant;
   const isScreenShareSupported = navigator.mediaDevices && navigator.mediaDevices.getDisplayMedia;
-  const isDisabled = props.disabled || disableScreenShareButton || !isScreenShareSupported;
+  const isDisabled = props.disabled || disableScreenShareButton || !isScreenShareSupported || state.bot !== null;
 
   let tooltipMessage = SCREEN_SHARE_TEXT;
 

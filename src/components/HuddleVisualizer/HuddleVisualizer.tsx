@@ -19,13 +19,13 @@ const Outline = styled('div')({
 
 // Without styled containers or scroll container
 export default function HuddleVisualizer() {
-  const { zoomed } = useAPIContext();
+  const { state, zoomed } = useAPIContext();
   const screenSharing: boolean = useScreenShareParticipant() !== undefined;
 
   return (
     <Outline>
       {zoomed ? (
-        screenSharing ? (
+        screenSharing || state.bot !== null ? (
           <HuddleContent />
         ) : (
           <HuddleZoomedIn />
