@@ -14,8 +14,8 @@ const useStyles = makeStyles((theme: Theme) =>
       margin: theme.spacing(1),
       color: 'white',
       backgroundColor: '#cdadd4 !important',
-      height: '5vh',
-      width: '5vh',
+      height: '55px',
+      width: '55px',
       boxShadow: '3px 3px 7px rgba(0, 0, 0, 0.14) !important',
     },
     // container: {

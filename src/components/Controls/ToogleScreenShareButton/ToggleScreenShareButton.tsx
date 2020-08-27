@@ -20,8 +20,8 @@ const useStyles = makeStyles((theme: Theme) =>
     fab: {
       margin: theme.spacing(1),
       color: '#A3B0F7',
-      height: '5vh',
-      width: '5vh',
+      height: '55px',
+      width: '55px',
       backgroundColor: 'white !important',
       boxShadow: '3px 3px 7px rgba(0, 0, 0, 0.14) !important',
     },

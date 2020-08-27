@@ -7,6 +7,7 @@
     "@material-ui/core": "^4.11.0",
     "@material-ui/icons": "^4.9.1",
     "@primer/octicons-react": "^9.6.0",
+    "@types/bytebuffer": "^5.0.41",
     "@types/d3-timer": "^1.0.9",
     "@types/fscreen": "^1.0.1",
     "@types/jest": "^24.9.1",
