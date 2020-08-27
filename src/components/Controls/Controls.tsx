@@ -18,7 +18,7 @@ const useStyles = makeStyles((theme: Theme) =>
       position: 'absolute',
       right: '50%',
       // transform: 'translate(50%, 30px)',
-      bottom: '50px',
+      bottom: '1vh',
       zIndex: 1,
       transition: 'opacity 1.2s, transform 1.2s, visibility 0s 1.2s',
       opacity: 0,
@@ -39,7 +39,7 @@ const useStyles = makeStyles((theme: Theme) =>
       paddingLeft: '1%',
       paddingRight: '1%',
       boxShadow: '3px 3px 7px rgba(0, 0, 0, 0.07)',
-      padding: '11px 25px',
+      padding: '0.3vw',
     },
   })
 );

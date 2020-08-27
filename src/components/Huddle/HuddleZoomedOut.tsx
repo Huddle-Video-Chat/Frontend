@@ -190,6 +190,7 @@ function Huddle({ participants, position, huddleID, onClick, inHuddle, isSharing
           enableScreenShare={false}
           size={size}
           disableAudio={!inHuddle}
+          contentView={true}
         />
       );
     });

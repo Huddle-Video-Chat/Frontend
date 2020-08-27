@@ -15,6 +15,7 @@ interface ParticipantProps {
   size: number;
   aspectRatio?: number;
   huddleID?: number;
+  contentView: boolean;
 }
 
 export default function Participant({
@@ -27,13 +28,14 @@ export default function Participant({
   size,
   aspectRatio,
   huddleID,
+  contentView,
 }: ParticipantProps) {
   const { zoomed } = useAPIContext();
 
   const Positioner = styled('div')({
-    width: aspectRatio !== undefined ? (size * aspectRatio).toString() + 'px' : size.toString() + 'px',
-    height: size.toString() + 'px',
-    margin: '0px',
+    height: aspectRatio !== undefined ? (size / aspectRatio).toString() + 'px' : size.toString() + 'px',
+    width: size.toString() + 'px',
+    margin: '1vh auto',
     objectFit: 'contain',
     display: 'flex',
     justifyContent: 'center',
@@ -41,7 +43,7 @@ export default function Participant({
     borderRadius: enableScreenShare ? '2.8125%/5%' : '50%',
     overflow: 'hidden',
 
-    position: zoomed ? 'absolute' : 'static',
+    position: zoomed && !contentView ? 'absolute' : 'static',
   });
 
   return (

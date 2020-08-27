@@ -57,8 +57,7 @@ export default function HuddleContent({}: HuddleContentProps) {
   const Content = styled('div')({
     width: '80vw',
     height: '100%',
-    padding: '5%',
-    backgroundColor: 'red',
+    display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
   });
@@ -66,13 +65,8 @@ export default function HuddleContent({}: HuddleContentProps) {
   const ParticipantStrip = styled('div')({
     width: '20vw',
     height: '100%',
-    display: 'flex',
-    flexDirection: 'column',
     overflow: 'scroll',
-    padding: '5%',
-    backgroundColor: 'green',
-    justifyContent: 'center',
-    alignItems: 'center',
+    padding: '2%',
   });
 
   return (
@@ -85,9 +79,10 @@ export default function HuddleContent({}: HuddleContentProps) {
             isSelected={true}
             onClick={onParticipantClick}
             enableScreenShare={true}
-            size={window.innerHeight * 0.7}
-            aspectRatio={16 / 9}
+            size={window.innerWidth * 0.7}
+            aspectRatio={16 / 10}
             disableAudio={false}
+            contentView={true}
           />
         ) : (
           <></>
@@ -106,6 +101,7 @@ export default function HuddleContent({}: HuddleContentProps) {
               enableScreenShare={false}
               size={size}
               disableAudio={false}
+              contentView={true}
             />
           );
         })}

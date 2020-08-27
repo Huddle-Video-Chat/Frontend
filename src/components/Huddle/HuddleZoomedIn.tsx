@@ -81,6 +81,7 @@ export default function HuddleZoomedIn({}: HuddleZoomedInProps) {
             enableScreenShare={false}
             size={size}
             disableAudio={false}
+            contentView={true}
           />
         );
       })}
