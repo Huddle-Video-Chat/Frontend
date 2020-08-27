@@ -15,6 +15,7 @@ const useStyles = makeStyles((theme: Theme) =>
       backgroundColor: '#cdadd4 !important',
       height: '55px',
       width: '55px',
+      top: '15px',
       boxShadow: '3px 3px 7px rgba(0, 0, 0, 0.14) !important',
     },
     // container: {
