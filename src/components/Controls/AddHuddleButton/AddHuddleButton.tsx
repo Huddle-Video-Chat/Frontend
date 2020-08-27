@@ -11,17 +11,17 @@ const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     fab: {
       margin: theme.spacing(1),
-      color: '#ffffff',
-      backgroundColor: '#a7aff4 !important',
+      color: 'white',
+      backgroundColor: '#cdadd4 !important',
       height: '55px',
       width: '55px',
       boxShadow: '3px 3px 7px rgba(0, 0, 0, 0.14) !important',
     },
-    container: {
-      display: 'flex',
-      position: 'absolute',
-      top: '20px',
-    },
+    // container: {
+    //   display: 'flex',
+    //   position: 'absolute',
+    //   top: '6%',
+    // },
     noMaxWidth: {
       maxWidth: 'none',
     },
@@ -48,21 +48,21 @@ export default function AddHuddleButton() {
   }
 
   return (
-    <div className={classes.container}>
-      <Tooltip
-        title={tooltipMessage}
-        classes={{ tooltip: classes.noMaxWidth }}
-        placement="bottom"
-        PopperProps={{ disablePortal: true }}
-        onClick={addHuddle}
-        style={{ cursor: zoomed ? 'not-allowed' : 'pointer' }}
-      >
-        <div>
-          <Fab className={classes.fab} disabled={disableAddHuddleButton} data-cy-audio-toggle>
-            <AddCircleOutlineIcon />
-          </Fab>
-        </div>
-      </Tooltip>
-    </div>
+    // <div className={classes.container}>
+    <Tooltip
+      title={tooltipMessage}
+      classes={{ tooltip: classes.noMaxWidth }}
+      placement="bottom"
+      PopperProps={{ disablePortal: true }}
+      onClick={addHuddle}
+      style={{ cursor: zoomed ? 'not-allowed' : 'pointer' }}
+    >
+      <div>
+        <Fab className={classes.fab} disabled={disableAddHuddleButton} data-cy-audio-toggle>
+          <AddCircleOutlineIcon />
+        </Fab>
+      </div>
+    </Tooltip>
+    // </div>
   );
 }

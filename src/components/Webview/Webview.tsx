@@ -1,37 +1,66 @@
 import React from 'react';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+import Close from '@material-ui/icons/Close';
+import Fab from '@material-ui/core/Fab';
+import Tooltip from '@material-ui/core/Tooltip';
+import useAPIContext from '../../hooks/useAPIContext/useAPIContext';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     container: {
-      width: '100%',
-      height: '100%',
       display: 'flex',
       flexDirection: 'column',
-      padding: '1%',
-      margin: '0px',
-      justifyContent: 'center',
+    },
+    titleBar: {
+      width: '100%',
+      display: 'flex',
+      flexDirection: 'row',
       alignItems: 'center',
     },
+    title: {
+      fontSize: '1.5em',
+      color: 'black',
+    },
     webview: {
-      height: '85%',
-      width: '80%',
       border: 'none',
       borderRadius: '25px',
+      backgroundColor: '#CEAED4',
+    },
+    fab: {
+      margin: theme.spacing(1),
+      color: 'white !important',
+      height: '4vh',
+      width: '4vh',
+      backgroundColor: 'red !important',
+      boxShadow: '3px 3px 7px rgba(0, 0, 0, 0.14) !important',
     },
   })
 );
 
 interface WebviewProps {
   url: string;
+  size: number;
+  aspectRatio: number;
 }
 
-export default function Webview({ url }: WebviewProps) {
+export default function Webview({ url, size, aspectRatio }: WebviewProps) {
   const classes = useStyles();
+
+  const { removeBot } = useAPIContext();
 
   return (
     <div className={classes.container}>
-      <iframe className={classes.webview} src={url} />
+      <div className={classes.titleBar}>
+        <Fab className={classes.fab} color="primary" onClick={removeBot}>
+          <Close />
+        </Fab>
+        <p className={classes.title}>Codenames</p>
+      </div>
+      <iframe
+        className={classes.webview}
+        style={{ width: size.toString() + 'px', height: (size / aspectRatio).toString() + 'px' }}
+        src={url}
+      />
     </div>
   );
 }
