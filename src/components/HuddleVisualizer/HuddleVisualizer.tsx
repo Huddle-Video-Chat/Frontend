@@ -32,21 +32,6 @@ export default function HuddleVisualizer() {
         )
       ) : (
         <HuddleZoomedOut />
-        // huddleList.map(huddleID => {
-        //   let huddleParticipants: [] = state.state[huddleID];
-
-        //   let pos = huddlePositions[huddleList.length - 1][num++];
-
-        //   return (
-        //     <HuddleZoomedOut
-        //       onClick={joinHuddle}
-        //       inHuddle={parseInt(huddleID) === state.huddle}
-        //       huddleID={huddleID}
-        //       participants={huddleParticipants}
-        //       position={pos}
-        //     />
-        //   );
-        // })
       )}
     </Outline>
   );
