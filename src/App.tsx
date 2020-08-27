@@ -62,15 +62,13 @@ export default function App() {
               <Main>
                 <>
                   <HuddleVisualizer />
-                  {/* Consolidate the bottom three into one component */}
                   <Chat />
-                  {/* <ToggleZoomButton />
-                  <AddHuddleButton /> */}
                   <Bots />
                 </>
                 <Controls />
                 <NavBar />
               </Main>
+
               <ReconnectingNotification />
             </Container>
           </APIProvider>
