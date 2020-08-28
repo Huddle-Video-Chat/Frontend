@@ -1,22 +1,18 @@
 import React, { useState } from 'react';
 import { styled } from '@material-ui/core/styles';
 
-import Controls from './components/Controls/Controls';
-import NavBar from './components/Controls/NavBar';
-import Chat from './components/Chat/Chat';
 import Bots from './components/Bots/Bots';
-import LocalVideoPreview from './components/LocalVideoPreview/LocalVideoPreview';
+import Chat from './components/Chat/Chat';
+import NavBar from './components/Controls/NavBar';
 import MenuBar from './components/MenuBar/MenuBar';
-import ToggleZoomButton from './components/Controls/ToggleZoomButton/ToggleZoomButton';
-import AddHuddleButton from './components/Controls/AddHuddleButton/AddHuddleButton';
-import ReconnectingNotification from './components/ReconnectingNotification/ReconnectingNotification';
-import Room from './components/Room/Room';
+import Controls from './components/Controls/Controls';
 import { APIProvider } from './components/APIProvider';
+import HuddleVisualizer from './components/HuddleVisualizer/HuddleVisualizer';
+import LocalVideoPreview from './components/LocalVideoPreview/LocalVideoPreview';
+import ReconnectingNotification from './components/ReconnectingNotification/ReconnectingNotification';
 
 import useHeight from './hooks/useHeight/useHeight';
 import useRoomState from './hooks/useRoomState/useRoomState';
-import Webview from './components/Webview/Webview';
-import HuddleVisualizer from './components/HuddleVisualizer/HuddleVisualizer';
 
 const Container = styled('div')({
   display: 'grid',
@@ -38,7 +34,7 @@ export default function App() {
   // will look good on mobile browsers even after the location bar opens or closes.
   const height = useHeight();
 
-  // TODO: this is really fucking stupid code need to refractor.
+  // Ternary to make sure the APIProvider is only called inside a connected room
   return (
     <>
       {roomState === 'disconnected' ? (

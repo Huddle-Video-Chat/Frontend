@@ -1,29 +1,17 @@
 import React from 'react';
+import { styled, createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+
 import { MemoParticipant } from '../Participant/Participant';
-import { nextSquareRoot, getArrangementPositionsZoomed } from '../../utils/algorithms';
-
-import { styled } from '@material-ui/core/styles';
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import useScreenShareParticipant from '../../hooks/useScreenShareParticipant/useScreenShareParticipant';
-
-import useAPIContext from '../../hooks/useAPIContext/useAPIContext';
-import { Participant } from 'twilio-video';
 import Webview from '../Webview/Webview';
 
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    huddle: {
-      overflow: 'visible',
-      border: '2px dashed grey',
-      display: 'flex',
-    },
-  })
-);
+import useScreenShareParticipant from '../../hooks/useScreenShareParticipant/useScreenShareParticipant';
+import useAPIContext from '../../hooks/useAPIContext/useAPIContext';
+
+import { nextSquareRoot } from '../../utils/algorithms';
 
 interface HuddleContentProps {}
 
 export default function HuddleContent({}: HuddleContentProps) {
-  const classes = useStyles();
   const { state } = useAPIContext();
   const screenSharingParticipant = useScreenShareParticipant();
   const participants: any[] = state.state[state.huddle];
@@ -100,7 +88,6 @@ export default function HuddleContent({}: HuddleContentProps) {
 
       <ParticipantStrip>
         {participants.map(participant => {
-          console.log(participants.length);
           return (
             <MemoParticipant
               key={participant.sid}

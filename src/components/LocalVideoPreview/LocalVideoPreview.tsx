@@ -2,7 +2,6 @@ import React from 'react';
 import { LocalVideoTrack } from 'twilio-video';
 import VideoTrack from '../VideoTrack/VideoTrack';
 import useVideoContext from '../../hooks/useVideoContext/useVideoContext';
-import useMousePosition from '../../hooks/useMousePosition/useMousePosition';
 import { styled } from '@material-ui/core/styles';
 
 const Container = styled('div')({
@@ -19,17 +18,10 @@ const Container = styled('div')({
   position: 'absolute',
 });
 
-const Outline = styled('div')({
-  overflow: 'hidden',
-  borderRadius: '50%',
-});
-
 export default function LocalVideoPreview() {
   const { localTracks } = useVideoContext();
 
   const videoTrack = localTracks.find(track => track.name.includes('camera')) as LocalVideoTrack;
-
-  const mousePosition = useMousePosition();
 
   // Hardcoded -150 for radius
   return videoTrack ? (
