@@ -12,13 +12,10 @@ export default function useRoomName() {
   // }, [])
 
   if (roomName) {
-    console.log('existing room name');
-    console.log(roomName);
     window.sessionStorage.setItem('roomName', roomName);
     first = false;
     return [roomName, first];
   } else {
-    console.log('new fresh room');
     let d = new Date();
     const text = d.toString();
     var random = Math.random().toString();

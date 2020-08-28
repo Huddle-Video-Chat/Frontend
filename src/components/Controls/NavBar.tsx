@@ -2,12 +2,6 @@ import React from 'react';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import clsx from 'clsx';
 
-import EndCallButton from './EndCallButton/EndCallButton';
-import ToggleAudioButton from './ToggleAudioButton/ToggleAudioButton';
-import ToggleVideoButton from './ToggleVideoButton/ToggleVideoButton';
-import ToggleScreenShareButton from './ToogleScreenShareButton/ToggleScreenShareButton';
-import InviteLinkButton from './InviteLinkButton/InviteLinkButton';
-
 import useIsUserActive from '../../hooks/useIsUserActive/useIsUserActive';
 import useRoomState from '../../hooks/useRoomState/useRoomState';
 import ToggleZoomButton from './ToggleZoomButton/ToggleZoomButton';
@@ -49,7 +43,6 @@ const useStyles = makeStyles((theme: Theme) =>
 export default function Controls() {
   const classes = useStyles();
   const roomState = useRoomState();
-  const isReconnecting = roomState === 'reconnecting';
   const isUserActive = useIsUserActive();
   const showControls = isUserActive || roomState === 'disconnected';
 

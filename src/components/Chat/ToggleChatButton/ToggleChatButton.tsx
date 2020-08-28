@@ -13,14 +13,16 @@ const useStyles = makeStyles((theme: Theme) =>
       backgroundColor: '#f2aab2 !important',
       height: '55px',
       width: '55px',
+      top: '15px',
+      right: '15px',
       boxShadow: '3px 3px 7px rgba(0, 0, 0, 0.14) !important',
     },
     container: {
       display: 'flex',
       position: 'absolute',
       right: '2%',
+      top: '3%',
       transform: 'translate(50%, 30px)',
-      top: '20px',
     },
     maxWidth: {
       maxWidth: 'none',

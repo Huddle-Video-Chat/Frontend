@@ -15,10 +15,13 @@ elif name == "vicky":
   # REPLACE LINE BELOW WITH YOUR ABSOLUTE PATH
   folder_path = "/Users/vickyli/Desktop/work/dev/backend-new/"
   my_whitelist = "VICKY_WHITELIST="
-elif name == "armaam":
+elif name == "albert-dev":
   # REPLACE LINE BELOW WITH YOUR ABSOLUTE PATH
   folder_path = "/Users/zgong/sum2020/Backend/backend-new/"
-  my_whitelist = "ARMAAN_WHITELIST="
+  my_whitelist = "DEV_WHITELIST="
+elif name == "vicky-dev":
+  folder_path = "/Users/vickyli/Desktop/work/dev/backend-new/"
+  my_whitelist = "DEV_WHITELIST="
 else:
   print('unknown user argument')
   exit()

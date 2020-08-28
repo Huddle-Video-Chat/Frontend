@@ -13,22 +13,28 @@ const useStyles = makeStyles((theme: Theme) =>
       // transform: 'translate(50%, 30px)',
       top: '9%',
       backgroundColor: '#EDAAB7',
-      width: '250px',
+      width: '270px',
       height: '85%',
       display: 'flex',
       flexDirection: 'column',
-      padding: '0% 2%',
+      padding: '0% 0.5%',
       margin: '20px',
       borderRadius: '15px',
       boxShadow: '4px 4px 17px rgba(0, 0, 0, 0.13)',
+      '&::-webkit-scrollbar': {
+        display: 'none',
+      },
+      overflowX: 'hidden',
     },
     topBar: {
       display: 'flex',
       flexDirection: 'row',
       alignItems: 'center',
+      marginTop: '20px',
     },
     closeButton: {
       height: '5vh',
+      width: '20px !important',
     },
     closeIcon: {},
     title: {
@@ -37,10 +43,11 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     messageListContainer: {
       flexGrow: 94,
-      overflow: 'scroll',
+      overflowY: 'scroll',
     },
     senderContainer: {
       flexGrow: 3,
+      marginLeft: '30px',
     },
     messageContainer: {
       display: 'flex',
@@ -100,7 +107,7 @@ export default function ChatBox({ closeChat }: ChatBoxProps) {
       fetch(url, requestOptions)
         .then(response => response.json())
         .then(data => setMessages(data));
-    }, 2000);
+    }, 1000);
     return () => clearInterval(interval);
   });
 
@@ -140,17 +147,20 @@ export default function ChatBox({ closeChat }: ChatBoxProps) {
       </div>
 
       <div className={classes.messageListContainer} ref={messagesEndRef}>
-        {messages.map(message => (
-          <div className={classes.messageContainer}>
-            <div className={classes.messageData}>
-              <h2 className={classes.h2}>{message.username}</h2>
-              {/* <p>8:00 p.m.</p> */}
+        {messages
+          .slice(0)
+          .reverse()
+          .map(message => (
+            <div className={classes.messageContainer}>
+              <div className={classes.messageData}>
+                <h2 className={classes.h2}>{message.username}</h2>
+                {/* <p>8:00 p.m.</p> */}
+              </div>
+              <div className={classes.messageBody}>
+                <p className={classes.p}>{message.body}</p>
+              </div>
             </div>
-            <div className={classes.messageBody}>
-              <p className={classes.p}>{message.body}</p>
-            </div>
-          </div>
-        ))}
+          ))}
       </div>
       <div className={classes.senderContainer}>
         {/* <form onSubmit={handleSubmit}> */}

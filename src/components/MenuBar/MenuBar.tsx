@@ -70,15 +70,6 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 export function getRoomName(first: boolean) {
-  // const match = window.location.search.match(/roomName=(.*)&?/);
-  // const rmName = match ? match[1] : window.sessionStorage.getItem('roomName');
-  // var roomMessage = 'Create Room';
-  // console.log(rmName);
-  // if (rmName != null) {
-  //   roomMessage = 'Join Room';
-  // }
-  // return roomMessage;
-  console.log(first);
   if (first) {
     return 'Create Room';
   } else {
@@ -86,21 +77,18 @@ export function getRoomName(first: boolean) {
   }
 }
 
-export default function MenuBar(huddleState: any) {
+export default function MenuBar() {
   const classes = useStyles();
   const { user, getToken, isFetching } = useAppState();
   const { isConnecting, connect, isAcquiringLocalTracks } = useVideoContext();
   const roomState = useRoomState();
-  // const passedRoomName = useRoomName();
 
   const [name, setName] = useState<string>(user?.displayName || '');
-  //const [roomName, setRoomName, isFirst] = useRoomName();
   const roomInfo = useRoomName();
   const [roomName, setRoomName] = useState(roomInfo[0]);
   const first = roomInfo[1];
 
   useEffect(() => {
-    console.log(roomName);
     if (roomName) {
       setRoomName(roomName);
     }
@@ -109,10 +97,6 @@ export default function MenuBar(huddleState: any) {
   const handleNameChange = (event: ChangeEvent<HTMLInputElement>) => {
     setName(event.target.value);
   };
-
-  // const handleRoomNameChange = (event: ChangeEvent<HTMLInputElement>) => {
-  //   setRoomName(event.target.value);
-  // };
 
   const handleSubmit = () => {
     getToken(name, roomName).then(token => connect(token));

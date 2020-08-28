@@ -26,15 +26,6 @@ export default function HuddleZoomedIn({}: HuddleZoomedInProps) {
   const huddleList = Object.keys(state.state);
   const size = (window.innerHeight * 1) / 3;
 
-  const adjustedHuddleDiameter = (nextSquareRoot(participants.length) + Math.sqrt(2) - 1) * size;
-
-  const center = { x: window.innerHeight / 2, y: window.innerWidth / 2 };
-
-  const adjustedPosition = {
-    left: adjustedHuddleDiameter / 2,
-    top: adjustedHuddleDiameter / 2,
-  };
-
   function onParticipantClick() {}
   // adjusting the center
 
