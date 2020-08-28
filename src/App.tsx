@@ -17,6 +17,7 @@ import useHeight from './hooks/useHeight/useHeight';
 import useRoomState from './hooks/useRoomState/useRoomState';
 import Webview from './components/Webview/Webview';
 import HuddleVisualizer from './components/HuddleVisualizer/HuddleVisualizer';
+import SpatialIndicator from './components/Huddle/SpacialIndicator';
 
 const Container = styled('div')({
   display: 'grid',

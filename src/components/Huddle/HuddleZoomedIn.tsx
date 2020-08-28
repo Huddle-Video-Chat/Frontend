@@ -6,6 +6,7 @@ import { styled } from '@material-ui/core/styles';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 
 import useAPIContext from '../../hooks/useAPIContext/useAPIContext';
+import SpatialIndicator from './SpacialIndicator';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -22,6 +23,7 @@ interface HuddleZoomedInProps {}
 export default function HuddleZoomedIn({}: HuddleZoomedInProps) {
   const { state } = useAPIContext();
   const participants: any[] = state.state[state.huddle];
+  const huddleList = Object.keys(state.state);
   const size = (window.innerHeight * 1) / 3;
 
   const adjustedHuddleDiameter = (nextSquareRoot(participants.length) + Math.sqrt(2) - 1) * size;
@@ -69,6 +71,8 @@ export default function HuddleZoomedIn({}: HuddleZoomedInProps) {
     rowGap: '20px',
   });
 
+  let index: number = 0;
+
   return (
     <Positioner>
       {participants.map(participant => {
@@ -84,6 +88,14 @@ export default function HuddleZoomedIn({}: HuddleZoomedInProps) {
             contentView={true}
           />
         );
+      })}
+
+      {huddleList.map(huddleID => {
+        let huddleParticipants: [] = state.state[huddleID];
+
+        if (huddleID !== state.huddle.toString()) {
+          return <SpatialIndicator index={index++} participants={huddleParticipants} />;
+        }
       })}
     </Positioner>
   );

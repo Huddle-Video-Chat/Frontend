@@ -9,6 +9,7 @@ import useScreenShareParticipant from '../../hooks/useScreenShareParticipant/use
 import useAPIContext from '../../hooks/useAPIContext/useAPIContext';
 import { Participant } from 'twilio-video';
 import Webview from '../Webview/Webview';
+import SpatialIndicator from './SpacialIndicator';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -27,6 +28,7 @@ export default function HuddleContent({}: HuddleContentProps) {
   const { state } = useAPIContext();
   const screenSharingParticipant = useScreenShareParticipant();
   const participants: any[] = state.state[state.huddle];
+  const huddleList = Object.keys(state.state);
   const size: number = (window.innerHeight * 1) / 5;
 
   const adjustedHuddleDiameter = (nextSquareRoot(participants.length) + Math.sqrt(2) - 1) * size;
@@ -69,6 +71,8 @@ export default function HuddleContent({}: HuddleContentProps) {
     overflow: 'scroll',
     padding: '2%',
   });
+
+  let index: number = 0;
 
   return (
     <Positioner style={adjustedPosition}>
@@ -115,6 +119,14 @@ export default function HuddleContent({}: HuddleContentProps) {
           );
         })}
       </ParticipantStrip>
+
+      {huddleList.map(huddleID => {
+        let huddleParticipants: [] = state.state[huddleID];
+
+        if (huddleID !== state.huddle.toString()) {
+          return <SpatialIndicator index={index++} participants={huddleParticipants} />;
+        }
+      })}
     </Positioner>
   );
 }
