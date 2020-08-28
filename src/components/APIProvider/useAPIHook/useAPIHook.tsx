@@ -80,17 +80,6 @@ export default function useAPIHook() {
       }
       newState[huddleID].push(localParticipant);
 
-      if (Object.keys(newState).length > 1 && parseInt(huddleID) !== 0) {
-        // [ newState[0], newState[huddleID] ] = [ newState[huddleID], newState[0] ]
-        console.log('newState[0]:')
-        console.log(newState[0])
-        console.log('newState[huddleID:')
-        console.log(newState[huddleID])
-        const temp = newState[huddleID]
-        newState[huddleID] = newState[0]
-        newState[0] = temp
-      }
-
       setState({
         state: newState,
         joined: true,

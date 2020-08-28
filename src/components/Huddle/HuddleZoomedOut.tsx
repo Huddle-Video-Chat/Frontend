@@ -81,14 +81,22 @@ interface HuddleProps {
 export default function HuddleZoomedOut() {
   const { state, joinHuddle, isSharing } = useAPIContext();
   const huddleList = Object.keys(state.state);
-  let num: number = 0;
+  let myHuddleParticipants = state.state[state.huddle]
+  let num: number = 1;
 
   return (
     <>
       {huddleList.map(huddleID => {
         const huddleParticipants: [] = state.state[huddleID];
 
-        const pos = huddlePositions[huddleList.length - 1][num++];
+        let pos
+        if (parseInt(huddleID) === state.huddle) {
+          console.log('the truth bitch')
+          pos = huddlePositions[huddleList.length - 1][0];
+        } else {
+          pos = huddlePositions[huddleList.length - 1][num++];
+        }
+
 
         return (
           <Huddle
