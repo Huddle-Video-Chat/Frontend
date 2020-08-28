@@ -18,7 +18,7 @@ const useStyles = makeStyles((theme: Theme) =>
       position: 'absolute',
       right: '50%',
       // transform: 'translate(50%, 30px)',
-      bottom: '1vh',
+      bottom: '50px',
       zIndex: 1,
       transition: 'opacity 1.2s, transform 1.2s, visibility 0s 1.2s',
       opacity: 0,
@@ -33,13 +33,13 @@ const useStyles = makeStyles((theme: Theme) =>
       [theme.breakpoints.down('xs')]: {
         bottom: `${theme.sidebarMobileHeight + 3}px`,
       },
-      background: 'linear-gradient(90deg, #B4B0E4 0%, #D4AEC5 98.94%);',
+      backgroundColor: '#A3B0F7',
       borderRadius: '50px',
       color: 'green',
       paddingLeft: '1%',
       paddingRight: '1%',
       boxShadow: '3px 3px 7px rgba(0, 0, 0, 0.07)',
-      padding: '0.3vw',
+      padding: '11px 25px',
     },
   })
 );

@@ -29,7 +29,7 @@ export default function ParticipantTracks({
   const { room } = useVideoContext();
   const publications = usePublications(participant);
   const isLocal = participant === room.localParticipant;
-  const { state } = useAPIContext()
+  const { state } = useAPIContext();
 
   let filteredPublications;
 

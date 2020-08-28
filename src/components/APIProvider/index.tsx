@@ -1,15 +1,13 @@
-import React, { createContext, ReactNode, useState } from 'react';
+import React, { createContext, ReactNode } from 'react';
 import useVideoContext from '../../hooks/useVideoContext/useVideoContext';
 import useAPIHook from './useAPIHook/useAPIHook';
 import useZoomToggle from './useZoomToggle/useZoomToggle';
-import useScreenShareToggle from './useScreenShareToggle/useScreenShareToggle';
 
 export interface IState {
   state: any;
   joined: boolean;
   counter: number;
   huddle: number;
-  bot: string;
 }
 
 interface IAPIContext {
@@ -17,12 +15,9 @@ interface IAPIContext {
   joinHuddle: (huddle: string) => void;
   addHuddle: () => void;
   deleteUser: () => void;
-  addBot: (name: string) => void;
-  removeBot: () => void;
+
   zoomed: boolean;
   toggleZoomed: () => void;
-  isSharing: boolean;
-  toggleScreenShare: () => void;
 }
 
 interface APIProviderProps {
@@ -37,7 +32,6 @@ export function APIProvider({ children }: APIProviderProps) {
 
   const [zoomed, toggleZoomed] = useZoomToggle();
   const [state, updateState] = useAPIHook();
-  const [isSharing, toggleScreenShare] = useScreenShareToggle(state);
 
   async function joinHuddle(huddle: string) {
     if (parseInt(huddle) !== state.huddle) {
@@ -86,36 +80,6 @@ export function APIProvider({ children }: APIProviderProps) {
     }
   }
 
-  async function addBot(name: string) {
-    const requestOptions = {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-    };
-
-    var url = 'https://huddle-video.herokuapp.com/bots/' + name;
-    url += '?id=' + room.sid;
-    url += '&user_id=' + localParticipant.sid;
-    url += '&huddle_id=' + state.huddle;
-    fetch(url, requestOptions)
-      .then(response => response.json())
-      .then(data => updateState(data));
-  }
-
-  async function removeBot() {
-    const requestOptions = {
-      method: 'DELETE',
-      headers: { 'Content-Type': 'application/json' },
-    };
-
-    var url = 'https://huddle-video.herokuapp.com/bots/delete';
-    url += '?id=' + room.sid;
-    url += '&user_id=' + localParticipant.sid;
-    url += '&huddle_id=' + state.huddle;
-    fetch(url, requestOptions)
-      .then(response => response.json())
-      .then(data => updateState(data));
-  }
-
   return (
     <APIContext.Provider
       value={{
@@ -123,12 +87,8 @@ export function APIProvider({ children }: APIProviderProps) {
         joinHuddle,
         addHuddle,
         deleteUser,
-        addBot,
-        removeBot,
         zoomed,
         toggleZoomed,
-        isSharing,
-        toggleScreenShare,
       }}
     >
       {children}

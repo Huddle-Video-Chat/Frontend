@@ -1,24 +1,13 @@
-import { useEffect } from 'react';
-
 const crypto = require('crypto');
 
 export default function useRoomName() {
   const match = window.location.search.match(/roomName=(.*)&?/);
   const roomName = match ? match[1] : window.sessionStorage.getItem('roomName');
-  var first = true;
-
-  // useEffect(() => {
-
-  // }, [])
 
   if (roomName) {
-    console.log('existing room name');
-    console.log(roomName);
     window.sessionStorage.setItem('roomName', roomName);
-    first = false;
-    return [roomName, first];
+    return roomName;
   } else {
-    console.log('new fresh room');
     let d = new Date();
     const text = d.toString();
     var random = Math.random().toString();
@@ -28,7 +17,7 @@ export default function useRoomName() {
       .digest('hex');
 
     window.sessionStorage.setItem('roomName', val);
-    first = true;
-    return [val, first];
+
+    return val;
   }
 }

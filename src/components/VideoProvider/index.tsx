@@ -61,7 +61,6 @@ export function VideoProvider({ options, children, onError = () => {}, onDisconn
   } = useLocalTracks();
   const { room, isConnecting, connect } = useRoom(localTracks, onErrorCallback, options);
 
-
   // Register onError and onDisconnect callback functions.
   useHandleRoomDisconnectionErrors(room, onError);
   useHandleTrackPublicationFailed(room, onError);

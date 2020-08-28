@@ -17,7 +17,7 @@ const useStyles = makeStyles((theme: Theme) =>
       height: '85%',
       display: 'flex',
       flexDirection: 'column',
-      padding: '0% 2%',
+      padding: '2%',
       margin: '20px',
       borderRadius: '15px',
       boxShadow: '4px 4px 17px rgba(0, 0, 0, 0.13)',

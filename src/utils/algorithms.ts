@@ -44,12 +44,4 @@ function getArrangementPositions(size: number, diameter: number, center: any) {
   return result;
 }
 
-function getArrangementPositionsZoomed(size: number, diameter: number, center: any) {
-  let result: any[] = [];
-  for (let index = 0; index < size; index += 1) {
-    result.push({ right: center.x, top: index * diameter * 1.1 });
-  }
-  return result;
-}
-
-export { nextSquareRoot, getArrangementPositions, getArrangementPositionsZoomed };
+export { nextSquareRoot, getArrangementPositions };

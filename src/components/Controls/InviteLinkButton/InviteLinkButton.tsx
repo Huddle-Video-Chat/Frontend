@@ -1,22 +1,18 @@
 import React from 'react';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-
 import useRoomName from '../../../hooks/useRoomName/useRoomName';
 import usePasscode from '../../../hooks/usePasscode/usePasscode';
 
 import Fab from '@material-ui/core/Fab';
 import Tooltip from '@material-ui/core/Tooltip';
 import ShareIcon from '@material-ui/icons/Share';
-import SuccessMessage from '../../SuccessMessage/SuccessMessage';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     fab: {
       margin: theme.spacing(1),
-      color: '#A3B0F7',
-      height: '55px',
-      width: '55px',
-      backgroundColor: 'white !important',
+      color: 'white',
+      backgroundColor: '#A3B0F7 !important',
       boxShadow: '3px 3px 7px rgba(0, 0, 0, 0.14) !important',
     },
   })
@@ -24,10 +20,10 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export default function InviteLinkButton(props: { disabled?: boolean }) {
   const classes = useStyles();
-  const roomName = useRoomName()[0];
+  const roomName = useRoomName();
   const passcode = usePasscode();
   const url = window.location.href;
-  const handleCopy = () => {
+  const copyLink = () => {
     var placeHolder = url + '?passcode=' + passcode + '&roomName=' + roomName;
     var dummy = document.createElement('textarea');
     dummy.setAttribute('id', 'dummy_id');
@@ -39,13 +35,10 @@ export default function InviteLinkButton(props: { disabled?: boolean }) {
   };
 
   return (
-    <div>
-      <Tooltip title={'Copy Invite'} placement="top" PopperProps={{ disablePortal: true }}>
-        <Fab className={classes.fab} onClick={handleCopy} disabled={props.disabled}>
-          <ShareIcon />
-        </Fab>
-      </Tooltip>
-      {/* <SuccessMessage /> */}
-    </div>
+    <Tooltip title={'Copy Invite'} placement="top" PopperProps={{ disablePortal: true }}>
+      <Fab className={classes.fab} onClick={copyLink} disabled={props.disabled}>
+        <ShareIcon />
+      </Fab>
+    </Tooltip>
   );
 }

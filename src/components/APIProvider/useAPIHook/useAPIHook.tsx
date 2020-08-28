@@ -22,7 +22,6 @@ export default function useAPIHook() {
     joined: false,
     counter: 0,
     huddle: -1,
-    bot: '',
   });
 
   if (roomState !== 'disconnected' && !state.joined) {
@@ -79,15 +78,11 @@ export default function useAPIHook() {
       }
       newState[huddleID].push(localParticipant);
 
-      console.log('data:');
-      console.log(data);
-
       setState({
         state: newState,
         joined: true,
         counter: data.state_counter,
         huddle: parseInt(data.huddle_id),
-        bot: data.bot_url,
       });
     }
   }
