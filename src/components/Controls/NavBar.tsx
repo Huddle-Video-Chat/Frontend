@@ -10,6 +10,8 @@ import InviteLinkButton from './InviteLinkButton/InviteLinkButton';
 
 import useIsUserActive from '../../hooks/useIsUserActive/useIsUserActive';
 import useRoomState from '../../hooks/useRoomState/useRoomState';
+import ToggleZoomButton from './ToggleZoomButton/ToggleZoomButton';
+import AddHuddleButton from './AddHuddleButton/AddHuddleButton';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -18,7 +20,7 @@ const useStyles = makeStyles((theme: Theme) =>
       position: 'absolute',
       right: '50%',
       // transform: 'translate(50%, 30px)',
-      bottom: '1vh',
+      top: '7vh',
       zIndex: 1,
       transition: 'opacity 1.2s, transform 1.2s, visibility 0s 1.2s',
       opacity: 0,
@@ -33,12 +35,12 @@ const useStyles = makeStyles((theme: Theme) =>
       [theme.breakpoints.down('xs')]: {
         bottom: `${theme.sidebarMobileHeight + 3}px`,
       },
-      background: 'linear-gradient(90deg, #B4B0E4 0%, #D4AEC5 98.94%);',
+      // background: 'linear-gradient(90deg, #B4B0E4 0%, #D4AEC5 98.94%);',
       borderRadius: '50px',
-      color: 'green',
+      // color: 'green',
       paddingLeft: '1%',
       paddingRight: '1%',
-      boxShadow: '3px 3px 7px rgba(0, 0, 0, 0.07)',
+      // boxShadow: '3px 3px 7px rgba(0, 0, 0, 0.07)',
       padding: '0.3vw',
     },
   })
@@ -55,15 +57,8 @@ export default function Controls() {
     <div className={clsx(classes.container, { showControls })}>
       {roomState !== 'disconnected' && (
         <>
-          <InviteLinkButton />
-        </>
-      )}
-      <ToggleAudioButton disabled={isReconnecting} />
-      <ToggleVideoButton disabled={isReconnecting} />
-      {roomState !== 'disconnected' && (
-        <>
-          <ToggleScreenShareButton disabled={isReconnecting} />
-          <EndCallButton />
+          <ToggleZoomButton />
+          <AddHuddleButton />
         </>
       )}
     </div>

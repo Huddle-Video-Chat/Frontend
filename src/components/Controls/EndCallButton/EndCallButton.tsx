@@ -12,8 +12,10 @@ const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     fab: {
       margin: theme.spacing(1),
-      color: '#F2F2F2 !important',
-      backgroundColor: 'red !important',
+      color: 'red !important',
+      height: '55px',
+      width: '55px',
+      backgroundColor: '#F2F2F2 !important',
       boxShadow: '3px 3px 7px rgba(0, 0, 0, 0.14) !important',
     },
   })

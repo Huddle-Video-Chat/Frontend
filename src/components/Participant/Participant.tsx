@@ -3,6 +3,7 @@ import React from 'react';
 import { Participant as IParticipant } from 'twilio-video';
 import ParticipantTracks from '../ParticipantTracks/ParticipantTracks';
 import ParticipantInfo from '../ParticipantInfo/ParticipantInfo';
+import useAPIContext from '../../hooks/useAPIContext/useAPIContext';
 
 interface ParticipantProps {
   participant: IParticipant;
@@ -10,9 +11,11 @@ interface ParticipantProps {
   enableScreenShare?: boolean;
   onClick: () => void;
   isSelected: boolean;
-  position: object;
-  participantDiameter: number;
+  position?: object;
+  size: number;
+  aspectRatio?: number;
   huddleID?: number;
+  contentView: boolean;
 }
 
 export default function Participant({
@@ -22,25 +25,31 @@ export default function Participant({
   onClick,
   isSelected,
   position,
-  participantDiameter,
+  size,
+  aspectRatio,
   huddleID,
+  contentView,
 }: ParticipantProps) {
+  const { zoomed } = useAPIContext();
+
   const Positioner = styled('div')({
-    width: participantDiameter.toString() + 'px',
-    height: participantDiameter.toString() + 'px',
-    margin: '0px',
+    height: aspectRatio !== undefined ? (size / aspectRatio).toString() + 'px' : size.toString() + 'px',
+    width: size.toString() + 'px',
+    margin: '1vh auto',
     objectFit: 'contain',
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    borderRadius: '50%',
+    borderRadius: enableScreenShare ? '2.8125%/5%' : '50%',
+    overflow: 'hidden',
+
+    position: zoomed && !contentView ? 'absolute' : 'static',
   });
 
   return (
     // TODO: convert to absolute and use {left: x, top: y}
 
-    <Positioner style={position}>
-      {/* <button onClick={clickButton}>{hear ? 'i am shut' : 'shut up'}</button> */}
+    <Positioner style={position !== undefined ? position : {}}>
       {/* <ParticipantInfo participant={participant} onClick={onClick} isSelected={isSelected}> */}
       <ParticipantTracks participant={participant} disableAudio={disableAudio} enableScreenShare={enableScreenShare} />
       {/* </ParticipantInfo> */}
