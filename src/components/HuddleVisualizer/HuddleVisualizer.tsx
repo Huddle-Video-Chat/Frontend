@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
+import { styled } from '@material-ui/core/styles';
+
 import HuddleZoomedIn from '../Huddle/HuddleZoomedIn';
 import HuddleZoomedOut from '../Huddle/HuddleZoomedOut';
 import HuddleContent from '../Huddle/HuddleContent';
-import { styled } from '@material-ui/core/styles';
 
 import useAPIContext from '../../hooks/useAPIContext/useAPIContext';
 import useScreenShareParticipant from '../../hooks/useScreenShareParticipant/useScreenShareParticipant';
@@ -10,7 +11,6 @@ import useScreenShareParticipant from '../../hooks/useScreenShareParticipant/use
 const Outline = styled('div')({
   position: 'relative',
   height: '100%',
-  // display: 'grid',
   overflow: 'hidden',
 
   background: '#F7F7F7',

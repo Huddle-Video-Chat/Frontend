@@ -70,7 +70,7 @@ export function APIProvider({ children }: APIProviderProps) {
   }
 
   async function addHuddle() {
-    if (Object.keys(state.state).length < 6 && state.state[state.huddle].length > 1) {
+    if (state.state[state.huddle].length > 1) {
       // console.log('Adding huddle...');
       const requestOptions = {
         method: 'POST',

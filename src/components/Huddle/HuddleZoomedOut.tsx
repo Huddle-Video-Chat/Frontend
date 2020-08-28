@@ -1,13 +1,14 @@
 import React from 'react';
 import { Participant as IParticipant } from 'twilio-video';
-import Participant, { MemoParticipant } from '../Participant/Participant';
-import { nextSquareRoot, getArrangementPositions, getArrangementPositionsZoomed } from '../../utils/algorithms';
+import { nextSquareRoot, getArrangementPositions } from '../../utils/algorithms';
 
 import { styled } from '@material-ui/core/styles';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import PeopleIcon from '@material-ui/icons/People';
 import Tooltip from '@material-ui/core/Tooltip';
-import Stepbro from '../../img/stepbro.png';
+
+import Participant, { MemoParticipant } from '../Participant/Participant';
+
 import useAPIContext from '../../hooks/useAPIContext/useAPIContext';
 
 interface Position {
@@ -68,16 +69,6 @@ const huddlePositions: Position[][] = [
   ],
 ];
 
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    huddle: {
-      overflow: 'visible',
-      border: '2px dashed grey',
-      display: 'flex',
-    },
-  })
-);
-
 interface HuddleProps {
   participants: IParticipant[];
   position: any;
@@ -95,9 +86,9 @@ export default function HuddleZoomedOut() {
   return (
     <>
       {huddleList.map(huddleID => {
-        let huddleParticipants: [] = state.state[huddleID];
+        const huddleParticipants: [] = state.state[huddleID];
 
-        let pos = huddlePositions[huddleList.length - 1][num++];
+        const pos = huddlePositions[huddleList.length - 1][num++];
 
         return (
           <Huddle
@@ -116,10 +107,7 @@ export default function HuddleZoomedOut() {
 
 function Huddle({ participants, position, huddleID, onClick, inHuddle, isSharing }: HuddleProps) {
   const size = ((inHuddle ? 1.25 : 1) * (window.innerHeight * 1)) / 5;
-  const adjustedHuddleDiameter =
-    (inHuddle ? 1.25 : 1) * (nextSquareRoot(Math.min(participants.length, 4)) + Math.sqrt(2) - 1) * size;
-
-  const center = { x: position.left - adjustedHuddleDiameter / 2, y: position.top - adjustedHuddleDiameter / 2 };
+  const adjustedHuddleDiameter = (nextSquareRoot(Math.min(participants.length, 4)) + Math.sqrt(2) - 1) * size;
 
   const adjustedPosition = {
     left: window.innerWidth * position.left - adjustedHuddleDiameter / 2,
@@ -158,8 +146,6 @@ function Huddle({ participants, position, huddleID, onClick, inHuddle, isSharing
       onClick(huddleID);
     }
   }
-
-  let count = 0;
 
   function huddleContent() {
     const huddleParticipants = participants.length > 4 ? participants.slice(0, 3) : participants;

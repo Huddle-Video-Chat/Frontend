@@ -5,7 +5,7 @@ import useParticipants from '../../../hooks/useParticipants/useParticipants';
 import useVideoContext from '../../../hooks/useVideoContext/useVideoContext';
 import useRoomState from '../../../hooks/useRoomState/useRoomState';
 
-// DO NOT USE THIS HOOK ANYWHERE, ONLY USED IN APIPROVIDER
+// DO NOT USE THIS HOOK ANYWHERE ELSE, ONLY USED IN APIPROVIDER
 
 interface IData {
   // TODO, make the type of data explicit
@@ -74,13 +74,22 @@ export default function useAPIHook() {
         newState[huddleID].push(p);
       });
       const huddleID: string = data.huddle_id;
+
       if (newState[huddleID] === undefined) {
         newState[huddleID] = [];
       }
       newState[huddleID].push(localParticipant);
 
-      console.log('data:');
-      console.log(data);
+      if (Object.keys(newState).length > 1 && parseInt(huddleID) !== 0) {
+        // [ newState[0], newState[huddleID] ] = [ newState[huddleID], newState[0] ]
+        console.log('newState[0]:')
+        console.log(newState[0])
+        console.log('newState[huddleID:')
+        console.log(newState[huddleID])
+        const temp = newState[huddleID]
+        newState[huddleID] = newState[0]
+        newState[0] = temp
+      }
 
       setState({
         state: newState,
