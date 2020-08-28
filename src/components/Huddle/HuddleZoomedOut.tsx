@@ -81,9 +81,9 @@ interface HuddleProps {
 export default function HuddleZoomedOut() {
   const { state, joinHuddle, isSharing } = useAPIContext();
   const huddleList = Object.keys(state.state);
-  let myHuddleParticipants = state.state[state.huddle];
   let num: number = 1;
 
+  // NESTED FOR LOOPS HERE
   return (
     <>
       {huddleList.map(huddleID => {
@@ -91,7 +91,6 @@ export default function HuddleZoomedOut() {
 
         let pos;
         if (parseInt(huddleID) === state.huddle) {
-          console.log('the truth bitch');
           pos = huddlePositions[huddleList.length - 1][0];
         } else {
           pos = huddlePositions[huddleList.length - 1][num++];
@@ -113,7 +112,7 @@ export default function HuddleZoomedOut() {
 }
 
 function Huddle({ participants, position, huddleID, onClick, inHuddle, isSharing }: HuddleProps) {
-  const size = ((inHuddle ? 1.25 : 1) * (window.innerHeight * 1)) / 5;
+  const size = ((window.innerHeight * 1)) / 5;
   const adjustedHuddleDiameter = (nextSquareRoot(Math.min(participants.length, 4)) + Math.sqrt(2) - 1) * size;
 
   const adjustedPosition = {
@@ -173,6 +172,7 @@ function Huddle({ participants, position, huddleID, onClick, inHuddle, isSharing
         </div>
       ) : null;
 
+      // INNER LOOP FOR THE NESTED
     const contents = huddleParticipants.map(participant => {
       return (
         <MemoParticipant

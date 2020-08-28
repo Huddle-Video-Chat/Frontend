@@ -41,8 +41,10 @@ export default function useAPIHook() {
   }
 
   // make SURE useAPIHook is only called inside a CONNECTED ROOM
+  // IMPORTANT!!!
   useEffect(() => {
     if (roomState !== 'disconnected') {
+
       const interval = setInterval(() => {
         const requestOptions = {
           method: 'GET',
@@ -56,16 +58,22 @@ export default function useAPIHook() {
           .then(data => updateState(data));
       }, 500);
       return () => clearInterval(interval);
+
     }
   });
 
+  // IMPORTANT!!!
   function updateState(data: any) {
     console.log('updating state ...');
+
+    // Only updates state if theres actually a change to the state
     if (data.state_counter !== state.counter) {
       // console.log(data);
       var newState: {
         [key: string]: any;
       } = {};
+
+      // Lots of for loops
       participants.map(p => {
         const huddleID: string = data.users[p.sid];
         if (newState[huddleID] === undefined) {
