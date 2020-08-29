@@ -46,7 +46,7 @@ const useStyles = makeStyles((theme: Theme) =>
     messageListContainer: {
       height: '85%',
       overflowY: 'scroll',
-      marginLeft: '30px',
+      marginLeft: '14px',
     },
     senderContainer: {
       height: '10%',

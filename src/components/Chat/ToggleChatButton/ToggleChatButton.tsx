@@ -51,28 +51,27 @@ interface ToggleChatButtonProps {
 
 export default function ToggleChatButton({ openChat, unread }: ToggleChatButtonProps) {
   const classes = useStyles();
-  const [messages, setMessages] = useState<Chat[]>([]);
-  console.log(messages.length);
-  const messagesPresent = messages.length !== 0;
+  // const [messages, setMessages] = useState<Chat[]>([]);
+  // console.log(messages.length);
+  // const messagesPresent = messages.length !== 0;
 
   const UnreadIndicator = styled('div')({
-    height: '0.5vh',
-    width: '0.5vh',
+    height: '16px',
+    width: '16px',
     borderRadius: '50%',
     backgroundColor: 'red',
     position: 'absolute',
-    right: '2%',
-    top: '3%',
-    transform: 'translate(50%, 30px)',
+    right: '38px',
+    top: '2px',
   });
 
   return (
     <>
-      {/* <UnreadIndicator/> */}
       <div className={classes.container}>
         <Tooltip title="Open Chat" placement="bottom" PopperProps={{ disablePortal: true }} onClick={openChat}>
           <Fab className={classes.fab} onClick={openChat}>
             <Chat />
+            {unread ? <UnreadIndicator /> : <div></div>}
           </Fab>
         </Tooltip>
       </div>
