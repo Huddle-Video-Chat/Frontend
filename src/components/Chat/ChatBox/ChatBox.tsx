@@ -4,6 +4,7 @@ import Close from '@material-ui/icons/Close';
 import { Button } from '@material-ui/core';
 import TextField from '@material-ui/core/TextField';
 import useVideoContext from '../../../hooks/useVideoContext/useVideoContext';
+import Linkify from 'react-linkify';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -17,8 +18,8 @@ const useStyles = makeStyles((theme: Theme) =>
       height: '85%',
       display: 'flex',
       flexDirection: 'column',
-      padding: '0% 0.5%',
-      margin: '20px',
+      padding: '1vh 1vw',
+      margin: '1vh',
       borderRadius: '15px',
       boxShadow: '4px 4px 17px rgba(0, 0, 0, 0.13)',
       '&::-webkit-scrollbar': {
@@ -39,23 +40,29 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     closeIcon: {},
     title: {
-      flexGrow: 3,
+      height: '5%',
       alignSelf: 'center',
     },
     messageListContainer: {
-      flexGrow: 94,
+      height: '85%',
       overflowY: 'scroll',
       marginLeft: '30px',
     },
     senderContainer: {
-      flexGrow: 3,
-      marginLeft: '30px',
+      height: '10%',
+      display: 'flex',
+      justifyContent: 'center',
     },
     messageContainer: {
       display: 'flex',
       flexDirection: 'column',
       alignItems: 'start',
       marginTop: '5%',
+      marginRight: '7%',
+      marginLeft: '7%',
+    },
+    textField: {
+      width: '90%',
     },
     messageData: {
       display: 'flex',
@@ -80,64 +87,40 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-interface ChatBoxProps {
-  closeChat: () => void;
-}
-interface Chat {
+export interface ChatProps {
   username: string;
   body: string;
 }
 
-export default function ChatBox({ closeChat }: ChatBoxProps) {
+interface ChatBoxProps {
+  closeChat: () => void;
+  sendMessage: (body: string) => void;
+  messages?: ChatProps[];
+}
+
+export default function ChatBox({ closeChat, sendMessage, messages }: ChatBoxProps) {
   const { room } = useVideoContext();
   const localParticipant = room.localParticipant;
 
   const classes = useStyles();
-  const [messages, setMessages] = useState<Chat[]>([]);
   const [body, setBody] = useState<string>('');
 
   const messagesEndRef = useRef(document.createElement('div'));
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      const requestOptions = {
-        method: 'GET',
-        headers: { 'Content-Type': 'application/json' },
-      };
-      var url = 'https://huddle-video.herokuapp.com/messages/get';
-      url += '?id=' + room.sid;
-      fetch(url, requestOptions)
-        .then(response => response.json())
-        .then(data => setMessages(data));
-    }, 500);
-    return () => clearInterval(interval);
-  });
 
   // useEffect(() => {
   //   messagesEndRef.current.scrollIntoView({ behavior: 'smooth' });
   // });
 
-  const handleSubmit = (e: any) => {
-    if (e.keyCode === 13) {
-      const requestOptions = {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-      };
-      var url = 'https://huddle-video.herokuapp.com/messages/send';
-      url += '?id=' + room.sid;
-      url += '&username=' + localParticipant.identity;
-      url += '&body=' + body;
-      fetch(url, requestOptions)
-        .then(response => response.json())
-        .then(data => setMessages(data));
-
-      setBody('');
-    }
-  };
-
   const handleNameChange = (event: ChangeEvent<HTMLInputElement>) => {
     setBody(event.target.value);
   };
+
+  function handleSubmit(e: any) {
+    if (e.keyCode === 13) {
+      sendMessage(body);
+      setBody('');
+    }
+  }
 
   return (
     <div className={classes.container}>
@@ -149,27 +132,28 @@ export default function ChatBox({ closeChat }: ChatBoxProps) {
       </div>
 
       <div className={classes.messageListContainer} ref={messagesEndRef}>
-        {messages
-          .slice(0)
-          .reverse()
-          .map(message => (
-            <div className={classes.messageContainer}>
-              <div className={classes.messageData}>
-                <h2 className={classes.h2}>{message.username}</h2>
-                {/* <p>8:00 p.m.</p> */}
+        {messages !== undefined &&
+          messages
+            .slice(0)
+            .reverse()
+            .map(message => (
+              <div className={classes.messageContainer}>
+                <div className={classes.messageData}>
+                  <h2 className={classes.h2}>{message.username}</h2>
+                  {/* <p>8:00 p.m.</p> */}
+                </div>
+                <div className={classes.messageBody}>
+                  <Linkify>{message.body}</Linkify>
+                </div>
               </div>
-              <div className={classes.messageBody}>
-                <p className={classes.p}>{message.body}</p>
-              </div>
-            </div>
-          ))}
+            ))}
       </div>
       <div className={classes.senderContainer}>
         {/* <form onSubmit={handleSubmit}> */}
         <TextField
           id="menu-name"
           label="Message"
-          // className={classes.textField}
+          className={classes.textField}
           value={body}
           onKeyDown={handleSubmit}
           onChange={handleNameChange}

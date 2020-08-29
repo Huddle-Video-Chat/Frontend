@@ -4,6 +4,7 @@ import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import Fab from '@material-ui/core/Fab';
 import Tooltip from '@material-ui/core/Tooltip';
 import Chat from '@material-ui/icons/Chat';
+import { styled } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -45,26 +46,36 @@ const useStyles = makeStyles((theme: Theme) =>
 
 interface ToggleChatButtonProps {
   openChat: () => void;
+  unread: boolean;
 }
-interface Chat {
-  username: string;
-  body: string;
-}
-export default function ToggleChatButton({ openChat }: ToggleChatButtonProps) {
+
+export default function ToggleChatButton({ openChat, unread }: ToggleChatButtonProps) {
   const classes = useStyles();
   const [messages, setMessages] = useState<Chat[]>([]);
   console.log(messages.length);
   const messagesPresent = messages.length !== 0;
 
+  const UnreadIndicator = styled('div')({
+    height: '0.5vh',
+    width: '0.5vh',
+    borderRadius: '50%',
+    backgroundColor: 'red',
+    position: 'absolute',
+    right: '2%',
+    top: '3%',
+    transform: 'translate(50%, 30px)',
+  });
+
   return (
-    <div className={classes.container}>
-      <Tooltip title="Open Chat" placement="bottom" PopperProps={{ disablePortal: true }} onClick={openChat}>
-        <Fab className={classes.fab} onClick={openChat}>
-          <Chat />
-          <div className={classes.notifications}>{messages.length}</div>
-          {/* {messagesPresent ? <div className={classes.notifications}>{messages.length}</div> : <div></div>} */}
-        </Fab>
-      </Tooltip>
-    </div>
+    <>
+      {/* <UnreadIndicator/> */}
+      <div className={classes.container}>
+        <Tooltip title="Open Chat" placement="bottom" PopperProps={{ disablePortal: true }} onClick={openChat}>
+          <Fab className={classes.fab} onClick={openChat}>
+            <Chat />
+          </Fab>
+        </Tooltip>
+      </div>
+    </>
   );
 }
