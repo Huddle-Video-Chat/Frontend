@@ -11,7 +11,7 @@ const useStyles = makeStyles((theme: Theme) =>
       position: 'absolute',
       right: '15px',
       // transform: 'translate(50%, 30px)',
-      top: '9%',
+      top: '7%',
       backgroundColor: '#EDAAB7',
       width: '270px',
       height: '85%',
@@ -31,6 +31,7 @@ const useStyles = makeStyles((theme: Theme) =>
       flexDirection: 'row',
       alignItems: 'center',
       marginTop: '20px',
+      marginLeft: '5px',
     },
     closeButton: {
       height: '5vh',
@@ -44,6 +45,7 @@ const useStyles = makeStyles((theme: Theme) =>
     messageListContainer: {
       flexGrow: 94,
       overflowY: 'scroll',
+      marginLeft: '30px',
     },
     senderContainer: {
       flexGrow: 3,
@@ -107,7 +109,7 @@ export default function ChatBox({ closeChat }: ChatBoxProps) {
       fetch(url, requestOptions)
         .then(response => response.json())
         .then(data => setMessages(data));
-    }, 1000);
+    }, 500);
     return () => clearInterval(interval);
   });
 
