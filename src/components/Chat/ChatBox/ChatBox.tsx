@@ -12,7 +12,7 @@ const useStyles = makeStyles((theme: Theme) =>
       position: 'absolute',
       right: '15px',
       // transform: 'translate(50%, 30px)',
-      top: '9%',
+      top: '7%',
       backgroundColor: '#EDAAB7',
       width: '270px',
       height: '85%',
@@ -31,6 +31,8 @@ const useStyles = makeStyles((theme: Theme) =>
       display: 'flex',
       flexDirection: 'row',
       alignItems: 'center',
+      marginTop: '20px',
+      marginLeft: '5px',
     },
     closeButton: {
       height: '5vh',
@@ -44,6 +46,7 @@ const useStyles = makeStyles((theme: Theme) =>
     messageListContainer: {
       height: '85%',
       overflowY: 'scroll',
+      marginLeft: '14px',
     },
     senderContainer: {
       height: '10%',

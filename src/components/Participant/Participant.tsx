@@ -4,6 +4,7 @@ import { Participant as IParticipant } from 'twilio-video';
 import ParticipantTracks from '../ParticipantTracks/ParticipantTracks';
 import ParticipantInfo from '../ParticipantInfo/ParticipantInfo';
 import useAPIContext from '../../hooks/useAPIContext/useAPIContext';
+import VideocamOffIcon from '@material-ui/icons/VideocamOff';
 
 interface ParticipantProps {
   participant: IParticipant;
@@ -42,7 +43,7 @@ export default function Participant({
     alignItems: 'center',
     borderRadius: enableScreenShare ? '2.8125%/5%' : '50%',
     overflow: 'hidden',
-
+    backgroundColor: '#A3B0F7',
     position: zoomed && !contentView ? 'absolute' : 'static',
   });
 
@@ -50,6 +51,7 @@ export default function Participant({
     // TODO: convert to absolute and use {left: x, top: y}
 
     <Positioner style={position !== undefined ? position : {}}>
+      <VideocamOffIcon style={{ fill: 'white', position: 'absolute', zIndex: 0, height: '55px', width: '55px' }} />
       {/* <ParticipantInfo participant={participant} onClick={onClick} isSelected={isSelected}> */}
       <ParticipantTracks participant={participant} disableAudio={disableAudio} enableScreenShare={enableScreenShare} />
       {/* </ParticipantInfo> */}
