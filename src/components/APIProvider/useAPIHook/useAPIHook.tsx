@@ -42,6 +42,8 @@ export default function useAPIHook() {
 
   // make SURE useAPIHook is only called inside a CONNECTED ROOM
   // IMPORTANT!!!
+  // I need to add redux here
+  // TODO: Wrap this component in redux
   useEffect(() => {
     if (roomState !== 'disconnected') {
 

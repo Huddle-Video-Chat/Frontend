@@ -116,6 +116,8 @@ export function APIProvider({ children }: APIProviderProps) {
       .then(data => updateState(data));
   }
 
+  // WILL RERENDER ALL CHILDREN IF ANY OF THESE VALUES CHANGE
+  // IMPORTANT!!!!!
   return (
     <APIContext.Provider
       value={{
