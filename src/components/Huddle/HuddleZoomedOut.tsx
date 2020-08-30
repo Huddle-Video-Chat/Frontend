@@ -124,10 +124,8 @@ function Huddle({ participants, position, huddleID, onClick, inHuddle, isSharing
   // adjusting the center
 
   const Positioner = styled('div')({
-    border: inHuddle ? 'none' : '3px solid #A3B0F7',
-    backgroundImage: inHuddle ? 'url("https://i.imgur.com/o4EznhC.gif")' : 'none',
-    backgroundPosition: 'center',
-    backgroundSize: adjustedHuddleDiameter,
+    border: inHuddle ? 'none' : '3px solid #6FB4F644',
+    background: inHuddle ? 'linear-gradient(135deg, #EFE4f966, #FFE8E966);' : 'none',
     borderRadius: '50%',
     width: adjustedHuddleDiameter,
     height: adjustedHuddleDiameter,
