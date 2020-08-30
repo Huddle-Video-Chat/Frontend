@@ -6,7 +6,7 @@ import useIsUserActive from '../../hooks/useIsUserActive/useIsUserActive';
 import useRoomState from '../../hooks/useRoomState/useRoomState';
 import ToggleZoomButton from './ToggleZoomButton/ToggleZoomButton';
 import LeaveHuddleButton from './LeaveHuddleButton/LeaveHuddleButton';
-import AddHuddleButton from './LeaveHuddleButton/LeaveHuddleButton';
+import AddHuddleButton from './AddHuddleButton/AddHuddleButton';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

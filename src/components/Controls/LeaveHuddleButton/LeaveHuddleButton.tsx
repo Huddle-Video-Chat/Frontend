@@ -33,7 +33,7 @@ const useStyles = makeStyles((theme: Theme) =>
         {props.zoomed ? <ZoomOutIcon /> : <ZoomInIcon />}
       </Fab> */
 
-export default function AddHuddleButton() {
+export default function LeaveHuddleButton() {
   const classes = useStyles();
   const { addHuddle, zoomed, isSharing } = useAPIContext();
 
@@ -45,7 +45,7 @@ export default function AddHuddleButton() {
   } else if (isSharing) {
     tooltipMessage = 'Cannot add huddle while sharing screen';
   } else {
-    tooltipMessage = 'Add huddle';
+    tooltipMessage = 'Leave huddle';
   }
 
   return (

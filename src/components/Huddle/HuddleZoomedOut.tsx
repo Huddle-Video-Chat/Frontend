@@ -6,10 +6,13 @@ import { styled } from '@material-ui/core/styles';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import PeopleIcon from '@material-ui/icons/People';
 import Tooltip from '@material-ui/core/Tooltip';
+import ScreenShare from '@material-ui/icons/ScreenShare';
+import Apps from '@material-ui/icons/Apps';
 
 import Participant, { MemoParticipant } from '../Participant/Participant';
 
 import useAPIContext from '../../hooks/useAPIContext/useAPIContext';
+import useScreenShareParticipant from '../../hooks/useScreenShareParticipant/useScreenShareParticipant';
 
 interface Position {
   left: number;
@@ -76,10 +79,12 @@ interface HuddleProps {
   onClick: (huddleID: string) => void;
   inHuddle: boolean;
   isSharing: boolean;
+  bot: string;
+  toggleZoomed: () => void;
 }
 
 export default function HuddleZoomedOut() {
-  const { state, joinHuddle, isSharing } = useAPIContext();
+  const { state, joinHuddle, isSharing, toggleZoomed } = useAPIContext();
   const huddleList = Object.keys(state.state);
   let myHuddleParticipants = state.state[state.huddle];
   let num: number = 1;
@@ -105,6 +110,8 @@ export default function HuddleZoomedOut() {
             onClick={joinHuddle}
             inHuddle={parseInt(huddleID) === state.huddle}
             isSharing={isSharing}
+            bot={state.bot}
+            toggleZoomed={toggleZoomed}
           />
         );
       })}
@@ -112,15 +119,15 @@ export default function HuddleZoomedOut() {
   );
 }
 
-function Huddle({ participants, position, huddleID, onClick, inHuddle, isSharing }: HuddleProps) {
+function Huddle({ participants, position, huddleID, onClick, inHuddle, isSharing, bot, toggleZoomed }: HuddleProps) {
   const size = ((inHuddle ? 1.25 : 1) * (window.innerHeight * 1)) / 5;
   const adjustedHuddleDiameter = (nextSquareRoot(Math.min(participants.length, 4)) + Math.sqrt(2) - 1) * size;
+  const screenShareParticipant = useScreenShareParticipant();
 
   const adjustedPosition = {
     left: window.innerWidth * position.left - adjustedHuddleDiameter / 2,
     top: window.innerHeight * position.top - adjustedHuddleDiameter / 2,
   };
-
   // adjusting the center
 
   const Positioner = styled('div')({
@@ -135,6 +142,19 @@ function Huddle({ participants, position, huddleID, onClick, inHuddle, isSharing
     // padding: '20px',
     display: 'grid',
     gridTemplateColumns: participants.length === 1 ? 'repeat(1, 1fr)' : 'repeat(2, 1fr)',
+  });
+
+  const ScreenShareIndicator = styled('div')({
+    backgroundColor: 'pink',
+    borderRadius: '50%',
+    position: 'absolute',
+    width: (window.innerHeight / 25).toString() + 'px',
+    height: (window.innerHeight / 25).toString() + 'px',
+    left: window.innerWidth * position.left - adjustedHuddleDiameter / 2.5,
+    top: window.innerHeight * position.top - adjustedHuddleDiameter / 2.5,
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
   });
 
   let tooltipMessage;
@@ -193,14 +213,30 @@ function Huddle({ participants, position, huddleID, onClick, inHuddle, isSharing
   }
 
   return (
-    <Tooltip
-      title={tooltipMessage}
-      placement="top"
-      PopperProps={{ disablePortal: true }}
-      onClick={() => onClick(huddleID)}
-      style={adjustedPosition}
-    >
-      <Positioner style={adjustedPosition}>{huddleContent()}</Positioner>
-    </Tooltip>
+    <>
+      <Tooltip
+        title={tooltipMessage}
+        placement="top"
+        PopperProps={{ disablePortal: true }}
+        onClick={() => onClick(huddleID)}
+        style={adjustedPosition}
+      >
+        <Positioner style={adjustedPosition}>{huddleContent()}</Positioner>
+      </Tooltip>
+      {(screenShareParticipant || bot !== null) && (
+        <Tooltip
+          title={
+            screenShareParticipant
+              ? 'Participant is screensharing, click to zoom in'
+              : 'App is being used, click to zoom in'
+          }
+          placement="top"
+          PopperProps={{ disablePortal: true }}
+          onClick={toggleZoomed}
+        >
+          <ScreenShareIndicator>{screenShareParticipant ? <ScreenShare /> : <Apps />}</ScreenShareIndicator>
+        </Tooltip>
+      )}
+    </>
   );
 }
