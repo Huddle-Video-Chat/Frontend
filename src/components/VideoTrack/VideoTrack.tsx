@@ -9,6 +9,7 @@ const Video = styled('video')({
   width: '100% !important',
   height: '100%',
   objectFit: 'cover',
+  zIndex: 2,
   // borderRadius: '50%',
 });
 
