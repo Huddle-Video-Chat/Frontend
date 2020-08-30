@@ -19,6 +19,10 @@ import LocalAudioLevelIndicator from './DeviceSelector/LocalAudioLevelIndicator/
 import ToggleFullscreenButton from './ToggleFullScreenButton/ToggleFullScreenButton';
 
 import Menu from './Menu/Menu';
+import amplitude from 'amplitude-js';
+import { AmplitudeProvider, Amplitude, LogOnMount } from '@amplitude/react-amplitude';
+
+const AMPLITUDE_KEY = '';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

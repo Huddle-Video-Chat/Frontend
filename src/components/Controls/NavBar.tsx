@@ -5,7 +5,8 @@ import clsx from 'clsx';
 import useIsUserActive from '../../hooks/useIsUserActive/useIsUserActive';
 import useRoomState from '../../hooks/useRoomState/useRoomState';
 import ToggleZoomButton from './ToggleZoomButton/ToggleZoomButton';
-import AddHuddleButton from './AddHuddleButton/AddHuddleButton';
+import LeaveHuddleButton from './LeaveHuddleButton/LeaveHuddleButton';
+import AddHuddleButton from './LeaveHuddleButton/LeaveHuddleButton';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -52,6 +53,7 @@ export default function Controls() {
         <>
           <ToggleZoomButton />
           <AddHuddleButton />
+          <LeaveHuddleButton />
         </>
       )}
     </div>

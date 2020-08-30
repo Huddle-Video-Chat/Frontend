@@ -2,7 +2,7 @@ import React from 'react';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 
 import Fab from '@material-ui/core/Fab';
-import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import Tooltip from '@material-ui/core/Tooltip';
 
 import useAPIContext from '../../../hooks/useAPIContext/useAPIContext';
@@ -55,12 +55,12 @@ export default function AddHuddleButton() {
       classes={{ tooltip: classes.noMaxWidth }}
       placement="bottom"
       PopperProps={{ disablePortal: true }}
-      // onClick={addHuddle}
+      onClick={addHuddle}
       style={{ cursor: zoomed ? 'not-allowed' : 'pointer' }}
     >
       <div>
         <Fab className={classes.fab} disabled={disableAddHuddleButton} data-cy-audio-toggle>
-          <AddCircleOutlineIcon />
+          <ExitToAppIcon />
         </Fab>
       </div>
     </Tooltip>
