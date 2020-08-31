@@ -1,8 +1,8 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 
 import Fab from '@material-ui/core/Fab';
-import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import Tooltip from '@material-ui/core/Tooltip';
 
 import useAPIContext from '../../../hooks/useAPIContext/useAPIContext';
@@ -33,11 +33,9 @@ const useStyles = makeStyles((theme: Theme) =>
         {props.zoomed ? <ZoomOutIcon /> : <ZoomInIcon />}
       </Fab> */
 
-export default function AddHuddleButton() {
+export default function LeaveHuddleButton() {
   const classes = useStyles();
   const { addHuddle, zoomed, isSharing } = useAPIContext();
-
-  console.log("should not run when state changes!!")
 
   const disableAddHuddleButton = zoomed || isSharing;
 
@@ -47,7 +45,7 @@ export default function AddHuddleButton() {
   } else if (isSharing) {
     tooltipMessage = 'Cannot add huddle while sharing screen';
   } else {
-    tooltipMessage = 'Add huddle';
+    tooltipMessage = 'Leave huddle';
   }
 
   return (
@@ -57,12 +55,12 @@ export default function AddHuddleButton() {
       classes={{ tooltip: classes.noMaxWidth }}
       placement="bottom"
       PopperProps={{ disablePortal: true }}
-      // onClick={addHuddle}
+      onClick={addHuddle}
       style={{ cursor: zoomed ? 'not-allowed' : 'pointer' }}
     >
       <div>
         <Fab className={classes.fab} disabled={disableAddHuddleButton} data-cy-audio-toggle>
-          <AddCircleOutlineIcon />
+          <ExitToAppIcon />
         </Fab>
       </div>
     </Tooltip>

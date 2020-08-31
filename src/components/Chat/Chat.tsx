@@ -44,7 +44,7 @@ export default function Chat() {
           }
           setMessages(data);
         });
-    }, 1000);
+    }, 500);
     return () => clearInterval(interval);
   });
 
