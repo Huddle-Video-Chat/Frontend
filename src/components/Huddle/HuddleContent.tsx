@@ -109,7 +109,7 @@ export default function HuddleContent({}: HuddleContentProps) {
       </ParticipantStrip>
 
       {huddleList.map(huddleID => {
-        let huddleParticipants: [] = state.state[huddleID];
+        let huddleParticipants: [] = state.state[huddleID].participants;
 
         if (huddleID !== state.huddle.toString()) {
           return <SpatialIndicator index={index++} participants={huddleParticipants} />;

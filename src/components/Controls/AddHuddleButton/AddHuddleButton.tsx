@@ -6,6 +6,7 @@ import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 import Tooltip from '@material-ui/core/Tooltip';
 
 import useAPIContext from '../../../hooks/useAPIContext/useAPIContext';
+import Popup from 'reactjs-popup';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -59,9 +60,16 @@ export default function AddHuddleButton() {
       style={{ cursor: zoomed ? 'not-allowed' : 'pointer' }}
     >
       <div>
-        <Fab className={classes.fab} disabled={disableAddHuddleButton} data-cy-audio-toggle>
-          <AddCircleOutlineIcon />
-        </Fab>
+        <Popup
+          trigger={
+            <Fab className={classes.fab} disabled={disableAddHuddleButton} data-cy-audio-toggle>
+              <AddCircleOutlineIcon />
+            </Fab>
+          }
+          position="right center"
+        >
+          <div>Popup content here !!</div>
+        </Popup>
       </div>
     </Tooltip>
     // </div>

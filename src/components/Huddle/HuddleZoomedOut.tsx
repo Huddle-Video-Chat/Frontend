@@ -14,6 +14,14 @@ import Participant, { MemoParticipant } from '../Participant/Participant';
 import useAPIContext from '../../hooks/useAPIContext/useAPIContext';
 import useScreenShareParticipant from '../../hooks/useScreenShareParticipant/useScreenShareParticipant';
 
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    huddleName: {
+      color: 'black',
+    },
+  })
+);
+
 interface Position {
   left: number;
   top: number;
@@ -74,6 +82,7 @@ const huddlePositions: Position[][] = [
 
 interface HuddleProps {
   participants: IParticipant[];
+  name?: string;
   position: any;
   huddleID: string;
   onClick: (huddleID: string) => void;
@@ -92,7 +101,7 @@ export default function HuddleZoomedOut() {
   return (
     <>
       {huddleList.map(huddleID => {
-        const huddleParticipants: [] = state.state[huddleID];
+        const huddleParticipants: [] = state.state[huddleID].participants;
 
         let pos;
         if (parseInt(huddleID) === state.huddle) {
@@ -105,6 +114,7 @@ export default function HuddleZoomedOut() {
         return (
           <Huddle
             participants={huddleParticipants}
+            name="Design."
             position={pos}
             huddleID={huddleID}
             onClick={joinHuddle}
@@ -119,10 +129,23 @@ export default function HuddleZoomedOut() {
   );
 }
 
-function Huddle({ participants, position, huddleID, onClick, inHuddle, isSharing, bot, toggleZoomed }: HuddleProps) {
+function Huddle({
+  participants,
+  name,
+  position,
+  huddleID,
+  onClick,
+  inHuddle,
+  isSharing,
+  bot,
+  toggleZoomed,
+}: HuddleProps) {
   const size = ((inHuddle ? 1.25 : 1) * (window.innerHeight * 1)) / 5;
   const adjustedHuddleDiameter = (nextSquareRoot(Math.min(participants.length, 4)) + Math.sqrt(2) - 1) * size;
   const screenShareParticipant = useScreenShareParticipant();
+  const classes = useStyles();
+
+  console.log(name);
 
   const adjustedPosition = {
     left: window.innerWidth * position.left - adjustedHuddleDiameter / 2,
@@ -130,16 +153,22 @@ function Huddle({ participants, position, huddleID, onClick, inHuddle, isSharing
   };
   // adjusting the center
 
-  const Positioner = styled('div')({
+  const Container = styled('div')({
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
     border: inHuddle ? 'none' : '3px solid #6FB4F644',
     background: inHuddle ? 'linear-gradient(135deg, #EFE4f966, #FFE8E966);' : 'none',
     borderRadius: '50%',
-    width: adjustedHuddleDiameter,
-    height: adjustedHuddleDiameter,
+    width: adjustedHuddleDiameter * (name !== undefined ? 1.2 : 1),
+    height: adjustedHuddleDiameter * (name !== undefined ? 1.2 : 1),
     position: 'absolute',
+  });
+
+  const Positioner = styled('div')({
     justifyItems: 'center',
     alignItems: 'center',
-    // padding: '20px',
     display: 'grid',
     gridTemplateColumns: participants.length === 1 ? 'repeat(1, 1fr)' : 'repeat(2, 1fr)',
   });
@@ -221,7 +250,10 @@ function Huddle({ participants, position, huddleID, onClick, inHuddle, isSharing
         onClick={() => onClick(huddleID)}
         style={adjustedPosition}
       >
-        <Positioner style={adjustedPosition}>{huddleContent()}</Positioner>
+        <Container>
+          <Positioner style={adjustedPosition}>{huddleContent()}</Positioner>
+          {name !== undefined ? <h1 className={classes.huddleName}>{name}</h1> : <></>}
+        </Container>
       </Tooltip>
       {(screenShareParticipant || bot !== null) && (
         <Tooltip

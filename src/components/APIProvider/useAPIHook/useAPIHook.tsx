@@ -64,21 +64,44 @@ export default function useAPIHook() {
     if (data.state_counter !== state.counter) {
       // console.log(data);
       var newState: {
-        [key: string]: any;
+        [key: string]: {
+          participants: any;
+          name?: string;
+        };
       } = {};
       participants.map(p => {
         const huddleID: string = data.users[p.sid];
         if (newState[huddleID] === undefined) {
-          newState[huddleID] = [];
+          newState[huddleID] = {
+            participants: [],
+            name: undefined,
+          };
         }
-        newState[huddleID].push(p);
+        newState[huddleID].participants.push(p);
       });
+
       const huddleID: string = data.huddle_id;
 
       if (newState[huddleID] === undefined) {
-        newState[huddleID] = [];
+        newState[huddleID] = {
+          participants: [],
+          name: undefined,
+        };
       }
-      newState[huddleID].push(localParticipant);
+      newState[huddleID].participants.push(localParticipant);
+
+      // Object.keys(data.named_huddles).map(id => {
+      //   if (newState[id] === undefined) {
+      //     newState[id] = {
+      //       participants: [],
+      //       name: undefined
+      //     };
+      //   }
+
+      //   newState[id].name = data.named_huddles[id]
+      // });
+
+      console.log(newState);
 
       setState({
         state: newState,
