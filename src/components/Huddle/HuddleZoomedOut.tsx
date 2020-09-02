@@ -118,13 +118,8 @@ export default function HuddleZoomedOut() {
   );
 }
 
-<<<<<<< HEAD
-function Huddle({ participants, position, huddleID, onClick, inHuddle, isSharing }: HuddleProps) {
-  const size = ((window.innerHeight * 1)) / 5;
-=======
 function Huddle({ participants, position, huddleID, onClick, inHuddle, isSharing, bot, toggleZoomed }: HuddleProps) {
   const size = ((inHuddle ? 1.25 : 1) * (window.innerHeight * 1)) / 5;
->>>>>>> 1efec5049ac9ecabe1f199c80a94c6f1e0013d7b
   const adjustedHuddleDiameter = (nextSquareRoot(Math.min(participants.length, 4)) + Math.sqrt(2) - 1) * size;
   const screenShareParticipant = useScreenShareParticipant();
 
@@ -195,7 +190,7 @@ function Huddle({ participants, position, huddleID, onClick, inHuddle, isSharing
         </div>
       ) : null;
 
-      // INNER LOOP FOR THE NESTED
+    // INNER LOOP FOR THE NESTED
     const contents = huddleParticipants.map(participant => {
       return (
         <MemoParticipant

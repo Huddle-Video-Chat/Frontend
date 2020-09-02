@@ -20,6 +20,7 @@ const Container = styled('div')({
   display: 'grid',
   background: '#F7F7F7',
   gridTemplateRows: 'auto 1fr',
+  overflow: 'hidden',
 });
 
 const Main = styled('main')({
@@ -52,7 +53,6 @@ export default function App() {
           </Container>
         </>
       ) : (
-        
         // Where APIProvider gets called!
         <>
           <APIProvider>
