@@ -52,6 +52,7 @@ export default function App() {
           </Container>
         </>
       ) : (
+        // Where APIProvider gets called!
         <>
           <APIProvider>
             <Container style={{ height }}>

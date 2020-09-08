@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 
 import Fab from '@material-ui/core/Fab';
@@ -37,6 +37,8 @@ const useStyles = makeStyles((theme: Theme) =>
 export default function AddHuddleButton() {
   const classes = useStyles();
   const { addHuddle, zoomed, isSharing } = useAPIContext();
+
+  console.log('should not run when state changes!!');
 
   const disableAddHuddleButton = zoomed || isSharing;
 

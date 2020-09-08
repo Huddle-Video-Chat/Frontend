@@ -95,9 +95,9 @@ interface HuddleProps {
 export default function HuddleZoomedOut() {
   const { state, joinHuddle, isSharing, toggleZoomed } = useAPIContext();
   const huddleList = Object.keys(state.state);
-  let myHuddleParticipants = state.state[state.huddle];
   let num: number = 1;
 
+  // NESTED FOR LOOPS HERE
   return (
     <>
       {huddleList.map(huddleID => {
@@ -105,7 +105,6 @@ export default function HuddleZoomedOut() {
 
         let pos;
         if (parseInt(huddleID) === state.huddle) {
-          console.log('the truth bitch');
           pos = huddlePositions[huddleList.length - 1][0];
         } else {
           pos = huddlePositions[huddleList.length - 1][num++];
@@ -220,6 +219,7 @@ function Huddle({
         </div>
       ) : null;
 
+    // INNER LOOP FOR THE NESTED
     const contents = huddleParticipants.map(participant => {
       return (
         <MemoParticipant

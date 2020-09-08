@@ -41,6 +41,9 @@ export default function useAPIHook() {
   }
 
   // make SURE useAPIHook is only called inside a CONNECTED ROOM
+  // IMPORTANT!!!
+  // I need to add redux here
+  // TODO: Wrap this component in redux
   useEffect(() => {
     if (roomState !== 'disconnected') {
       const interval = setInterval(() => {
@@ -59,8 +62,11 @@ export default function useAPIHook() {
     }
   });
 
+  // IMPORTANT!!!
   function updateState(data: any) {
     console.log('updating state ...');
+
+    // Only updates state if theres actually a change to the state
     if (data.state_counter !== state.counter) {
       // console.log(data);
       var newState: {
@@ -69,6 +75,8 @@ export default function useAPIHook() {
           name?: string;
         };
       } = {};
+
+      // Lots of for loops
       participants.map(p => {
         const huddleID: string = data.users[p.sid];
         if (newState[huddleID] === undefined) {
