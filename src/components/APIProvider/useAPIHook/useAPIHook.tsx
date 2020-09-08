@@ -98,16 +98,16 @@ export default function useAPIHook() {
       }
       newState[huddleID].participants.push(localParticipant);
 
-      // Object.keys(data.named_huddles).map(id => {
-      //   if (newState[id] === undefined) {
-      //     newState[id] = {
-      //       participants: [],
-      //       name: undefined
-      //     };
-      //   }
+      Object.keys(data.named_huddles).map(id => {
+        if (newState[id] === undefined) {
+          newState[id] = {
+            participants: [],
+            name: undefined,
+          };
+        }
 
-      //   newState[id].name = data.named_huddles[id]
-      // });
+        newState[id].name = data.named_huddles[id];
+      });
 
       console.log(newState);
 

@@ -113,7 +113,7 @@ export default function HuddleZoomedOut() {
         return (
           <Huddle
             participants={huddleParticipants}
-            name="Design."
+            name={state.state[huddleID].name}
             position={pos}
             huddleID={huddleID}
             onClick={joinHuddle}

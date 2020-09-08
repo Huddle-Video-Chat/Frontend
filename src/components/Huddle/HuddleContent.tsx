@@ -16,7 +16,7 @@ interface HuddleContentProps {}
 export default function HuddleContent({}: HuddleContentProps) {
   const { state } = useAPIContext();
   const screenSharingParticipant = useScreenShareParticipant();
-  const participants: any[] = state.state[state.huddle];
+  const participants: any[] = state.state[state.huddle].participants;
   const huddleList = Object.keys(state.state);
   const size: number = (window.innerHeight * 1) / 5;
 

@@ -22,7 +22,7 @@ interface HuddleZoomedInProps {}
 
 export default function HuddleZoomedIn({}: HuddleZoomedInProps) {
   const { state } = useAPIContext();
-  const participants: any[] = state.state[state.huddle];
+  const participants: any[] = state.state[state.huddle].participants;
   const huddleList = Object.keys(state.state);
   const size = (window.innerHeight * 1) / 3;
 
