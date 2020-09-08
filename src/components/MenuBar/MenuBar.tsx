@@ -116,7 +116,7 @@ export default function MenuBar() {
               {window.location.search.includes('customIdentity=true') || !user?.displayName ? (
                 <TextField
                   id="menu-name"
-                  label="Name"
+                  label="Your name"
                   className={classes.textField}
                   value={name}
                   onChange={handleNameChange}

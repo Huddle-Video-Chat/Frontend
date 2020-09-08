@@ -26,6 +26,7 @@ const useStyles = makeStyles((theme: Theme) =>
         display: 'none',
       },
       overflowX: 'hidden',
+      zIndex: 3,
     },
     topBar: {
       display: 'flex',
@@ -158,6 +159,7 @@ export default function ChatBox({ closeChat, sendMessage, messages }: ChatBoxPro
           onKeyDown={handleSubmit}
           onChange={handleNameChange}
           margin="dense"
+          autoComplete="off"
         />
         {/* </form> */}
       </div>

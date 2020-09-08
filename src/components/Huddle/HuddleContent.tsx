@@ -79,6 +79,7 @@ export default function HuddleContent({}: HuddleContentProps) {
             aspectRatio={16 / 10}
             disableAudio={false}
             contentView={true}
+            indicator={false}
           />
         ) : (
           <>
@@ -103,6 +104,7 @@ export default function HuddleContent({}: HuddleContentProps) {
               size={size}
               disableAudio={false}
               contentView={true}
+              indicator={false}
             />
           );
         })}

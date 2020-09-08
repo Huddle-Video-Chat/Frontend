@@ -90,6 +90,7 @@ export default function SpacialIndicator({ participants, index }: SpacialIndicat
                   size={20}
                   disableAudio={true}
                   contentView={true}
+                  indicator={true}
                 />
               );
             })}
@@ -109,6 +110,7 @@ export default function SpacialIndicator({ participants, index }: SpacialIndicat
                   size={20}
                   disableAudio={true}
                   contentView={true}
+                  indicator={true}
                 />
               );
             })}

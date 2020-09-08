@@ -27,28 +27,28 @@ const huddlePositions: Position[][] = [
   ],
   [
     { left: 1 / 2, top: 1 / 2 },
-    { left: 1 / 4, top: 1 / 2 },
-    { left: 3 / 4, top: 1 / 2 },
+    { left: 1 / 5, top: 1 / 2 },
+    { left: 4 / 5, top: 1 / 2 },
   ],
   [
     { left: 1 / 2, top: 1 / 2 },
-    { left: 1 / 4, top: 1 / 3 },
-    { left: 1 / 4, top: 2 / 3 },
-    { left: 3 / 4, top: 1 / 2 },
+    { left: 1 / 5, top: 1 / 3 },
+    { left: 1 / 5, top: 2 / 3 },
+    { left: 4 / 5, top: 1 / 2 },
   ],
   [
     { left: 1 / 2, top: 1 / 2 },
-    { left: 1 / 4, top: 1 / 3 },
-    { left: 1 / 4, top: 2 / 3 },
-    { left: 3 / 4, top: 1 / 3 },
-    { left: 3 / 4, top: 2 / 3 },
+    { left: 1 / 4, top: 1 / 4 },
+    { left: 1 / 4, top: 3 / 4 },
+    { left: 3 / 4, top: 1 / 4 },
+    { left: 3 / 4, top: 3 / 4 },
   ],
   [
     { left: 1 / 2, top: 1 / 2 },
-    { left: 4 / 9, top: 1 / 5 },
-    { left: 1 / 4, top: 1 / 2 },
-    { left: 1 / 3, top: 3 / 4 },
-    { left: 2 / 3, top: 3 / 4 },
+    { left: 3 / 9, top: 1 / 6 },
+    { left: 1 / 5, top: 1 / 2 },
+    { left: 1 / 3, top: 4 / 5 },
+    { left: 2 / 3, top: 4 / 5 },
     { left: 2 / 3, top: 1 / 3 },
   ],
   [
@@ -119,7 +119,7 @@ export default function HuddleZoomedOut() {
 }
 
 function Huddle({ participants, position, huddleID, onClick, inHuddle, isSharing, bot, toggleZoomed }: HuddleProps) {
-  const size = ((inHuddle ? 1.25 : 1) * (window.innerHeight * 1)) / 5;
+  const size = ((inHuddle ? 1 : 0.7) * (window.innerHeight * 1)) / 5;
   const adjustedHuddleDiameter = (nextSquareRoot(Math.min(participants.length, 4)) + Math.sqrt(2) - 1) * size;
   const screenShareParticipant = useScreenShareParticipant();
 
@@ -202,6 +202,7 @@ function Huddle({ participants, position, huddleID, onClick, inHuddle, isSharing
           size={size}
           disableAudio={!inHuddle}
           contentView={true}
+          indicator={false}
         />
       );
     });
