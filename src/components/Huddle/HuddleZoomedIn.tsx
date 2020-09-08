@@ -47,8 +47,8 @@ export default function HuddleZoomedIn({}: HuddleZoomedInProps) {
 
   const Positioner = styled('div')({
     border: 'null',
-    width: '100%',
-    height: '100%',
+    width: '70%',
+    height: '75%',
     // position: 'absolute',
     justifyItems: 'center',
     alignItems: 'center',
@@ -77,6 +77,7 @@ export default function HuddleZoomedIn({}: HuddleZoomedInProps) {
             size={size}
             disableAudio={false}
             contentView={true}
+            indicator={false}
           />
         );
       })}

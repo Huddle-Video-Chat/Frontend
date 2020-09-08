@@ -24,6 +24,7 @@ const useStyles = makeStyles((theme: Theme) =>
       right: '2%',
       top: '3%',
       transform: 'translate(50%, 30px)',
+      zIndex: 3,
     },
     maxWidth: {
       maxWidth: 'none',

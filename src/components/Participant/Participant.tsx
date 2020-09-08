@@ -17,6 +17,7 @@ interface ParticipantProps {
   aspectRatio?: number;
   huddleID?: number;
   contentView: boolean;
+  indicator: boolean;
 }
 
 export default function Participant({
@@ -30,6 +31,7 @@ export default function Participant({
   aspectRatio,
   huddleID,
   contentView,
+  indicator,
 }: ParticipantProps) {
   const { zoomed } = useAPIContext();
 
@@ -51,7 +53,12 @@ export default function Participant({
     // TODO: convert to absolute and use {left: x, top: y}
 
     <Positioner style={position !== undefined ? position : {}}>
-      <VideocamOffIcon style={{ fill: 'white', position: 'absolute', zIndex: 0, height: '55px', width: '55px' }} />
+      {indicator ? (
+        <VideocamOffIcon style={{ fill: 'white', position: 'absolute', zIndex: 0, height: '5px', width: '5px' }} />
+      ) : (
+        <VideocamOffIcon style={{ fill: 'white', position: 'absolute', zIndex: 0, height: '60px', width: '60px' }} />
+      )}
+
       {/* <ParticipantInfo participant={participant} onClick={onClick} isSelected={isSelected}> */}
       <ParticipantTracks participant={participant} disableAudio={disableAudio} enableScreenShare={enableScreenShare} />
       {/* </ParticipantInfo> */}

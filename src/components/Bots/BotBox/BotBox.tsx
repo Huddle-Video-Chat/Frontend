@@ -22,6 +22,7 @@ const useStyles = makeStyles((theme: Theme) =>
       margin: '20px',
       borderRadius: '15px',
       boxShadow: '4px 4px 17px rgba(0, 0, 0, 0.13)',
+      zIndex: 3,
     },
     topBar: {
       display: 'flex',
