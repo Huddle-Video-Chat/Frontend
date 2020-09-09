@@ -8,6 +8,14 @@ import BotCard from '../BotCard/BotCard';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
+    '@global': {
+      '*::-webkit-scrollbar': {
+        backgroundColor: 'rgba(0,0,0,0)',
+      },
+    },
+    '*::-webkit-scrollbar': {
+      backgroundColor: 'rgba(0,0,0,0)',
+    },
     container: {
       position: 'absolute',
       left: '15px',
@@ -23,6 +31,10 @@ const useStyles = makeStyles((theme: Theme) =>
       borderRadius: '15px',
       boxShadow: '4px 4px 17px rgba(0, 0, 0, 0.13)',
       zIndex: 3,
+      overflowX: 'hidden',
+      '&::-webkit-scrollbar': {
+        backgroundColor: 'rgba(0,0,0,0)',
+      },
     },
     topBar: {
       display: 'flex',
@@ -47,6 +59,7 @@ const useStyles = makeStyles((theme: Theme) =>
       flexDirection: 'column',
       alignItems: 'start',
       marginTop: '5%',
+      overflowX: 'hidden',
     },
     messageData: {
       display: 'flex',
