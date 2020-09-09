@@ -70,8 +70,8 @@ export function APIProvider({ children }: APIProviderProps) {
   }
 
   async function addHuddle() {
-    if (state.state[state.huddle].length > 1) {
-      // console.log('Adding huddle...');
+    if (state.state[state.huddle].participants.length > 1) {
+      console.log('Adding huddle...');
       const requestOptions = {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },

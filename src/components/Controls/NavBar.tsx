@@ -52,7 +52,7 @@ export default function Controls() {
       {roomState !== 'disconnected' && (
         <>
           <ToggleZoomButton />
-          <AddHuddleButton />
+          {/* <AddHuddleButton /> */}
           <LeaveHuddleButton />
         </>
       )}

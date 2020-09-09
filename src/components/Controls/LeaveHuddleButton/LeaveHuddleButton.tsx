@@ -3,6 +3,7 @@ import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 
 import Fab from '@material-ui/core/Fab';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 import Tooltip from '@material-ui/core/Tooltip';
 
 import useAPIContext from '../../../hooks/useAPIContext/useAPIContext';
@@ -59,7 +60,7 @@ export default function LeaveHuddleButton() {
       style={{ cursor: zoomed ? 'not-allowed' : 'pointer' }}
     >
       <Fab className={classes.fab} disabled={disableAddHuddleButton} data-cy-audio-toggle>
-        <ExitToAppIcon />
+        <AddCircleOutlineIcon />
       </Fab>
     </Tooltip>
     // </div>
