@@ -2,7 +2,7 @@ import { styled } from '@material-ui/core/styles';
 import React from 'react';
 import { Participant as IParticipant } from 'twilio-video';
 import ParticipantTracks from '../ParticipantTracks/ParticipantTracks';
-import ParticipantInfo from '../ParticipantInfo/ParticipantInfo';
+// import ParticipantInfo from '../ParticipantInfo/ParticipantInfo';
 import useAPIContext from '../../hooks/useAPIContext/useAPIContext';
 import VideocamOffIcon from '@material-ui/icons/VideocamOff';
 

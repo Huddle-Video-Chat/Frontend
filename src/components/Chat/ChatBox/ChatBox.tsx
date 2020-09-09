@@ -8,6 +8,14 @@ import Linkify from 'react-linkify';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
+    '@global': {
+      '*::-webkit-scrollbar': {
+        backgroundColor: 'rgba(0,0,0,0)',
+      },
+    },
+    '*::-webkit-scrollbar': {
+      backgroundColor: 'rgba(0,0,0,0)',
+    },
     container: {
       position: 'absolute',
       right: '15px',
@@ -22,7 +30,7 @@ const useStyles = makeStyles((theme: Theme) =>
       margin: '1vh',
       borderRadius: '15px',
       boxShadow: '4px 4px 17px rgba(0, 0, 0, 0.13)',
-      '&::-webkit-scrollbar': {
+      '*::-webkit-scrollbar': {
         display: 'none',
       },
       overflowX: 'hidden',
@@ -48,6 +56,9 @@ const useStyles = makeStyles((theme: Theme) =>
       height: '85%',
       overflowY: 'scroll',
       marginLeft: '14px',
+      '&::-webkit-scrollbar': {
+        display: 'none',
+      },
     },
     senderContainer: {
       height: '10%',
