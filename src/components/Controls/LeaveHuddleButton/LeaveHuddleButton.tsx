@@ -58,11 +58,9 @@ export default function LeaveHuddleButton() {
       onClick={addHuddle}
       style={{ cursor: zoomed ? 'not-allowed' : 'pointer' }}
     >
-      <div>
-        <Fab className={classes.fab} disabled={disableAddHuddleButton} data-cy-audio-toggle>
-          <ExitToAppIcon />
-        </Fab>
-      </div>
+      <Fab className={classes.fab} disabled={disableAddHuddleButton} data-cy-audio-toggle>
+        <ExitToAppIcon />
+      </Fab>
     </Tooltip>
     // </div>
   );

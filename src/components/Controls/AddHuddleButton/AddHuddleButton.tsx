@@ -6,6 +6,7 @@ import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 import Tooltip from '@material-ui/core/Tooltip';
 
 import useAPIContext from '../../../hooks/useAPIContext/useAPIContext';
+import Popup from 'reactjs-popup';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -37,7 +38,7 @@ export default function AddHuddleButton() {
   const classes = useStyles();
   const { addHuddle, zoomed, isSharing } = useAPIContext();
 
-  console.log("should not run when state changes!!")
+  console.log('should not run when state changes!!');
 
   const disableAddHuddleButton = zoomed || isSharing;
 
@@ -61,9 +62,16 @@ export default function AddHuddleButton() {
       style={{ cursor: zoomed ? 'not-allowed' : 'pointer' }}
     >
       <div>
-        <Fab className={classes.fab} disabled={disableAddHuddleButton} data-cy-audio-toggle>
-          <AddCircleOutlineIcon />
-        </Fab>
+        <Popup
+          trigger={
+            <Fab className={classes.fab} disabled={disableAddHuddleButton} data-cy-audio-toggle>
+              <AddCircleOutlineIcon />
+            </Fab>
+          }
+          position="right center"
+        >
+          <div>Popup content here !!</div>
+        </Popup>
       </div>
     </Tooltip>
     // </div>

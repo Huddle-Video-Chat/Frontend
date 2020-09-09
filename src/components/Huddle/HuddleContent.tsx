@@ -16,7 +16,7 @@ interface HuddleContentProps {}
 export default function HuddleContent({}: HuddleContentProps) {
   const { state } = useAPIContext();
   const screenSharingParticipant = useScreenShareParticipant();
-  const participants: any[] = state.state[state.huddle];
+  const participants: any[] = state.state[state.huddle].participants;
   const huddleList = Object.keys(state.state);
   const size: number = (window.innerHeight * 1) / 5;
 
@@ -111,7 +111,7 @@ export default function HuddleContent({}: HuddleContentProps) {
       </ParticipantStrip>
 
       {huddleList.map(huddleID => {
-        let huddleParticipants: [] = state.state[huddleID];
+        let huddleParticipants: [] = state.state[huddleID].participants;
 
         if (huddleID !== state.huddle.toString()) {
           return <SpatialIndicator index={index++} participants={huddleParticipants} />;

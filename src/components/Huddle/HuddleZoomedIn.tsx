@@ -22,7 +22,7 @@ interface HuddleZoomedInProps {}
 
 export default function HuddleZoomedIn({}: HuddleZoomedInProps) {
   const { state } = useAPIContext();
-  const participants: any[] = state.state[state.huddle];
+  const participants: any[] = state.state[state.huddle].participants;
   const huddleList = Object.keys(state.state);
   const size = (window.innerHeight * 1) / 3;
 
@@ -83,7 +83,7 @@ export default function HuddleZoomedIn({}: HuddleZoomedInProps) {
       })}
 
       {huddleList.map(huddleID => {
-        let huddleParticipants: [] = state.state[huddleID];
+        let huddleParticipants: [] = state.state[huddleID].participants;
 
         if (huddleID !== state.huddle.toString()) {
           return <SpatialIndicator index={index++} participants={huddleParticipants} />;

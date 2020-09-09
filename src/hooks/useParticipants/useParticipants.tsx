@@ -7,6 +7,7 @@ export default function useParticipants() {
   const { room } = useVideoContext();
   // const dominantSpeaker = useDominantSpeaker();
   const [participants, setParticipants] = useState(Array.from(room.participants.values()));
+  const [disconnection, setDisconnection] = useState<Boolean>(false);
 
   // When the dominant speaker changes, they are moved to the front of the participants array.
   // This means that the most recent dominant speakers will always be near the top of the
@@ -20,11 +21,21 @@ export default function useParticipants() {
   //   }
   // }, [dominantSpeaker]);
 
+  function disconnected() {
+    setDisconnection(true);
+  }
+
+  function disconnectionProcessed() {
+    setDisconnection(false);
+  }
+
   useEffect(() => {
     const participantConnected = (participant: RemoteParticipant) =>
       setParticipants(prevParticipants => [...prevParticipants, participant]);
-    const participantDisconnected = (participant: RemoteParticipant) =>
+    const participantDisconnected = (participant: RemoteParticipant) => {
       setParticipants(prevParticipants => prevParticipants.filter(p => p !== participant));
+      disconnected();
+    };
     room.on('participantConnected', participantConnected);
     room.on('participantDisconnected', participantDisconnected);
     return () => {

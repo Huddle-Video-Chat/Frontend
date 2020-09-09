@@ -2,14 +2,7 @@ import React from 'react';
 import clsx from 'clsx';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import { LocalAudioTrack, LocalVideoTrack, Participant, RemoteAudioTrack, RemoteVideoTrack } from 'twilio-video';
-
-import AudioLevelIndicator from '../AudioLevelIndicator/AudioLevelIndicator';
 import BandwidthWarning from '../BandwidthWarning/BandwidthWarning';
-import NetworkQualityLevel from '../NewtorkQualityLevel/NetworkQualityLevel';
-import ParticipantConnectionIndicator from './ParticipantConnectionIndicator/ParticipantConnectionIndicator';
-import PinIcon from './PinIcon/PinIcon';
-import ScreenShare from '@material-ui/icons/ScreenShare';
-import VideocamOff from '@material-ui/icons/VideocamOff';
 
 import useParticipantNetworkQualityLevel from '../../hooks/useParticipantNetworkQualityLevel/useParticipantNetworkQualityLevel';
 import usePublications from '../../hooks/usePublications/usePublications';
