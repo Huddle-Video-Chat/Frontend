@@ -52,7 +52,7 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     listContainer: {
       flexGrow: 94,
-      overflow: 'scroll',
+      overflowY: 'scroll',
     },
     messageContainer: {
       display: 'flex',
