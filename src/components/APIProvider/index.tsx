@@ -9,16 +9,20 @@ export interface IState {
   joined: boolean;
   counter: number;
   huddle: number;
-  bot: string;
+  bot_url: string;
+  bot_name: string;
 }
 
 interface IAPIContext {
   state: IState;
   joinHuddle: (huddle: string) => void;
-  addHuddle: () => void;
+  leaveHuddle: () => void;
   deleteUser: () => void;
   addBot: (name: string) => void;
   removeBot: () => void;
+  emptyHuddle: (name: string) => void;
+  nameHuddle: (huddle: string, name: string) => void;
+  unnameHuddle: (huddle: string) => void;
   zoomed: boolean;
   toggleZoomed: () => void;
   isSharing: boolean;
@@ -57,6 +61,52 @@ export function APIProvider({ children }: APIProviderProps) {
     }
   }
 
+  async function emptyHuddle(name: string) {
+    const requestOptions = {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+    };
+
+    var url = 'https://huddle-video.herokuapp.com/huddle/empty';
+    url += '?id=' + room.sid;
+    url += '&name=' + name;
+
+    fetch(url, requestOptions)
+      .then(response => response.json())
+      .then(data => updateState(data));
+  }
+
+  async function nameHuddle(huddle: string, name: string) {
+    const requestOptions = {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+    };
+
+    var url = 'https://huddle-video.herokuapp.com/huddle/name';
+    url += '?id=' + room.sid;
+    url += '&huddle_id=' + huddle;
+    url += '&name=' + name;
+
+    fetch(url, requestOptions)
+      .then(response => response.json())
+      .then(data => updateState(data));
+  }
+
+  async function unnameHuddle(huddle: string) {
+    const requestOptions = {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+    };
+
+    var url = 'https://huddle-video.herokuapp.com/huddle/unname';
+    url += '?id=' + room.sid;
+    url += '&huddle_id=' + huddle;
+
+    fetch(url, requestOptions)
+      .then(response => response.json())
+      .then(data => updateState(data));
+  }
+
   async function deleteUser() {
     const requestOptions = {
       method: 'DELETE',
@@ -69,8 +119,8 @@ export function APIProvider({ children }: APIProviderProps) {
     fetch(url, requestOptions);
   }
 
-  async function addHuddle() {
-    if (state.state[state.huddle].participants.length > 1) {
+  async function leaveHuddle() {
+    if (state.state[state.huddle].participants.length > 1 || state.state[state.huddle].name != undefined) {
       console.log('Adding huddle...');
       const requestOptions = {
         method: 'POST',
@@ -123,10 +173,13 @@ export function APIProvider({ children }: APIProviderProps) {
       value={{
         state,
         joinHuddle,
-        addHuddle,
+        leaveHuddle,
         deleteUser,
         addBot,
         removeBot,
+        emptyHuddle,
+        nameHuddle,
+        unnameHuddle,
         zoomed,
         toggleZoomed,
         isSharing,

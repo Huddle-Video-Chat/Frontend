@@ -38,12 +38,13 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 interface WebviewProps {
+  name: string;
   url: string;
   size: number;
   aspectRatio: number;
 }
 
-export default function Webview({ url, size, aspectRatio }: WebviewProps) {
+export default function Webview({ name, url, size, aspectRatio }: WebviewProps) {
   const classes = useStyles();
 
   const { removeBot } = useAPIContext();
@@ -54,7 +55,7 @@ export default function Webview({ url, size, aspectRatio }: WebviewProps) {
         <Fab className={classes.fab} color="primary" onClick={removeBot}>
           <Close />
         </Fab>
-        <p className={classes.title}>Codenames</p>
+        <p className={classes.title}>{name}</p>
       </div>
       <iframe
         className={classes.webview}

@@ -4,7 +4,7 @@ import useParticipants from '../useParticipants/useParticipants';
 import useVideoContext from '../useVideoContext/useVideoContext';
 
 export default function useHuddleParticipants() {
-  const participants = useParticipants();
+  const { participants } = useParticipants();
   const {
     room: { localParticipant },
   } = useVideoContext();

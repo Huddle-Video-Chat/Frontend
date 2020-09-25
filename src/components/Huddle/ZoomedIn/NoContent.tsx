@@ -1,11 +1,11 @@
 import React from 'react';
-import { MemoParticipant } from '../Participant/Participant';
-import { nextSquareRoot, getArrangementPositionsZoomed, getArrangementPositions } from '../../utils/algorithms';
+import { MemoParticipant } from '../../Participant/Participant';
+import { nextSquareRoot, getArrangementPositionsZoomed, getArrangementPositions } from '../../../utils/algorithms';
 
 import { styled } from '@material-ui/core/styles';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 
-import useAPIContext from '../../hooks/useAPIContext/useAPIContext';
+import useAPIContext from '../../../hooks/useAPIContext/useAPIContext';
 import SpatialIndicator from './SpacialIndicator';
 
 const useStyles = makeStyles((theme: Theme) =>

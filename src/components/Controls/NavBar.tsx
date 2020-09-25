@@ -7,6 +7,7 @@ import useRoomState from '../../hooks/useRoomState/useRoomState';
 import ToggleZoomButton from './ToggleZoomButton/ToggleZoomButton';
 import LeaveHuddleButton from './LeaveHuddleButton/LeaveHuddleButton';
 import AddHuddleButton from './AddHuddleButton/AddHuddleButton';
+import BreakoutButton from './Breakouts/BreakoutButton';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -52,8 +53,9 @@ export default function Controls() {
       {roomState !== 'disconnected' && (
         <>
           <ToggleZoomButton />
-          {/* <AddHuddleButton /> */}
+          <AddHuddleButton />
           <LeaveHuddleButton />
+          {/* <BreakoutButton /> */}
         </>
       )}
     </div>

@@ -3,7 +3,6 @@ import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 
 import Fab from '@material-ui/core/Fab';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
-import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 import Tooltip from '@material-ui/core/Tooltip';
 
 import useAPIContext from '../../../hooks/useAPIContext/useAPIContext';
@@ -36,7 +35,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export default function LeaveHuddleButton() {
   const classes = useStyles();
-  const { addHuddle, zoomed, isSharing } = useAPIContext();
+  const { leaveHuddle, zoomed, isSharing } = useAPIContext();
 
   const disableAddHuddleButton = zoomed || isSharing;
 
@@ -56,11 +55,11 @@ export default function LeaveHuddleButton() {
       classes={{ tooltip: classes.noMaxWidth }}
       placement="bottom"
       PopperProps={{ disablePortal: true }}
-      onClick={addHuddle}
+      onClick={leaveHuddle}
       style={{ cursor: zoomed ? 'not-allowed' : 'pointer' }}
     >
       <Fab className={classes.fab} disabled={disableAddHuddleButton} data-cy-audio-toggle>
-        <AddCircleOutlineIcon />
+        <ExitToAppIcon />
       </Fab>
     </Tooltip>
     // </div>
