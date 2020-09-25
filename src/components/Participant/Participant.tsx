@@ -43,24 +43,48 @@ export default function Participant({
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    borderRadius: enableScreenShare ? '2.8125%/5%' : '50%',
+    borderRadius: enableScreenShare ? '2.8125%/5%' : '1000px',
     overflow: 'hidden',
     backgroundColor: '#A3B0F7',
-    position: zoomed && !contentView ? 'absolute' : 'static',
+    position: zoomed && !contentView ? 'absolute' : 'relative',
+  });
+
+  const Name = styled('div')({
+    height: (size * 0.8).toString() + 'px',
+    width: (size * 0.8).toString() + 'px',
+    backgroundColor: 'rgba(255,255,255,0.8)',
+    color: 'black',
+    fontSize: '18px',
+    opacity: 0,
+    '&:hover': {
+      opacity: 1,
+    },
+    borderRadius: '1000px',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    zIndex: 5,
+    position: 'absolute',
+    padding: '20px',
+    transition: 'all 0.3s ease',
   });
 
   return (
     // TODO: convert to absolute and use {left: x, top: y}
 
     <Positioner style={position !== undefined ? position : {}}>
-      {indicator ? (
+      {indicator || enableScreenShare ? (
         <VideocamOffIcon style={{ fill: 'white', position: 'absolute', zIndex: 0, height: '5px', width: '5px' }} />
       ) : (
-        <VideocamOffIcon style={{ fill: 'white', position: 'absolute', zIndex: 0, height: '60px', width: '60px' }} />
+        <>
+          <Name>{participant.identity}</Name>
+          <VideocamOffIcon style={{ fill: 'white', position: 'absolute', zIndex: 0, height: '60px', width: '60px' }} />
+        </>
       )}
 
       {/* <ParticipantInfo participant={participant} onClick={onClick} isSelected={isSelected}> */}
       <ParticipantTracks participant={participant} disableAudio={disableAudio} enableScreenShare={enableScreenShare} />
+
       {/* </ParticipantInfo> */}
     </Positioner>
   );
