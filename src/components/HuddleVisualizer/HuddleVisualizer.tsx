@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { styled } from '@material-ui/core/styles';
 
-import HuddleZoomedIn from '../Huddle/HuddleZoomedIn';
-import HuddleZoomedOut from '../Huddle/HuddleZoomedOut';
-import HuddleContent from '../Huddle/HuddleContent';
+import HuddleZoomedIn from '../Huddle/ZoomedIn/NoContent';
+import HuddleZoomedOut from '../Huddle/ZoomedOut/ZoomedOut';
+import HuddleContent from '../Huddle/ZoomedIn/Content';
 
 import useAPIContext from '../../hooks/useAPIContext/useAPIContext';
 import useScreenShareParticipant from '../../hooks/useScreenShareParticipant/useScreenShareParticipant';
@@ -27,7 +27,7 @@ export default function HuddleVisualizer() {
 
   return (
     <Outline>
-      {zoomed ? screenSharing || state.bot !== null ? <HuddleContent /> : <HuddleZoomedIn /> : <HuddleZoomedOut />}
+      {zoomed ? screenSharing || state.bot_url !== null ? <HuddleContent /> : <HuddleZoomedIn /> : <HuddleZoomedOut />}
     </Outline>
   );
 }

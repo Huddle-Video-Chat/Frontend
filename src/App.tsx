@@ -15,8 +15,6 @@ import ReconnectingNotification from './components/ReconnectingNotification/Reco
 
 import useHeight from './hooks/useHeight/useHeight';
 import useRoomState from './hooks/useRoomState/useRoomState';
-import Webview from './components/Webview/Webview';
-import SpatialIndicator from './components/Huddle/SpacialIndicator';
 
 const Container = styled('div')({
   display: 'grid',

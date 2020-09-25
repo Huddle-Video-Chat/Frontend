@@ -1,15 +1,15 @@
 import React from 'react';
 import { styled, createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 
-import { MemoParticipant } from '../Participant/Participant';
-import Webview from '../Webview/Webview';
+import { MemoParticipant } from '../../Participant/Participant';
+import Webview from '../../Webview/Webview';
 
-import useScreenShareParticipant from '../../hooks/useScreenShareParticipant/useScreenShareParticipant';
-import useAPIContext from '../../hooks/useAPIContext/useAPIContext';
+import useScreenShareParticipant from '../../../hooks/useScreenShareParticipant/useScreenShareParticipant';
+import useAPIContext from '../../../hooks/useAPIContext/useAPIContext';
 import { Participant } from 'twilio-video';
 import SpatialIndicator from './SpacialIndicator';
 
-import { nextSquareRoot } from '../../utils/algorithms';
+import { nextSquareRoot } from '../../../utils/algorithms';
 
 interface HuddleContentProps {}
 
@@ -83,8 +83,13 @@ export default function HuddleContent({}: HuddleContentProps) {
           />
         ) : (
           <>
-            {state.bot !== null ? (
-              <Webview url={state.bot} size={window.innerWidth * 0.65} aspectRatio={1200 / 700} />
+            {state.bot_url !== null ? (
+              <Webview
+                name={state.bot_name}
+                url={state.bot_url}
+                size={window.innerWidth * 0.65}
+                aspectRatio={1200 / 700}
+              />
             ) : (
               <></>
             )}

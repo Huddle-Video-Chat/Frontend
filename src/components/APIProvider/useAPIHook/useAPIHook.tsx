@@ -12,8 +12,9 @@ interface IData {
 }
 
 export default function useAPIHook() {
-  const participants: RemoteParticipant[] = useParticipants();
+  // const [participants]: RemoteParticipant[] = useParticipants();
   const roomState = useRoomState();
+  const { participants, disconnection, disconnectionProcessed } = useParticipants();
   const { room } = useVideoContext();
   const localParticipant = room.localParticipant;
 
@@ -22,7 +23,8 @@ export default function useAPIHook() {
     joined: false,
     counter: 0,
     huddle: -1,
-    bot: '',
+    bot_url: '',
+    bot_name: '',
   });
 
   if (roomState !== 'disconnected' && !state.joined) {
@@ -67,7 +69,7 @@ export default function useAPIHook() {
     console.log('updating state ...');
 
     // Only updates state if theres actually a change to the state
-    if (data.state_counter !== state.counter) {
+    if (data.state_counter !== state.counter || disconnection) {
       // console.log(data);
       var newState: {
         [key: string]: {
@@ -110,13 +112,15 @@ export default function useAPIHook() {
       });
 
       console.log(newState);
+      disconnectionProcessed();
 
       setState({
         state: newState,
         joined: true,
         counter: data.state_counter,
         huddle: parseInt(data.huddle_id),
-        bot: data.bot_url,
+        bot_url: data.bot_url,
+        bot_name: data.bot_name,
       });
     }
   }

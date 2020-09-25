@@ -1,14 +1,8 @@
 import React from 'react';
 import { Participant as IParticipant } from 'twilio-video';
-import Participant, { MemoParticipant } from '../Participant/Participant';
-import { nextSquareRoot, getArrangementPositions, getArrangementPositionsZoomed } from '../../utils/algorithms';
-
+import { MemoParticipant } from '../../Participant/Participant';
 import { styled } from '@material-ui/core/styles';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import PeopleIcon from '@material-ui/icons/People';
-import Tooltip from '@material-ui/core/Tooltip';
-import Stepbro from '../../img/stepbro.png';
-import useAPIContext from '../../hooks/useAPIContext/useAPIContext';
 
 const topVals: number[] = [50, 20, 80, 35, 65];
 

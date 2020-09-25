@@ -3,6 +3,12 @@ import { RemoteParticipant } from 'twilio-video';
 // import useDominantSpeaker from '../useDominantSpeaker/useDominantSpeaker';
 import useVideoContext from '../useVideoContext/useVideoContext';
 
+// export interface IParticipants {
+//   participants: RemoteParticipant[],
+//   disconnection: boolean,
+//   disconnectionProcessed: () => void,
+// }
+
 export default function useParticipants() {
   const { room } = useVideoContext();
   // const dominantSpeaker = useDominantSpeaker();
@@ -22,11 +28,14 @@ export default function useParticipants() {
   // }, [dominantSpeaker]);
 
   function disconnected() {
+    console.log('DISCONNECTION');
     setDisconnection(true);
   }
 
   function disconnectionProcessed() {
-    setDisconnection(false);
+    if (disconnection) {
+      setDisconnection(false);
+    }
   }
 
   useEffect(() => {
@@ -44,5 +53,5 @@ export default function useParticipants() {
     };
   }, [room]);
 
-  return participants;
+  return { participants, disconnection, disconnectionProcessed } as const;
 }

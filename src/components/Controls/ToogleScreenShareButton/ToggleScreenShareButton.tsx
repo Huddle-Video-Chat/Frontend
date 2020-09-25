@@ -35,7 +35,7 @@ export default function ToggleScreenShareButton(props: { disabled?: boolean }) {
   const { room } = useVideoContext();
   const disableScreenShareButton = screenShareParticipant && screenShareParticipant !== room.localParticipant;
   const isScreenShareSupported = navigator.mediaDevices && navigator.mediaDevices.getDisplayMedia;
-  const isDisabled = props.disabled || disableScreenShareButton || !isScreenShareSupported || state.bot !== null;
+  const isDisabled = props.disabled || disableScreenShareButton || !isScreenShareSupported || state.bot_url !== null;
 
   let tooltipMessage = SCREEN_SHARE_TEXT;
 

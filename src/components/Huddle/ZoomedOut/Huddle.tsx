@@ -1,6 +1,6 @@
 import React from 'react';
 import { Participant as IParticipant } from 'twilio-video';
-import { nextSquareRoot, getArrangementPositions } from '../../utils/algorithms';
+import { nextSquareRoot } from '../../../utils/algorithms';
 
 import { styled } from '@material-ui/core/styles';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
@@ -9,10 +9,9 @@ import Tooltip from '@material-ui/core/Tooltip';
 import ScreenShare from '@material-ui/icons/ScreenShare';
 import Apps from '@material-ui/icons/Apps';
 
-import Participant, { MemoParticipant } from '../Participant/Participant';
-
-import useAPIContext from '../../hooks/useAPIContext/useAPIContext';
-import useScreenShareParticipant from '../../hooks/useScreenShareParticipant/useScreenShareParticipant';
+import { MemoParticipant } from '../../Participant/Participant';
+import useScreenShareParticipant from '../../../hooks/useScreenShareParticipant/useScreenShareParticipant';
+import PinHuddleButton from './PinHuddleButton';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -21,64 +20,6 @@ const useStyles = makeStyles((theme: Theme) =>
     },
   })
 );
-
-interface Position {
-  left: number;
-  top: number;
-}
-
-const huddlePositions: Position[][] = [
-  [{ left: 1 / 2, top: 1 / 2 }],
-  [
-    { left: 1 / 2, top: 1 / 2 },
-    { left: 1 / 4, top: 1 / 2 },
-  ],
-  [
-    { left: 1 / 2, top: 1 / 2 },
-    { left: 1 / 5, top: 1 / 2 },
-    { left: 4 / 5, top: 1 / 2 },
-  ],
-  [
-    { left: 1 / 2, top: 1 / 2 },
-    { left: 1 / 5, top: 1 / 3 },
-    { left: 1 / 5, top: 2 / 3 },
-    { left: 4 / 5, top: 1 / 2 },
-  ],
-  [
-    { left: 1 / 2, top: 1 / 2 },
-    { left: 1 / 4, top: 1 / 4 },
-    { left: 1 / 4, top: 3 / 4 },
-    { left: 3 / 4, top: 1 / 4 },
-    { left: 3 / 4, top: 3 / 4 },
-  ],
-  [
-    { left: 1 / 2, top: 1 / 2 },
-    { left: 3 / 9, top: 1 / 6 },
-    { left: 1 / 5, top: 1 / 2 },
-    { left: 1 / 3, top: 4 / 5 },
-    { left: 2 / 3, top: 4 / 5 },
-    { left: 2 / 3, top: 1 / 3 },
-  ],
-  [
-    { left: 1 / 2, top: 1 / 2 },
-    { left: 1 / 3, top: 1 / 5 },
-    { left: 1 / 5, top: 1 / 2 },
-    { left: 1 / 3, top: 4 / 5 },
-    { left: 2 / 3, top: 4 / 5 },
-    { left: 4 / 5, top: 1 / 2 },
-    { left: 2 / 3, top: 1 / 5 },
-  ],
-  [
-    { left: 1 / 2, top: 1 / 2 },
-    { left: 1 / 3, top: 1 / 5 },
-    { left: 1 / 4, top: 1 / 2 },
-    { left: 1 / 3, top: 4 / 5 },
-    { left: 6 / 10, top: 4 / 5 },
-    { left: 3 / 4, top: 7 / 10 },
-    { left: 4 / 6, top: 1 / 4 },
-    { left: 7 / 10, top: 1 / 6 },
-  ],
-];
 
 interface HuddleProps {
   participants: IParticipant[];
@@ -92,43 +33,7 @@ interface HuddleProps {
   toggleZoomed: () => void;
 }
 
-export default function HuddleZoomedOut() {
-  const { state, joinHuddle, isSharing, toggleZoomed } = useAPIContext();
-  const huddleList = Object.keys(state.state);
-  let num: number = 1;
-
-  // NESTED FOR LOOPS HERE
-  return (
-    <>
-      {huddleList.map(huddleID => {
-        const huddleParticipants: [] = state.state[huddleID].participants;
-
-        let pos;
-        if (parseInt(huddleID) === state.huddle) {
-          pos = huddlePositions[huddleList.length - 1][0];
-        } else {
-          pos = huddlePositions[huddleList.length - 1][num++];
-        }
-
-        return (
-          <Huddle
-            participants={huddleParticipants}
-            name={state.state[huddleID].name}
-            position={pos}
-            huddleID={huddleID}
-            onClick={joinHuddle}
-            inHuddle={parseInt(huddleID) === state.huddle}
-            isSharing={isSharing}
-            bot={state.bot}
-            toggleZoomed={toggleZoomed}
-          />
-        );
-      })}
-    </>
-  );
-}
-
-function Huddle({
+export default function Huddle({
   participants,
   name,
   position,
@@ -270,6 +175,7 @@ function Huddle({
           <ScreenShareIndicator>{screenShareParticipant ? <ScreenShare /> : <Apps />}</ScreenShareIndicator>
         </Tooltip>
       )}
+      <PinHuddleButton position={position} huddleDiameter={adjustedHuddleDiameter} huddleID={huddleID} oldName={name} />
     </>
   );
 }
